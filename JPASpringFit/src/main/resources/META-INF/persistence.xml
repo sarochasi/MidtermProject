@@ -5,6 +5,12 @@
 	<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
 	<class>com.skilldistillery.springfit.entities.User</class>
+	<class>com.skilldistillery.springfit.entities.BodyWeight</class>
+	<class>com.skilldistillery.springfit.entities.Exercise</class>
+	<class>com.skilldistillery.springfit.entities.ExerciseType</class>
+	<class>com.skilldistillery.springfit.entities.UnitType</class>
+	<class>com.skilldistillery.springfit.entities.Workout</class>
+	<class>com.skilldistillery.springfit.entities.WorkoutComment</class>
 	
     <properties>
       <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/springfitdb" />
