@@ -3,16 +3,17 @@ package com.skilldistillery.springfit.entities;
 import java.util.List;
 import java.util.Objects;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
 
 @Entity
-@Table(name="unit_type")
-public class UnitType {
+public class Routine {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,10 +23,17 @@ public class UnitType {
 	
 	private String description;
 	
-	@OneToMany(mappedBy = "unitType")
-	private List<Exercise> exercises;
+	@Column(name="image_url")
+	private String imageUrl;
+	
+	@OneToMany(mappedBy = "routine")
+	private List<RoutineWorkout> routineWorkout;
+	
+	@ManyToOne
+	@JoinColumn(name ="user_id")
+	private User user;
 
-	public UnitType() {
+	public Routine() {
 		super();
 	}
 
@@ -52,14 +60,29 @@ public class UnitType {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
 
-	public List<Exercise> getExercises() {
-		return exercises;
+	public String getImageUrl() {
+		return imageUrl;
 	}
 
-	public void setExercises(List<Exercise> exercises) {
-		this.exercises = exercises;
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+
+	public List<RoutineWorkout> getRoutineWorkout() {
+		return routineWorkout;
+	}
+
+	public void setRoutineWorkout(List<RoutineWorkout> routineWorkout) {
+		this.routineWorkout = routineWorkout;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	@Override
@@ -75,14 +98,14 @@ public class UnitType {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		UnitType other = (UnitType) obj;
+		Routine other = (Routine) obj;
 		return id == other.id;
 	}
 
 	@Override
 	public String toString() {
-		return "UnitType [id=" + id + ", name=" + name + ", description=" + description + ", exercises=" + exercises
-				+ "]";
+		return "Routine [id=" + id + ", name=" + name + ", description=" + description + ", imageUrl=" + imageUrl
+				+ ", routineWorkout=" + routineWorkout + ", user=" + user + "]";
 	}
 	
 	

@@ -2,7 +2,6 @@ package com.skilldistillery.springfit.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -14,11 +13,11 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
-class ExerciseTypeTest {
+class WorkoutExerciseTest {
 	
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private ExerciseType exerciseType;
+	private WorkoutExercise workoutExercise;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -33,28 +32,36 @@ class ExerciseTypeTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em=emf.createEntityManager();
-		exerciseType = em.find(ExerciseType.class, 1);
+		workoutExercise = em.find(WorkoutExercise.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		exerciseType = null;
+		workoutExercise = null;
 	}
 
 	@Test
-	void test_BodyWeight_entity_mapping() {
-		assertNotNull(exerciseType);
-		assertEquals("legs", exerciseType.getName());
+	void test_WorkoutExercise_entity_mapping() {
+		assertNotNull(workoutExercise);
+		assertEquals(10, workoutExercise.getUnits());
 
 	}
 	
 	@Test
-	void test_BodyWeight_Exercise_One_To_many_mapping() {
-		assertNotNull(exerciseType.getExcercises());
-		assertTrue(exerciseType.getExcercises().size() > 0);
+	void test_WorkoutExercise_Workout_mapping() {
+		assertNotNull(workoutExercise.getWorkout());
+		
+		assertEquals("Chest Workout", workoutExercise.getWorkout().getName());
 		
 	}
 	
+	@Test
+	void test_WorkoutExercise_Exercise_mapping() {
+		assertNotNull(workoutExercise.getExercise());
+		
+		assertEquals("Pushups", workoutExercise.getExercise().getName());
+		
+	}
 
 }

@@ -1,5 +1,6 @@
 package com.skilldistillery.springfit.entities;
 
+import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Column;
@@ -9,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Exercise {
@@ -22,16 +24,21 @@ public class Exercise {
 	private String instructions;
 	
 	@ManyToOne
-	@JoinColumn(name = "exercise_type")
+	@JoinColumn(name = "exercise_type_id")
 	private ExerciseType exerciseType;
 	
 	@Column(name="calories_per_unit")
 	private int caloriesPerUnit;
 	
-//	private UnitType unitType;
+	@ManyToOne
+	@JoinColumn(name = "unit_type_id")
+	private UnitType unitType;
 	
 	@Column(name="image_url")
 	private String imageUrl;
+	
+	@OneToMany(mappedBy = "exercise")
+	private List<WorkoutExercise> workoutExercises;
 
 	public Exercise() {
 		super();
@@ -86,6 +93,24 @@ public class Exercise {
 		this.exerciseType = exerciseType;
 	}
 
+	public UnitType getUnitType() {
+		return unitType;
+	}
+
+	public void setUnitType(UnitType unitType) {
+		this.unitType = unitType;
+	}
+
+
+
+	public List<WorkoutExercise> getWorkoutExercises() {
+		return workoutExercises;
+	}
+
+	public void setWorkoutExercises(List<WorkoutExercise> workoutExercises) {
+		this.workoutExercises = workoutExercises;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -106,8 +131,10 @@ public class Exercise {
 	@Override
 	public String toString() {
 		return "Exercise [id=" + id + ", name=" + name + ", instructions=" + instructions + ", exerciseType="
-				+ exerciseType + ", caloriesPerUnit=" + caloriesPerUnit + ", imageUrl=" + imageUrl + "]";
+				+ exerciseType + ", caloriesPerUnit=" + caloriesPerUnit + ", unitType=" + unitType + ", imageUrl="
+				+ imageUrl + ", workoutExercises=" + workoutExercises + "]";
 	}
-	
+
+
 	
 }

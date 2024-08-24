@@ -9,8 +9,12 @@
 	<class>com.skilldistillery.springfit.entities.Exercise</class>
 	<class>com.skilldistillery.springfit.entities.ExerciseType</class>
 	<class>com.skilldistillery.springfit.entities.UnitType</class>
+	<class>com.skilldistillery.springfit.entities.Nutrition</class>
 	<class>com.skilldistillery.springfit.entities.Workout</class>
 	<class>com.skilldistillery.springfit.entities.WorkoutComment</class>
+	<class>com.skilldistillery.springfit.entities.WorkoutExercise</class>
+	<class>com.skilldistillery.springfit.entities.Routine</class>
+	<class>com.skilldistillery.springfit.entities.RoutineWorkout</class>
 	
     <properties>
       <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/springfitdb" />
