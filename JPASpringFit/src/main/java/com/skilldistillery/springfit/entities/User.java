@@ -41,11 +41,11 @@ public class User {
 	@Column(name = "date_of_birth")
 	private LocalDate dateOfBirth;
 	
-	@ManyToMany(mappedBy = "users")
-	private List<Workout> likedWorkout;
-	
-	@OneToMany(mappedBy = "user")
-	private List<Workout> workouts;
+//	@ManyToMany(mappedBy = "users")
+//	private List<Workout> likedWorkout;
+//	
+//	@OneToMany(mappedBy = "user")
+//	private List<Workout> workouts;
 	
 	public User() {
 		super();
@@ -113,18 +113,18 @@ public class User {
 		this.dateOfBirth = dateOfBirth;
 	}
 	
-	public List<Workout> getLikedWorkout() {
-		return likedWorkout;
-	}
-	public void setLikedWorkout(List<Workout> likedWorkout) {
-		this.likedWorkout = likedWorkout;
-	}
-	public List<Workout> getWorkouts() {
-		return workouts;
-	}
-	public void setWorkouts(List<Workout> workout) {
-		this.workouts = workout;
-	}
+//	public List<Workout> getLikedWorkout() {
+//		return likedWorkout;
+//	}
+//	public void setLikedWorkout(List<Workout> likedWorkout) {
+//		this.likedWorkout = likedWorkout;
+//	}
+//	public List<Workout> getWorkouts() {
+//		return workouts;
+//	}
+//	public void setWorkouts(List<Workout> workout) {
+//		this.workouts = workout;
+//	}
 	public void setHeight(Integer height) {
 		this.height = height;
 	}
@@ -143,13 +143,20 @@ public class User {
 		User other = (User) obj;
 		return id == other.id;
 	}
+//	@Override
+//	public String toString() {
+//		return "User [id=" + id + ", username=" + username + ", password=" + password + ", enabled=" + enabled
+//				+ ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", height=" + height
+//				+ ", gender=" + gender + ", dateOfBirth=" + dateOfBirth + ", likedWorkout=" + likedWorkout
+//				+ ", workout=" + workouts + "]";
+//	}
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", enabled=" + enabled
 				+ ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", height=" + height
-				+ ", gender=" + gender + ", dateOfBirth=" + dateOfBirth + ", likedWorkout=" + likedWorkout
-				+ ", workout=" + workouts + "]";
+				+ ", gender=" + gender + ", dateOfBirth=" + dateOfBirth + "]";
 	}
+	
 	
 	 
 

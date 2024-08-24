@@ -18,6 +18,8 @@
 	<%-- <jsp:include page="nav.jsp" /> --%> 
 
 	<h1>Welcome to Spring Fit</h1>
+	<%-- ${SMOKETEST}  --%> 
+
 	
 	<!-- 1 row of ~5 (Circle buttons w/ ((IMAGE HREF)) legs, arms, chest, back, core, cardio TO BE CHANGED -->
 	<div class="btn-group" role="group" aria-label="Basic outlined example">
