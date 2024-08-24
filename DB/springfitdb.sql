@@ -359,6 +359,8 @@ COMMIT;
 START TRANSACTION;
 USE `springfitdb`;
 INSERT INTO `workout` (`id`, `name`, `description`, `create_date`, `last_update`, `enabled`, `published`, `image_url`, `user_id`) VALUES (1, 'Chest Workout', 'upperbody', '2024/08/23', '2024/08/03', 1, 1, 'https://fitnessfit.com.au/wp-content/uploads/2020/11/chest-workout-for-men-1.jpg', 1);
+INSERT INTO `workout` (`id`, `name`, `description`, `create_date`, `last_update`, `enabled`, `published`, `image_url`, `user_id`) VALUES (2, 'Leg Workout', 'lowerbody', '2024/08/23', '2023/08/23', 1, 1, 'na', 1);
+INSERT INTO `workout` (`id`, `name`, `description`, `create_date`, `last_update`, `enabled`, `published`, `image_url`, `user_id`) VALUES (3, 'Cardio', 'cardio', '2024/08/23', '2024/08/23', 1, 1, 'na', 1);
 
 COMMIT;
 
@@ -369,8 +371,8 @@ COMMIT;
 START TRANSACTION;
 USE `springfitdb`;
 INSERT INTO `unit_type` (`id`, `name`, `description`) VALUES (1, 'Repetition', 'na');
-INSERT INTO `unit_type` (`id`, `name`, `description`) VALUES (2, 'Minute', NULL);
-INSERT INTO `unit_type` (`id`, `name`, `description`) VALUES (3, 'Mile', NULL);
+INSERT INTO `unit_type` (`id`, `name`, `description`) VALUES (2, 'Minute', 'na');
+INSERT INTO `unit_type` (`id`, `name`, `description`) VALUES (3, 'Mile', 'na');
 
 COMMIT;
 
@@ -380,9 +382,20 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `springfitdb`;
-INSERT INTO `exercise` (`id`, `name`, `instructions`, `exercise_type_id`, `calories_per_unit`, `unit_type_id`, `image_url`) VALUES (1, 'Pushups', 'na', 1, 3, 1, 'https://www.fitnesseducation.edu.au/wp-content/uploads/2017/03/Pushups.jpg');
-INSERT INTO `exercise` (`id`, `name`, `instructions`, `exercise_type_id`, `calories_per_unit`, `unit_type_id`, `image_url`) VALUES (2, 'Crunches', 'na', 5, 2, 1, 'na');
+INSERT INTO `exercise` (`id`, `name`, `instructions`, `exercise_type_id`, `calories_per_unit`, `unit_type_id`, `image_url`) VALUES (1, 'Pushups', 'na', 3, 10, 1, 'https://www.fitnesseducation.edu.au/wp-content/uploads/2017/03/Pushups.jpg');
+INSERT INTO `exercise` (`id`, `name`, `instructions`, `exercise_type_id`, `calories_per_unit`, `unit_type_id`, `image_url`) VALUES (2, 'Crunches', 'na', 5, 10, 1, 'na');
 INSERT INTO `exercise` (`id`, `name`, `instructions`, `exercise_type_id`, `calories_per_unit`, `unit_type_id`, `image_url`) VALUES (3, 'Burpees', 'na', 6, 10, 1, 'na');
+INSERT INTO `exercise` (`id`, `name`, `instructions`, `exercise_type_id`, `calories_per_unit`, `unit_type_id`, `image_url`) VALUES (4, 'Squats', 'na', 1, 10, 1, 'na');
+INSERT INTO `exercise` (`id`, `name`, `instructions`, `exercise_type_id`, `calories_per_unit`, `unit_type_id`, `image_url`) VALUES (5, 'Jogging', 'na', 6, 10, 3, 'na');
+INSERT INTO `exercise` (`id`, `name`, `instructions`, `exercise_type_id`, `calories_per_unit`, `unit_type_id`, `image_url`) VALUES (6, 'Deadlift', 'na', 4, 10, 1, 'na');
+INSERT INTO `exercise` (`id`, `name`, `instructions`, `exercise_type_id`, `calories_per_unit`, `unit_type_id`, `image_url`) VALUES (7, 'Pullup', 'na', 4, 10, 1, 'na');
+INSERT INTO `exercise` (`id`, `name`, `instructions`, `exercise_type_id`, `calories_per_unit`, `unit_type_id`, `image_url`) VALUES (8, 'Dumbell Curls', 'na', 2, 10, 1, 'na');
+INSERT INTO `exercise` (`id`, `name`, `instructions`, `exercise_type_id`, `calories_per_unit`, `unit_type_id`, `image_url`) VALUES (9, 'Stationary Biking', 'na', 6, 10, 2, 'na');
+INSERT INTO `exercise` (`id`, `name`, `instructions`, `exercise_type_id`, `calories_per_unit`, `unit_type_id`, `image_url`) VALUES (10, 'Eliptical', 'na', 6, 10, 2, 'na');
+INSERT INTO `exercise` (`id`, `name`, `instructions`, `exercise_type_id`, `calories_per_unit`, `unit_type_id`, `image_url`) VALUES (11, 'Lunges', 'na', 1, 10, 1, 'na');
+INSERT INTO `exercise` (`id`, `name`, `instructions`, `exercise_type_id`, `calories_per_unit`, `unit_type_id`, `image_url`) VALUES (12, 'Benchpress', 'na', 3, 10, 1, 'na');
+INSERT INTO `exercise` (`id`, `name`, `instructions`, `exercise_type_id`, `calories_per_unit`, `unit_type_id`, `image_url`) VALUES (13, 'Dips', 'na', 2, 10, 1, 'na');
+INSERT INTO `exercise` (`id`, `name`, `instructions`, `exercise_type_id`, `calories_per_unit`, `unit_type_id`, `image_url`) VALUES (14, 'Situps', 'na', 5, 10, 1, 'na');
 
 COMMIT;
 
@@ -392,7 +405,12 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `springfitdb`;
-INSERT INTO `workout_exercise` (`id`, `units`, `sets`, `notes`, `workout_id`, `exercise_id`) VALUES (1, 10, 2, 'User enters ', 1, 1);
+INSERT INTO `workout_exercise` (`id`, `units`, `sets`, `notes`, `workout_id`, `exercise_id`) VALUES (1, 10, 3, 'Pushups', 1, 1);
+INSERT INTO `workout_exercise` (`id`, `units`, `sets`, `notes`, `workout_id`, `exercise_id`) VALUES (2, 10, 3, 'BenchPress', 1, 12);
+INSERT INTO `workout_exercise` (`id`, `units`, `sets`, `notes`, `workout_id`, `exercise_id`) VALUES (3, 12, 3, 'Lunges', 2, 11);
+INSERT INTO `workout_exercise` (`id`, `units`, `sets`, `notes`, `workout_id`, `exercise_id`) VALUES (4, 5, 5, 'Squats', 2, 4);
+INSERT INTO `workout_exercise` (`id`, `units`, `sets`, `notes`, `workout_id`, `exercise_id`) VALUES (5, 30, 1, 'Jogging', 3, 5);
+INSERT INTO `workout_exercise` (`id`, `units`, `sets`, `notes`, `workout_id`, `exercise_id`) VALUES (6, 25, 1, 'Eliptical', 3, 11);
 
 COMMIT;
 
@@ -403,6 +421,7 @@ COMMIT;
 START TRANSACTION;
 USE `springfitdb`;
 INSERT INTO `nutrition` (`id`, `name`, `date_eaten`, `grams_carbohydrates`, `grams_fat`, `grams_protien`, `user_id`) VALUES (1, 'Meal 1', '2024/08/23', 100, 100, 150, 1);
+INSERT INTO `nutrition` (`id`, `name`, `date_eaten`, `grams_carbohydrates`, `grams_fat`, `grams_protien`, `user_id`) VALUES (2, 'Meal 2', '2024/08/23', 100, 120, 40, 1);
 
 COMMIT;
 
@@ -413,6 +432,12 @@ COMMIT;
 START TRANSACTION;
 USE `springfitdb`;
 INSERT INTO `body_weight` (`id`, `weight_lbs`, `date_weighed`, `user_id`) VALUES (1, 180, '2024-08-23', 1);
+INSERT INTO `body_weight` (`id`, `weight_lbs`, `date_weighed`, `user_id`) VALUES (2, 182, '2024-08-24', 1);
+INSERT INTO `body_weight` (`id`, `weight_lbs`, `date_weighed`, `user_id`) VALUES (3, 182, '2024-08-26', 1);
+INSERT INTO `body_weight` (`id`, `weight_lbs`, `date_weighed`, `user_id`) VALUES (4, 184, '2024-08-28', 1);
+INSERT INTO `body_weight` (`id`, `weight_lbs`, `date_weighed`, `user_id`) VALUES (5, 186, '2024-09-02', 1);
+INSERT INTO `body_weight` (`id`, `weight_lbs`, `date_weighed`, `user_id`) VALUES (6, 185, '2024-09-03', 1);
+INSERT INTO `body_weight` (`id`, `weight_lbs`, `date_weighed`, `user_id`) VALUES (7, 187, '2024-08-05', 1);
 
 COMMIT;
 
@@ -423,6 +448,7 @@ COMMIT;
 START TRANSACTION;
 USE `springfitdb`;
 INSERT INTO `liked_exercise` (`user_id`, `exercise_id`) VALUES (1, 1);
+INSERT INTO `liked_exercise` (`user_id`, `exercise_id`) VALUES (1, 3);
 
 COMMIT;
 
@@ -452,7 +478,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `springfitdb`;
-INSERT INTO `routine` (`id`, `name`, `description`, `image_url`, `user_id`) VALUES (1, 'Muscle Gaining Routine', 'Bulk workout routine', 'na', 1);
+INSERT INTO `routine` (`id`, `name`, `description`, `image_url`, `user_id`) VALUES (1, 'Full Body Routine', 'Bulk workout routine', 'na', 1);
 
 COMMIT;
 
@@ -463,6 +489,8 @@ COMMIT;
 START TRANSACTION;
 USE `springfitdb`;
 INSERT INTO `routine_workout` (`id`, `day_number`, `workout_sequence`, `workout_id`, `routine_id`) VALUES (1, 1, 1, 1, 1);
+INSERT INTO `routine_workout` (`id`, `day_number`, `workout_sequence`, `workout_id`, `routine_id`) VALUES (2, 2, 2, 2, 1);
+INSERT INTO `routine_workout` (`id`, `day_number`, `workout_sequence`, `workout_id`, `routine_id`) VALUES (3, 3, 3, 3, 1);
 
 COMMIT;
 
