@@ -50,6 +50,9 @@ public class User {
 	@OneToMany(mappedBy="user")
 	private List<Nutrition> nutritions;
 	
+	@OneToMany(mappedBy = "user")
+	private List<Routine> routines;
+	
 	public User() {
 		super();
 	}
@@ -139,6 +142,12 @@ public class User {
 	public void setNutritions(List<Nutrition> nutrition) {
 		this.nutritions = nutrition;
 	}
+	public List<Routine> getRoutines() {
+		return routines;
+	}
+	public void setRoutines(List<Routine> routines) {
+		this.routines = routines;
+	}
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -159,7 +168,7 @@ public class User {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", enabled=" + enabled
 				+ ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", height=" + height
 				+ ", gender=" + gender + ", dateOfBirth=" + dateOfBirth + ", likedWorkout=" + likedWorkout
-				+ ", workout=" + workouts + "]";
+				+ ", workouts=" + workouts + ", nutritions=" + nutritions + ", routines=" + routines + "]";
 	}
 	
 	 

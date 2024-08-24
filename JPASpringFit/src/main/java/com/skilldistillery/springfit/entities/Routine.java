@@ -8,6 +8,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
 @Entity
@@ -26,6 +28,10 @@ public class Routine {
 	
 	@OneToMany(mappedBy = "routine")
 	private List<RoutineWorkout> routineWorkout;
+	
+	@ManyToOne
+	@JoinColumn(name ="user_id")
+	private User user;
 
 	public Routine() {
 		super();
@@ -71,6 +77,14 @@ public class Routine {
 		this.routineWorkout = routineWorkout;
 	}
 
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -91,7 +105,7 @@ public class Routine {
 	@Override
 	public String toString() {
 		return "Routine [id=" + id + ", name=" + name + ", description=" + description + ", imageUrl=" + imageUrl
-				+ ", routineWorkout=" + routineWorkout + "]";
+				+ ", routineWorkout=" + routineWorkout + ", user=" + user + "]";
 	}
 	
 	

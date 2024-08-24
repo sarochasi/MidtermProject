@@ -60,5 +60,11 @@ class UserTest {
 		assertTrue(user.getWorkouts().size()>0);
 		
 	}
+	@Test
+	void test_User_Routine_One_to_many_mapping() {
+		assertNotNull(user.getRoutines());
+		assertTrue(user.getRoutines().size()>0);
+		
+	}
 
 }

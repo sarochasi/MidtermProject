@@ -42,19 +42,18 @@ class RoutineWorkoutTest {
 	}
 
 	@Test
-	void test_BodyWeight_entity_mapping() {
+	void test_RoutineWorkout_entity_mapping() {
 		assertNotNull(routineWorkout);
 		assertEquals(1, routineWorkout.getDayNumber());
 
 	}
 	
-//	@Test
-//	void test_BodyWeight_User_mapping() {
-//		assertNotNull(routine.getUser());
-//		
-//		assertEquals("admin", routine.getUser().getUsername());
-//		assertEquals("na", routine.getUser().getFirstName());
-//		
-//	}
+	@Test
+	void test_RoutineWorkout_Routine_mapping() {
+		assertNotNull(routineWorkout.getRoutine());
+		
+		assertEquals("Muscle Gaining Routine", routineWorkout.getRoutine().getName());
+		
+	}
 
 }

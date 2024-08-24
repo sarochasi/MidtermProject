@@ -18,9 +18,9 @@ public class WorkoutExercise {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	private int units;
+	private Integer units;
 	
-	private int sets;
+	private Integer sets;
 	
 	private String notes;
 	
@@ -44,19 +44,19 @@ public class WorkoutExercise {
 		this.id = id;
 	}
 
-	public int getUnits() {
+	public Integer getUnits() {
 		return units;
 	}
 
-	public void setUnits(int units) {
+	public void setUnits(Integer units) {
 		this.units = units;
 	}
 
-	public int getSets() {
+	public Integer getSets() {
 		return sets;
 	}
 
-	public void setSets(int sets) {
+	public void setSets(Integer sets) {
 		this.sets = sets;
 	}
 

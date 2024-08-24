@@ -21,7 +21,7 @@ public class BodyWeight {
 	private int id;
 	
 	@Column(name="weight_lbs")
-	private int weight;
+	private Integer weight;
 	
 	@Column(name="date_weighed")
 	private LocalDateTime dateWeighted;
@@ -34,19 +34,21 @@ public class BodyWeight {
 		super();
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public int getWeight() {
+
+
+	public Integer getWeight() {
 		return weight;
 	}
 
-	public void setWeight(int weight) {
+	public void setWeight(Integer weight) {
 		this.weight = weight;
 	}
 

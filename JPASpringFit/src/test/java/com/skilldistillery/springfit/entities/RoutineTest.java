@@ -2,6 +2,7 @@ package com.skilldistillery.springfit.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -51,8 +52,13 @@ class RoutineTest {
 	@Test
 	void test_Routine_RoutineWorkout_mapping() {
 		assertNotNull(routine.getRoutineWorkout());
+		assertTrue(routine.getRoutineWorkout().size()>0);
 		
-//		assertEquals("admin", routine.getRoutineWorkout());
+	}
+	@Test
+	void test_Routine_User_mapping() {
+		assertNotNull(routine.getUser());
+		assertEquals("na", routine.getUser().getFirstName());
 		
 	}
 
