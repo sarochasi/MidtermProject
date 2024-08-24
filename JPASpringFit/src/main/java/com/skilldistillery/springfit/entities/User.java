@@ -32,12 +32,12 @@ public class User {
 	private String email;
 	
 	@Column(name = "height_in_inches")
-	private int height;
+	private Integer height;
 	
 	private String gender;
 	
 	@Column(name = "date_of_birth")
-	private LocalDateTime dateOfBirth;
+	private LocalDate dateOfBirth;
 	
 	public User() {
 		super();
@@ -98,10 +98,10 @@ public class User {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	public LocalDateTime getDateOfBirth() {
+	public LocalDate getDateOfBirth() {
 		return dateOfBirth;
 	}
-	public void setDateOfBirth(LocalDateTime dateOfBirth) {
+	public void setDateOfBirth(LocalDate dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 	@Override
