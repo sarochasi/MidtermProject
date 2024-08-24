@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="jakarta.tags.core" prefix="c" %>
     
 <!DOCTYPE html>
 <html>
@@ -13,7 +14,7 @@
 <body>
 
 	<!-- Bring in the NAVBAR -->
-	<jsp: include page="navbar.jsp"/>
+	<%-- <jsp: include page="navbar.jsp"/> --%>
 	<%-- <jsp:include page="nav.jsp" /> --%>
 
 	<h1>Welcome to Spring Fit</h1>
@@ -35,7 +36,7 @@
 	<p>PARAGRAPH ABOUT </p>
 	
 	
-	<form action="login.do" method="POST">
+	<!-- <form action="login.do" method="POST">
 	
 	Error messages
 	
@@ -45,7 +46,7 @@
 	<input type="password" name="password"/>
 	
 	
-	<input type="submit" value="Log In" > 
+	<input type="submit" value="Log In" > --> 
 	
 	
 	</form>

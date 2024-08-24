@@ -4,27 +4,27 @@
 
 <nav>
 
-	<a href"home.do">
+<!-- 	<a href"home.do">
 		<img src="images/Logo_screenshot.png" alt="Springfit logo">
-	</a>
+	</a> -->
 
 	<!-- HYPERLINK (home) -->
-	<a href="index.do">Home</a>
+	<a href="home.do">Home</a>
 	
 	<!--  LOGIN LINK DISPLAYS -> ONLY if user is NOT logged in. -->
-	<c:if test="${empty sessionScope.loggedInUser }">
+	<%-- <c:if test="${empty sessionScope.loggedInUser }">
 		<a href="login.do">Login</a>
-	</c:if>
+	</c:if> --%>
 	
 	<!--  ACCOUNT  -->
-	<c:if test="${not empty sessionScope.loggedInUser }">
+	<%-- <c:if test="${not empty sessionScope.loggedInUser }">
 		<a href="account.do">My Account</a>
-	</c:if>
+	</c:if> --%>
 
 	<!--  LOGOUT  -->
-	<c:if test="${not empty sessionScope.loggedInUser }">
+	<%-- <c:if test="${not empty sessionScope.loggedInUser }">
 		<a href="logout.do">Logout</a>
-	</c:if>
+	</c:if> --%>
 	
 	
 </nav>
