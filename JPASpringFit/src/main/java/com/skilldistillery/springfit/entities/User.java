@@ -43,7 +43,7 @@ public class User {
 	
 	@ManyToMany(mappedBy = "users")
 	private List<Workout> likedWorkout;
-	
+
 	@OneToMany(mappedBy = "user")
 	private List<Workout> workouts;
 	
@@ -163,13 +163,19 @@ public class User {
 		User other = (User) obj;
 		return id == other.id;
 	}
+	
+	// Generally keep MANY-MANY relationships out of toString
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", enabled=" + enabled
 				+ ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", height=" + height
-				+ ", gender=" + gender + ", dateOfBirth=" + dateOfBirth + ", likedWorkout=" + likedWorkout
-				+ ", workouts=" + workouts + ", nutritions=" + nutritions + ", routines=" + routines + "]";
+				+ ", gender=" + gender + ", dateOfBirth=" + dateOfBirth + "]";
 	}
+	
+	
+
+	
+	
 	
 	 
 
