@@ -4,7 +4,7 @@
 
 <nav>
 
-<!-- 	<a href"home.do">
+<!-- 	<a href"home.do"> 
 		<img src="images/Logo_screenshot.png" alt="Springfit logo">
 	</a> -->
 

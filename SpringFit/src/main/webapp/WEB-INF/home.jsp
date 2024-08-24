@@ -15,7 +15,7 @@
 
 	<!-- Bring in the NAVBAR -->
 	<%-- <jsp: include page="navbar.jsp"/> --%>
-	<%-- <jsp:include page="nav.jsp" /> --%>
+	<%-- <jsp:include page="nav.jsp" /> --%> 
 
 	<h1>Welcome to Spring Fit</h1>
 	
@@ -35,17 +35,25 @@
 	
 	<p>PARAGRAPH ABOUT </p>
 	
+	<form action="login.do" method="POST">	<!--  Will need to add login.do and/or a "landing page" within UserController -->
+        
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username">
+        <br></br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password">
+        <br></br>
+
+        <input type="submit" value="Log In">
+    </form>
 	
+	
+	<!--  Log In LAB EXAMPLE -->
 	<!-- <form action="login.do" method="POST">
-	
 	Error messages
-	
 	<input type="text" name="username">
-	
-	
 	<input type="password" name="password"/>
-	
-	
 	<input type="submit" value="Log In" > --> 
 	
 	
