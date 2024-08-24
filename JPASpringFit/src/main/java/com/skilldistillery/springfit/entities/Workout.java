@@ -38,8 +38,12 @@ public class Workout {
 	
 	@Column(name="image_url")
 	private String imageUrl;
+	
 	@OneToMany(mappedBy = "workout")
 	private List<WorkoutComment> workoutComments;
+	
+	@OneToMany(mappedBy = "workout")
+	private List<WorkoutExercise> workoutExercise;
 	
 	@ManyToMany
 	@JoinTable(name="liked_workout", joinColumns = @JoinColumn(name="workout_id"),
@@ -147,6 +151,14 @@ public class Workout {
 		this.user = user;
 	}
 
+	public List<WorkoutExercise> getWorkoutExercise() {
+		return workoutExercise;
+	}
+
+	public void setWorkoutExercise(List<WorkoutExercise> workoutExercise) {
+		this.workoutExercise = workoutExercise;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -168,7 +180,8 @@ public class Workout {
 	public String toString() {
 		return "Workout [id=" + id + ", name=" + name + ", description=" + description + ", createDate=" + createDate
 				+ ", lastUpdate=" + lastUpdate + ", enabled=" + enabled + ", published=" + published + ", imageUrl="
-				+ imageUrl + ", users=" + users + ", workoutComments=" + workoutComments + ", user=" + user + "]";
+				+ imageUrl + ", workoutComments=" + workoutComments + ", workoutExercise=" + workoutExercise
+				+ ", users=" + users + ", user=" + user + "]";
 	}
 	
 	

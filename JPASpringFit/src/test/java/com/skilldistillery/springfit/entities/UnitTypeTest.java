@@ -14,11 +14,11 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
-class ExerciseTypeTest {
+class UnitTypeTest {
 	
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private ExerciseType exerciseType;
+	private UnitType unitType;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -33,26 +33,26 @@ class ExerciseTypeTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em=emf.createEntityManager();
-		exerciseType = em.find(ExerciseType.class, 1);
+		unitType = em.find(UnitType.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		exerciseType = null;
+		unitType = null;
 	}
 
 	@Test
 	void test_BodyWeight_entity_mapping() {
-		assertNotNull(exerciseType);
-		assertEquals("legs", exerciseType.getName());
+		assertNotNull(unitType);
+		assertEquals("Repetition", unitType.getName());
 
 	}
 	
 	@Test
-	void test_BodyWeight_Exercise_One_To_many_mapping() {
-		assertNotNull(exerciseType.getExcercises());
-		assertTrue(exerciseType.getExcercises().size() > 0);
+	void test_UnitType_Exercise_One_To_many_mapping() {
+		assertNotNull(unitType.getExercises());
+		assertTrue(unitType.getExercises().size() > 0);
 		
 	}
 	

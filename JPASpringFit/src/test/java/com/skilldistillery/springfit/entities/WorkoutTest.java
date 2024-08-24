@@ -68,5 +68,12 @@ class WorkoutTest {
 		assertTrue(workout.getWorkoutComments().size() > 0);
 		
 	}
+	
+	@Test
+	void test_Workout_WorkoutExercise_mapping() {
+		assertNotNull(workout.getWorkoutExercise());
+		assertTrue(workout.getWorkoutExercise().size() > 0);
+		
+	}
 
 }

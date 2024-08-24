@@ -1,11 +1,13 @@
 package com.skilldistillery.springfit.entities;
 
+import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -19,6 +21,9 @@ public class UnitType {
 	private String name;
 	
 	private String description;
+	
+	@OneToMany(mappedBy = "unitType")
+	private List<Exercise> exercises;
 
 	public UnitType() {
 		super();
@@ -47,6 +52,15 @@ public class UnitType {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
+
+	public List<Exercise> getExercises() {
+		return exercises;
+	}
+
+	public void setExercises(List<Exercise> exercises) {
+		this.exercises = exercises;
+	}
 
 	@Override
 	public int hashCode() {
@@ -67,7 +81,8 @@ public class UnitType {
 
 	@Override
 	public String toString() {
-		return "UnitType [id=" + id + ", name=" + name + ", description=" + description + "]";
+		return "UnitType [id=" + id + ", name=" + name + ", description=" + description + ", exercises=" + exercises
+				+ "]";
 	}
 	
 	
