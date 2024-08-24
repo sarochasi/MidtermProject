@@ -13,11 +13,11 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
-class WorkoutExerciseTest {
+class RoutineWorkoutTest {
 	
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private WorkoutExercise workoutExercise;
+	private RoutineWorkout routineWorkout;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -32,36 +32,29 @@ class WorkoutExerciseTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em=emf.createEntityManager();
-		workoutExercise = em.find(WorkoutExercise.class, 1);
+		routineWorkout = em.find(RoutineWorkout.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		workoutExercise = null;
+		routineWorkout = null;
 	}
 
 	@Test
-	void test_WorkoutExercise_entity_mapping() {
-		assertNotNull(workoutExercise);
-		assertEquals(10, workoutExercise.getUnits());
+	void test_BodyWeight_entity_mapping() {
+		assertNotNull(routineWorkout);
+		assertEquals(1, routineWorkout.getDayNumber());
 
 	}
 	
-	@Test
-	void test_WorkoutExercise_Workout_mapping() {
-		assertNotNull(workoutExercise.getWorkout());
-		
-		assertEquals("Chest Workout", workoutExercise.getWorkout().getName());
-		
-	}
-	
-	@Test
-	void test_WorkoutExercise_Exercise_mapping() {
-		assertNotNull(workoutExercise.getExercise());
-		
-		assertEquals("Pushups", workoutExercise.getExercise().getName());
-		
-	}
+//	@Test
+//	void test_BodyWeight_User_mapping() {
+//		assertNotNull(routine.getUser());
+//		
+//		assertEquals("admin", routine.getUser().getUsername());
+//		assertEquals("na", routine.getUser().getFirstName());
+//		
+//	}
 
 }

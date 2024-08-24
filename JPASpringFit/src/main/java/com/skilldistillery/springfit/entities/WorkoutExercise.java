@@ -24,9 +24,9 @@ public class WorkoutExercise {
 	
 	private String notes;
 	
-//	@ManyToOne
-//	@JoinColumn(name="exercise_id")
-//	private Exercise exercise;
+	@ManyToOne
+	@JoinColumn(name="exercise_id")
+	private Exercise exercise;
 	
 	@ManyToOne
 	@JoinColumn(name="workout_id")
@@ -68,13 +68,13 @@ public class WorkoutExercise {
 		this.notes = notes;
 	}
 
-//	public Exercise getExercise() {
-//		return exercise;
-//	}
-//
-//	public void setExercise(Exercise exercise) {
-//		this.exercise = exercise;
-//	}
+	public Exercise getExercise() {
+		return exercise;
+	}
+
+	public void setExercise(Exercise exercise) {
+		this.exercise = exercise;
+	}
 
 	public Workout getWorkout() {
 		return workout;
@@ -105,7 +105,7 @@ public class WorkoutExercise {
 	@Override
 	public String toString() {
 		return "WorkoutExercise [id=" + id + ", units=" + units + ", sets=" + sets + ", notes=" + notes + ", exercise="
-				+ "exercise" + ", workout=" + "workout" + "]";
+				+ exercise + ", workout=" + workout + "]";
 	}
 	
 	

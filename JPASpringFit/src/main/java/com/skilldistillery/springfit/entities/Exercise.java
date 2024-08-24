@@ -37,8 +37,8 @@ public class Exercise {
 	@Column(name="image_url")
 	private String imageUrl;
 	
-//	@OneToMany(mappedBy = "exercises")
-//	private List<WorkoutExercise> workoutExercises;
+	@OneToMany(mappedBy = "exercise")
+	private List<WorkoutExercise> workoutExercises;
 
 	public Exercise() {
 		super();
@@ -103,6 +103,14 @@ public class Exercise {
 
 
 
+	public List<WorkoutExercise> getWorkoutExercises() {
+		return workoutExercises;
+	}
+
+	public void setWorkoutExercises(List<WorkoutExercise> workoutExercises) {
+		this.workoutExercises = workoutExercises;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -124,7 +132,7 @@ public class Exercise {
 	public String toString() {
 		return "Exercise [id=" + id + ", name=" + name + ", instructions=" + instructions + ", exerciseType="
 				+ exerciseType + ", caloriesPerUnit=" + caloriesPerUnit + ", unitType=" + unitType + ", imageUrl="
-				+ imageUrl + "]";
+				+ imageUrl + ", workoutExercises=" + workoutExercises + "]";
 	}
 
 
