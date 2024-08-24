@@ -47,6 +47,9 @@ public class User {
 	@OneToMany(mappedBy = "user")
 	private List<Workout> workouts;
 	
+	@OneToMany(mappedBy="user")
+	private List<Nutrition> nutritions;
+	
 	public User() {
 		super();
 	}
@@ -127,6 +130,14 @@ public class User {
 	}
 	public void setHeight(Integer height) {
 		this.height = height;
+	}
+	
+	
+	public List<Nutrition> getNutritions() {
+		return nutritions;
+	}
+	public void setNutritions(List<Nutrition> nutrition) {
+		this.nutritions = nutrition;
 	}
 	@Override
 	public int hashCode() {
