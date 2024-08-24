@@ -40,7 +40,10 @@ public class WorkoutComment {
 	@JoinColumn(name = "user_id")
 	private User user;
 
-//	private Workout workoutId;
+	@ManyToOne
+	@JoinColumn(name = "workout_id")
+	private Workout workout;
+	
 	
 	public WorkoutComment() {
 		super();
@@ -107,6 +110,14 @@ public class WorkoutComment {
 	
 	
 
+	public Workout getWorkout() {
+		return workout;
+	}
+
+	public void setWorkout(Workout workout) {
+		this.workout = workout;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -127,7 +138,7 @@ public class WorkoutComment {
 	@Override
 	public String toString() {
 		return "WorkoutComment [id=" + id + ", createDate=" + createDate + ", content=" + content + ", reply=" + reply
-				+ ", replies=" + replies + ", enabled=" + enabled + ", userId=" + user + "]";
+				+ ", replies=" + replies + ", enabled=" + enabled + ", user=" + user + ", workout=" + workout + "]";
 	}
 	
 	

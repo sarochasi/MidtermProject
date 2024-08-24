@@ -1,7 +1,7 @@
 package com.skilldistillery.springfit.entities;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Column;
@@ -9,6 +9,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class User {
@@ -38,6 +40,12 @@ public class User {
 	
 	@Column(name = "date_of_birth")
 	private LocalDate dateOfBirth;
+	
+	@ManyToMany(mappedBy = "users")
+	private List<Workout> likedWorkout;
+	
+	@OneToMany(mappedBy = "user")
+	private List<Workout> workouts;
 	
 	public User() {
 		super();
@@ -104,6 +112,22 @@ public class User {
 	public void setDateOfBirth(LocalDate dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
+	
+	public List<Workout> getLikedWorkout() {
+		return likedWorkout;
+	}
+	public void setLikedWorkout(List<Workout> likedWorkout) {
+		this.likedWorkout = likedWorkout;
+	}
+	public List<Workout> getWorkouts() {
+		return workouts;
+	}
+	public void setWorkouts(List<Workout> workout) {
+		this.workouts = workout;
+	}
+	public void setHeight(Integer height) {
+		this.height = height;
+	}
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -123,7 +147,8 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", enabled=" + enabled
 				+ ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", height=" + height
-				+ ", gender=" + gender + ", dateOfBirth=" + dateOfBirth + "]";
+				+ ", gender=" + gender + ", dateOfBirth=" + dateOfBirth + ", likedWorkout=" + likedWorkout
+				+ ", workout=" + workouts + "]";
 	}
 	
 	 

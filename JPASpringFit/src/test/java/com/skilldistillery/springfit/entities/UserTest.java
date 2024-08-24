@@ -2,6 +2,7 @@ package com.skilldistillery.springfit.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -46,6 +47,18 @@ class UserTest {
 		assertNotNull(user);
 		assertEquals("admin", user.getUsername());
 
+	}
+	@Test
+	void test_User_Workout_Many_To_many_mapping() {
+		assertNotNull(user.getLikedWorkout());
+		assertTrue(user.getLikedWorkout().size()>0);
+		
+	}
+	@Test
+	void test_User_Workout_One_to_many_mapping() {
+		assertNotNull(user.getWorkouts());
+		assertTrue(user.getWorkouts().size()>0);
+		
 	}
 
 }
