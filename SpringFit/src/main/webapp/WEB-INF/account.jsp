@@ -40,6 +40,9 @@
         
     </c:choose>
 	
+<form action = "GetWorkoutPage.do" method="GET">
+	<input type="submit" value="Create New Workout"/>
+</form>
 	
 	
 </body>
