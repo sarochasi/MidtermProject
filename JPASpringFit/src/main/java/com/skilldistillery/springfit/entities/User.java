@@ -100,10 +100,10 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public int getHeight() {
+	public Integer getHeight() {
 		return height;
 	}
-	public void setHeight(int height) {
+	public void setHeight(Integer height) {
 		this.height = height;
 	}
 	public String getGender() {
@@ -131,9 +131,7 @@ public class User {
 	public void setWorkouts(List<Workout> workout) {
 		this.workouts = workout;
 	}
-	public void setHeight(Integer height) {
-		this.height = height;
-	}
+
 	
 	
 	public List<Nutrition> getNutritions() {

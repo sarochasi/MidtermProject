@@ -44,7 +44,9 @@
             </div>
             
         </div>
-
+        <form action="registerForm.do" method="GET">
+        <button type="submit" class="btn btn-primary">Sign up</button>
+		</form>
 		<!-- WILL LATER DISPLAY PHOTOS/LOGOS OF CORRESPONDING MUSCLE GROUP (HREF - THERE IS AN IMAGES DIRECTORY IN PROJECT) -->
         <!-- NEAR BOTTOM -->
         <div class="mt-5 text-center">

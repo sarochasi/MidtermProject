@@ -6,5 +6,8 @@ public interface UserDAO {
 	
 	User authenticateUser(String username, String password);
 	
+	User registerUser(User user);
+	
+	Boolean usernameExists(String username);
 
 }

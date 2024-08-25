@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -41,9 +42,36 @@ public class UserController {
             return "error"; 
         }
     }
+    
+    @RequestMapping(path="registerForm.do", method=RequestMethod.GET)
+    public String showRegisterForm(Model model) {
+    	model.addAttribute("user", new User());
+    	return "register";
+    }
+    
+    @RequestMapping(path = "Register.do", method = RequestMethod.POST)
+    public String doRegister(@ModelAttribute("user") User user, HttpSession session, Model model) {
+    	
+    	user.setEnabled(true);
+    	
+    	if (userDao.usernameExists(user.getUsername())) {
+    		model.addAttribute("errorMessage", "Username already exists. Please choose a different username.");
+    		return "register";
+    	}
+    	
+    	User registeredUser = userDao.registerUser(user);
+    	
+    	if (registeredUser != null) {
+    		session.setAttribute("loggedInUser", registeredUser);
+    		session.setAttribute("loginTime", LocalDateTime.now());
+    		
+    		return "account";
+    	}else {
+    		model.addAttribute("errorMessage", "Registration failed. Please try again.");
+    		return "register";
+    	}
+    }
 	
-	
-
 }
 
 
