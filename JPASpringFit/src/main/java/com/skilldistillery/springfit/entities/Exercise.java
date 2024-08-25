@@ -39,7 +39,7 @@ public class Exercise {
 	
 	@OneToMany(mappedBy = "exercise")
 	private List<WorkoutExercise> workoutExercises;
-
+	
 	public Exercise() {
 		super();
 	}
@@ -110,6 +110,7 @@ public class Exercise {
 	public void setWorkoutExercises(List<WorkoutExercise> workoutExercises) {
 		this.workoutExercises = workoutExercises;
 	}
+	
 
 	@Override
 	public int hashCode() {
