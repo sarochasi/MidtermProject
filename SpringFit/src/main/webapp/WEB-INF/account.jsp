@@ -104,6 +104,8 @@
 <!-- ================================= Navbar================================================= -->
 
 	<h2>Account Details</h2>
+	<p>Maybe label above with "Welcome "User's NAME" (and create a seperate jsp for account settings/update settings, etc.)</p>
+	<p>Maybe create logic that will display the user's info, only IF they would like to display that information publicly. (user would have the choice?) - first name, last name, height, gender (but might not display as ex. First Name: Bob, rather "Bob") </p>
 
 	<!--  	Update account.jsp to output escaped (c:out) user data if the user is logged in 
 			(i.e. in session, accessible on the JSP page with the sessionScope variable), 
@@ -129,8 +131,44 @@
 <form action = "GetWorkoutPage.do" method="GET">
 	<input type="submit" value="Create New Workout"/>
 </form>
+<br>
+<br>
 	
 	
+		<!-- Basic/general layout ideas -->
+		<h3>Maybe more buttons / forms</h3>
+			<p>Maybe a few additional buttons above (in addition to "Create New Workout", such as a "Health" table that allows a user to submit their weight and calories. (Would only need to include a POST if this is all handled within the account.jsp) </p>
+		<h3>Your workouts</h3>
+			<p>Maybe all of the user's saved workouts displays as a 1 row "table" that can scroll horizontally (left and right?) Will need to read more into Bootstrap responsive table in order to figure out how to implement.</p>
+			
+			<div class="table-responsive">
+    			<table class="table table-bordered">
+        			<thead>
+            			<tr>
+                			<th>Workout Name</th>
+                			<th>Image</th>
+            			</tr>
+        			</thead>
+        			
+        			<tbody>
+            			<c:forEach var="workout" items="${sessionScope.loggedInUser.workouts}">
+                			<tr>
+                    			<td><c:out value="${workout.name}" /></td>
+                    			<td>
+                        			<c:if test="${not empty workout.imageUrl}">
+                            			<img src="<c:out value='${workout.imageUrl}'/>" alt="Workout Image" width="50" height="50">
+                        			</c:if>
+                    			</td>
+                			</tr>
+            			</c:forEach>
+        			</tbody>
+    			</table>
+			</div>
+			
+		
+		<h3>Your "favorite" (and/or liked/rated) workouts</h3>
+			<p>Same as above, maybe a table that scrolls horizontally. These would be workouts that the user has interacted/saved. (i.e some other user's workout) that they wanted to save into theirs (instance of the other user's workout) - the user may be able to edit their "copy" but not the other user's original workout.</p>
+			
 	
 		<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
