@@ -19,11 +19,11 @@ public class ExerciseController {
 	private ExerciseDAO exerciseDao;
 
 	// SHOW ALL EXERCISES
-	@RequestMapping(path = "exercise.do", method = RequestMethod.GET)
+	@RequestMapping(path = "testingexercise.do", method = RequestMethod.GET) // Will need to update once we know where we want to display exercises.
 	public String showAllExercises(Model model) {
 		List<Exercise> exercises = exerciseDao.showAllExercises(); 
 		model.addAttribute("allExercises", exercises);
-		return "exercises";
+		return "testingexercise";
 	}
 
 	// SEARCH BY ID
@@ -47,7 +47,31 @@ public class ExerciseController {
 		} else {
 			model.addAttribute("searchResults", exercises);
 		}
-		return "exercises";
+		return "testingexercise";
 	}
+	
+    // SEARCH BY EXERCISE TYPE
+//    @RequestMapping(path = "testingexercise.do", method = RequestMethod.GET)
+//    public String searchByType(@RequestParam("exerciseType") int id, Model model) {
+//        List<Exercise> exercises = exerciseDao.showExercisesByType(id);
+//        if (exercises.isEmpty()) {
+//            model.addAttribute("error", "No exercises found for this type.");
+//        } else {
+//            model.addAttribute("searchResults", exercises);
+//        }
+//        return "testingexercise"; 
+//    }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

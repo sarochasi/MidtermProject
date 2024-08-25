@@ -42,6 +42,8 @@
 							class="nav-link dropdown-toggle" href="#" role="button"
 							data-bs-toggle="dropdown" aria-expanded="false"> Exercise </a>
 							<ul class="dropdown-menu">
+								<!-- TESTING LINK FUNCTIONALITY WITH LEG -->
+								<!-- <li><a class="dropdown-item" href="searchByType.do?exerciseType=1">Leg</a></li> -->
 								<li><a class="dropdown-item" href="#">Leg</a></li>
 								<li><a class="dropdown-item" href="#">Arm</a></li>
 								<li><a class="dropdown-item" href="#">Chest</a></li>
@@ -140,6 +142,8 @@
 			<p>Maybe a few additional buttons above (in addition to "Create New Workout", such as a "Health" table that allows a user to submit their weight and calories. (Would only need to include a POST if this is all handled within the account.jsp) </p>
 		<h3>Your workouts</h3>
 			<p>Maybe all of the user's saved workouts displays as a 1 row "table" that can scroll horizontally (left and right?) Will need to read more into Bootstrap responsive table in order to figure out how to implement.</p>
+			<a class="btn btn-primary btn-custom" href="testingexercise.do">Exercises (only testing href functionality to testingexercise here - WILL DELETE)</a>
+			
 			
 			<div class="table-responsive">
     			<table class="table table-bordered">

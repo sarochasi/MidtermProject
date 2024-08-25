@@ -22,7 +22,6 @@ public class ExerciseDaoImpl implements ExerciseDAO {
 	public List<Exercise> showAllExercises() {
 		// Exercise exercise = null;
 		String jpql = "SELECT e FROM Exercise e";
-		
 		return em.createQuery(jpql, Exercise.class).getResultList();		
 	}
 
@@ -30,7 +29,6 @@ public class ExerciseDaoImpl implements ExerciseDAO {
 	@Override
 	public List<Exercise> showExercisesByKeyword(String keyword) {
 		String jpql = "SELECT e FROM Exercise e WHERE e.name LIKE :keyword";
-		
 		return em.createQuery(jpql, Exercise.class).setParameter("keyword", "%" + keyword + "%")
 				.getResultList();
 	}
@@ -40,13 +38,28 @@ public class ExerciseDaoImpl implements ExerciseDAO {
 	public Exercise showExerciseById(int id) {
 		return em.find(Exercise.class, id);
 	}
-
 // Might find a need for an update feature in the future.	
 //	@Override
 //	public Exercise updateExercise(int id, Exercise e) {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
+
+	// This may need work.
+	@Override
+	public List<Exercise> showExercisesByType(int id) {
+		String jpql = "SELECT e FROM Exercise e WHERE e.type.id = :exerciseType";
+        return em.createQuery(jpql, Exercise.class)
+                 .setParameter("exerciseType", id)
+                 .getResultList(); 
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 
 }
