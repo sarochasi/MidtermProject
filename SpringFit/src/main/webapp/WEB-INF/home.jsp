@@ -17,8 +17,50 @@
 
 <body>
 
-	<div class="container mt-4">
+<header>
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">LOGO</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+       
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Exercise
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Leg</a></li>
+            <li><a class="dropdown-item" href="#">Arm</a></li>
+            <li><a class="dropdown-item" href="#">Chest</a></li>
+            <li><a class="dropdown-item" href="#">Back</a></li>
+            <li><a class="dropdown-item" href="#">Core</a></li>
+            <li><a class="dropdown-item" href="#">Cardio</a></li>
+            
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+        </li>
+      </ul>
+      <form class="d-flex" role="search">
+        
+         <a class="nav-link active" aria-current="page" href="#">Log in</a>
+      </form>
+    </div>
+  </div>
+</nav>
+</header>
+
+
 		<main>
+	<div class="container mt-4">
 			<div class="d-block mx-auto mb-4">
 				<h1 class="text-center">Welcome to Spring Fit</h1>
 
@@ -27,7 +69,7 @@
 			<div class="row g-5">
 
 				<!-- LEFT -->
-				<div class="col-md-6 col-lg-7">
+				<div class="col-md-6 col-lg-6">
 					<p>Welcome to Springfit – your ultimate companion in achieving
 						your fitness goals. At Springfit, we’re dedicated to providing you
 						with the tools and insights you need to lead a healthier, more
@@ -51,7 +93,7 @@
 				</div>
 
 				<!-- RIGHT -->
-				<div class="col-md-5 col-lg-4 order-md-last">
+				<div class="col-md-4 col-lg-4 order-md-last">
 					<form action="login.do" method="POST">
 						<h4 class="d-flex justify-content-between align-items-center mb-3">
 							<span class="text-primary">Log in</span>
@@ -77,8 +119,6 @@
 				</div>
 
 			</div>
-			<!-- WILL LATER DISPLAY PHOTOS/LOGOS OF CORRESPONDING MUSCLE GROUP (HREF - THERE IS AN IMAGES DIRECTORY IN PROJECT) -->
-			<!-- NEAR BOTTOM -->
 
 <hr class="featurette-divider">
 
@@ -146,30 +186,17 @@
 
 			
 			</div>
-			<!-- /.col-lg-4 -->
+
+
+
+</div>
+</main>
 
 
 
 
 
-
-
-
-
-	<div class="mt-5 text-center">
-		<div class="btn-group" role="group"
-			aria-label="Basic outlined example">
-			<button type="button" class="btn btn-outline-primary">Legs</button>
-			<button type="button" class="btn btn-outline-primary">Arms</button>
-			<button type="button" class="btn btn-outline-primary">Chest</button>
-			<button type="button" class="btn btn-outline-primary">Back</button>
-			<button type="button" class="btn btn-outline-primary">Core</button>
-			<button type="button" class="btn btn-outline-primary">Cardio</button>
-		</div>
-	</div>
-	</main>
-	</div>
-
+	
 	<!-- Bootstrap script src (bottom of body) -->
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
