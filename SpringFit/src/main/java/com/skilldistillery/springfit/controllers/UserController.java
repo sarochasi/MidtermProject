@@ -71,6 +71,12 @@ public class UserController {
     		return "register";
     	}
     }
+    
+	@RequestMapping("logout.do")
+	public String logout(HttpSession session) {
+		session.removeAttribute("loggedInUser");
+		return "home";
+	}
 	
 }
 

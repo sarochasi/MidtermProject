@@ -9,5 +9,7 @@ public interface UserDAO {
 	User registerUser(User user);
 	
 	Boolean usernameExists(String username);
+	
+	
 
 }
