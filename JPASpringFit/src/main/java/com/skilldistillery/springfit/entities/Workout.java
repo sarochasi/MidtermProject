@@ -1,6 +1,7 @@
 package com.skilldistillery.springfit.entities;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -43,7 +44,7 @@ public class Workout {
 	private List<WorkoutComment> workoutComments;
 	
 	@OneToMany(mappedBy = "workout")
-	private List<WorkoutExercise> workoutExercise;
+	private List<WorkoutExercise> workoutExercises;
 	
 	@ManyToMany
 	@JoinTable(name="liked_workout", joinColumns = @JoinColumn(name="workout_id"),
@@ -54,11 +55,15 @@ public class Workout {
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
-
+	
+///--------------------------------------------------------------------------------------------------------------
+	
 	public Workout() {
 		super();
 	}
-
+	
+///--------------------------------------------------------------------------------------------------------------
+	
 	public int getId() {
 		return id;
 	}
@@ -152,13 +157,26 @@ public class Workout {
 	}
 
 	public List<WorkoutExercise> getWorkoutExercise() {
-		return workoutExercise;
+		return workoutExercises;
 	}
 
 	public void setWorkoutExercise(List<WorkoutExercise> workoutExercise) {
-		this.workoutExercise = workoutExercise;
+		this.workoutExercises = workoutExercise;
 	}
-
+	public void addWorkoutExercise(WorkoutExercise workoutExercise) {
+		if (workoutExercises==null) {workoutExercises = new ArrayList<>();}
+		
+		//if workoutExercises.contains(workoutExercise)?????
+		workoutExercises.add(workoutExercise);
+		workoutExercise.setWorkout(this);
+		
+	}
+	public void removeWorkoutExercise(WorkoutExercise workoutExercise) {
+		System.out.println("fix removeWorkoutExercise");
+	}
+	
+	
+	///--------------------------------------------------------------------------------------------------------------
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -180,7 +198,7 @@ public class Workout {
 	public String toString() {
 		return "Workout [id=" + id + ", name=" + name + ", description=" + description + ", createDate=" + createDate
 				+ ", lastUpdate=" + lastUpdate + ", enabled=" + enabled + ", published=" + published + ", imageUrl="
-				+ imageUrl + ", workoutComments=" + workoutComments + ", workoutExercise=" + workoutExercise
+				+ imageUrl + ", workoutComments=" + workoutComments + ", workoutExercise=" + workoutExercises
 				+ ", users=" + users + ", user=" + user + "]";
 	}
 	
