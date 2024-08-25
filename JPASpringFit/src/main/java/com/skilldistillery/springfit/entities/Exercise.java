@@ -39,6 +39,8 @@ public class Exercise {
 	
 	@OneToMany(mappedBy = "exercise")
 	private List<WorkoutExercise> workoutExercises;
+	
+	private List<Exercise> exercises;
 
 	public Exercise() {
 		super();
@@ -109,6 +111,16 @@ public class Exercise {
 
 	public void setWorkoutExercises(List<WorkoutExercise> workoutExercises) {
 		this.workoutExercises = workoutExercises;
+	}
+	
+	
+
+	public List<Exercise> getExercises() {
+		return exercises;
+	}
+
+	public void setExercises(List<Exercise> exercises) {
+		this.exercises = exercises;
 	}
 
 	@Override
