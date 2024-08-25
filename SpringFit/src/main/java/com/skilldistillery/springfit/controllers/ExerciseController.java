@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.skilldistillery.springfit.data.ExerciseDAO;
 import com.skilldistillery.springfit.entities.Exercise;
@@ -24,6 +25,25 @@ public class ExerciseController {
 		List<Exercise> exercises = exerciseDao.showAllExercises(); 
 		model.addAttribute("allExercises", exercises);
 		return "testingexercise";
+	}
+	//Displays all exercises on workout page
+	@RequestMapping(path = "showAllExercices.do", method = RequestMethod.GET) // Will need to update once we know where we want to display exercises.
+	public String showAllExercisesForWorkoutPage(Model model) {
+		List<Exercise> exercises = exerciseDao.showAllExercises(); 
+		model.addAttribute("allExercises", exercises);
+		return "workout";
+	}
+	//Opens workout page when selected from account page
+	@RequestMapping(path = "GetWorkoutPage.do")
+	public ModelAndView displayWorkoutPage() {	
+		ModelAndView mv = new ModelAndView();
+		
+		List<Exercise> exercises = exerciseDao.findAllExercises();
+		
+		
+		mv.addObject("allExercises",exercises);
+		mv.setViewName("workout");
+		return mv;
 	}
 
 	// SEARCH BY ID

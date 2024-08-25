@@ -14,5 +14,8 @@ public interface ExerciseDAO {
 	
 	// Exercise (By ExerciseType)
 	List<Exercise> showExercisesByType(int id);
+	
+	public List<Exercise> findAllExercises();
+
 
 }

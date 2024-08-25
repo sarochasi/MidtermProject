@@ -24,6 +24,15 @@ public class ExerciseDaoImpl implements ExerciseDAO {
 		String jpql = "SELECT e FROM Exercise e";
 		return em.createQuery(jpql, Exercise.class).getResultList();		
 	}
+	@Override
+	public List<Exercise> findAllExercises() {
+		// Exercise exercise = null;
+		String jpql = "SELECT e FROM Exercise e";
+		List<Exercise> exerciseList;
+		exerciseList = em.createQuery(jpql, Exercise.class).getResultList();
+		em.close();
+		return exerciseList;
+	}
 
 	// KEYWORD
 	@Override

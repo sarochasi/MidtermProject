@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -37,6 +38,7 @@ public class Exercise {
 	@Column(name="image_url")
 	private String imageUrl;
 	
+	//Lazy??
 	@OneToMany(mappedBy = "exercise")
 	private List<WorkoutExercise> workoutExercises;
 	
@@ -129,12 +131,12 @@ public class Exercise {
 		return id == other.id;
 	}
 
-	@Override
-	public String toString() {
-		return "Exercise [id=" + id + ", name=" + name + ", instructions=" + instructions + ", exerciseType="
-				+ exerciseType + ", caloriesPerUnit=" + caloriesPerUnit + ", unitType=" + unitType + ", imageUrl="
-				+ imageUrl + ", workoutExercises=" + workoutExercises + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "Exercise [id=" + id + ", name=" + name + ", instructions=" + instructions + ", exerciseType="
+//				+ exerciseType + ", caloriesPerUnit=" + caloriesPerUnit + ", unitType=" + unitType + ", imageUrl="
+//				+ imageUrl  + "]";
+//	}
 
 
 	
