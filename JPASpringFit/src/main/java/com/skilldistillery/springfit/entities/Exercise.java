@@ -40,8 +40,6 @@ public class Exercise {
 	@OneToMany(mappedBy = "exercise")
 	private List<WorkoutExercise> workoutExercises;
 	
-	private List<Exercise> exercises;
-
 	public Exercise() {
 		super();
 	}
@@ -113,15 +111,6 @@ public class Exercise {
 		this.workoutExercises = workoutExercises;
 	}
 	
-	
-
-	public List<Exercise> getExercises() {
-		return exercises;
-	}
-
-	public void setExercises(List<Exercise> exercises) {
-		this.exercises = exercises;
-	}
 
 	@Override
 	public int hashCode() {
