@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.springfit.entities.Exercise;
+import com.skilldistillery.springfit.entities.ExerciseType;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -58,6 +59,11 @@ public class ExerciseDaoImpl implements ExerciseDAO {
         return em.createQuery(jpql, Exercise.class)
                  .setParameter("exerciseType", id)
                  .getResultList(); 
+	}
+	@Override
+	public List<ExerciseType> findAllExerciseTypes() {
+		String jpql = "Select e FROM ExerciseType e";				
+		return em.createQuery(jpql, ExerciseType.class).getResultList();
 	}
 	
 	

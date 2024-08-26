@@ -2,7 +2,8 @@ package com.skilldistillery.springfit.data;
 
 import java.util.List;
 
-import com.skilldistillery.springfit.entities.Exercise;
+import org.springframework.stereotype.Repository;
+
 import com.skilldistillery.springfit.entities.Workout;
 import com.skilldistillery.springfit.entities.WorkoutExercise;
 
@@ -10,7 +11,10 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 
+@Transactional
+@Repository
 public class WorkoutDAOImpl implements WorkoutDAO {
 	private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("JPASpringFit");
 	

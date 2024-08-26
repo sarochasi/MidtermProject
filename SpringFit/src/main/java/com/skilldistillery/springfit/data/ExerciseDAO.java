@@ -4,6 +4,7 @@ package com.skilldistillery.springfit.data;
 import java.util.List;
 
 import com.skilldistillery.springfit.entities.Exercise;
+import com.skilldistillery.springfit.entities.ExerciseType;
 
 public interface ExerciseDAO {
 	
@@ -17,6 +18,8 @@ public interface ExerciseDAO {
 	List<Exercise> showExercisesByType(int id);
 	
 	public List<Exercise> findAllExercises();
+	
+	public List<ExerciseType> findAllExerciseTypes();
 
 
 }

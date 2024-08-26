@@ -33,18 +33,7 @@ public class ExerciseController {
 		model.addAttribute("allExercises", exercises);
 		return "workout";
 	}
-	//Opens workout page when selected from account page
-	@RequestMapping(path = "GetWorkoutPage.do")
-	public ModelAndView displayWorkoutPage() {	
-		ModelAndView mv = new ModelAndView();
-		
-		List<Exercise> exercises = exerciseDao.findAllExercises();
-		
-		
-		mv.addObject("allExercises",exercises);
-		mv.setViewName("workout");
-		return mv;
-	}
+
 
 	// SEARCH BY ID
 	@RequestMapping(path = "searchById.do", method = RequestMethod.GET)
