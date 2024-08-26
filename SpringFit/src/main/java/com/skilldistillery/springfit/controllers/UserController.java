@@ -29,7 +29,7 @@ public class UserController {
 	
 	// LOGIN FORM - OUTPUT (POST) 
     @RequestMapping(path = "login.do", method = RequestMethod.POST)
-    public String doLogin(User user, HttpSession session, Model model) {
+    public String doLogin(@ModelAttribute("user") User user, HttpSession session, Model model) {
     	
         User authUser = userDao.authenticateUser(user.getUsername(), user.getPassword());
         
@@ -42,6 +42,19 @@ public class UserController {
             return "error"; 
         }
     }
+    
+    @RequestMapping(path = "profile.do", method = RequestMethod.GET)
+    public String showProfile(HttpSession session, Model model) {
+        User loggedInUser = (User) session.getAttribute("loggedInUser");
+        if (loggedInUser != null) {
+            model.addAttribute("user", loggedInUser);
+            return "account"; 
+        } else {
+            model.addAttribute("errorMessage", "You must be logged in to view your profile.");
+            return "login"; 
+        }
+    }
+
     
     @RequestMapping(path="registerForm.do", method=RequestMethod.GET)
     public String showRegisterForm(Model model) {

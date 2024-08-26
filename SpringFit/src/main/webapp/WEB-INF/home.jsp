@@ -3,7 +3,7 @@
 <%@ taglib uri="jakarta.tags.core" prefix="c"%>
 
 <!DOCTYPE html>
-<html>
+<html data-bs-theme="Success">
 
 <head>
 <meta charset="UTF-8">
@@ -22,13 +22,18 @@
 
 		<nav class="navbar navbar-expand-lg bg-body-tertiary">
 			<div class="container-fluid">
-				<a class="navbar-brand" href="#">LOGO</a>
+				<a class="navbar-brand" href="home.do"> <img
+					src="images/springFit_transparent-.png" alt="Logo" width="70"
+					height="30" class="d-inline-block align-text-top">
+				</a>
 				<button class="navbar-toggler" type="button"
 					data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
 					aria-controls="navbarSupportedContent" aria-expanded="false"
 					aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
+
+
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 						<li class="nav-item"><a class="nav-link active"
@@ -46,8 +51,7 @@
 								<li><a class="dropdown-item" href="#">Cardio</a></li>
 
 							</ul></li>
-						<li class="nav-item"><a class="nav-link disabled"
-							aria-disabled="true">Disabled</a></li>
+				
 					</ul>
 
 					<c:choose>
@@ -66,8 +70,7 @@
 								<ul class="dropdown-menu text-small "
 									style="position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate(0px, 34px);"
 									aria-labelledby="accountDropdown">
-									<li><a class="dropdown-item" href="#">Profile</a></li>
-									<li><a class="dropdown-item" href="#">Settings</a></li>
+									<li><a class="dropdown-item" href="profile.do">Profile</a></li>
 									<li><hr class="dropdown-divider"></li>
 									<li><a class="dropdown-item" href="logout.do">Log out</a></li>
 								</ul>
@@ -76,8 +79,7 @@
 						<c:otherwise>
 							<button class="btn btn-link nav-link active" type="button"
 								data-bs-toggle="collapse" data-bs-target="#loginForm"
-								aria-expanded="false" aria-controls="loginForm">Log in
-							</button>
+								aria-expanded="false" aria-controls="loginForm">Log in</button>
 						</c:otherwise>
 					</c:choose>
 				</div>
@@ -106,69 +108,12 @@
 		</div>
 	</div>
 	<main>
-		<%-- 	<div class="container mt-4">
-			<div class="d-block mx-auto mb-4">
-				<h1 class="text-center">Welcome to Spring Fit</h1>
 
-				${SMOKETEST}
-			</div>
-			<div class="row g-5">
-
-				<!-- LEFT -->
-				<div class="col-md-6 col-lg-6">
-					<p>Welcome to Springfit – your ultimate companion in achieving
-						your fitness goals. At Springfit, we’re dedicated to providing you
-						with the tools and insights you need to lead a healthier, more
-						active lifestyle. Our cutting-edge platform offers comprehensive
-						tracking features, so you can monitor your workouts, set goals,
-						and celebrate your progress every step of the way.</p>
-					<p>Personalized Fitness Tracking is at the heart of what we do.
-						Whether you’re a seasoned athlete or just starting your fitness
-						journey, Springfit caters to all levels of experience. Our
-						intuitive dashboard allows you to log workouts, track nutrition,
-						and assess your overall performance. With detailed analytics and
-						real-time feedback, you’ll have everything you need to optimize
-						your routine and stay motivated.</p>
-					<p>Join our vibrant community of fitness enthusiasts and
-						professionals. At Springfit, we believe in the power of connection
-						and support. Engage with like-minded individuals, share your
-						achievements, and get inspired by others’ stories. Together, we’ll
-						push the boundaries of fitness and reach new milestones. Start
-						your journey with Springfit today and discover a smarter, more
-						connected way to stay fit.</p>
-				</div>
-
-				<!-- RIGHT -->
-				<div class="col-md-4 col-lg-4 order-md-last">
-					<form action="login.do" method="POST">
-						<h4 class="d-flex justify-content-between align-items-center mb-3">
-							<span class="text-primary">Log in</span>
-						</h4>
-						<div class="mb-3">
-							<label for="username" class="form-label">Username:</label> <input
-								type="text" id="username" name="username" class="form-control"
-								required>
-						</div>
-						<div class="mb-3">
-							<label for="password" class="form-label">Password:</label> <input
-								type="password" id="password" name="password"
-								class="form-control" required>
-						</div>
-						<button type="submit" class="btn btn-primary">Log In</button>
-					</form>
-					<form action="registerForm.do" method="GET">
-						<p>
-							Not a member?
-							<button type="submit" class="btn btn-link">Sign up</button>
-						</p>
-					</form>
-				</div>
-
-			</div> --%>
 
 		<!-- ==================================================================================== -->
 
 		<div class="b-example-divider"></div>
+
 		<div class="container col-xl-10 col-xxl-8 px-4 py-5">
 			<div class="row align-items-center g-lg-5 py-5">
 				<div class="col-lg-7 text-center text-lg-start">
@@ -188,6 +133,8 @@
 						<div class="col-md-10 mx-auto col-lg-5">
 							<form action="login.do" method="POST"
 								class="p-4 p-md-5 border rounded-3 bg-body-tertiary">
+								<h1 class="fw-bold mb-0 fs-2">Log in</h1>
+								<br>
 								<div class="form-floating mb-3">
 									<input type="text" class="form-control" id="floatingInput"
 										name="username" placeholder="username"> <label
@@ -214,14 +161,42 @@
 						</div>
 					</c:when>
 					<c:otherwise>
-						<div class="col-md-10 mx-auto col-lg-5">
-							<ul>
-								<li>Username: <c:out
-										value="${sessionScope.loggedInUser.username}" /></li>
-								<li>First Name: <c:out
-										value="${sessionScope.loggedInUser.firstName}" /></li>
-								<li>Last Name: <c:out
-										value="${sessionScope.loggedInUser.lastName}" /></li>
+					
+					
+					
+						<div class="col-md-10 mx-auto col-lg-5 center">
+							
+
+							<ul class="d-grid gap-4 my-5 list-unstyled small centered-ul">
+
+								<li class="d-flex justify-content-center">
+									<form action="profile.do" method="GET">
+										<button type="submit"
+											class="w-100 py-2 mb-2 btn btn-outline-secondary rounded-3" style="height:100px;width:1000px">
+											<img src="images/profile.png" width="48" height="48"
+												alt="Account">
+											<div>
+												<h5 class="mb-0">See your profile</h5>
+											</div>
+										</button>
+									</form>
+
+								</li>
+								
+								<li class="d-flex justify-content-center">
+									<form action="" method="GET">
+										<button type="submit"
+											class="w-100 py-2 mb-2 btn btn-outline-secondary rounded-3" style="height:100px;width:1000px">
+											<img src="images/commu.png" width="48" height="48"
+												alt="Account">
+											<div>
+												<h5 class="mb-0">Community board</h5>
+											</div>
+										</button>
+									</form>
+
+								</li>
+
 
 							</ul>
 
@@ -232,11 +207,10 @@
 
 
 			</div>
+
+
+
 		</div>
-
-
-
-
 
 
 
@@ -273,6 +247,7 @@
 						<form action="showExercise.do" method="POST">
 							<button type="submit" class="btn btn-link">Arms</button>
 						</form>
+
 					</div>
 					<div class="col-lg-2 text-center">
 						<div class="rounded-circle"
@@ -322,6 +297,101 @@
 
 			</div>
 		</div>
+
+		<!-- ==================================== feature ============================================ -->
+
+
+		<hr class="featurette-divider">
+		<div class="container col-xl-10 col-xxl-8 px-4 py-5">
+			<div
+				class="row featurette d-flex align-items-center justify-content-center">
+				<div class="col-md-7">
+					<h2 class="featurette-heading fw-normal lh-1">Personalized
+						Workout Plans</h2>
+					<p class="lead">At FitnessTracker, we offer Personalized
+						Workout Plans tailored to your unique fitness goals. Create
+						customized regimens based on your preferences, whether you want to
+						lose weight, build muscle, or enhance overall health. With options
+						to adjust exercises, sets, and schedules, you can easily stay
+						motivated and track your progress as you work towards your fitness
+						objectives.</p>
+				</div>
+				<div class="col-md-5">
+					<img src="https://www.dmoose.com/cdn/shop/articles/Main_Image_c34524b2-86f3-4c60-92fa-2e9d67beccf5.jpg?v=1668438961"
+						class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
+						width="300" height="300" xmlns="http://www.w3.org/2000/svg"
+						role="img" aria-label="Placeholder: 500x500"
+						preserveAspectRatio="xMidYMid slice" focusable="false">
+					
+					</img>
+				</div>
+			</div>
+
+			<hr class="featurette-divider">
+			<div
+				class="row featurette d-flex align-items-center justify-content-center">
+				<div class="col-md-7 order-md-2">
+					<h2 class="featurette-heading fw-normal lh-1">Progress
+						Tracking Dashboard</h2>
+					<p class="lead">Stay motivated with our Progress Tracking
+						Dashboard, which provides a clear overview of your fitness
+						journey. Monitor key metrics like weight, body measurements, and
+						exercise history with visual graphs and charts.</p>
+				</div>
+				<div class="col-md-5 order-md-1">
+					<img src="https://www.verywellfit.com/thmb/jB9WezPXQ3Ou8QBImfbY03ziUjw=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/Pushups-5680bb925f9b586a9edf3927.jpg"
+						class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
+						width="300" height="300" xmlns="http://www.w3.org/2000/svg"
+						role="img" aria-label="Placeholder: 500x500"
+						preserveAspectRatio="xMidYMid slice" focusable="false">
+					
+				</div>
+			</div>
+			<hr class="featurette-divider">
+
+			<div
+				class="row featurette d-flex align-items-center justify-content-center">
+				<div class="col-md-7">
+					<h2 class="featurette-heading fw-normal lh-1">Exercise Library
+						and Tutorials</h2>
+					<p class="lead">Explore our extensive Exercise Library and
+						Tutorials to learn new exercises and perfect your form. Featuring
+						a wide range of categorized exercises with instructional videos
+						and safety tips, you can easily find options that suit your skill
+						level.</p>
+				</div>
+				<div class="col-md-5">
+					<img src="https://cdn.shedefined.com.au/wp-content/uploads/2023/07/04233631/How-shy-girl-workouts-help-women-get-fit-and-gain-confidence-in-gym-960x540-1.jpg"
+						class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
+						width="300" height="300" xmlns="http://www.w3.org/2000/svg"
+						role="img" aria-label="Placeholder: 500x500"
+						preserveAspectRatio="xMidYMid slice" focusable="false">
+					
+				</div>
+			</div>
+		</div>
+
+
+		<!-- ==================================== feature ============================================ -->
+
+		<div class="b-example-divider"></div>
+
+
+		<div class="container">
+			<footer
+				class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+				<div class="col-md-4 d-flex align-items-center">
+					<a href="/"
+						class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
+						<img src="images/springFit_transparent-.png" alt="Logo" width="100"
+						height="50">
+					</a>
+				</div>
+				<p class="float-end"><a href="#">Back to top</a></p>
+			</footer>
+		</div>
+
+
 
 	</main>
 
