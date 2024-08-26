@@ -449,6 +449,7 @@ START TRANSACTION;
 USE `springfitdb`;
 INSERT INTO `liked_exercise` (`user_id`, `exercise_id`) VALUES (1, 1);
 INSERT INTO `liked_exercise` (`user_id`, `exercise_id`) VALUES (1, 3);
+INSERT INTO `liked_exercise` (`user_id`, `exercise_id`) VALUES (1, 5);
 
 COMMIT;
 
