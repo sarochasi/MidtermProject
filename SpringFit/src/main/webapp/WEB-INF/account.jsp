@@ -108,13 +108,13 @@
 		<form action="IntializeWorkout.do" method="GET">
 			<div class="mb-3">
 				<label for="workoutName" class="form-label">Workout name</label> <input
-					type="text" class="form-control" id="workoutName" name="workoutName"
+					type="text" class="form-control" id="workoutName" name="name"
 					required>
 			</div>
 			
 			<div class="mb-3">
 				<label for="workoutDescription" class="form-label">Description</label> <input
-					type="text" class="form-control" id="workoutDescription" name="workoutDescription"
+					type="text" class="form-control" id="workoutDescription" name="description"
 					>
 			</div>
 			
