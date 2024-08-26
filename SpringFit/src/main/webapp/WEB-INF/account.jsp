@@ -86,12 +86,52 @@
 					<div class="container-fluid">
 						<div class="d-flex justify-content-between align-items-center">
 							<h3>Your Workouts</h3>
-							<form action="GetWorkoutPage.do" method="GET">
+							<!-- <form action="GetWorkoutPage.do" method="GET">
 								<button type="submit" class="btn btn-primary btn-custom">Create
+									New Workout</button>
+							</form>
+						</div> -->
+							<form action="IntializeWorkout.do" method="GET">
+								<button type="button" class="btn btn-link active"
+								data-bs-toggle="collapse" data-bs-target="#createWorkoutForm"
+						aria-expanded="false" aria-controls="createWorkoutForm">Create
 									New Workout</button>
 							</form>
 						</div>
 					</div>
+					
+					
+					<div class="collapse" id="createWorkoutForm"
+	style="right: 0; width: 250px; z-index: 1000;">
+	<div class="card card-body">
+	
+		<form action="GetWorkoutPage.do" method="GET">
+			<div class="mb-3">
+				<label for="workoutName" class="form-label">Workout name</label> <input
+					type="text" class="form-control" id="workoutName" name="workoutName"
+					required>
+			</div>
+			
+			<div class="mb-3">
+				<label for="workoutDescription" class="form-label">Description</label> <input
+					type="text" class="form-control" id="workoutDescription" name="workoutDescription"
+					>
+			</div>
+			
+			<div class="mb-3">
+				<label for="imageUrln" class="form-label">Image url</label> <input
+					type="text" class="form-control" id="imageUrl" name="imageUrl"
+					>
+			</div>
+			
+			<button type="submit" class="btn btn-primary w-100">Create workout</button>
+		</form>
+	</div>
+</div>
+					
+					<!-- ==================================================== -->
+					
+					
 
 					<c:forEach var="workoutExercise" items="${workoutplan}">
 						<div class="card" style="width: 18rem;">
