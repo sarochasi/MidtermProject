@@ -49,29 +49,6 @@
 			<!-- <h2>Account Details</h2> -->
 			<h2>Welcome ${loggedInUser.firstName}!</h2>
 
-			<!-- (From the LoginLab) -->
-			<!--  	Update account.jsp to output escaped (c:out) user data if the user is logged in 
-			(i.e. in session, accessible on the JSP page with the sessionScope variable), 
-			or "Not Logged In." otherwise. 		-->
-
-			<%-- Output user details --%>
-			<%-- 	<c:choose>
-		<c:when test="${not empty sessionScope.loggedInUser}">
-			<ul>
-				<li>Username: <c:out
-						value="${sessionScope.loggedInUser.username}" /></li>
-				<p>Password: <c:out value="${sessionScope.loggedInUser.password}"/></p>
-				<li>First Name: <c:out
-						value="${sessionScope.loggedInUser.firstName}" /></li>
-				<li>Last Name: <c:out
-						value="${sessionScope.loggedInUser.lastName}" /></li>
-			</ul>
-		</c:when>
-		<c:otherwise>
-			<p>Not Logged In.</p>
-		</c:otherwise>
-	</c:choose> --%>
-			<%-- Output user details --%>
 			<!-- Can later decide to remove username / full name (could be moved to a "settings".jsp -->
 			<c:choose>
 				<c:when test="${not empty sessionScope.loggedInUser}">
@@ -86,69 +63,66 @@
 					<div class="container-fluid">
 						<div class="d-flex justify-content-between align-items-center">
 							<h3>Your Workouts</h3>
-							<!-- <form action="GetWorkoutPage.do" method="GET">
-								<button type="submit" class="btn btn-primary btn-custom">Create
-									New Workout</button>
-							</form>
-						</div> -->
+
 							<form action="IntializeWorkout.do" method="GET">
 								<button type="button" class="btn btn-link active"
-								data-bs-toggle="collapse" data-bs-target="#createWorkoutForm"
-						aria-expanded="false" aria-controls="createWorkoutForm">Create
+									data-bs-toggle="collapse" data-bs-target="#createWorkoutForm"
+									aria-expanded="false" aria-controls="createWorkoutForm">Create
 									New Workout</button>
 							</form>
 						</div>
 					</div>
-					
-					
-					<div class="collapse mt-2" id="createWorkoutForm"
-	>
-	<div class="card card-body">
-	
-		<form action="InitializeWorkout.do" method="GET">
-			<div class="mb-3">
-				<label for="workoutName" class="form-label">Workout name</label> <input
-					type="text" class="form-control" id="workoutName" name="name"
-					required>
-			</div>
-			
-			<div class="mb-3">
-				<label for="workoutDescription" class="form-label">Description</label> <input
-					type="text" class="form-control" id="workoutDescription" name="description"
-					>
-			</div>
-			
-			<div class="mb-3">
-				<label for="imageUrln" class="form-label">Image url</label> <input
-					type="text" class="form-control" id="imageUrl" name="imageUrl"
-					>
-			</div>
-			
-			<button type="submit" class="btn btn-primary w-100">Create workout</button>
-		</form>
-	</div>
-</div>
-					
-					<!-- ==================================================== -->
-					
-					
 
-					<c:forEach var="workoutExercise" items="${workoutplan}">
+
+					<div class="collapse mt-2" id="createWorkoutForm">
+						<div class="card card-body">
+
+							<form action="InitializeWorkout.do" method="GET">
+								<div class="mb-3">
+									<label for="workoutName" class="form-label">Workout
+										name</label> <input type="text" class="form-control" id="workoutName"
+										name="name" required>
+								</div>
+
+								<div class="mb-3">
+									<label for="workoutDescription" class="form-label">Description</label>
+									<input type="text" class="form-control" id="workoutDescription"
+										name="description">
+								</div>
+
+								<div class="mb-3">
+									<label for="imageUrln" class="form-label">Image url</label> <input
+										type="text" class="form-control" id="imageUrl" name="imageUrl">
+								</div>
+
+								<button type="submit" class="btn btn-primary w-100">Create
+									workout</button>
+							</form>
+						</div>
+					</div>
+
+					<!-- ==================================================== -->
+
+
+					<%-- 	<c:when test="${not empty workout }"> --%>
+					<c:forEach var="workout" items="${workout}">
 						<div class="card" style="width: 18rem;">
 							<div class="card-body">
 								<h5 class="card-title">${workout.name}</h5>
-								<h6 class="card-subtitle mb-2 text-body-secondary">${sessionScope.loggedInUse.firstName}</h6>
+								<h6 class="card-subtitle mb-2 text-body-secondary">${loggedInUse.firstName}</h6>
 								<p class="card-text"></p>
 								<a href="#" class="card-link">Card link</a> <a href="#"
 									class="card-link">Another link</a>
 							</div>
 						</div>
-						</c:forEach>
+					</c:forEach>
+
 				</c:when>
+
+				<%-- 	</c:when> --%>
 				<c:otherwise>
 					<p>Not Logged In.</p>
 				</c:otherwise>
-
 			</c:choose>
 
 			<!-- USER's Workouts -->

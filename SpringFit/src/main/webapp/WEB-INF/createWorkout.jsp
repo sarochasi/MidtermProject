@@ -32,7 +32,7 @@
 										<option value="${exercise.id }">${exercise.name}</option>
 									</c:forEach>
 							</select> 
-							<button class="w-100 btn btn-lg btn-primary" type="submit">Add exercise</button>
+							<button class="btn btn-lg btn-primary" type="submit">Add exercise</button>
 							
 							</li>
 
@@ -42,7 +42,9 @@
 				</c:when>
 
 				<c:when test="${not empty exerciseTypes}">
-					<form action="GetWorkoutPage.do" method="GET">
+					<form action="GetWorkoutPage.do" method="GET"> 
+					<input type="hidden" value="${workoutId }" name="workoutId"/>
+					
 
 						<select name="exerciseType">
 
@@ -55,15 +57,14 @@
 							</c:forEach>
 						</select>
 						
-						<button class="w-100 btn btn-lg btn-primary" type="submit">Submit</button>
+						<button class="btn btn-lg btn-primary" type="submit">Submit</button>
 
 					</form>
 
 				</c:when>
 				
 				
-			<%-- 	<c:when test="${not empty workout }">
-				< --%>
+		
 				
 				
 			</c:choose>
