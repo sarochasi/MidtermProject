@@ -41,7 +41,7 @@
 					</form>
 				</c:when>
 
-				<c:when test="${not empty exerciseType}">
+				<c:when test="${not empty exerciseTypes}">
 					<form action="GetWorkoutPage.do" method="GET">
 
 						<select name="exerciseType">
