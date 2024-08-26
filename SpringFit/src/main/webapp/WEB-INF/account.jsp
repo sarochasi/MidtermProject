@@ -34,12 +34,12 @@
 
 <body>
 
-	<%@ include file="navbar.jsp" %>
+	<%@ include file="navbar.jsp"%>
 
 	<%--Edit the file nav.jsp to change nav links (navbar code to be contained in navbar; will only need to plug into each jsp)--%>
 	<%-- <jsp:include page="nav.jsp" /> --%>
 
-	
+
 	<main>
 
 
@@ -82,6 +82,28 @@
 						<li>${sessionScope.loggedInUser.firstName}
 							${sessionScope.loggedInUser.lastName}</li>
 					</ul>
+
+					<div class="container-fluid">
+						<div class="d-flex justify-content-between align-items-center">
+							<h3>Your Workouts</h3>
+							<form action="GetWorkoutPage.do" method="GET">
+								<button type="submit" class="btn btn-primary btn-custom">Create
+									New Workout</button>
+							</form>
+						</div>
+					</div>
+
+					<c:forEach var="workoutExercise" items="${workoutplan}">
+						<div class="card" style="width: 18rem;">
+							<div class="card-body">
+								<h5 class="card-title">${workout.name}</h5>
+								<h6 class="card-subtitle mb-2 text-body-secondary">${sessionScope.loggedInUse.firstName}</h6>
+								<p class="card-text"></p>
+								<a href="#" class="card-link">Card link</a> <a href="#"
+									class="card-link">Another link</a>
+							</div>
+						</div>
+						</c:forEach>
 				</c:when>
 				<c:otherwise>
 					<p>Not Logged In.</p>
@@ -91,15 +113,10 @@
 
 			<!-- USER's Workouts -->
 			<!-- Will need to be updated once (maybe for each/cycle through) we have logic sorted out & more workouts/data entered into MySQL Workbench DB -->
-			<div class="container-fluid">
-				<div class="d-flex justify-content-between align-items-center">
-					<h3>Your Workouts</h3>
-					<form action="GetWorkoutPage.do" method="GET">
-						<button type="submit" class="btn btn-primary btn-custom">Create
-							New Workout</button>
-					</form>
-				</div>
-				<div class="scrolling-wrapper">
+
+
+
+			<!-- <div class="scrolling-wrapper">
 
 					<div class="card">
 						<img src="image" class="card-img-top" alt="image href">
@@ -139,7 +156,7 @@
 
 				</div>
 			</div>
-
+ -->
 			<!-- FAVORITE -->
 			<!-- Will need to be updated once (maybe for each/cycle through) we have logic sorted out & more workouts/data entered into MySQL Workbench DB -->
 			<div class="container-fluid mt-4">
@@ -243,8 +260,8 @@
 
 
 
-<!-- Footer -->
-<%@ include file="footer.jsp" %>
+		<!-- Footer -->
+		<%@ include file="footer.jsp"%>
 
 
 		<script
