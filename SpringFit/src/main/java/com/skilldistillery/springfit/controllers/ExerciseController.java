@@ -1,4 +1,3 @@
-
 package com.skilldistillery.springfit.controllers;
 
 import java.util.List;
@@ -72,16 +71,16 @@ public class ExerciseController {
 	}
 	
     // SEARCH BY EXERCISE TYPE
-//    @RequestMapping(path = "testingexercise.do", method = RequestMethod.GET)
-//    public String searchByType(@RequestParam("exerciseType") int id, Model model) {
-//        List<Exercise> exercises = exerciseDao.showExercisesByType(id);
-//        if (exercises.isEmpty()) {
-//            model.addAttribute("error", "No exercises found for this type.");
-//        } else {
-//            model.addAttribute("searchResults", exercises);
-//        }
-//        return "testingexercise"; 
-//    }
+    @RequestMapping(path = "searchByType.do", method = RequestMethod.GET)
+    public String searchByType(@RequestParam("typeId") int id, Model model) {
+        List<Exercise> exercises = exerciseDao.showExercisesByType(id);
+        if (exercises.isEmpty()) {
+            model.addAttribute("error", "No exercises found for this type.");
+        } else {
+            model.addAttribute("exercises", exercises);
+        }
+        return "Display"; 
+    }
 	
 	
 	

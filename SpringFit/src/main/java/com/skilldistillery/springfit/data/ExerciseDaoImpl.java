@@ -54,16 +54,11 @@ public class ExerciseDaoImpl implements ExerciseDAO {
 	// This may need work.
 	@Override
 	public List<Exercise> showExercisesByType(int id) {
-		String jpql = "SELECT e FROM Exercise e WHERE e.type.id = :exerciseType";
+		String jpql = "SELECT e FROM Exercise e WHERE e.exerciseType.id = :exerciseType";
         return em.createQuery(jpql, Exercise.class)
                  .setParameter("exerciseType", id)
                  .getResultList(); 
 	}
-	
-	
-	
-	
-	
 	
 	
 	

@@ -17,6 +17,7 @@
 
 <body>
 
+	
 
 	<header class="p-3 mb-3 border-bottom">
 
@@ -234,17 +235,22 @@
 							<img src="images/leg.png" alt="Legs Exercise"
 								style="width: 100%; height: 100%; object-fit: cover;" />
 						</div>
-						<form action="showExercise.do" method="POST">
+						<form action="searchByType.do" method="GET">
+						<input type="hidden" name="typeId" value="1" />
 							<button type="submit" class="btn btn-link">Legs</button>
 						</form>
 					</div>
+					
+					
 					<div class="col-lg-2 text-center">
 						<div class="rounded-circle"
 							style="width: 140px; height: 140px; overflow: hidden; position: relative;">
 							<img src="images/arm.png" alt="Legs Exercise"
 								style="width: 100%; height: 100%; object-fit: cover;" />
 						</div>
-						<form action="showExercise.do" method="POST">
+						
+						<form action="searchByType.do" method="GET">
+						<input type="hidden" name="typeId" value="2" />
 							<button type="submit" class="btn btn-link">Arms</button>
 						</form>
 
@@ -255,7 +261,8 @@
 							<img src="images/chest.png" alt="Legs Exercise"
 								style="width: 100%; height: 100%; object-fit: cover;" />
 						</div>
-						<form action="showExercise.do" method="POST">
+						<form action="searchByType.do" method="GET">
+						<input type="hidden" name="typeId" value="3" />
 							<button type="submit" class="btn btn-link">Chest</button>
 						</form>
 					</div>
@@ -265,7 +272,8 @@
 							<img src="images/back.png" alt="Legs Exercise"
 								style="width: 100%; height: 100%; object-fit: cover;" />
 						</div>
-						<form action="showExercise.do" method="POST">
+						<form action="searchByType.do" method="GET">
+						<input type="hidden" name="typeId" value="4" />
 							<button type="submit" class="btn btn-link">Back</button>
 						</form>
 					</div>
@@ -275,7 +283,8 @@
 							<img src="images/abs.png" alt="Legs Exercise"
 								style="width: 100%; height: 100%; object-fit: cover;" />
 						</div>
-						<form action="showExercise.do" method="POST">
+						<form action="searchByType.do" method="GET">
+						<input type="hidden" name="typeId" value="5" />
 							<button type="submit" class="btn btn-link">Core</button>
 						</form>
 					</div>
@@ -285,7 +294,8 @@
 							<img src="images/cardio.png" alt="Legs Exercise"
 								style="width: 100%; height: 100%; object-fit: cover;" />
 						</div>
-						<form action="showExercise.do" method="POST">
+						<form action="searchByType.do" method="GET">
+						<input type="hidden" name="typeId" value="6" />
 							<button type="submit" class="btn btn-link">Cardio</button>
 						</form>
 					</div>
