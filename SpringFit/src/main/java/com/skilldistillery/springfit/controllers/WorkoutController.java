@@ -27,12 +27,13 @@ public class WorkoutController {
 	private WorkoutDAO workoutDao;
 	@Autowired
 	private ExerciseDAO exerciseDao;
+//	@Autowired
+//	private WorkoutExercise workoutExerciseDao;
 
 	// Methods
 	// * navigateToCreateWorkoutJSP
 	// * addExerciseToWorkout
 	// * save workout from session to database
-
 //	//I think this method can be deleted, exercise
 //	@RequestMapping(path = "GetWorkoutPagealternate.do")
 //	public ModelAndView displayWorkoutPage() {	
@@ -40,9 +41,34 @@ public class WorkoutController {
 //		mv.setViewName("workout");
 //		return mv;
 //	}
-
 	// Takes user data for Workout (name desicription, etc), does not take exercises
 	// yet.
+
+
+	// Opens createWorkout page when user selected from account page
+	@RequestMapping(path = "GetWorkoutPage.do", params = "exerciseType")
+	public ModelAndView displayWorkoutPage(@RequestParam("exerciseType") int typeId, HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		User loggedInUser = (User) session.getAttribute("loggedInUser");
+		if (loggedInUser != null) {
+			List<Exercise> exercises = exerciseDao.showExercisesByType(typeId);
+			mv.addObject("exercises", exercises);
+			mv.setViewName("createWorkout");
+		} else {
+			mv.setViewName("home");
+		}
+
+		return mv;
+	}
+	
+	@RequestMapping(path = "GetWorkoutPage.do")
+	public ModelAndView getExerciseType() {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("exerciseTypes", exerciseDao.findAllExerciseTypes());
+		mv.setViewName("createWorkout");
+		return mv;
+	}
+	
 	@RequestMapping(path = "InitializeWorkout.do")
 	public ModelAndView initializeWorkout(Workout workout, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
@@ -55,40 +81,14 @@ public class WorkoutController {
 		return mv;
 	}
 
-	@RequestMapping(path = "GetWorkoutPage.do")
-	public ModelAndView getExerciseType() {
-		ModelAndView mv = new ModelAndView();
-
-		mv.addObject("exerciseTypes", exerciseDao.findAllExerciseTypes());
-
-		mv.setViewName("createWorkout");
-
-		return mv;
-	}
-
-	// Opens createWorkout page when user selected from account page
-	@RequestMapping(path = "GetWorkoutPage.do", params = "exerciseType")
-	public ModelAndView displayWorkoutPage(@RequestParam("exerciseType") int typeId, HttpSession session) {
-		ModelAndView mv = new ModelAndView();
-		User loggedInUser = (User) session.getAttribute("loggedInUser");
-		if (loggedInUser != null) {
-			List<Exercise> exercises = exerciseDao.showExercisesByType(typeId);
-
-			mv.addObject("exercises", exercises);
-			mv.setViewName("createWorkout");
-		} else {
-			mv.setViewName("home");
-
-		}
-
-		return mv;
-	}
-
 	@RequestMapping(path = "addExercise.do", method = RequestMethod.POST)
 	public String addExerciseToWorkout(HttpSession session, @RequestParam("id") int exerciseId,
-			WorkoutExercise workoutExercise, Model model) {
+			WorkoutExercise workoutExercise, Workout workout, Model model) {
 		
-		// workoutExercise = workoutDao.createNewWorkout(workoutExercise);
+		
+		// List<Workout> exercises = workoutDao.addExerciseToWorkout(workout, null);
+		
+		
 		
 		// exercise Id recieved
 

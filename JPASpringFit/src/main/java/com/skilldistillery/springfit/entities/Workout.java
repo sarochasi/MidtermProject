@@ -163,16 +163,24 @@ public class Workout {
 	public void setWorkoutExercise(List<WorkoutExercise> workoutExercise) {
 		this.workoutExercises = workoutExercise;
 	}
+	
 	public void addWorkoutExercise(WorkoutExercise workoutExercise) {
-		if (workoutExercises==null) {workoutExercises = new ArrayList<>();}
+		if (workoutExercises==null) workoutExercises = new ArrayList<>();
 		
-		//if workoutExercises.contains(workoutExercise)?????
-		workoutExercises.add(workoutExercise);
-		workoutExercise.setWorkout(this);
+		if (!workoutExercises.contains(workoutExercise)) {
+			workoutExercises.add(workoutExercise);
+			if(workoutExercise.getWorkout() != null) {
+				workoutExercise.getWorkout().addWorkoutExercise(workoutExercise);
+			}
+			workoutExercise.setWorkout(this);
+		}
 		
 	}
 	public void removeWorkoutExercise(WorkoutExercise workoutExercise) {
-		System.out.println("fix removeWorkoutExercise");
+		if(workoutExercises != null && workoutExercises.contains(workoutExercise)) {
+			workoutExercises.remove(workoutExercise);
+			// workoutExercise.
+		}
 	}
 	
 	

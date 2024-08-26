@@ -41,6 +41,13 @@ public class WorkoutDAOImpl implements WorkoutDAO {
 		
 		return newWorkout;
 	}
+	@Override
+	public Workout addExerciseToWorkout (String workoutName, List<WorkoutExercise> exerciseList) {
+		Workout newWorkout = new Workout();
+		newWorkout.setWorkoutExercise(exerciseList);
+		
+		return newWorkout;
+	}
 
 	@Override
 	public Workout updateNewWorkout(int id, List<WorkoutExercise> exerciseList) {
