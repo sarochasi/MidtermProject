@@ -24,7 +24,6 @@ public class WorkoutDAOImpl implements WorkoutDAO {
 
 	@Override
 	public Workout getWorkoutById(int workoutId) {
-		// TODO Auto-generated method stub
 		return em.find(Workout.class, workoutId);
 	}
 
@@ -37,9 +36,9 @@ public class WorkoutDAOImpl implements WorkoutDAO {
 	}
 	@Override
 	public Workout createNewWorkout(String workoutName, List<WorkoutExercise> exerciseList) {
-		EntityManager em = emf.createEntityManager();
 		Workout newWorkout = new Workout();
 		newWorkout.setWorkoutExercise(exerciseList);
+		
 		return newWorkout;
 	}
 

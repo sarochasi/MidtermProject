@@ -44,13 +44,13 @@ public class WorkoutController {
 	// Takes user data for Workout (name desicription, etc), does not take exercises
 	// yet.
 	@RequestMapping(path = "InitializeWorkout.do")
-	public ModelAndView initializeWorkout(Workout workout, User user, HttpSession session) {
+	public ModelAndView initializeWorkout(Workout workout, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		User loggedInUser = (User) session.getAttribute("loggedInUser");
 		if (loggedInUser != null) {
 			mv.addObject("workout", workoutDao.createNewWorkoutInitialize(workout, loggedInUser.getId()));
 		}
-		mv.setViewName("createWorkout");
+		mv.setViewName("redirect:GetWorkoutPage.do");
 		
 		return mv;
 	}
@@ -87,7 +87,9 @@ public class WorkoutController {
 	@RequestMapping(path = "addExercise.do", method = RequestMethod.POST)
 	public String addExerciseToWorkout(HttpSession session, @RequestParam("id") int exerciseId,
 			WorkoutExercise workoutExercise, Model model) {
-
+		
+		// workoutExercise = workoutDao.createNewWorkout(workoutExercise);
+		
 		// exercise Id recieved
 
 		return "createWorkout";

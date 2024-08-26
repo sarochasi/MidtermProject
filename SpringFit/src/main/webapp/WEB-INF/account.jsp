@@ -105,7 +105,7 @@
 	>
 	<div class="card card-body">
 	
-		<form action="IntializeWorkout.do" method="GET">
+		<form action="InitializeWorkout.do" method="GET">
 			<div class="mb-3">
 				<label for="workoutName" class="form-label">Workout name</label> <input
 					type="text" class="form-control" id="workoutName" name="name"
