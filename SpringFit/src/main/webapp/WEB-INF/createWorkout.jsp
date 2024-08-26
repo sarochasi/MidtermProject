@@ -28,39 +28,12 @@
 							class="dropdown-menu position-static d-grid gap-1 p-2 rounded-3 mx-0 shadow w-220px"
 							data-bs-theme="light">
 							<li><select name="id">
-									<option value="0">Legs</option>
-									<c:forEach var="exercise" items="${legsExercises}">
+									<c:forEach var="exercise" items="${exercises}">
 										<option value="${exercise.id }">${exercise.name}</option>
 									</c:forEach>
-							</select> <select name="id">
-									<option value="0">Arms</option>
-									<c:forEach var="exercise" items="${amrsExercises}">
-										<option value="${exercise.id }">${exercise.name}</option>
-									</c:forEach>
-							</select> <select name="id">
-									<option value="0">Chest</option>
-									<c:forEach var="exercise" items="${chestExercises}">
-										<option value="${exercise.id }">${exercise.name}</option>
-									</c:forEach>
-							</select> <select name="id">
-									<option value="0">Back</option>
-									<c:forEach var="exercise" items="${coreExercises}">
-										<option value="${exercise.id }">${exercise.name}</option>
-									</c:forEach>
-							</select> <select name="id">
-									<option value="0">Core</option>
-									<c:forEach var="exercise" items="${coreExercises}">
-										<option value="${exercise.id }">${exercise.name}</option>
-									</c:forEach>
-							</select> <select name="id">
-									<option value="0">Cardio</option>
-									<c:forEach var="exercise" items="${cardioExercises}">
-										<option value="${exercise.id }">${exercise.name}</option>
-									</c:forEach>
-
-							</select></li>
-
-
+							</select> 
+							
+							</li>
 
 						</ul>
 
