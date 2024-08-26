@@ -7,7 +7,7 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Account Profile - could customize with '$''s Account</title>
+<title>Account Profile</title>
 
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
@@ -223,10 +223,9 @@
 		</div>
 </main>
 
-	<script
 
-            		<li>Username: <c:out value="${sessionScope.loggedInUser.username}"/></li>
-           	 	<%-- <p>Password: <c:out value="${sessionScope.loggedInUser.password}"/></p> --%>
+   <%--          		<li>Username: <c:out value="${sessionScope.loggedInUser.username}"/></li>
+           	 	<p>Password: <c:out value="${sessionScope.loggedInUser.password}"/></p>
             		<li>First Name: <c:out value="${sessionScope.loggedInUser.firstName}"/></li>
             		<li>Last Name: <c:out value="${sessionScope.loggedInUser.lastName}"/></li>
             	</ul>
@@ -242,7 +241,7 @@
 	<input type="submit" value="Create New Workout"/>
 </form>
 <br>
-<br>
+<br> --%>
 	
 	
 		<!-- Basic/general layout ideas -->
