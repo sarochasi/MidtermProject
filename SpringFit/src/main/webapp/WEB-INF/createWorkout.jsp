@@ -21,7 +21,7 @@
 
 			<h3>Create new workout</h3>
 			<c:choose>
-				<c:when test="${not empty exerciseType}">
+				<c:when test="${not empty exercises}">
 					<form action="addExercise.do" method="POST">
 
 						<ul
@@ -32,6 +32,7 @@
 										<option value="${exercise.id }">${exercise.name}</option>
 									</c:forEach>
 							</select> 
+							<button class="w-100 btn btn-lg btn-primary" type="submit">Submit</button>
 							
 							</li>
 
@@ -39,8 +40,8 @@
 
 					</form>
 				</c:when>
-				<c:when test="${not empty exercises }">
 
+				<c:when test="${not empty exerciseType}">
 					<form action="GetWorkoutPage.do" method="GET">
 
 						<select name="exerciseType">
