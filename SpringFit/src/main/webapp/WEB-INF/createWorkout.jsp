@@ -60,7 +60,15 @@
 					</form>
 
 				</c:when>
+				
+				
+			<%-- 	<c:when test="${not empty workout }">
+				< --%>
+				
+				
 			</c:choose>
+			
+			
 
 
 
