@@ -101,8 +101,8 @@
 					</div>
 					
 					
-					<div class="collapse" id="createWorkoutForm"
-	style="right: 0; width: 250px; z-index: 1000;">
+					<div class="collapse mt-2" id="createWorkoutForm"
+	>
 	<div class="card card-body">
 	
 		<form action="GetWorkoutPage.do" method="GET">
