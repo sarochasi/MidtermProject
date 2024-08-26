@@ -28,7 +28,7 @@
 
 			<hr class="featurette-divider">
 			<c:choose>
-				
+
 				<c:when test="${not empty loggedInUser}">
 					<c:forEach var="exercise" items="${exercises}">
 						<div class="container col-xl-10 col-xxl-8 px-4 py-5">
@@ -36,8 +36,10 @@
 								class="row featurette d-flex align-items-center justify-content-center">
 								<div class="col-md-7">
 									<h2 class="featurette-heading fw-normal lh-1">${exercise.name}</h2>
-									<p class="lead"><strong>Instruction: </strong>${exercise.instructions}</p>
-										<p class="lead"><strong>Calories per unit: </strong>${exercise.caloriesPerUnit}</p>
+									<p class="lead">
+										<strong>Instruction: </strong>${exercise.instructions}</p>
+									<p class="lead">
+										<strong>Calories per unit: </strong>${exercise.caloriesPerUnit}</p>
 								</div>
 								<div class="col-md-5">
 									<img src="${exercise.imageUrl}"
@@ -51,7 +53,7 @@
 					</c:forEach>
 				</c:when>
 
-			
+
 				<c:otherwise>
 					<c:forEach var="exercise" items="${exercises}" varStatus="status">
 						<c:if test="${status.index == 0}">
@@ -60,10 +62,12 @@
 									class="row featurette d-flex align-items-center justify-content-center">
 									<div class="col-md-7">
 										<h2 class="featurette-heading fw-normal lh-1">${exercise.name}</h2>
-										<p class="lead"><strong>Instruction: </strong>${exercise.instructions}</p>
-										<p class="lead"><strong>Calories per unit: </strong>${exercise.caloriesPerUnit}</p>
-										
-										
+										<p class="lead">
+											<strong>Instruction: </strong>${exercise.instructions}</p>
+										<p class="lead">
+											<strong>Calories per unit: </strong>${exercise.caloriesPerUnit}</p>
+
+
 									</div>
 									<div class="col-md-5">
 										<img src="${exercise.imageUrl}"
@@ -75,29 +79,40 @@
 								</div>
 							</div>
 						</c:if>
+
 					</c:forEach>
+					<p>Please log in to see all exercise</p>
+					<button class="btn btn-link active" type="button"
+						data-bs-toggle="collapse" data-bs-target="#loginForm2"
+						aria-expanded="false" aria-controls="loginForm">Log in</button>
+
 				</c:otherwise>
 			</c:choose>
 
+					<div class="collapse" id="loginForm2"
+						style="right: 0; width: 250px; z-index: 1000;">
+						<div class="card card-body">
+							<form action="login.do" method="POST">
+								<div class="mb-3">
+									<label for="username" class="form-label">Username</label> <input
+										type="text" class="form-control" id="username" name="username"
+										required>
+								</div>
+								<div class="mb-3">
+									<label for="password" class="form-label">Password</label> <input
+										type="password" class="form-control" id="password"
+										name="password" required>
+								</div>
+								<button type="submit" class="btn btn-primary w-100">Log
+									in</button>
+							</form>
 
-			<%-- 		<c:if test="${not empty error}">
-				<div class="alert alert-warning">${error}</div>
-			</c:if>
-
-			<ul>
-				<c:forEach var="exercise" items="${exercises}">
-					<li>${exercise.name}</li>
-				</c:forEach>
-			</ul> --%>
-
-
-
+		</div>
 		</div>
 
 
 
-
-
+</div>
 
 
 
