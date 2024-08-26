@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>See exercises</title>
 
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
@@ -16,50 +16,83 @@
 </head>
 <body>
 
-	<%@ include file="navbar.jsp" %>
+	<%@ include file="navbar.jsp"%>
 
-	<div class="container">
-		<main>
-		
-		<section class="py-5 text-center container">
-    <div class="row py-lg-5">
-      <div class="col-lg-6 col-md-8 mx-auto">
-        <h1 class="fw-light">${ExerciseType.name}</h1>
-        
-      </div>
-    </div>
-  </section>
-  
-  
-  
-  
-  
-   <h2>Exercises</h2>
+	<!-- ============================================================== -->
 
-    <c:if test="${not empty error}">
-        <div class="alert alert-warning">${error}</div>
-    </c:if>
-
-    <ul>
-        <c:forEach var="exercise" items="${exercises}">
-            <li>${exercise.name}</li>
-        </c:forEach>
-    </ul>
-  
-  
-  
-  
-  
-  
-  
-  
-			<!-- <form action="GetWorkoutPage.do" method="GET">
-				Create New Workout <input type="text" name="name" /> <input
-					type="submit" value="Create New Workout" />
-			</form>
- -->
+	<main>
+		<div class="container">
 
 
+			<h2>Exercises</h2>
+
+			<hr class="featurette-divider">
+			<c:choose>
+				
+				<c:when test="${not empty loggedInUser}">
+					<c:forEach var="exercise" items="${exercises}">
+						<div class="container col-xl-10 col-xxl-8 px-4 py-5">
+							<div
+								class="row featurette d-flex align-items-center justify-content-center">
+								<div class="col-md-7">
+									<h2 class="featurette-heading fw-normal lh-1">${exercise.name}</h2>
+									<p class="lead"><strong>Instruction: </strong>${exercise.instructions}</p>
+										<p class="lead"><strong>Calories per unit: </strong>${exercise.caloriesPerUnit}</p>
+								</div>
+								<div class="col-md-5">
+									<img src="${exercise.imageUrl}"
+										class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
+										width="300" height="300" xmlns="http://www.w3.org/2000/svg"
+										role="img" aria-label="Placeholder: 500x500"
+										preserveAspectRatio="xMidYMid slice" focusable="false">
+								</div>
+							</div>
+						</div>
+					</c:forEach>
+				</c:when>
+
+			
+				<c:otherwise>
+					<c:forEach var="exercise" items="${exercises}" varStatus="status">
+						<c:if test="${status.index == 0}">
+							<div class="container col-xl-10 col-xxl-8 px-4 py-5">
+								<div
+									class="row featurette d-flex align-items-center justify-content-center">
+									<div class="col-md-7">
+										<h2 class="featurette-heading fw-normal lh-1">${exercise.name}</h2>
+										<p class="lead"><strong>Instruction: </strong>${exercise.instructions}</p>
+										<p class="lead"><strong>Calories per unit: </strong>${exercise.caloriesPerUnit}</p>
+										
+										
+									</div>
+									<div class="col-md-5">
+										<img src="${exercise.imageUrl}"
+											class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
+											width="300" height="300" xmlns="http://www.w3.org/2000/svg"
+											role="img" aria-label="Placeholder: 500x500"
+											preserveAspectRatio="xMidYMid slice" focusable="false">
+									</div>
+								</div>
+							</div>
+						</c:if>
+					</c:forEach>
+				</c:otherwise>
+			</c:choose>
+
+
+			<%-- 		<c:if test="${not empty error}">
+				<div class="alert alert-warning">${error}</div>
+			</c:if>
+
+			<ul>
+				<c:forEach var="exercise" items="${exercises}">
+					<li>${exercise.name}</li>
+				</c:forEach>
+			</ul> --%>
+
+
+
+		</div>
 
 
 
@@ -77,28 +110,13 @@
 
 
 
-			<!-- ========================================= Footer ============================== -->
-			<div class="b-example-divider"></div>
 
 
-			<div class="container">
-				<footer
-					class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-					<div class="col-md-4 d-flex align-items-center">
-						<a href="/"
-							class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
-							<img src="images/springFit_transparent-.png" alt="Logo"
-							width="100" height="50">
-						</a>
-					</div>
-					<p class="float-end">
-						<a href="#">Back to top</a>
-					</p>
-				</footer>
-			</div>
 
-		</main>
-	</div>
+
+		<!-- ========================================= Footer ============================== -->
+		<%@ include file="footer.jsp"%>
+	</main>
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

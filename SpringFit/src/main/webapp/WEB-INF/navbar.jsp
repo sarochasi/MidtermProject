@@ -27,12 +27,30 @@
 					class="nav-link dropdown-toggle" href="#" role="button"
 					data-bs-toggle="dropdown" aria-expanded="false"> Exercise </a>
 					<ul class="dropdown-menu">
-						<li><a class="dropdown-item" href="#">Leg</a></li>
-						<li><a class="dropdown-item" href="#">Arm</a></li>
-						<li><a class="dropdown-item" href="#">Chest</a></li>
-						<li><a class="dropdown-item" href="#">Back</a></li>
-						<li><a class="dropdown-item" href="#">Core</a></li>
-						<li><a class="dropdown-item" href="#">Cardio</a></li>
+						<li><form action="searchByType.do" method="GET" style="margin: 0; padding: 0;">
+                        <input type="hidden" name="typeId" value="1" />
+                        <button type="submit" class="dropdown-item btn btn-link">Legs</button>
+                    </form></li>
+						<li><form action="searchByType.do" method="GET" style="margin: 0; padding: 0;">
+                        <input type="hidden" name="typeId" value="2" />
+                        <button type="submit" class="dropdown-item btn btn-link">Arms</button>
+                    </form></li>
+						<li><form action="searchByType.do" method="GET" style="margin: 0; padding: 0;">
+                        <input type="hidden" name="typeId" value="3" />
+                        <button type="submit" class="dropdown-item btn btn-link">Chest</button>
+                    </form></li>
+						<li><form action="searchByType.do" method="GET" style="margin: 0; padding: 0;">
+                        <input type="hidden" name="typeId" value="4" />
+                        <button type="submit" class="dropdown-item btn btn-link">Back</button>
+                    </form></li>
+						<li><form action="searchByType.do" method="GET" style="margin: 0; padding: 0;">
+                        <input type="hidden" name="typeId" value="5" />
+                        <button type="submit" class="dropdown-item btn btn-link">Core</button>
+                    </form></li>
+						<li><form action="searchByType.do" method="GET" style="margin: 0; padding: 0;">
+                        <input type="hidden" name="typeId" value="6" />
+                        <button type="submit" class="dropdown-item btn btn-link">Cardio</button>
+                    </form></li>
 
 					</ul></li>
 
@@ -69,7 +87,6 @@
 		</div>
 	</div>
 </nav>
-</header>
 
 
 <!-- Collapsible login form -->
