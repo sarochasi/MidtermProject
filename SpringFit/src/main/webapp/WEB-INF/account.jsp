@@ -47,6 +47,8 @@
 							class="nav-link dropdown-toggle" href="#" role="button"
 							data-bs-toggle="dropdown" aria-expanded="false"> Exercise </a>
 							<ul class="dropdown-menu">
+								<!-- TESTING LINK FUNCTIONALITY WITH LEG -->
+								<!-- <li><a class="dropdown-item" href="searchByType.do?exerciseType=1">Leg</a></li> -->
 								<li><a class="dropdown-item" href="#">Leg</a></li>
 								<li><a class="dropdown-item" href="#">Arm</a></li>
 								<li><a class="dropdown-item" href="#">Chest</a></li>
@@ -134,6 +136,7 @@
 	<c:choose>
 		<c:when test="${not empty sessionScope.loggedInUser}">
 			<ul>
+
 				<li>Username: <c:out
 						value="${sessionScope.loggedInUser.username}" /></li>
 				<%-- <p>Password: <c:out value="${sessionScope.loggedInUser.password}"/></p> --%>
@@ -221,6 +224,66 @@
 </main>
 
 	<script
+
+            		<li>Username: <c:out value="${sessionScope.loggedInUser.username}"/></li>
+           	 	<%-- <p>Password: <c:out value="${sessionScope.loggedInUser.password}"/></p> --%>
+            		<li>First Name: <c:out value="${sessionScope.loggedInUser.firstName}"/></li>
+            		<li>Last Name: <c:out value="${sessionScope.loggedInUser.lastName}"/></li>
+            	</ul>
+        </c:when>
+
+        <c:otherwise>
+            <p>Not Logged In.</p>
+        </c:otherwise>
+        
+    </c:choose>
+	
+<form action = "GetWorkoutPage.do" method="GET">
+	<input type="submit" value="Create New Workout"/>
+</form>
+<br>
+<br>
+	
+	
+		<!-- Basic/general layout ideas -->
+		<h3>Maybe more buttons / forms</h3>
+			<p>Maybe a few additional buttons above (in addition to "Create New Workout", such as a "Health" table that allows a user to submit their weight and calories. (Would only need to include a POST if this is all handled within the account.jsp) </p>
+		<h3>Your workouts</h3>
+			<p>Maybe all of the user's saved workouts displays as a 1 row "table" that can scroll horizontally (left and right?) Will need to read more into Bootstrap responsive table in order to figure out how to implement.</p>
+			<a class="btn btn-primary btn-custom" href="testingexercise.do">Exercises (only testing href functionality to testingexercise here - WILL DELETE)</a>
+			
+			
+			<div class="table-responsive">
+    			<table class="table table-bordered">
+        			<thead>
+            			<tr>
+                			<th>Workout Name</th>
+                			<th>Image</th>
+            			</tr>
+        			</thead>
+        			
+        			<tbody>
+            			<c:forEach var="workout" items="${sessionScope.loggedInUser.workouts}">
+                			<tr>
+                    			<td><c:out value="${workout.name}" /></td>
+                    			<td>
+                        			<c:if test="${not empty workout.imageUrl}">
+                            			<img src="<c:out value='${workout.imageUrl}'/>" alt="Workout Image" width="50" height="50">
+                        			</c:if>
+                    			</td>
+                			</tr>
+            			</c:forEach>
+        			</tbody>
+    			</table>
+			</div>
+			
+		
+		<h3>Your "favorite" (and/or liked/rated) workouts</h3>
+			<p>Same as above, maybe a table that scrolls horizontally. These would be workouts that the user has interacted/saved. (i.e some other user's workout) that they wanted to save into theirs (instance of the other user's workout) - the user may be able to edit their "copy" but not the other user's original workout.</p>
+			
+	
+		<script
+
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 		crossorigin="anonymous"></script>
