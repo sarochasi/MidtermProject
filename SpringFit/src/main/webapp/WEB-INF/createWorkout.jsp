@@ -32,7 +32,7 @@
 										<option value="${exercise.id }">${exercise.name}</option>
 									</c:forEach>
 							</select> 
-							<button class="w-100 btn btn-lg btn-primary" type="submit">Submit</button>
+							<button class="w-100 btn btn-lg btn-primary" type="submit">Add exercise</button>
 							
 							</li>
 
