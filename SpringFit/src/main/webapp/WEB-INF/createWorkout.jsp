@@ -68,7 +68,7 @@
 				</c:when>
 				<c:otherwise>
 
-					<form action="" method="GET">
+					<form action="GetWorkoutPage.do" method="GET">
 
 						<select name="exerciseType">
 
