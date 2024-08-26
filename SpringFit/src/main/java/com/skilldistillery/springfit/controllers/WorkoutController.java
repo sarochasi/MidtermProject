@@ -14,6 +14,7 @@ import com.skilldistillery.springfit.data.ExerciseDAO;
 import com.skilldistillery.springfit.data.WorkoutDAO;
 import com.skilldistillery.springfit.entities.Exercise;
 import com.skilldistillery.springfit.entities.User;
+import com.skilldistillery.springfit.entities.Workout;
 import com.skilldistillery.springfit.entities.WorkoutExercise;
 
 import jakarta.servlet.http.HttpSession;
@@ -22,7 +23,7 @@ import jakarta.servlet.http.HttpSession;
 public class WorkoutController {
 
 	@Autowired
-	private WorkoutDAO workoutDAO;
+	private WorkoutDAO workoutDao;
 	@Autowired
 	private ExerciseDAO exerciseDao;
 
@@ -31,8 +32,6 @@ public class WorkoutController {
 	// * addExerciseToWorkout
 	// * save workout from session to database
 
-	
-	
 //	//I think this method can be deleted, exercise
 //	@RequestMapping(path = "GetWorkoutPagealternate.do")
 //	public ModelAndView displayWorkoutPage() {	
@@ -40,28 +39,32 @@ public class WorkoutController {
 //		mv.setViewName("workout");
 //		return mv;
 //	}
-	
-	//Takes user data for Workout (name desicription, etc), does not take exercises yet.
+
+	// Takes user data for Workout (name desicription, etc), does not take exercises
+	// yet.
 	@RequestMapping(path = "InitializeWorkout.do")
-	public ModelAndView initializeWorkout() {
+	public ModelAndView initializeWorkout(Workout workout, User user, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
+		User loggedInUser = (User) session.getAttribute("loggedInUser");
+		if (loggedInUser != null) {
+			mv.addObject("workout", workoutDao.createNewWorkoutInitialize(workout, loggedInUser.getId()));
+		}
+		mv.setViewName("createWorkout");
 		
 		return mv;
 	}
 
 	@RequestMapping(path = "GetWorkoutPage.do")
-	public ModelAndView getExerciseType( ) {
+	public ModelAndView getExerciseType() {
 		ModelAndView mv = new ModelAndView();
 
-		
 		mv.addObject("exerciseTypes", exerciseDao.findAllExerciseTypes());
-		
+
 		mv.setViewName("createWorkout");
 
 		return mv;
 	}
-	
-	
+
 	// Opens createWorkout page when user selected from account page
 	@RequestMapping(path = "GetWorkoutPage.do", params = "exerciseType")
 	public ModelAndView displayWorkoutPage(@RequestParam("exerciseType") int typeId, HttpSession session) {
@@ -72,8 +75,7 @@ public class WorkoutController {
 
 			mv.addObject("exercises", exercises);
 			mv.setViewName("createWorkout");
-		}
-		else {
+		} else {
 			mv.setViewName("home");
 
 		}
@@ -81,20 +83,16 @@ public class WorkoutController {
 		return mv;
 	}
 
+	@RequestMapping(path = "addExercise.do", method = RequestMethod.POST)
+	public String addExerciseToWorkout(HttpSession session, @RequestParam("id") int exerciseId,
+			WorkoutExercise workoutExercise, Model model) {
 
-	
-	
-	@RequestMapping(path="addExercise.do", method=RequestMethod.POST)
-	public String addExerciseToWorkout(HttpSession session, @RequestParam("id")int exerciseId,WorkoutExercise workoutExercise, Model model) {
-		
-		//exercise Id recieved
-		
-		
+		// exercise Id recieved
+
 		return "createWorkout";
-		
+
 	}
 
-	
 	@RequestMapping(path = "CreateWorkout.do")
 	public ModelAndView createWorkout() {
 		ModelAndView mv = new ModelAndView();

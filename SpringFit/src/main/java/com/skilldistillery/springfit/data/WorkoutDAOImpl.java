@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.skilldistillery.springfit.entities.User;
 import com.skilldistillery.springfit.entities.Workout;
 import com.skilldistillery.springfit.entities.WorkoutExercise;
 
@@ -18,11 +19,8 @@ import jakarta.transaction.Transactional;
 public class WorkoutDAOImpl implements WorkoutDAO {
 	private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("JPASpringFit");
 	
-	
 	@PersistenceContext
 	private EntityManager em;
-
-	//	private static EntityManagerFactory emf = Persistence.createEntityManagerFactory(")
 
 	@Override
 	public Workout getWorkoutById(int workoutId) {
@@ -31,8 +29,15 @@ public class WorkoutDAOImpl implements WorkoutDAO {
 	}
 
 	@Override
+	public Workout createNewWorkoutInitialize(Workout workout, int userId) {
+		User user = em.find(User.class, userId);
+		workout.setUser(user);
+		em.persist(workout);
+		return workout;
+	}
+	@Override
 	public Workout createNewWorkout(String workoutName, List<WorkoutExercise> exerciseList) {
-		EntityManager em=emf.createEntityManager();
+		EntityManager em = emf.createEntityManager();
 		Workout newWorkout = new Workout();
 		newWorkout.setWorkoutExercise(exerciseList);
 		return newWorkout;
