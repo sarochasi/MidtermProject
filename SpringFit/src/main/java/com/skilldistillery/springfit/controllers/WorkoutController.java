@@ -48,18 +48,26 @@ public class WorkoutController {
 		ModelAndView mv = new ModelAndView();
 		User loggedInUser = (User) session.getAttribute("loggedInUser");
 		if (loggedInUser != null) {
-			mv.addObject("workout", workoutDao.createNewWorkoutInitialize(workout, loggedInUser.getId()));
+			Workout newWorkout = workoutDao.createNewWorkoutInitialize(workout, loggedInUser.getId());
+			mv.addObject("workout", newWorkout);
+			
+			mv.setViewName("redirect:GetWorkoutPage.do?workoutId="+newWorkout.getId());
 		}
-		mv.setViewName("redirect:GetWorkoutPage.do");
+		else {
+			mv.setViewName("home");
+		}
+		
 		
 		return mv;
 	}
 
-	@RequestMapping(path = "GetWorkoutPage.do")
-	public ModelAndView getExerciseType() {
+	@RequestMapping(path = "GetWorkoutPage.do", params="workoutId")
+	public ModelAndView getExerciseType(@RequestParam("workoutId")int workoutId) {
 		ModelAndView mv = new ModelAndView();
 
 		mv.addObject("exerciseTypes", exerciseDao.findAllExerciseTypes());
+
+		mv.addObject("workoutId",workoutId );
 
 		mv.setViewName("createWorkout");
 
