@@ -15,10 +15,27 @@
 	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
 	crossorigin="anonymous">
 
+<style>
+.scrolling-wrapper {
+	overflow-x: auto;
+	white-space: nowrap;
+	padding: 10px 0;
+}
+
+.scrolling-wrapper .card {
+	display: inline-block;
+	width: 200px; /* Adjust as needed */
+	margin-right: 10px; /* Space between cards */
+}
+</style>
+
 </head>
 
 
 <body>
+
+	<%--Edit the file nav.jsp to change nav links (navbar code to be contained in navbar; will only need to plug into each jsp)--%>
+	<%-- <jsp:include page="nav.jsp" /> --%>
 
 	<!-- ================================= Navbar================================================= -->
 
@@ -57,7 +74,7 @@
 								<li><a class="dropdown-item" href="#">Cardio</a></li>
 
 							</ul></li>
-					
+
 					</ul>
 
 					<c:choose>
@@ -114,194 +131,216 @@
 		</div>
 	</div>
 	<!-- ================================= Navbar================================================= -->
-<main>
+	<main>
 
 
-<div class="container col-xl-10 col-xxl-8 px-4 py-5">
+		<div class="container col-xl-10 col-xxl-8 px-4 py-5">
 
 
-	<h2>Account Details</h2>
-	<p>Maybe label above with "Welcome "User's NAME" (and create a
-		seperate jsp for account settings/update settings, etc.)</p>
-	<p>Maybe create logic that will display the user's info, only IF
-		they would like to display that information publicly. (user would have
-		the choice?) - first name, last name, height, gender (but might not
-		display as ex. First Name: Bob, rather "Bob")</p>
+			<!-- <h2>Account Details</h2> -->
+			<h2>Welcome ${loggedInUser.firstName}!</h2>
 
-	<!--  	Update account.jsp to output escaped (c:out) user data if the user is logged in 
+			<!-- (From the LoginLab) -->
+			<!--  	Update account.jsp to output escaped (c:out) user data if the user is logged in 
 			(i.e. in session, accessible on the JSP page with the sessionScope variable), 
 			or "Not Logged In." otherwise. 		-->
 
-	<%-- Output user details --%>
-	<c:choose>
+			<%-- Output user details --%>
+			<%-- 	<c:choose>
 		<c:when test="${not empty sessionScope.loggedInUser}">
 			<ul>
-
 				<li>Username: <c:out
 						value="${sessionScope.loggedInUser.username}" /></li>
-				<%-- <p>Password: <c:out value="${sessionScope.loggedInUser.password}"/></p> --%>
+				<p>Password: <c:out value="${sessionScope.loggedInUser.password}"/></p>
 				<li>First Name: <c:out
 						value="${sessionScope.loggedInUser.firstName}" /></li>
 				<li>Last Name: <c:out
 						value="${sessionScope.loggedInUser.lastName}" /></li>
 			</ul>
 		</c:when>
-
 		<c:otherwise>
 			<p>Not Logged In.</p>
 		</c:otherwise>
+	</c:choose> --%>
+			<%-- Output user details --%>
+			<!-- Can later decide to remove username / full name (could be moved to a "settings".jsp -->
+			<c:choose>
+				<c:when test="${not empty sessionScope.loggedInUser}">
+					<ul>
+						<li>Username: <c:out
+								value="${sessionScope.loggedInUser.username}" /></li>
+						<%-- <p>Password: <c:out value="${sessionScope.loggedInUser.password}"/></p> --%>
+						<li>${sessionScope.loggedInUser.firstName}
+							${sessionScope.loggedInUser.lastName}</li>
+					</ul>
+				</c:when>
+				<c:otherwise>
+					<p>Not Logged In.</p>
+				</c:otherwise>
 
-	</c:choose>
+			</c:choose>
 
-	<form action="GetWorkoutPage.do" method="GET">
-		<input type="submit" value="Create New Workout" />
-	</form>
-	<br>
-	<br>
-
-
-	<!-- Basic/general layout ideas -->
-	<h3>Maybe more buttons / forms</h3>
-	<p>Maybe a few additional buttons above (in addition to "Create New
-		Workout", such as a "Health" table that allows a user to submit their
-		weight and calories. (Would only need to include a POST if this is all
-		handled within the account.jsp)</p>
-	<h3>Your workouts</h3>
-	<p>Maybe all of the user's saved workouts displays as a 1 row
-		"table" that can scroll horizontally (left and right?) Will need to
-		read more into Bootstrap responsive table in order to figure out how
-		to implement.</p>
-
-	<div class="table-responsive">
-		<table class="table table-bordered">
-			<thead>
-				<tr>
-					<th>Workout Name</th>
-					<th>Image</th>
-				</tr>
-			</thead>
-
-			<tbody>
-				<c:forEach var="workout"
-					items="${sessionScope.loggedInUser.workouts}">
-					<tr>
-						<td><c:out value="${workout.name}" /></td>
-						<td><c:if test="${not empty workout.imageUrl}">
-								<img src="<c:out value='${workout.imageUrl}'/>"
-									alt="Workout Image" width="50" height="50">
-							</c:if></td>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
-	</div>
-
-
-	<h3>Your "favorite" (and/or liked/rated) workouts</h3>
-	<p>Same as above, maybe a table that scrolls horizontally. These
-		would be workouts that the user has interacted/saved. (i.e some other
-		user's workout) that they wanted to save into theirs (instance of the
-		other user's workout) - the user may be able to edit their "copy" but
-		not the other user's original workout.</p>
-
-
-<div class="b-example-divider"></div>
-
-
-		<div class="container">
-			<footer
-				class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-				<div class="col-md-4 d-flex align-items-center">
-					<a href="/"
-						class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
-						<img src="images/springFit_transparent-.png" alt="Logo" width="80"
-						height="50">
-					</a>
+			<!-- USER's Workouts -->
+			<!-- Will need to be updated once (maybe for each/cycle through) we have logic sorted out & more workouts/data entered into MySQL Workbench DB -->
+			<div class="container-fluid">
+				<div class="d-flex justify-content-between align-items-center">
+					<h3>Your Workouts</h3>
+					<form action="GetWorkoutPage.do" method="GET">
+						<button type="submit" class="btn btn-primary btn-custom">Create
+							New Workout</button>
+					</form>
 				</div>
-			</footer>
-		</div>
-		</div>
-</main>
+				<div class="scrolling-wrapper">
 
+					<div class="card">
+						<img src="image" class="card-img-top" alt="image href">
+						<div class="card-body">
+							<h5 class="card-title">1</h5>
+							<p class="card-text">1</p>
+						</div>
+					</div>
+					<div class="card">
+						<img src="image" class="card-img-top" alt="image href">
+						<div class="card-body">
+							<h5 class="card-title">1</h5>
+							<p class="card-text">1</p>
+						</div>
+					</div>
+					<div class="card">
+						<img src="image" class="card-img-top" alt="image href">
+						<div class="card-body">
+							<h5 class="card-title">1</h5>
+							<p class="card-text">1</p>
+						</div>
+					</div>
+					<div class="card">
+						<img src="image" class="card-img-top" alt="image href">
+						<div class="card-body">
+							<h5 class="card-title">1</h5>
+							<p class="card-text">1</p>
+						</div>
+					</div>
+					<div class="card">
+						<img src="image" class="card-img-top" alt="image href">
+						<div class="card-body">
+							<h5 class="card-title">1</h5>
+							<p class="card-text">1</p>
+						</div>
+					</div>
 
-   <%--          		<li>Username: <c:out value="${sessionScope.loggedInUser.username}"/></li>
-           	 	<p>Password: <c:out value="${sessionScope.loggedInUser.password}"/></p>
-            		<li>First Name: <c:out value="${sessionScope.loggedInUser.firstName}"/></li>
-            		<li>Last Name: <c:out value="${sessionScope.loggedInUser.lastName}"/></li>
-            	</ul>
-        </c:when>
-
-        <c:otherwise>
-            <p>Not Logged In.</p>
-        </c:otherwise>
-        
-    </c:choose>
-	
-<form action = "GetWorkoutPage.do" method="GET">
-	<input type="submit" value="Create New Workout"/>
-</form>
-<br>
-<br> --%>
-	
-	
-		<!-- Basic/general layout ideas -->
-		<h3>Maybe more buttons / forms</h3>
-			<p>Maybe a few additional buttons above (in addition to "Create New Workout", such as a "Health" table that allows a user to submit their weight and calories. (Would only need to include a POST if this is all handled within the account.jsp) </p>
-		<h3>Your workouts</h3>
-			<p>Maybe all of the user's saved workouts displays as a 1 row "table" that can scroll horizontally (left and right?) Will need to read more into Bootstrap responsive table in order to figure out how to implement.</p>
-			<a class="btn btn-primary btn-custom" href="testingexercise.do">Exercises (only testing href functionality to testingexercise here - WILL DELETE)</a>
-			
-			
-			<div class="table-responsive">
-    			<table class="table table-bordered">
-        			<thead>
-            			<tr>
-                			<th>Workout Name</th>
-                			<th>Image</th>
-            			</tr>
-        			</thead>
-        			
-        			<tbody>
-            			<c:forEach var="workout" items="${sessionScope.loggedInUser.workouts}">
-                			<tr>
-                    			<td><c:out value="${workout.name}" /></td>
-                    			<td>
-                        			<c:if test="${not empty workout.imageUrl}">
-                            			<img src="<c:out value='${workout.imageUrl}'/>" alt="Workout Image" width="50" height="50">
-                        			</c:if>
-                    			</td>
-                			</tr>
-            			</c:forEach>
-        			</tbody>
-    			</table>
+				</div>
 			</div>
-			
-		
-		<h3>Your "favorite" (and/or liked/rated) workouts</h3>
-			<p>Same as above, maybe a table that scrolls horizontally. These would be workouts that the user has interacted/saved. (i.e some other user's workout) that they wanted to save into theirs (instance of the other user's workout) - the user may be able to edit their "copy" but not the other user's original workout.</p>
-			
-	
-		<script
 
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-		crossorigin="anonymous"></script>
+			<!-- FAVORITE -->
+			<!-- Will need to be updated once (maybe for each/cycle through) we have logic sorted out & more workouts/data entered into MySQL Workbench DB -->
+			<div class="container-fluid mt-4">
+				<div class="d-flex justify-content-between align-items-center">
+					<h3>Your Favorite Workouts</h3>
+					<form action="GetWorkoutPage.do" method="GET">
+						<button type="submit" class="btn btn-primary btn-custom">Explore
+							all workouts!</button>
+					</form>
+				</div>
+				<div class="scrolling-wrapper">
+
+					<div class="card">
+						<img src="image" class="card-img-top" alt="image href">
+						<div class="card-body">
+							<h5 class="card-title">1</h5>
+							<p class="card-text">1</p>
+						</div>
+					</div>
+					<div class="card">
+						<img src="image" class="card-img-top" alt="image href">
+						<div class="card-body">
+							<h5 class="card-title">1</h5>
+							<p class="card-text">1</p>
+						</div>
+					</div>
+					<div class="card">
+						<img src="image" class="card-img-top" alt="image href">
+						<div class="card-body">
+							<h5 class="card-title">1</h5>
+							<p class="card-text">1</p>
+						</div>
+					</div>
+					<div class="card">
+						<img src="image" class="card-img-top" alt="image href">
+						<div class="card-body">
+							<h5 class="card-title">1</h5>
+							<p class="card-text">1</p>
+						</div>
+					</div>
+					<div class="card">
+						<img src="image" class="card-img-top" alt="image href">
+						<div class="card-body">
+							<h5 class="card-title">1</h5>
+							<p class="card-text">1</p>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+		<br>
+
+		<!-- Today's Numbers / Health? -->
+		<div class="container-fluid">
+			<h3>Today's Numbers</h3>
+			<table class="table table-bordered">
+				<thead></thead>
+
+				<tbody>
+					<tr>
+						<td>Current Weight</td>
+						<td>
+							<form action="submitWeight.do" method="POST">
+								<input type="number" class="form-control" name="weight"
+									placeholder="Enter your weight" required>
+								<button type="submit" class="btn btn-primary mt-2">Submit
+									Weight</button>
+							</form>
+						</td>
+					</tr>
+					<tr>
+						<td>Total Calories Consumed Today</td>
+						<td>
+							<form action="submitCalories.do" method="POST">
+								<input type="number" class="form-control" name="calories"
+									placeholder="Enter total calories" required>
+								<button type="submit" class="btn btn-primary mt-2">Submit
+									Calories</button>
+							</form>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+
+		<h3>Misc. (to be deleted)</h3>
+		<p>Updated "Account Details" to (Welcome, user's name). A
+			"Settings" button already exists under the user drop down (top right)</p>
+		<p>Maybe create logic that will display the user's info, only IF
+			they would like to display that information publicly. (user would
+			have the choice?) - first name, last name, height, gender (but might
+			not display as ex. First Name: Bob, rather "Bob")</p>
+		<p>Where should we display user's graphs? What will the graphs
+			output/track?</p>
+		<p>Will need to revisit ManyToMany (toStrings)</p>
+		<p>How many jsps? 1 for exercises and 1 for workouts?</p>
+
+
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+			crossorigin="anonymous"></script>
 </body>
 
 
 
 </html>
-
-
-
-
-
-
-
-
-
-
-
 
 
 
