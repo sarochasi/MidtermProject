@@ -163,6 +163,7 @@ public class WorkoutController {
 		return "communityWorkouts";
 	}
 	
+
 	@RequestMapping(path = "workoutByUser.do", method = RequestMethod.GET)
 	public String getWorkoutByUserId(HttpSession session,
 			@RequestParam("userId") int userId, Model model) {
@@ -171,5 +172,21 @@ public class WorkoutController {
 		return "account";
 		
 	}
+
+	@RequestMapping(path = "showExercisesWithinWorkout.do", method = RequestMethod.GET)
+	public ModelAndView viewWorkoutDetails(@RequestParam("workoutId") int workoutId) {
+		ModelAndView mv = new ModelAndView();
+		Workout workout = workoutDao.getWorkoutById(workoutId);
+		List<WorkoutExercise> workoutExercises = workoutDao.getExercisesByWorkoutId(workoutId);
+		
+		mv.addObject("workout", workout);
+		mv.addObject("workoutExercises", workoutExercises);
+		mv.setViewName("viewWorkoutDetails");
+		
+		return mv;
+	}
+	
+	
+
 
 }
