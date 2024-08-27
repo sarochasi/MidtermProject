@@ -18,4 +18,6 @@ public interface WorkoutDAO {
 	public Workout createNewWorkout(String workoutName, List<WorkoutExercise> exerciseList);
 	
 	public List<Workout> showAllWorkouts();
+	public List<WorkoutExercise> getExercisesByWorkoutId(int workoutId);
+	
 }

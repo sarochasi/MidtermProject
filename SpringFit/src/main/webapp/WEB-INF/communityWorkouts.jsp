@@ -32,7 +32,7 @@
 				<tr>
 					<td>${workout.name}</td>
 					<td>${workout.description}</td>
-					<td>${workout.imageUrl}</td>
+					<%-- <td>${workout.imageUrl}</td> --%>
 					<td><a class="btn btn-info btn-sm"
 						href="performworkout.do?id=${workout.id}">Start Exercise</a></td>
 						<!-- Should a workout's details display on seperate jsp? -->
