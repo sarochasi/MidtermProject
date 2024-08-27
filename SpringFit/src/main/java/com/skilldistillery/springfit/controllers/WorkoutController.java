@@ -1,4 +1,5 @@
 
+
 package com.skilldistillery.springfit.controllers;
 
 import java.util.List;
@@ -96,8 +97,8 @@ public class WorkoutController {
 		return mv;
 	}
 
-	
-	
+
+
 
 
 	
