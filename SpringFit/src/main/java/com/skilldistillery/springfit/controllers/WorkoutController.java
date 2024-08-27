@@ -175,6 +175,7 @@ public class WorkoutController {
 	
 
 
+	@RequestMapping(path = "showExercisesWithinWorkout.do", method = RequestMethod.GET)
 	public ModelAndView viewWorkoutDetails(@RequestParam("workoutId") int workoutId) {
 		ModelAndView mv = new ModelAndView();
 		Workout workout = workoutDao.getWorkoutById(workoutId);
