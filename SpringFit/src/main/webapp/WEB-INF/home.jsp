@@ -94,7 +94,7 @@
 								</li>
 								
 								<li class="d-flex justify-content-center">
-									<form action="" method="GET">
+									<form action="showAllWorkouts.do" method="GET">
 										<button type="submit"
 											class="w-100 py-2 mb-2 btn btn-outline-secondary rounded-3" style="height:100px;width:1000px">
 											<img src="images/commu.png" width="48" height="48"
