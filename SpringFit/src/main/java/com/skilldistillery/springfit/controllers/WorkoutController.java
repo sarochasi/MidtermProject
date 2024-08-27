@@ -117,20 +117,17 @@ public class WorkoutController {
 		System.out.println();
 		System.out.println();
 		workoutExercise = workoutExerciseDao.createWorkoutExercise(exerciseId, workoutId, workoutExercise);
-		//////FIX THIS I THINK createWorkout.jsp needs to get sets and reps and send here
 		
+		model.addAttribute("workoutExercise", workoutExercise);
 		
-		
-		//workoutExerciseDao.createWorkoutExerciseByExercise(null);
 		
 		
 
 		
-		Workout newWorkout = workoutDao.getWorkoutById(workoutId);
-		workoutDao.getWorkoutById(workoutId);
-		newWorkout.addWorkoutExercise(workoutExercise);
+//		Workout newWorkout = workoutDao.getWorkoutById(workoutId);
+//		workoutDao.getWorkoutById(workoutId);
+//		newWorkout.addWorkoutExercise(workoutExercise);
 		
-		//////FIX THIS I THINK createWorkout.jsp needs to get sets and reps and send here
 		
 		
 
