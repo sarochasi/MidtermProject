@@ -40,5 +40,17 @@ public class BodyWeightController {
 		
 		return mv;
 	}
+	
+	@RequestMapping(path ="openWeight.do")
+	public ModelAndView openBodyWeightData()
+	{
+		ModelAndView mv = new ModelAndView();
+		
+		mv.setViewName("displayBodyWeight");
+		
+		return mv;
+		
+		
+	}
 
 }
