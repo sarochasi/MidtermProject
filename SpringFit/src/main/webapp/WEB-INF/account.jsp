@@ -105,14 +105,15 @@
 
 
 					<%-- 	<c:when test="${not empty workout }"> --%>
-					<c:forEach var="workout" items="${workout}">
+					
+					<c:forEach var="workout" items="${allWorkouts}">
 						<div class="card" style="width: 18rem;">
 							<div class="card-body">
 								<h5 class="card-title">${workout.name}</h5>
-								<h6 class="card-subtitle mb-2 text-body-secondary">${loggedInUse.firstName}</h6>
+								<h6 class="card-subtitle mb-2 text-body-secondary">${loggedInUser.firstName}</h6>
 								<p class="card-text"></p>
-								<a href="#" class="card-link">Card link</a> <a href="#"
-									class="card-link">Another link</a>
+								<a href="#" class="card-link">View</a> <a href="#"
+									class="card-link">Edit</a>
 							</div>
 						</div>
 					</c:forEach>
