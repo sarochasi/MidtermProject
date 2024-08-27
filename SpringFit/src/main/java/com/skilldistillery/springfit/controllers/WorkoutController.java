@@ -151,6 +151,27 @@ public class WorkoutController {
 		return "communityWorkouts";
 	}
 
+	@RequestMapping(path = "workoutByUser.do", method = RequestMethod.GET)
+	public String getWorkoutByUserId(HttpSession session, @RequestParam("userId") int userId, Model model) {
+		User loggedInUser = (User) session.getAttribute("loggedInUser");
+		if (loggedInUser != null) {
+			List<Workout> myWorkouts = workoutDao.getWorkoutByUserId(userId);
+			System.out.println("======================================");
+			System.out.println("User ID: " + userId);
+			System.out.println("Number of Workouts: " + myWorkouts.size());
+			for (Workout workout : myWorkouts) {
+				System.out.println("Workout Name: " + workout.getName());
+			}
+			System.out.println("======================================");
+
+			model.addAttribute("myWorkouts", myWorkouts);
+			return "account";
+		} else {
+			
+			System.out.println("==================No user=============");
+			return "account";
+		}
+	}
 	
 
 
