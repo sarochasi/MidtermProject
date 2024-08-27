@@ -176,7 +176,7 @@
 			<div class="container-fluid mt-4">
 				<div class="d-flex justify-content-between align-items-center">
 					<h3>Your Favorite Workouts</h3>
-					<form action="GetWorkoutPage.do" method="GET">
+					<form action="showAllWorkouts.do" method="GET">
 						<button type="submit" class="btn btn-primary btn-custom">Explore
 							all workouts!</button>
 					</form>
