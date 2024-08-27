@@ -103,22 +103,9 @@
 
 					<!-- ==================================================== -->
 
+				</c:when>
 
 					<%-- 	<c:when test="${not empty workout }"> --%>
-					
-					<c:forEach var="workout" items="${allWorkouts}">
-						<div class="card" style="width: 18rem;">
-							<div class="card-body">
-								<h5 class="card-title">${workout.name}</h5>
-								<h6 class="card-subtitle mb-2 text-body-secondary">${loggedInUser.firstName}</h6>
-								<p class="card-text"></p>
-								<a href="#" class="card-link">View</a> <a href="#"
-									class="card-link">Edit</a>
-							</div>
-						</div>
-					</c:forEach>
-
-				</c:when>
 
 				<%-- 	</c:when> --%>
 				<c:otherwise>
@@ -129,6 +116,24 @@
 			<!-- USER's Workouts -->
 			<!-- Will need to be updated once (maybe for each/cycle through) we have logic sorted out & more workouts/data entered into MySQL Workbench DB -->
 
+					<div class="album py-5 bg-body-tertiary">
+						<div class="container">
+
+							<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+								<c:forEach var="workout" items="${myWorkouts}">
+									<div class="card" style="width: 18rem;">
+										<div class="card-body">
+											<h5 class="card-title">${workout.name}</h5>
+											<h6 class="card-subtitle mb-2 text-body-secondary">${loggedInUser.firstName}</h6>
+											<p class="card-text"></p>
+											<a href="#" class="card-link">View</a> <a href="#"
+												class="card-link">Edit</a>
+										</div>
+									</div>
+								</c:forEach>
+								</div>
+								</div>
+								</div>
 
 
 			<!-- <div class="scrolling-wrapper">

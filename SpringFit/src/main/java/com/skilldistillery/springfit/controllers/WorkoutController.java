@@ -166,6 +166,13 @@ public class WorkoutController {
 		return "communityWorkouts";
 	}
 	
-	
+	@RequestMapping(path = "workoutByUser.do", method = RequestMethod.GET)
+	public String getWorkoutByUserId(HttpSession session,
+			@RequestParam("userId") int userId, Model model) {
+		List<Workout> myWorkouts = workoutDao.getWorkoutByUserId(userId);
+		model.addAttribute("myWorkouts", myWorkouts);
+		return "account";
+		
+	}
 
 }
