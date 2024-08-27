@@ -96,67 +96,35 @@ public class WorkoutController {
 		return mv;
 	}
 
-	@RequestMapping(path = "addExercise.do", method = RequestMethod.POST)
-	public String addExerciseToWorkout(HttpSession session, @RequestParam("id") int exerciseId,
-			@RequestParam("workoutId") int workoutId, Model model) {
-		
-		User loggedInUser = (User) session.getAttribute("loggedInUser");
-		if (loggedInUser != null) {
-			
-			// If the person is a logged in user, then they can access Dao functionality?
-			Exercise exercise = exerciseDao.showExerciseById(exerciseId);
-			Workout workout = workoutDao.getWorkoutById(workoutId);
-			
-			if (exercise != null && workout != null) {
-			
-				// If exercise is not null & work is not null
-				// then introduce workout exercise
-				WorkoutExercise workoutExercise = new WorkoutExercise(); // Here or param?
-				workoutExercise.setExercise(exercise);
-				workoutExercise.setWorkout(workout);
-				
-				// workoutExercise.setSets(null);
-				
-				// Once we have (1) workout ID
-				// And a (2) workout exercise
-				// Then use workoutDAO to add that exercise to the workout. 
-				workoutDao.addExerciseToWorkout(workoutId, workoutExercise);
-				model.addAttribute("workout", workout);
-			}
-		}
-
-		// mv.setViewName("redirect:GetWorkoutPage.do?workoutId="+newWorkout.getId());
-		return "redirect:GetWorkoutPage.do?workoutId=" + workoutId;
-	}
-
-
 //	@RequestMapping(path = "addExercise.do", method = RequestMethod.POST)
-//	public String addExerciseToWorkout(HttpSession session, @RequestParam("id") int exerciseId, @RequestParam("workoutId") int workoutId,
-//			WorkoutExercise workoutExercise, Model model) {
+//	public String addExerciseToWorkout(HttpSession session, @RequestParam("id") int exerciseId,
+//			@RequestParam("workoutId") int workoutId, WorkoutExercise workoutExercise, Model model) {
 //		
-//		Workout newWorkout = workoutDao.getWorkoutById(workoutId);
-//		workoutDao.getWorkoutById(workoutId);
-//		newWorkout.addWorkoutExercise(workoutExercise);
-//		
-//		//////FIX THIS I THINK createWorkout.jsp needs to get sets and reps and send here
-//		
-//		
-//		workoutExerciseDao.createWorkoutExerciseByExercise(null);
-//		
-//		
-//		// workoutExercise = workoutDao.createNewWorkout(workoutExercise);
-//		
-//		// exercise Id recieved
-//
-//		return "createWorkout";
-//
+//		User loggedInUser = (User) session.getAttribute("loggedInUser");
+//		if (loggedInUser != null) {
+//			Exercise exercise = exerciseDao.showExerciseById(exerciseId);
+//			Workout workout = workoutDao.getWorkoutById(workoutId);
+//			
+//			if (exercise != null && workout != null) {
+//				
+//				workoutExercise.setExercise(exercise);
+//				workoutExercise.setWorkout(workout); 
+//				
+//				workoutDao.addExerciseToWorkout(workoutId, workoutExercise);
+//				model.addAttribute("workout", workout);
+//			}
+//		}
+//		// mv.setViewName("redirect:GetWorkoutPage.do?workoutId="+newWorkout.getId());
+//		return "redirect:GetWorkoutPage.do?workoutId=" + workoutId;
 //	}
+
 
 	
 	
 	@RequestMapping(path = "CreateWorkout.do")
 	public ModelAndView createWorkout() {
 		ModelAndView mv = new ModelAndView();
+		
 		// TODO: Fix, saves workout
 
 		return mv;
