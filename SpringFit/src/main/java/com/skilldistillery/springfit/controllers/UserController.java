@@ -91,6 +91,18 @@ public class UserController {
 		return "home";
 	}
 	
+	@RequestMapping(path="profileAfterWorkout.do")
+	public String returnToProfileAfterWorkoutCompletion(HttpSession session, Model model) {
+        User loggedInUser = (User) session.getAttribute("loggedInUser");
+        if (loggedInUser != null) {
+            model.addAttribute("user", loggedInUser);
+            return "account"; 
+        } else {
+            model.addAttribute("errorMessage", "You must be logged in to view your profile.");
+            return "login"; 
+        }
+	}
+	
 }
 
 
