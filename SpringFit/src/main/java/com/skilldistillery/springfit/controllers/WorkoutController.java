@@ -92,18 +92,25 @@ public class WorkoutController {
 		return mv;
 	}
 
-	@RequestMapping(path = "addExercise.do", method = RequestMethod.POST)
-	public String addExerciseToWorkout(HttpSession session, @RequestParam("id") int exerciseId,
-			WorkoutExercise workoutExercise, Model model) {
-		
-		// workoutExercise = workoutDao.createNewWorkout(workoutExercise);
-		
-		// exercise Id recieved
+//	@RequestMapping(path = "addExercise.do", method = RequestMethod.POST)
+//	public String addExerciseToWorkout(HttpSession session, @RequestParam("id") int exerciseId,
+//			WorkoutExercise workoutExercise, Model model, Workout workout) {
+//		
+//		Workout workoutAddExercise = em.find(Workout.class, workoutId);
+//		// workoutExercise = workoutDao.createNewWorkout(workoutExercise);
+//		
+//		// exercise Id recieved
+//		if (workout != null) {
+//			workout.addWorkoutExercise(workoutExercise);
+//			
+//		}
+//
+//		return "createWorkout";
+//
+//	}
 
-		return "createWorkout";
-
-	}
-
+	
+	
 	@RequestMapping(path = "CreateWorkout.do")
 	public ModelAndView createWorkout() {
 		ModelAndView mv = new ModelAndView();
