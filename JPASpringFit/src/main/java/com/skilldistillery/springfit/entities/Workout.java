@@ -18,52 +18,50 @@ import jakarta.persistence.OneToMany;
 
 @Entity
 public class Workout {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	private String name;
-	
+
 	private String description;
-	
+
 	@Column(name = "create_date")
 	private LocalDateTime createDate;
-	
-	@Column(name="last_update")
+
+	@Column(name = "last_update")
 	private LocalDateTime lastUpdate;
-	
+
 	private Boolean enabled;
-	
+
 	private Boolean published;
-	
-	@Column(name="image_url")
+
+	@Column(name = "image_url")
 	private String imageUrl;
-	
+
 	@OneToMany(mappedBy = "workout")
 	private List<WorkoutComment> workoutComments;
-	
+
 	@OneToMany(mappedBy = "workout")
 	private List<WorkoutExercise> workoutExercises;
-	
+
 	@ManyToMany
-	@JoinTable(name="liked_workout", joinColumns = @JoinColumn(name="workout_id"),
-	inverseJoinColumns = @JoinColumn(name="user_id"))
+	@JoinTable(name = "liked_workout", joinColumns = @JoinColumn(name = "workout_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
 	private List<User> users;
-	
-	
+
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
-	
+
 ///--------------------------------------------------------------------------------------------------------------
-	
+
 	public Workout() {
 		super();
 	}
-	
+
 ///--------------------------------------------------------------------------------------------------------------
-	
+
 	public int getId() {
 		return id;
 	}
@@ -128,8 +126,6 @@ public class Workout {
 		this.imageUrl = imageUrl;
 	}
 
-
-
 	public List<User> getUsers() {
 		return users;
 	}
@@ -137,7 +133,6 @@ public class Workout {
 	public void setUsers(List<User> users) {
 		this.users = users;
 	}
-	
 
 	public List<WorkoutComment> getWorkoutComments() {
 		return workoutComments;
@@ -146,7 +141,6 @@ public class Workout {
 	public void setWorkoutComments(List<WorkoutComment> workoutComments) {
 		this.workoutComments = workoutComments;
 	}
-	
 
 	public User getUser() {
 		return user;
@@ -163,20 +157,26 @@ public class Workout {
 	public void setWorkoutExercise(List<WorkoutExercise> workoutExercise) {
 		this.workoutExercises = workoutExercise;
 	}
+
+	// ADD 
 	public void addWorkoutExercise(WorkoutExercise workoutExercise) {
-		if (workoutExercises==null) {workoutExercises = new ArrayList<>();}
-		
-		//if workoutExercises.contains(workoutExercise)?????
+		if (workoutExercises == null) {
+			workoutExercises = new ArrayList<>();
+		}
+
+		// if workoutExercises.contains(workoutExercise)?????
 		workoutExercises.add(workoutExercise);
 		workoutExercise.setWorkout(this);
-		
+
 	}
+	// REMOVE
 	public void removeWorkoutExercise(WorkoutExercise workoutExercise) {
 		System.out.println("fix removeWorkoutExercise");
+		
 	}
 	
-	
-	///--------------------------------------------------------------------------------------------------------------
+
+	/// --------------------------------------------------------------------------------------------------------------
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -201,7 +201,5 @@ public class Workout {
 				+ imageUrl + ", workoutComments=" + workoutComments + ", workoutExercise=" + workoutExercises
 				+ ", users=" + users + ", user=" + user + "]";
 	}
-	
-	
 
 }

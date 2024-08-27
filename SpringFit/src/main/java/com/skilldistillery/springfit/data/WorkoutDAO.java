@@ -17,5 +17,7 @@ public interface WorkoutDAO {
 	
 	public Workout createNewWorkout(String workoutName, List<WorkoutExercise> exerciseList);
 	
+	public Workout addExerciseToWorkout(int workoutId, WorkoutExercise workoutExercise);
+	
 	
 }

@@ -27,6 +27,7 @@ public class WorkoutDAOImpl implements WorkoutDAO {
 		return em.find(Workout.class, workoutId);
 	}
 
+	// Initialize
 	@Override
 	public Workout createNewWorkoutInitialize(Workout workout, int userId) {
 		User user = em.find(User.class, userId);
@@ -34,12 +35,24 @@ public class WorkoutDAOImpl implements WorkoutDAO {
 		em.persist(workout);
 		return workout;
 	}
+	// Create
 	@Override
 	public Workout createNewWorkout(String workoutName, List<WorkoutExercise> exerciseList) {
 		Workout newWorkout = new Workout();
 		newWorkout.setWorkoutExercise(exerciseList);
 		
 		return newWorkout;
+	}
+	// Add exercises to workout
+	@Override
+	public Workout addExerciseToWorkout(int workoutId, WorkoutExercise workoutExercise) {
+		Workout workout = em.find(Workout.class, workoutId);
+		if (workout != null) {
+			workout.addWorkoutExercise(workoutExercise);  
+			em.persist(workoutExercise);  
+			em.merge(workout);  
+		}
+		return workout;
 	}
 
 	@Override

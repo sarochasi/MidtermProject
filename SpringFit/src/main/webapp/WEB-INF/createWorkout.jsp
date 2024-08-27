@@ -23,6 +23,7 @@
 			<c:choose>
 				<c:when test="${not empty exercises}">
 					<form action="addExercise.do" method="POST">
+					<input type="hidden" value="${workoutId }" name="workoutId"/>
 
 						<ul
 							class="dropdown-menu position-static d-grid gap-1 p-2 rounded-3 mx-0 shadow w-220px"
