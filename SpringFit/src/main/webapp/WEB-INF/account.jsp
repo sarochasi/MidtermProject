@@ -104,6 +104,7 @@
 					<!-- ==================================================== -->
 
 
+
 					<%-- 	<c:when test="${not empty workout }"> --%>
 					
 					<c:forEach var="workout" items="${allWorkouts}">
@@ -128,6 +129,7 @@
 
 			<!-- USER's Workouts -->
 			<!-- Will need to be updated once (maybe for each/cycle through) we have logic sorted out & more workouts/data entered into MySQL Workbench DB -->
+
 
 
 
@@ -242,6 +244,13 @@
 								<button type="submit" class="btn btn-primary mt-2">Submit
 									Weight</button>
 							</form>
+
+							<form action="openWeight.do" method="POST">
+								<button class="btn btn-lg btn-primary" type="submit">Open
+									weight</button>
+							</form>
+
+
 						</td>
 					</tr>
 					<tr>
@@ -273,7 +282,8 @@
 		<p>How many jsps? 1 for exercises and 1 for workouts?</p>
 
 
-
+		<button formaction="workoutByUser.do" class="btn btn-lg btn-primary"
+			type="button">test file</button>
 
 		<!-- Footer -->
 		<%@ include file="footer.jsp"%>
