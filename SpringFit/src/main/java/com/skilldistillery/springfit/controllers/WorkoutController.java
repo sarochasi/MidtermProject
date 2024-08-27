@@ -97,8 +97,10 @@ public class WorkoutController {
 	}
 
 	@RequestMapping(path = "addExercise.do", method = RequestMethod.POST)
-	public String addExerciseToWorkout(HttpSession session, @RequestParam("id") int exerciseId, @RequestParam("workoutId") int workoutId,
+	public String addExerciseToWorkout(HttpSession session, @RequestParam("id") int exerciseId, @RequestParam("workoutId") Integer workoutId, @RequestParam("sets") Integer sets, @RequestParam("units")
 			WorkoutExercise workoutExercise, Model model) {
+		//rep int
+		//set int
 		
 		Workout newWorkout = workoutDao.getWorkoutById(workoutId);
 		
