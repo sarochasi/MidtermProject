@@ -24,11 +24,11 @@
 			<tr>
 				<th>Workout name</th>
 				<th>Description</th>
-				<th>Image URL</th>
+				<!-- <th>Image URL</th> -->
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="workout" items="${showAllWorkouts}">
+			<c:forEach var="workout" items="${allWorkouts}">
 				<tr>
 					<td>${workout.name}</td>
 					<td>${workout.description}</td>
