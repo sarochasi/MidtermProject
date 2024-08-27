@@ -154,7 +154,7 @@ public class WorkoutController {
 	@RequestMapping(path = "workoutByUser.do", method = RequestMethod.GET)
 	public String getWorkoutByUserId(HttpSession session, @RequestParam("userId") int userId, Model model) {
 		User loggedInUser = (User) session.getAttribute("loggedInUser");
-		if (loggedInUser != null && loggedInUser.getId() == userId) {
+		if (loggedInUser != null) {
 			List<Workout> myWorkouts = workoutDao.getWorkoutByUserId(userId);
 			System.out.println("======================================");
 			System.out.println("User ID: " + userId);
