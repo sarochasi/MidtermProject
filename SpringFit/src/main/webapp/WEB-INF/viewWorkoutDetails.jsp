@@ -14,8 +14,6 @@
 
 </head>
 
-
-
 <body>
 
 	<h1>${workout.name}</h1>
@@ -30,11 +28,11 @@
 		</thead>
 		
 		<tbody>
-			<c:forEach var="exercise" items="${workoutExercises}">
+			<c:forEach var="workoutExercise" items="${workoutExercises}">
 				<tr>
-					<td>${exercise.name}</td>
-					<td>${exercise.units}</td>
-					<td>${exercise.sets}</td>
+					<td>${workoutExercise.exercise.name}</td>
+					<td>${workoutExercise.units}</td>
+					<td>${workoutExercise.sets}</td>
 				</tr>
 			</c:forEach>
 		</tbody>
