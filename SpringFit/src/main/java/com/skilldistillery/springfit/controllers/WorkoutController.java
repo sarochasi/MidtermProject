@@ -129,9 +129,9 @@ public class WorkoutController {
 		
 
 		
-//		Workout newWorkout = workoutDao.getWorkoutById(workoutId);
-//		workoutDao.getWorkoutById(workoutId);
-//		newWorkout.addWorkoutExercise(workoutExercise);
+		Workout newWorkout = workoutDao.getWorkoutById(workoutId);
+		workoutDao.getWorkoutById(workoutId);
+		newWorkout.addWorkoutExercise(workoutExercise);
 		
 		
 		
