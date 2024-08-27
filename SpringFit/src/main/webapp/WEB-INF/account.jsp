@@ -107,7 +107,7 @@
 
 					<%-- 	<c:when test="${not empty workout }"> --%>
 					
-					<c:forEach var="workout" items="${allWorkouts}">
+					<c:forEach var="workout" items="${myWorkouts}">
 						<div class="card" style="width: 18rem;">
 							<div class="card-body">
 								<h5 class="card-title">${workout.name}</h5>
