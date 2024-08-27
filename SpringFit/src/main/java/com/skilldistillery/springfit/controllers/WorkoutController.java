@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.skilldistillery.springfit.data.ExerciseDAO;
 import com.skilldistillery.springfit.data.WorkoutDAO;
+import com.skilldistillery.springfit.data.WorkoutExerciseDAO;
 import com.skilldistillery.springfit.entities.Exercise;
 import com.skilldistillery.springfit.entities.User;
 import com.skilldistillery.springfit.entities.Workout;
@@ -27,6 +28,9 @@ public class WorkoutController {
 	private WorkoutDAO workoutDao;
 	@Autowired
 	private ExerciseDAO exerciseDao;
+	
+	@Autowired
+	private WorkoutExerciseDAO workoutExerciseDao;
 
 	// Methods
 	// * navigateToCreateWorkoutJSP
@@ -75,13 +79,13 @@ public class WorkoutController {
 	}
 
 	// Opens createWorkout page when user selected from account page
-	@RequestMapping(path = "GetWorkoutPage.do", params = "exerciseType")
-	public ModelAndView displayWorkoutPage(@RequestParam("exerciseType") int typeId, HttpSession session) {
+	@RequestMapping(path = "GetWorkoutPage.do", params = {"exerciseType", "workoutId"})
+	public ModelAndView displayWorkoutPage(@RequestParam("exerciseType") int typeId, @RequestParam("workoutId") int workoutId, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		User loggedInUser = (User) session.getAttribute("loggedInUser");
 		if (loggedInUser != null) {
 			List<Exercise> exercises = exerciseDao.showExercisesByType(typeId);
-
+			mv.addObject("workoutId", workoutId);
 			mv.addObject("exercises", exercises);
 			mv.setViewName("createWorkout");
 		} else {
@@ -93,8 +97,20 @@ public class WorkoutController {
 	}
 
 	@RequestMapping(path = "addExercise.do", method = RequestMethod.POST)
-	public String addExerciseToWorkout(HttpSession session, @RequestParam("id") int exerciseId,
+	public String addExerciseToWorkout(HttpSession session, @RequestParam("id") int exerciseId, @RequestParam("workoutId") int workoutId,
 			WorkoutExercise workoutExercise, Model model) {
+		
+		Workout newWorkout = workoutDao.getWorkoutById(workoutId);
+		workoutDao.getWorkoutById(workoutId);
+		newWorkout.addWorkoutExercise(workoutExercise);
+		
+		//////FIX THIS I THINK createWorkout.jsp needs to get sets and reps and send here
+		
+		
+		workoutExerciseDao.createWorkoutExerciseByExercise(null);
+		
+		
+
 		
 		// workoutExercise = workoutDao.createNewWorkout(workoutExercise);
 		
