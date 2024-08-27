@@ -15,7 +15,7 @@
 </head>
 
 <body>
-
+	<%@ include file="navbar.jsp" %>
 	<h1>${workout.name}</h1>
 
 	<table class="table table-striped">
