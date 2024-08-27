@@ -71,5 +71,12 @@ public class WorkoutDAOImpl implements WorkoutDAO {
 
 //	=====================================================================
 	
+	public List<Workout> getWorkoutByUserId(int  userId){
+		String jpql = "SELECT w FROM Workout w WHERE w.user.id = :userId";
+		
+		
+		return em.createQuery(jpql, Workout.class).setParameter("userId", userId).getResultList();
+		
+	}
 
 }
