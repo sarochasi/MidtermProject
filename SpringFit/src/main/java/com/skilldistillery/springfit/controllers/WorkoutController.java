@@ -1,4 +1,5 @@
 
+
 package com.skilldistillery.springfit.controllers;
 
 import java.util.List;
@@ -97,6 +98,7 @@ public class WorkoutController {
 	}
 
 	@RequestMapping(path = "addExercise.do", method = RequestMethod.POST)
+
 	public String addExerciseToWorkout(HttpSession session,
 			@RequestParam("exerciseId") int exerciseId, 
 			@RequestParam("workoutId") Integer workoutId,
@@ -120,6 +122,18 @@ public class WorkoutController {
 		
 		
 		//workoutExerciseDao.createWorkoutExerciseByExercise(null);
+		
+		
+
+		
+		Workout newWorkout = workoutDao.getWorkoutById(workoutId);
+		workoutDao.getWorkoutById(workoutId);
+		newWorkout.addWorkoutExercise(workoutExercise);
+		
+		//////FIX THIS I THINK createWorkout.jsp needs to get sets and reps and send here
+		
+		
+
 		
 		
 

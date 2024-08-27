@@ -29,7 +29,7 @@
 						<ul
 							class="dropdown-menu position-static d-grid gap-1 p-2 rounded-3 mx-0 shadow w-220px"
 							data-bs-theme="light">
-							<li><select name="id">
+							<li><select name="exerciseId">
 									<c:forEach var="exercise" items="${exercises}">
 										<option value="${exercise.id }">${exercise.name}</option>
 									</c:forEach>

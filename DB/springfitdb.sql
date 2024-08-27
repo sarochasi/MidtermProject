@@ -121,7 +121,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `workout_exercise` ;
 
 CREATE TABLE IF NOT EXISTS `workout_exercise` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `units` INT NULL,
   `sets` INT NULL,
   `notes` TEXT NULL,

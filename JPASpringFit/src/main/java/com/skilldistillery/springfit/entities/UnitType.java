@@ -81,8 +81,7 @@ public class UnitType {
 
 	@Override
 	public String toString() {
-		return "UnitType [id=" + id + ", name=" + name + ", description=" + description + ", exercises=" + exercises
-				+ "]";
+		return "UnitType [id=" + id + ", name=" + name + ", description=" + description + "]";
 	}
 	
 	
