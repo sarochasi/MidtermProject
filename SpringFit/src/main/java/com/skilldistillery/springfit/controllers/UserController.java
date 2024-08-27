@@ -42,7 +42,8 @@ public class UserController {
 
         	session.setAttribute("loggedInUser", authUser);
             session.setAttribute("loginTime", LocalDateTime.now());
-            return "account";
+//            return "account";
+            return "redirect:profile.do";
         } else {
             return "error"; 
         }
@@ -55,6 +56,7 @@ public class UserController {
             model.addAttribute("user", loggedInUser);
             
             List<Workout> myWorkouts  = workoutDao.getWorkoutByUserId(loggedInUser.getId());
+            System.out.println(myWorkouts);
             model.addAttribute("myWorkouts", myWorkouts);
             return "account"; 
         } else {
