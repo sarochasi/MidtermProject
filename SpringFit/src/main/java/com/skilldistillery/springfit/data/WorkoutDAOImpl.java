@@ -53,8 +53,13 @@ public class WorkoutDAOImpl implements WorkoutDAO {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	public List<Workout> showAllWorkouts() {
+		String jpql = "SELECT w FROM Workout w";
+		return em.createQuery(jpql, Workout.class).getResultList();
+	}
 	
-	
-	
+
 
 }

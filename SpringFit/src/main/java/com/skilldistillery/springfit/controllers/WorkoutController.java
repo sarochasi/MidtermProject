@@ -153,5 +153,14 @@ public class WorkoutController {
 
 		return mv;
 	}
+	
+	@RequestMapping(path = "showAllWorkouts.do", method = RequestMethod.GET)
+	public String list(Model model) {
+		List<Workout> allWorkouts = workoutDao.showAllWorkouts();
+		model.addAttribute("allWorkouts", allWorkouts);
+		return "communityWorkouts";
+	}
+	
+	
 
 }
