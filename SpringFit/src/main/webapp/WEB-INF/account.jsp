@@ -103,6 +103,34 @@
 
 					<!-- ==================================================== -->
 
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>Workout name</th>
+								<th>Description</th>
+								<!-- <th>Image URL</th> -->
+							</tr>
+						</thead>
+						<tbody>
+							<c:choose>
+								<c:when test="${not empty myWorkouts}">
+									<c:forEach var="workout" items="${myWorkouts}">
+										<tr>
+											<td>${workout.name}</td>
+											<td>${workout.description}</td>
+											<td>${workout.imageUrl}</td>
+
+										</tr>
+									</c:forEach>
+								</c:when>
+								<c:otherwise>
+									<tr>
+										<td colspan="3">No workouts found.</td>
+									</tr>
+								</c:otherwise>
+							</c:choose>
+						</tbody>
+					</table>
 				</c:when>
 
 				<%-- 	<c:when test="${not empty workout }"> --%>
@@ -139,7 +167,7 @@
 
 
 
-	<%-- 		<div class="album py-5 bg-body-tertiary">
+			<%-- 		<div class="album py-5 bg-body-tertiary">
 				<div class="container">
 
 					<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -270,7 +298,10 @@
 								<button type="submit" class="btn btn-primary mt-2">Submit
 									Weight</button>
 							</form>
-							<button formaction="openWeight.do" class="btn btn-lg btn-primary" type="submit">Open weight</button>
+							<form action="openWeight.do" method="POST">
+								<button class="btn btn-lg btn-primary" type="submit">Open
+									weight</button>
+							</form>
 
 						</td>
 					</tr>
@@ -289,6 +320,10 @@
 			</table>
 		</div>
 
+
+
+		<button formaction="workoutByUser.do" class="btn btn-lg btn-primary"
+			type="button">test file</button>
 
 		<!-- Footer -->
 		<%@ include file="footer.jsp"%>
