@@ -129,11 +129,8 @@
 						<tr>
 							<td>${workout.name}</td>
 							<td>${workout.description}</td>
-							<td>${workout.imageUrl}</td>
-							<td><a class="btn btn-info btn-sm"
-								href="performworkout.do?id=${workout.id}">Start Exercise</a></td>
-							<!-- Should a workout's details display on seperate jsp? -->
-							href="details.do?id=${workout.id}">View Details</a></td>
+							<%-- <td>${workout.imageUrl}</td> --%>
+							<%-- <td><a class="btn btn-info btn-sm"href="showExercisesWithinWorkout.do?workoutId=${workout.id}">Workout Details</a></td> --%>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -205,7 +202,7 @@
  -->
 			<!-- FAVORITE -->
 			<!-- Will need to be updated once (maybe for each/cycle through) we have logic sorted out & more workouts/data entered into MySQL Workbench DB -->
-			<div class="container-fluid mt-4">
+ 			<div class="container-fluid mt-4">
 				<div class="d-flex justify-content-between align-items-center">
 					<h3>Your Favorite Workouts</h3>
 					<form action="showAllWorkouts.do" method="GET">
@@ -253,7 +250,7 @@
 
 				</div>
 			</div>
-		</div>
+		</div> 
 
 		<br>
 
@@ -291,21 +288,6 @@
 				</tbody>
 			</table>
 		</div>
-
-
-		<h3>Misc. (to be deleted)</h3>
-		<p>Updated "Account Details" to (Welcome, user's name). A
-			"Settings" button already exists under the user drop down (top right)</p>
-		<p>Maybe create logic that will display the user's info, only IF
-			they would like to display that information publicly. (user would
-			have the choice?) - first name, last name, height, gender (but might
-			not display as ex. First Name: Bob, rather "Bob")</p>
-		<p>Where should we display user's graphs? What will the graphs
-			output/track?</p>
-		<p>Will need to revisit ManyToMany (toStrings)</p>
-		<p>How many jsps? 1 for exercises and 1 for workouts?</p>
-
-
 
 
 		<!-- Footer -->

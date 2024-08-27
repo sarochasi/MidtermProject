@@ -164,14 +164,26 @@ public class WorkoutController {
 	}
 	
 
+//	@RequestMapping(path = "workoutByUser.do", method = RequestMethod.GET)
+//	public String getWorkoutByUserId(HttpSession session,
+//			@RequestParam("userId") int userId, Model model) {
+//		List<Workout> myWorkouts = workoutDao.getWorkoutByUserId(userId);
+//		model.addAttribute("myWorkouts", myWorkouts);
+//		return "account";
+//		
+//	}
 	@RequestMapping(path = "workoutByUser.do", method = RequestMethod.GET)
-	public String getWorkoutByUserId(HttpSession session,
-			@RequestParam("userId") int userId, Model model) {
-		List<Workout> myWorkouts = workoutDao.getWorkoutByUserId(userId);
-		model.addAttribute("myWorkouts", myWorkouts);
-		return "account";
-		
+	public String getWorkoutByUserId(HttpSession session, Model model) {
+	    User loggedInUser = (User) session.getAttribute("loggedInUser");
+	    if (loggedInUser != null) {
+	        List<Workout> myWorkouts = workoutDao.getWorkoutByUserId(loggedInUser.getId());
+	        model.addAttribute("myWorkouts", myWorkouts);
+	        return "account";
+	    } else {
+	        return "redirect:login.do"; // Redirect to login page if user is not logged in
+	    }
 	}
+
 
 	@RequestMapping(path = "showExercisesWithinWorkout.do", method = RequestMethod.GET)
 	public ModelAndView viewWorkoutDetails(@RequestParam("workoutId") int workoutId) {
