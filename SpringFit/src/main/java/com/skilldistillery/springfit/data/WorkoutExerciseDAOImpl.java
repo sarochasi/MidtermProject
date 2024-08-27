@@ -4,6 +4,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.skilldistillery.springfit.entities.Exercise;
+import com.skilldistillery.springfit.entities.Workout;
 import com.skilldistillery.springfit.entities.WorkoutExercise;
 
 import jakarta.persistence.EntityManager;
@@ -26,29 +27,20 @@ public class WorkoutExerciseDAOImpl implements WorkoutExerciseDAO {
 	}
 
 	@Override
-	public WorkoutExercise updateWorkoutExerciseById(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public WorkoutExercise createWorkoutExerciseById(int exerciseId) {
-
+	public WorkoutExercise createWorkoutExercise(int exerciseId, int workoutId, WorkoutExercise workoutExercise) {
+		Exercise exercise = em.find(Exercise.class, exerciseId);
+		Workout workout = em.find(Workout.class, workoutId);
+		if(exercise !=null && workout !=null)
+		{
+			workoutExercise.setExercise(exercise);
+			workoutExercise.setWorkout(workout);
+			em.persist(workoutExercise);
+			return workoutExercise;
+		}
+		else {
+			return null;
+		}
 		
-		return null;
-	}
-
-	@Override
-	public WorkoutExercise deleteWorkoutExerciseById(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public WorkoutExercise createWorkoutExerciseByExercise(Exercise exercise) {
-		WorkoutExercise newWorkoutExercise = new  WorkoutExercise();
-		newWorkoutExercise.setExercise(exercise);		
-		return newWorkoutExercise;
 	}
 
 }

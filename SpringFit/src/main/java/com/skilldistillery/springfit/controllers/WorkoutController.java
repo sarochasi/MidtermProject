@@ -97,15 +97,24 @@ public class WorkoutController {
 	}
 
 	@RequestMapping(path = "addExercise.do", method = RequestMethod.POST)
-	public String addExerciseToWorkout(HttpSession session, @RequestParam("id") int exerciseId, @RequestParam("workoutId") Integer workoutId, @RequestParam("sets") Integer sets, @RequestParam("units")
+	public String addExerciseToWorkout(HttpSession session,
+			@RequestParam("exerciseId") int exerciseId, 
+			@RequestParam("workoutId") Integer workoutId,
+
 			WorkoutExercise workoutExercise, Model model) {
 		//rep int
 		//set int
-		
-		Workout newWorkout = workoutDao.getWorkoutById(workoutId);
-		
-		newWorkout.addWorkoutExercise(workoutExercise);	//is workoutExercise a co
-		model.addAttribute("newWorkout", newWorkout);
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println("***********************************");
+		System.out.println(workoutExercise);
+		System.out.println("***********************************");
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		workoutExercise = workoutExerciseDao.createWorkoutExercise(exerciseId, workoutId, workoutExercise);
 		//////FIX THIS I THINK createWorkout.jsp needs to get sets and reps and send here
 		
 		

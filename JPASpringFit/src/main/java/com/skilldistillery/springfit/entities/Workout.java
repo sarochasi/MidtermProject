@@ -198,8 +198,7 @@ public class Workout {
 	public String toString() {
 		return "Workout [id=" + id + ", name=" + name + ", description=" + description + ", createDate=" + createDate
 				+ ", lastUpdate=" + lastUpdate + ", enabled=" + enabled + ", published=" + published + ", imageUrl="
-				+ imageUrl + ", workoutComments=" + workoutComments + ", workoutExercise=" + workoutExercises
-				+ ", users=" + users + ", user=" + user + "]";
+				+ imageUrl + ", user=" + user + "]";
 	}
 	
 	

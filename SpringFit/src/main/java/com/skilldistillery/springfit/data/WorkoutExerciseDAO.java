@@ -5,10 +5,7 @@ import com.skilldistillery.springfit.entities.WorkoutExercise;
 
 public interface WorkoutExerciseDAO {
 	public WorkoutExercise getWorkoutExerciseById(int id);
-	public WorkoutExercise updateWorkoutExerciseById(int id);
-	public WorkoutExercise createWorkoutExerciseById(int exerciseId);
-	public WorkoutExercise createWorkoutExerciseByExercise(Exercise exercise);
-	public WorkoutExercise deleteWorkoutExerciseById(int id);
+	public WorkoutExercise createWorkoutExercise(int exerciseId, int workoutId, WorkoutExercise workoutExercise);
 	
 	
 	
