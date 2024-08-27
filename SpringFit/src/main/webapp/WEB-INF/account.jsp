@@ -103,22 +103,9 @@
 
 					<!-- ==================================================== -->
 
-
-					<%-- 	<c:when test="${not empty workout }"> --%>
-					
-					<c:forEach var="workout" items="${allWorkouts}">
-						<div class="card" style="width: 18rem;">
-							<div class="card-body">
-								<h5 class="card-title">${workout.name}</h5>
-								<h6 class="card-subtitle mb-2 text-body-secondary">${loggedInUser.firstName}</h6>
-								<p class="card-text"></p>
-								<a href="#" class="card-link">View</a> <a href="#"
-									class="card-link">Edit</a>
-							</div>
-						</div>
-					</c:forEach>
-
 				</c:when>
+
+				<%-- 	<c:when test="${not empty workout }"> --%>
 
 				<%-- 	</c:when> --%>
 				<c:otherwise>
@@ -129,6 +116,50 @@
 			<!-- USER's Workouts -->
 			<!-- Will need to be updated once (maybe for each/cycle through) we have logic sorted out & more workouts/data entered into MySQL Workbench DB -->
 
+		<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Workout name</th>
+						<th>Description</th>
+						<!-- <th>Image URL</th> -->
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="workout" items="${myWorkouts}">
+						<tr>
+							<td>${workout.name}</td>
+							<td>${workout.description}</td>
+							<td>${workout.imageUrl}</td>
+							<td><a class="btn btn-info btn-sm"
+								href="performworkout.do?id=${workout.id}">Start Exercise</a></td>
+							<!-- Should a workout's details display on seperate jsp? -->
+							href="details.do?id=${workout.id}">View Details</a></td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+
+
+
+
+	<%-- 		<div class="album py-5 bg-body-tertiary">
+				<div class="container">
+
+					<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+						<c:forEach var="workout" items="${myWorkouts}">
+							<div class="card" style="width: 18rem;">
+								<div class="card-body">
+									<h5 class="card-title">${workout.name}</h5>
+									<h6 class="card-subtitle mb-2 text-body-secondary">${workout.user.firstName}</h6>
+									<p class="card-text"></p>
+									<!-- <a href="#" class="card-link">View</a> <a href="#"
+										class="card-link">Edit</a> -->
+								</div>
+							</div>
+						</c:forEach>
+					</div>
+				</div>
+			</div> --%>
 
 
 			<!-- <div class="scrolling-wrapper">
@@ -242,6 +273,8 @@
 								<button type="submit" class="btn btn-primary mt-2">Submit
 									Weight</button>
 							</form>
+							<button formaction="openWeight.do" class="btn btn-lg btn-primary" type="submit">Open weight</button>
+
 						</td>
 					</tr>
 					<tr>

@@ -40,18 +40,19 @@
 							<td>${workout.description}</td>
 							<%-- <td>${workout.imageUrl}</td> --%>
 							<td><a class="btn btn-info btn-sm"
-								href="performworkout.do?id=${workout.id}">Start Exercise</a></td>
+								href="showExercisesWithinWorkout.do?workoutId=${workout.id}">Workout
+									Details</a></td>
 							<!-- Should a workout's details display on seperate jsp? -->
 							<%-- href="details.do?id=${workout.id}">View Details</a></td> --%>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
-			
-			
-			
-			
-			
+
+
+
+
+
 			<!-- ================================================================================= -->
 
 			<%@ include file="footer.jsp"%>
