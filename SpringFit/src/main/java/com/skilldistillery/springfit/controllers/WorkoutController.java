@@ -96,27 +96,8 @@ public class WorkoutController {
 		return mv;
 	}
 
-//	@RequestMapping(path = "addExercise.do", method = RequestMethod.POST)
-//	public String addExerciseToWorkout(HttpSession session, @RequestParam("id") int exerciseId,
-//			@RequestParam("workoutId") int workoutId, WorkoutExercise workoutExercise, Model model) {
-//		
-//		User loggedInUser = (User) session.getAttribute("loggedInUser");
-//		if (loggedInUser != null) {
-//			Exercise exercise = exerciseDao.showExerciseById(exerciseId);
-//			Workout workout = workoutDao.getWorkoutById(workoutId);
-//			
-//			if (exercise != null && workout != null) {
-//				
-//				workoutExercise.setExercise(exercise);
-//				workoutExercise.setWorkout(workout); 
-//				
-//				workoutDao.addExerciseToWorkout(workoutId, workoutExercise);
-//				model.addAttribute("workout", workout);
-//			}
-//		}
-//		// mv.setViewName("redirect:GetWorkoutPage.do?workoutId="+newWorkout.getId());
-//		return "redirect:GetWorkoutPage.do?workoutId=" + workoutId;
-//	}
+	
+	
 
 
 	
