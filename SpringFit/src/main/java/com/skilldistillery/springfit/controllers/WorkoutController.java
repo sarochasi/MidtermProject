@@ -101,13 +101,14 @@ public class WorkoutController {
 			WorkoutExercise workoutExercise, Model model) {
 		
 		Workout newWorkout = workoutDao.getWorkoutById(workoutId);
-		workoutDao.getWorkoutById(workoutId);
-		newWorkout.addWorkoutExercise(workoutExercise);
 		
+		newWorkout.addWorkoutExercise(workoutExercise);	//is workoutExercise a co
+		model.addAttribute("newWorkout", newWorkout);
 		//////FIX THIS I THINK createWorkout.jsp needs to get sets and reps and send here
 		
 		
-		workoutExerciseDao.createWorkoutExerciseByExercise(null);
+		
+		//workoutExerciseDao.createWorkoutExerciseByExercise(null);
 		
 		
 
