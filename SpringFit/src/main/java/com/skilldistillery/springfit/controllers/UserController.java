@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.skilldistillery.springfit.data.UserDAO;
+import com.skilldistillery.springfit.entities.Nutrition;
 import com.skilldistillery.springfit.entities.User;
 
 import jakarta.servlet.http.HttpSession;
@@ -102,6 +103,14 @@ public class UserController {
             return "login"; 
         }
 	}
+	
+	
+	
+	
+
+	
+	
+	
 	
 }
 
