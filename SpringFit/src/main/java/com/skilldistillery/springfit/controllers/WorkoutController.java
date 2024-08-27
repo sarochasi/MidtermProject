@@ -1,5 +1,4 @@
 
-
 package com.skilldistillery.springfit.controllers;
 
 import java.util.List;
@@ -7,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,7 +29,7 @@ public class WorkoutController {
 	private WorkoutDAO workoutDao;
 	@Autowired
 	private ExerciseDAO exerciseDao;
-	
+
 	@Autowired
 	private WorkoutExerciseDAO workoutExerciseDao;
 
@@ -55,29 +55,28 @@ public class WorkoutController {
 		if (loggedInUser != null) {
 			Workout newWorkout = workoutDao.createNewWorkoutInitialize(workout, loggedInUser.getId());
 			mv.addObject("workout", newWorkout);
-			
-			mv.setViewName("redirect:GetWorkoutPage.do?workoutId="+newWorkout.getId());
-		}
-		else {
+
+			mv.setViewName("redirect:GetWorkoutPage.do?workoutId=" + newWorkout.getId());
+		} else {
 			mv.setViewName("home");
 		}
-		
-		
+
 		return mv;
 	}
 
-	@RequestMapping(path = "GetWorkoutPage.do", params="workoutId")
-	public ModelAndView getExerciseType(@RequestParam("workoutId")int workoutId) {
+	@RequestMapping(path = "GetWorkoutPage.do", params = "workoutId")
+	public ModelAndView getExerciseType(@RequestParam("workoutId") int workoutId) {
 		ModelAndView mv = new ModelAndView();
 
 		mv.addObject("exerciseTypes", exerciseDao.findAllExerciseTypes());
-		
+
 //		=============================================
-		List<WorkoutExercise> workoutExercises = workoutDao.getExercisesByWorkoutId(workoutId);;
-	    mv.addObject("workoutExercises", workoutExercises);
+		List<WorkoutExercise> workoutExercises = workoutDao.getExercisesByWorkoutId(workoutId);
+		;
+		mv.addObject("workoutExercises", workoutExercises);
 //	    ==============================================
 
-		mv.addObject("workoutId",workoutId );
+		mv.addObject("workoutId", workoutId);
 
 		mv.setViewName("createWorkout");
 
@@ -85,8 +84,9 @@ public class WorkoutController {
 	}
 
 	// Opens createWorkout page when user selected from account page
-	@RequestMapping(path = "GetWorkoutPage.do", params = {"exerciseType", "workoutId"})
-	public ModelAndView displayWorkoutPage(@RequestParam("exerciseType") int typeId, @RequestParam("workoutId") int workoutId, HttpSession session) {
+	@RequestMapping(path = "GetWorkoutPage.do", params = { "exerciseType", "workoutId" })
+	public ModelAndView displayWorkoutPage(@RequestParam("exerciseType") int typeId,
+			@RequestParam("workoutId") int workoutId, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		User loggedInUser = (User) session.getAttribute("loggedInUser");
 		if (loggedInUser != null) {
@@ -104,13 +104,12 @@ public class WorkoutController {
 
 	@RequestMapping(path = "addExercise.do", method = RequestMethod.POST)
 
-	public String addExerciseToWorkout(HttpSession session,
-			@RequestParam("exerciseId") int exerciseId, 
+	public String addExerciseToWorkout(HttpSession session, @RequestParam("exerciseId") int exerciseId,
 			@RequestParam("workoutId") Integer workoutId,
 
 			WorkoutExercise workoutExercise, Model model) {
-		//rep int
-		//set int
+		// rep int
+		// set int
 		System.out.println();
 		System.out.println();
 		System.out.println();
@@ -122,26 +121,15 @@ public class WorkoutController {
 		System.out.println();
 		System.out.println();
 		workoutExercise = workoutExerciseDao.createWorkoutExercise(exerciseId, workoutId, workoutExercise);
-		
-		model.addAttribute("workoutExercise", workoutExercise);
-		
-		
-		
 
-		
+		model.addAttribute("workoutExercise", workoutExercise);
+
 		Workout newWorkout = workoutDao.getWorkoutById(workoutId);
 		workoutDao.getWorkoutById(workoutId);
 		newWorkout.addWorkoutExercise(workoutExercise);
-		
-		
-		
 
-		
-		
-
-		
 		// workoutExercise = workoutDao.createNewWorkout(workoutExercise);
-		
+
 		// exercise Id recieved
 
 		return "redirect:GetWorkoutPage.do?workoutId=" + newWorkout.getId();
@@ -155,38 +143,62 @@ public class WorkoutController {
 
 		return mv;
 	}
-	
+
 	@RequestMapping(path = "showAllWorkouts.do", method = RequestMethod.GET)
 	public String list(Model model) {
 		List<Workout> allWorkouts = workoutDao.showAllWorkouts();
 		model.addAttribute("allWorkouts", allWorkouts);
 		return "communityWorkouts";
 	}
-	
 
 	@RequestMapping(path = "workoutByUser.do", method = RequestMethod.GET)
-	public String getWorkoutByUserId(HttpSession session,
-			@RequestParam("userId") int userId, Model model) {
-		List<Workout> myWorkouts = workoutDao.getWorkoutByUserId(userId);
-		model.addAttribute("myWorkouts", myWorkouts);
-		return "account";
-		
+	public String getWorkoutByUserId(HttpSession session, @RequestParam("userId") int userId, Model model) {
+		User loggedInUser = (User) session.getAttribute("loggedInUser");
+		if (loggedInUser != null && loggedInUser.getId() == userId) {
+			List<Workout> myWorkouts = workoutDao.getWorkoutByUserId(userId);
+			System.out.println("======================================");
+			System.out.println("User ID: " + userId);
+			System.out.println("Number of Workouts: " + myWorkouts.size());
+			for (Workout workout : myWorkouts) {
+				System.out.println("Workout Name: " + workout.getName());
+			}
+			System.out.println("======================================");
+
+			model.addAttribute("myWorkouts", myWorkouts);
+			return "account";
+		} else {
+			
+			System.out.println("==================No user=============");
+			return "account";
+		}
 	}
+	
+	@GetMapping("/account")
+	public String showAccountPage(HttpSession session, Model model) {
+	    User loggedInUser = (User) session.getAttribute("loggedInUser");
+	    if (loggedInUser != null) {
+	        List<Workout> myWorkouts = workoutDao.getWorkoutByUserId(loggedInUser.getId());
+	        model.addAttribute("myWorkouts", myWorkouts);
+	        System.out.println("Workouts for User: " + myWorkouts.size());
+	    } else {
+	        return "redirect:/login"; // Redirect to login if not logged in
+	    }
+	    return "account";
+	}
+
+
 
 	@RequestMapping(path = "showExercisesWithinWorkout.do", method = RequestMethod.GET)
 	public ModelAndView viewWorkoutDetails(@RequestParam("workoutId") int workoutId) {
 		ModelAndView mv = new ModelAndView();
 		Workout workout = workoutDao.getWorkoutById(workoutId);
 		List<WorkoutExercise> workoutExercises = workoutDao.getExercisesByWorkoutId(workoutId);
-		
+
 		mv.addObject("workout", workout);
 		mv.addObject("workoutExercises", workoutExercises);
 		mv.setViewName("viewWorkoutDetails");
-		
+
 		return mv;
 	}
-	
-	
-
 
 }

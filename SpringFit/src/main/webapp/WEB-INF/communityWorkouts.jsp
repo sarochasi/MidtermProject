@@ -49,7 +49,36 @@
 				</tbody>
 			</table>
 
+<%-- 			<c:forEach var="workout" items="${allWorkouts}">
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">${workout.name}</h5>
+            <h6 class="card-subtitle mb-2 text-body-secondary">${workout.user.firstName}</h6>
+            <p class="card-text">${workout.description}</p>
+            <a href="#" class="card-link">See detail</a>
+            <button type="button" class="btn btn-link active"
+                data-bs-toggle="collapse"
+                data-bs-target="#workoutDetail${workout.id}"
+                aria-expanded="false" aria-controls="workoutDetail${workout.id}">See workout</button>
+        </div>
+    </div>
 
+    <div class="collapse mt-2" id="workoutDetail${workout.id}">
+        <div class="card card-body">
+            <c:if test="${not empty workout.workoutExercises}">
+                <c:forEach var="exercise" items="${workout.workoutExercises}">
+                    <div class="mb-3">
+                        <label class="form-label">${exercise.name}</label>
+                        <p>${exercise.description}</p>
+                    </div>
+                </c:forEach>
+            </c:if>
+            <c:if test="${empty workout.workoutExercises}">
+                <p>No exercises available for this workout.</p>
+            </c:if>
+        </div>
+    </div>
+</c:forEach> --%>
 
 
 
