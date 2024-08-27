@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="jakarta.tags.core" prefix="c"%>
@@ -32,7 +33,20 @@
 									<c:forEach var="exercise" items="${exercises}">
 										<option value="${exercise.id }">${exercise.name}</option>
 									</c:forEach>
-							</select> 
+							</select>
+							 
+		
+							
+							<div class="form-floating mb-3">
+									<input type="number" class="form-control" id="floatingInput"
+										name="units" placeholder="Rep"> <label
+										for="floatingInput">Repetition</label>
+								</div>
+								<div class="form-floating mb-3">
+									<input type="number" class="form-control"
+										id="floatingPassword" name="sets" placeholder="Set">
+									<label for="floatingInput">Set</label>
+								</div>
 							<button class="btn btn-lg btn-primary" type="submit">Add exercise</button>
 							
 							</li>
@@ -63,6 +77,8 @@
 					</form>
 
 				</c:when>
+				
+				
 				
 				
 		
