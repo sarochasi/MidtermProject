@@ -71,6 +71,11 @@ public class WorkoutController {
 		ModelAndView mv = new ModelAndView();
 
 		mv.addObject("exerciseTypes", exerciseDao.findAllExerciseTypes());
+		
+//		=============================================
+		List<WorkoutExercise> workoutExercises = workoutDao.getExercisesByWorkoutId(workoutId);;
+	    mv.addObject("workoutExercises", workoutExercises);
+//	    ==============================================
 
 		mv.addObject("workoutId",workoutId );
 
@@ -139,7 +144,7 @@ public class WorkoutController {
 		
 		// exercise Id recieved
 
-		return "createWorkout";
+		return "redirect:GetWorkoutPage.do?workoutId=" + newWorkout.getId();
 
 	}
 
