@@ -47,9 +47,10 @@
 
 			<!-- <h2>Account Details</h2> -->
 			<h2>Welcome ${loggedInUser.firstName}!</h2>
+			<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->
 
 			<!-- Can later decide to remove username / full name (could be moved to a "settings".jsp -->
-			<c:choose>
+			 			<c:choose>
 				<c:when test="${not empty sessionScope.loggedInUser}">
 					<ul>
 						<li>Username: <c:out
@@ -57,56 +58,56 @@
 						<%-- <p>Password: <c:out value="${sessionScope.loggedInUser.password}"/></p> --%>
 						<li>${sessionScope.loggedInUser.firstName}
 							${sessionScope.loggedInUser.lastName}</li>
-					</ul>
+					</ul> 
 
-					<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->
-					<!-- Create Workout is functional here (drop down on account.jsp - workout name, description, image URL) -->
-					<div class="container-fluid">
-						<div class="d-flex justify-content-between align-items-center">
-							<h3>Your Workouts</h3>
+			<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->
+			<!-- Create Workout is functional here (drop down on account.jsp - workout name, description, image URL) -->
+			<div class="container-fluid">
+				<div class="d-flex justify-content-between align-items-center">
+					<h3>Your Workouts</h3>
 
-							<form action="IntializeWorkout.do" method="GET">
-								<button type="button" class="btn btn-info"
-									data-bs-toggle="collapse" data-bs-target="#createWorkoutForm"
-									aria-expanded="false" aria-controls="createWorkoutForm">Create
-									New Workout</button>
-							</form>
+					<form action="IntializeWorkout.do" method="GET">
+						<button type="button" class="btn btn-info"
+							data-bs-toggle="collapse" data-bs-target="#createWorkoutForm"
+							aria-expanded="false" aria-controls="createWorkoutForm">Create
+							New Workout</button>
+					</form>
+				</div>
+			</div>
+
+			<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->
+
+			<div class="collapse mt-2" id="createWorkoutForm">
+				<div class="card card-body">
+
+					<form action="InitializeWorkout.do" method="GET">
+						<div class="mb-3">
+							<label for="workoutName" class="form-label">Workout name</label>
+							<input type="text" class="form-control" id="workoutName"
+								name="name" required>
 						</div>
-					</div>
 
-					<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->
-
-					<div class="collapse mt-2" id="createWorkoutForm">
-						<div class="card card-body">
-
-							<form action="InitializeWorkout.do" method="GET">
-								<div class="mb-3">
-									<label for="workoutName" class="form-label">Workout
-										name</label> <input type="text" class="form-control" id="workoutName"
-										name="name" required>
-								</div>
-
-								<div class="mb-3">
-									<label for="workoutDescription" class="form-label">Description</label>
-									<input type="text" class="form-control" id="workoutDescription"
-										name="description">
-								</div>
-
-								<div class="mb-3">
-									<label for="imageUrln" class="form-label">Image url</label> <input
-										type="text" class="form-control" id="imageUrl" name="imageUrl">
-								</div>
-
-								<button type="submit" class="btn btn-primary w-100">Create
-									workout</button>
-							</form>
+						<div class="mb-3">
+							<label for="workoutDescription" class="form-label">Description</label>
+							<input type="text" class="form-control" id="workoutDescription"
+								name="description">
 						</div>
-					</div>
 
-					<!-- ==================================================== -->
-					<%-- 	<c:when test="${not empty workout }"> --%>
+						<div class="mb-3">
+							<label for="imageUrln" class="form-label">Image url</label> <input
+								type="text" class="form-control" id="imageUrl" name="imageUrl">
+						</div>
 
-					<%-- 					<c:forEach var="workout" items="${myWorkouts}">
+						<button type="submit" class="btn btn-primary w-100">Create
+							workout</button>
+					</form>
+				</div>
+			</div>
+
+			<!-- ==================================================== -->
+			<%-- 	<c:when test="${not empty workout }"> --%>
+
+			<%-- 					<c:forEach var="workout" items="${myWorkouts}">
 						<div class="card" style="width: 18rem;">
 							<div class="card-body">
 								<h5 class="card-title">${workout.name}</h5>
@@ -118,63 +119,63 @@
 						</div>
 					</c:forEach> --%>
 
-					<br>
+			<br>
 
 
-					<%-- 	<c:when test="${not empty workout }"> --%>
-					<div class="card-container">
-						<div class="row">
-							<c:forEach var="workout" items="${myWorkouts}">
-								<div class="col-md-4 mb-4">
-									<div class="card" style="width: 18rem;">
-										<div class="card-body">
-											<h5 class="card-title">${workout.name}</h5>
-											<h6 class="card-subtitle mb-2 text-body-secondary">
-												<strong>Created by: </strong>${user.firstName}
-											</h6>
-											<p class="card-text">
-												<strong>Description: </strong>${workout.description != null ? workout.description : 'N/A'}
-											</p>
-											<a class="btn btn-outline-info" data-bs-toggle="collapse"
-												href="#collapse${workout.id}" role="button"
-												aria-expanded="false" aria-controls="collapse${workout.id}">
-												View Exercises </a> <a href="#" class="btn btn-outline-info">Edit</a>
+			<%-- 	<c:when test="${not empty workout }"> --%>
+			<div class="card-container">
+				<div class="row">
+					<c:forEach var="workout" items="${myWorkouts}">
+						<div class="col-md-4 mb-4">
+							<div class="card" style="width: 18rem;">
+								<div class="card-body">
+									<h5 class="card-title">${workout.name}</h5>
+									<h6 class="card-subtitle mb-2 text-body-secondary">
+										<strong>Created by: </strong>${user.firstName}
+									</h6>
+									<p class="card-text">
+										<strong>Description: </strong>${workout.description != null ? workout.description : 'N/A'}
+									</p>
+									<a class="btn btn-outline-info" data-bs-toggle="collapse"
+										href="#collapse${workout.id}" role="button"
+										aria-expanded="false" aria-controls="collapse${workout.id}">
+										View Exercises </a> <a href="#" class="btn btn-outline-info">Edit</a>
 
 
-											<form action="deleteWorkout.do" method="POST">
-												<input type="hidden" name="workoutId" value="${workout.id}" />
-												<button type="submit" class="btn btn-outline-info">Delete</button>
-											</form>
+									<form action="deleteWorkout.do" method="POST">
+										<input type="hidden" name="workoutId" value="${workout.id}" />
+										<button type="submit" class="btn btn-outline-info">Delete</button>
+									</form>
 
-											<div class="collapse mt-2" id="collapse${workout.id}">
-												<div class="card card-body">
-													<ul>
-														<c:if test="${not empty workout.workoutExercises}">
-															<c:forEach var="exercise"
-																items="${workout.workoutExercises}">
-																<li><strong>${exercise.exercise.name}</strong><br />
-																	Units: ${exercise.units}<br /> Sets: ${exercise.sets}<br />
-																	Notes: ${exercise.notes != null ? exercise.notes : 'N/A'}<br />
-																</li>
-															</c:forEach>
-														</c:if>
-														<c:if test="${empty workout.workoutExercises}">
-															<li>No exercises found for this workout.</li>
-														</c:if>
-													</ul>
-												</div>
-											</div>
+									<div class="collapse mt-2" id="collapse${workout.id}">
+										<div class="card card-body">
+											<ul>
+												<c:if test="${not empty workout.workoutExercises}">
+													<c:forEach var="exercise"
+														items="${workout.workoutExercises}">
+														<li><strong>${exercise.exercise.name}</strong><br />
+															Units: ${exercise.units}<br /> Sets: ${exercise.sets}<br />
+															Notes: ${exercise.notes != null ? exercise.notes : 'N/A'}<br />
+														</li>
+													</c:forEach>
+												</c:if>
+												<c:if test="${empty workout.workoutExercises}">
+													<li>No exercises found for this workout.</li>
+												</c:if>
+											</ul>
 										</div>
 									</div>
 								</div>
-							</c:forEach>
+							</div>
 						</div>
-					</div>
+					</c:forEach>
+				</div>
+			</div>
 
 
-					<%-- 	<c:when test="${not empty workout }"> --%>
+			<%-- 	<c:when test="${not empty workout }"> --%>
 
-					<%-- 					<c:forEach var="workout" items="${myWorkouts}">
+			<%-- 					<c:forEach var="workout" items="${myWorkouts}">
 						<div class="card" style="width: 18rem;">
 							<div class="card-body">
 								<h5 class="card-title">${workout.name}</h5>
@@ -187,17 +188,17 @@
 					</c:forEach> --%>
 
 
-				</c:when>
+			</c:when>
 
-				<%-- 	</c:when> --%>
-				<c:otherwise>
-					<p>Please log in to see the profile</p>
-					<button class="btn btn-link active" type="button"
-						data-bs-toggle="collapse" data-bs-target="#loginFormInProfile"
-						aria-expanded="false" aria-controls="loginFormInProfile">Log
-						in</button>
+			<%-- 	</c:when> --%>
+			<c:otherwise>
+				<p>Please log in to see the profile</p>
+				<button class="btn btn-link active" type="button"
+					data-bs-toggle="collapse" data-bs-target="#loginFormInProfile"
+					aria-expanded="false" aria-controls="loginFormInProfile">Log
+					in</button>
 
-				</c:otherwise>
+			</c:otherwise>
 			</c:choose>
 
 			<div class="container-fluid mt-4">
@@ -312,13 +313,13 @@
 			<!-- Today's Numbers / Health? -->
 			<!-- Today's Numbers / Health?                         SECOND TABLE-->
 
-			<h3>Today's Numbers</h3>
+			<h3>Weight & Nutrition</h3>
 			<table class="table table-bordered">
 				<thead></thead>
 
 				<tbody>
 					<tr>
-						<td>Current Weight</td>
+						<!-- <td>Current Weight</td> -->
 						<td>
 							<form action="submitWeight.do" method="POST">
 								<input type="number" class="form-control" name="weight"
@@ -327,66 +328,65 @@
 									Weight</button>
 							</form>
 
+
 							<form action="openWeight.do" method="POST">
 								<button class="btn btn-info" type="submit">Open weight</button>
 							</form>
-
-
 						</td>
-					</tr>
-					<tr>
-
-						<td>Track your macros!</td>
-						<td><legend class="form-label">Select: </legend>
-							<form action="addNutrition.do" method="POST">
-
-								<div class="col-md-4">
-									<label for="zip" class="form-label">Date Consumed</label> <input
-										type="date" class="form-control" id="dateEaten"
-										name="dateEaten" placeholder="YYYY-MM-DD">
-								</div>
-
-<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->
-<!-- ---------------------------------------------------NUTRITION------------------------------------------------------------------------------ -->
-								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="radio" id="name"
-										name="name" value="Breakfast"> <label
-										class="form-check-label" for="name">Breakfast</label>
-								</div>
-
-								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="radio" id="name"
-										name="name" value="Lunch"> <label
-										class="form-check-label" for="lunch">Lunch</label>
-								</div>
-								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="radio" id="name"
-										name="name" value="Dinner"> <label
-										class="form-check-label" for="lunch">Dinner</label>
-								</div>
-								<div class="form-check form-check-inline">
-									<input class="form-check-input" type="radio" id="name"
-										name="name" value="Snack"> <label
-										class="form-check-label" for="lunch">Snack</label>
-								</div>
-
-								<input type="number" class="form-control"
-									name="gramsCarbohydrates"
-									placeholder="Enter carbohydrates (in grams)" required>
-								<!-- <button type="submit" class="btn btn-info">Submit
-									Carbohydrates</button> -->
-								<input type="number" class="form-control" name="gramsFat"
-									placeholder="Enter fat (in grams)" required>
-								<!-- <button type="submit" class="btn btn-info">Submit Fat</button> -->
-								<input type="number" class="form-control" name="gramsProtein"
-									placeholder="Enter protein (in grams)" required>
-								<button type="submit" class="btn btn-info">Submit</button>
-							</form></td>
 					</tr>
 				</tbody>
 			</table>
+
+			<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->
+			<!-- ---------------------------------------------------NUTRITION------------------------------------------------------------------------------ -->
+			<!-- <td>Track your macros!</td> -->
+			<td><legend class="form-label"></legend>
+				<form action="addNutrition.do" method="POST">
+
+					<div class="col-md-4">
+						<label for="zip" class="form-label"></label> <input type="date"
+							class="form-control" id="dateEaten" name="dateEaten"
+							placeholder="YYYY-MM-DD">
+					</div>
+
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" id="name" name="name"
+							value="Breakfast"> <label class="form-check-label"
+							for="name">Breakfast</label>
+					</div>
+
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" id="name" name="name"
+							value="Lunch"> <label class="form-check-label"
+							for="lunch">Lunch</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" id="name" name="name"
+							value="Dinner"> <label class="form-check-label"
+							for="lunch">Dinner</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" id="name" name="name"
+							value="Snack"> <label class="form-check-label"
+							for="lunch">Snack</label>
+					</div>
+
+					<input type="number" class="form-control" name="gramsCarbohydrates"
+						placeholder="Enter carbohydrates (in grams)" required>
+					<!-- <button type="submit" class="btn btn-info">Submit
+									Carbohydrates</button> -->
+					<input type="number" class="form-control" name="gramsFat"
+						placeholder="Enter fat (in grams)" required>
+					<!-- <button type="submit" class="btn btn-info">Submit Fat</button> -->
+					<input type="number" class="form-control" name="gramsProtein"
+						placeholder="Enter protein (in grams)" required>
+					<button type="submit" class="btn btn-info">Submit</button>
+				</form></td>
+			</tr>
+			</tbody>
+			</table>
 		</div>
-<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->
+		<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->
 
 
 
