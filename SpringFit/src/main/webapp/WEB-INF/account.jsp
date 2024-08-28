@@ -140,6 +140,12 @@
 												aria-expanded="false" aria-controls="collapse${workout.id}">
 												View Exercises </a> <a href="#" class="btn btn-outline-info">Edit</a>
 
+
+											<form action="deleteWorkout.do" method="POST">
+												<input type="hidden" name="workoutId" value="${workout.id}" />
+												<button type="submit" class="btn btn-outline-info">Delete</button>
+											</form>
+
 											<div class="collapse mt-2" id="collapse${workout.id}">
 												<div class="card card-body">
 													<ul>
@@ -255,8 +261,8 @@
 
 			<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->
 			<!-- Today's Numbers / Health?                  FIRST TABLE-->
-			
-<!-- 			<div class="container-fluid">
+
+			<!-- 			<div class="container-fluid">
 				<h3>Today's Numbers</h3>
 				<table class="table table-bordered">
 					<thead></thead>
@@ -294,8 +300,8 @@
 					</tbody>
 				</table>
 			</div> -->
-			
-			
+
+
 			<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->
 			<!-- Is this still needed for testing? -->
 			<!-- <button formaction="workoutByUser.do" class="btn btn-lg btn-primary"
@@ -329,38 +335,39 @@
 						</td>
 					</tr>
 					<tr>
+
 						<td>Track your macros!</td>
 						<td><legend class="form-label">Select: </legend>
+
 							<div class="col-md-4">
 								<label for="zip" class="form-label">Date Consumed</label> <input
 									type="date" class="form-control" id="dateEaten"
 									name="dateEaten" placeholder="YYYY-MM-DD">
 							</div>
-							
+
 							<div class="form-check form-check-inline">
 								<input class="form-check-input" type="checkbox" id="name"
 									name="name" value="name"> <label
 									class="form-check-label" for="name">Breakfast</label>
 							</div>
-							
+
 
 							<div class="form-check form-check-inline">
 								<input class="form-check-input" type="checkbox" id="name"
 									name="name" value="Lunch"> <label
 									class="form-check-label" for="lunch">Lunch</label>
 							</div>
-
 							<div class="form-check form-check-inline">
 								<input class="form-check-input" type="checkbox" id="name"
-									name="name" value="Dinner"> <label
-									class="form-check-label" for="dinner">Dinner</label>
+									name="name" value="Lunch"> <label
+									class="form-check-label" for="lunch">Lunch</label>
 							</div>
-
 							<div class="form-check form-check-inline">
 								<input class="form-check-input" type="checkbox" id="name"
-									name="name" value="Snack"> <label
-									class="form-check-label" for="snack">Snack</label>
+									name="name" value="Lunch"> <label
+									class="form-check-label" for="lunch">Lunch</label>
 							</div>
+
 							<form action="addNutrition.do" method="POST">
 								<input type="number" class="form-control"
 									name="gramsCarbohydrates"
@@ -386,10 +393,9 @@
 
 
 
-
 		<!-- Footer -->
 		<%@ include file="footer.jsp"%>
-		
+
 	</main>
 
 	<script

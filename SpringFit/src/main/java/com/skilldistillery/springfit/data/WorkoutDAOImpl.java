@@ -47,11 +47,39 @@ public class WorkoutDAOImpl implements WorkoutDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	public boolean deleteExerciseByWorkoutId(int id) {
+		boolean deleted = false;
+		
+		String jpql = "DELETE FROM WorkoutExercise we WHERE we.workout.id = :workoutId";
+	    int result = em.createQuery(jpql)
+	                   .setParameter("workoutId", id)
+	                   .executeUpdate();
+
+	    if(result > 0) {
+	        deleted = true;
+	    }
+
+	    return deleted;
+		
+	}
+	
 
 	@Override
-	public boolean deleteWorkout(int id, List<WorkoutExercise> exerciseList) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean deleteWorkout(int id) {
+		boolean deleted = false;
+
+	    Workout managedWorkout = em.find(Workout.class, id);
+
+	    if(managedWorkout != null) {
+	        deleteExerciseByWorkoutId(id);
+
+	        em.remove(managedWorkout);
+	        deleted = true;
+	    }
+
+	    return deleted;
 	}
 
 	@Override

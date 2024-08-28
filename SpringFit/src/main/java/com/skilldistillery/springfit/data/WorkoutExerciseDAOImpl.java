@@ -45,5 +45,23 @@ public class WorkoutExerciseDAOImpl implements WorkoutExerciseDAO {
 		
 
 	}
+	
+	@Override
+	public boolean deleteExerciseByWorkoutId(int id) {
+		boolean deleted = false;
+		
+		String jpql = "DELETE FROM WorkoutExercise we WHERE we.workout.id = :workoutId";
+	    int result = em.createQuery(jpql)
+	                   .setParameter("workoutId", id)
+	                   .executeUpdate();
+
+	    if(result > 0) {
+	        deleted = true;
+	    }
+
+	    return deleted;
+		
+	}
+	
 
 }

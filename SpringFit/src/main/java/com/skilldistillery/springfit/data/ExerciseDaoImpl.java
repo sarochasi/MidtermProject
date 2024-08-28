@@ -1,6 +1,8 @@
 
 package com.skilldistillery.springfit.data;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
