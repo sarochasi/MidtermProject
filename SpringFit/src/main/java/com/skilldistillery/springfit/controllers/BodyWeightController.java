@@ -1,10 +1,11 @@
 package com.skilldistillery.springfit.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.skilldistillery.springfit.data.BodyWeightDAO;
@@ -42,12 +43,22 @@ public class BodyWeightController {
 	}
 	
 	@RequestMapping(path ="openWeight.do")
-	public ModelAndView openBodyWeightData()
+	public ModelAndView openBodyWeightData(HttpSession session)
 	{
 		ModelAndView mv = new ModelAndView();
 		
+		User user = (User)session.getAttribute("loggedInUser");
+		List<BodyWeight> bodyWeightListByUser = bodyWeightDao.showAllBodyWeightsForUser(user);
+		mv.addObject("bodyWeightListByUser",bodyWeightListByUser);
 		mv.setViewName("displayBodyWeight");
-		
+		System.out.println("----------------------------------------");
+		System.out.println("----------------------------------------");
+		System.out.println("----------------------------------------");
+		System.out.println(bodyWeightListByUser.get(0).getDateWeighted());
+		System.out.println("----------------------------------------");
+		System.out.println("----------------------------------------");
+		System.out.println("----------------------------------------");
+		System.out.println("----------------------------------------");
 		return mv;
 		
 		
