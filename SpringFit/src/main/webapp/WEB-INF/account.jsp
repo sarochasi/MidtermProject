@@ -46,6 +46,7 @@
 		<div class="container col-xl-10 col-xxl-8 px-4 py-5">
 
 
+
 			<!-- <h2>Account Details</h2> -->
 			<h2>Welcome ${loggedInUser.firstName}!</h2>
 
@@ -65,7 +66,7 @@
 							<h3>Your Workouts</h3>
 
 							<form action="IntializeWorkout.do" method="GET">
-								<button type="button" class="btn btn-link active"
+								<button type="button" class="btn btn-info"
 									data-bs-toggle="collapse" data-bs-target="#createWorkoutForm"
 									aria-expanded="false" aria-controls="createWorkoutForm">Create
 									New Workout</button>
@@ -102,7 +103,7 @@
 					</div>
 
 					<!-- ==================================================== -->
-
+					<br>
 
 
 					<%-- 	<c:when test="${not empty workout }"> --%>
@@ -117,13 +118,12 @@
 												<strong>Created by: </strong>${user.firstName}
 											</h6>
 											<p class="card-text">
-												<strong>Description: </strong>${workout.description}
+												<strong>Description: </strong>${workout.description != null ? workout.description : 'N/A'}
 											</p>
 											<a class="btn btn-outline-info" data-bs-toggle="collapse"
 												href="#collapse${workout.id}" role="button"
 												aria-expanded="false" aria-controls="collapse${workout.id}">
-												View Exercises </a> 
-												<a href="#" class="btn btn-outline-info">Edit</a>
+												View Exercises </a> <a href="#" class="btn btn-outline-info">Edit</a>
 
 											<div class="collapse mt-2" id="collapse${workout.id}">
 												<div class="card card-body">
@@ -155,65 +155,43 @@
 
 				<%-- 	</c:when> --%>
 				<c:otherwise>
-					<p>Not Logged In.</p>
+					<p>Please log in to see the profile</p>
+					<button class="btn btn-link active" type="button"
+						data-bs-toggle="collapse" data-bs-target="#loginFormInProfile"
+						aria-expanded="false" aria-controls="loginFormInProfile">Log in</button>
+
 				</c:otherwise>
 			</c:choose>
-
-			<!-- USER's Workouts -->
-			<!-- Will need to be updated once (maybe for each/cycle through) we have logic sorted out & more workouts/data entered into MySQL Workbench DB -->
-
-
-
-
-			<!-- <div class="scrolling-wrapper">
-
-					<div class="card">
-						<img src="image" class="card-img-top" alt="image href">
-						<div class="card-body">
-							<h5 class="card-title">1</h5>
-							<p class="card-text">1</p>
+			<div class="collapse" id="#loginFormInProfile"
+				style="right: 0; width: 250px; z-index: 1000;">
+				<div class="card card-body">
+					<form action="login.do" method="POST">
+						<div class="mb-3">
+							<label for="username" class="form-label">Username</label> <input
+								type="text" class="form-control" id="username" name="username"
+								required>
 						</div>
-					</div>
-					<div class="card">
-						<img src="image" class="card-img-top" alt="image href">
-						<div class="card-body">
-							<h5 class="card-title">1</h5>
-							<p class="card-text">1</p>
+						<div class="mb-3">
+							<label for="password" class="form-label">Password</label> <input
+								type="password" class="form-control" id="password"
+								name="password" required>
 						</div>
-					</div>
-					<div class="card">
-						<img src="image" class="card-img-top" alt="image href">
-						<div class="card-body">
-							<h5 class="card-title">1</h5>
-							<p class="card-text">1</p>
-						</div>
-					</div>
-					<div class="card">
-						<img src="image" class="card-img-top" alt="image href">
-						<div class="card-body">
-							<h5 class="card-title">1</h5>
-							<p class="card-text">1</p>
-						</div>
-					</div>
-					<div class="card">
-						<img src="image" class="card-img-top" alt="image href">
-						<div class="card-body">
-							<h5 class="card-title">1</h5>
-							<p class="card-text">1</p>
-						</div>
-					</div>
+						<button type="submit" class="btn btn-primary w-100">Log
+							in</button>
+					</form>
 
 				</div>
 			</div>
- -->
+
+
 			<!-- FAVORITE -->
 			<!-- Will need to be updated once (maybe for each/cycle through) we have logic sorted out & more workouts/data entered into MySQL Workbench DB -->
 			<div class="container-fluid mt-4">
 				<div class="d-flex justify-content-between align-items-center">
 					<h3>Your Favorite Workouts</h3>
 					<form action="showAllWorkouts.do" method="GET">
-						<button type="submit" class="btn btn-primary btn-custom">Explore
-							all workouts!</button>
+						<button type="submit" class="btn btn-info">Explore all
+							workouts!</button>
 					</form>
 				</div>
 				<div class="scrolling-wrapper">
@@ -256,12 +234,11 @@
 
 				</div>
 			</div>
-		</div>
 
-		<br>
+			<br>
 
-		<!-- Today's Numbers / Health? -->
-		<div class="container-fluid">
+			<!-- Today's Numbers / Health? -->
+
 			<h3>Today's Numbers</h3>
 			<table class="table table-bordered">
 				<thead></thead>
@@ -273,13 +250,12 @@
 							<form action="submitWeight.do" method="POST">
 								<input type="number" class="form-control" name="weight"
 									placeholder="Enter your weight" required>
-								<button type="submit" class="btn btn-primary mt-2">Submit
+								<button type="submit" class="btn btn-outline-info">Submit
 									Weight</button>
 							</form>
 
 							<form action="openWeight.do" method="POST">
-								<button class="btn btn-lg btn-primary" type="submit">Open
-									weight</button>
+								<button class="btn btn-info" type="submit">Open weight</button>
 							</form>
 
 
@@ -291,7 +267,7 @@
 							<form action="submitCalories.do" method="POST">
 								<input type="number" class="form-control" name="calories"
 									placeholder="Enter total calories" required>
-								<button type="submit" class="btn btn-primary mt-2">Submit
+								<button type="submit" class="btn btn-info">Submit
 									Calories</button>
 							</form>
 						</td>
@@ -301,30 +277,16 @@
 		</div>
 
 
-		<h3>Misc. (to be deleted)</h3>
-		<p>Updated "Account Details" to (Welcome, user's name). A
-			"Settings" button already exists under the user drop down (top right)</p>
-		<p>Maybe create logic that will display the user's info, only IF
-			they would like to display that information publicly. (user would
-			have the choice?) - first name, last name, height, gender (but might
-			not display as ex. First Name: Bob, rather "Bob")</p>
-		<p>Where should we display user's graphs? What will the graphs
-			output/track?</p>
-		<p>Will need to revisit ManyToMany (toStrings)</p>
-		<p>How many jsps? 1 for exercises and 1 for workouts?</p>
 
-
-		<button formaction="workoutByUser.do" class="btn btn-lg btn-primary"
-			type="button">test file</button>
 
 		<!-- Footer -->
 		<%@ include file="footer.jsp"%>
+	</main>
 
-
-		<script
-			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-			integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-			crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+		crossorigin="anonymous"></script>
 </body>
 
 
