@@ -84,7 +84,7 @@ public class WorkoutDAOImpl implements WorkoutDAO {
 
 	@Override
 	public List<Workout> showAllWorkouts() {
-		String jpql = "SELECT w FROM Workout w WHERE enabled = true"; //AND published = true";
+		String jpql = "SELECT w FROM Workout w WHERE w.enabled = true"; //AND published = true";
 		return em.createQuery(jpql, Workout.class).getResultList();
 	}
 

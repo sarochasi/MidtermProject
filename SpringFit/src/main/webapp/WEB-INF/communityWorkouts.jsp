@@ -19,7 +19,7 @@
 
 <body>
 
-	<%-- <%@ include file="navbar.jsp"%> --%>
+	 <%@ include file="navbar.jsp"%> 
 
 	<main>
 		<div class="container col-xl-10 col-xxl-8 px-4 py-5">
@@ -112,7 +112,7 @@
 
 			<!-- ================================================================================= -->
 
-			<%-- <%@ include file="footer.jsp"%> --%>
+			 <%@ include file="footer.jsp"%> 
 	</main>
 
 

@@ -291,7 +291,7 @@
 		</div>
 				<br>
 				
-				<form action="communityWorkouts.do" method="POST">
+				<form action="showAllWorkouts.do" method="POST">
 					<button class="btn btn-info" type="submit">Explore workouts from the community!</button>
 				</form>
 		<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->
