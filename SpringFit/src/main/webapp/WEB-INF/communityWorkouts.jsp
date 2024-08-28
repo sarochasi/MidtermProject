@@ -7,22 +7,23 @@
 
 <head>
 <meta charset="UTF-8">
-<title>Community - Workouts</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
 	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
 	crossorigin="anonymous">
+	
+<title>Community - Workouts</title>
+
 </head>
 
 <body>
 
-	<%@ include file="navbar.jsp"%>
+	<%-- <%@ include file="navbar.jsp"%> --%>
 
 	<main>
 		<div class="container col-xl-10 col-xxl-8 px-4 py-5">
 
-			<!-- For each workout, that has been associated with a user, display that workout -->
 			<h1>Community</h1>
 
 			<c:choose>
@@ -45,9 +46,8 @@
 											<a class="btn btn-outline-success" data-bs-toggle="collapse"
 												href="#collapse${workout.id}" role="button"
 												aria-expanded="false" aria-controls="collapse${workout.id}">
-												View Exercises </a> 
-												<a href="#" class="btn btn-outline-success">Like</a>
-												<a href="#" class="btn btn-outline-success">Comment</a>
+												View Exercises </a> <a href="#" class="btn btn-outline-success">Like</a>
+											<a href="#" class="btn btn-outline-success">Comment</a>
 
 											<div class="collapse mt-2" id="collapse${workout.id}">
 												<div class="card card-body"
@@ -112,15 +112,15 @@
 
 			<!-- ================================================================================= -->
 
-			<%@ include file="footer.jsp"%>
+			<%-- <%@ include file="footer.jsp"%> --%>
 	</main>
+
+
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 		crossorigin="anonymous"></script>
-
-
 </body>
 
 

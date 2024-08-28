@@ -287,7 +287,13 @@
 				<form action="showAllNutrition.do" method="POST">
 					<button class="btn btn-info" type="submit">View</button>
 				</form>
+				
 		</div>
+				<br>
+				
+				<form action="communityWorkouts.do" method="POST">
+					<button class="btn btn-info" type="submit">Explore workouts from the community!</button>
+				</form>
 		<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->
 
 

@@ -231,7 +231,7 @@ public class WorkoutController {
 		ModelAndView mv = new ModelAndView();
 		
 		try {
-			Workout updatedWorkout = workoutDao.updateWorkout(workout.getId(), workout, null);
+			//Workout updatedWorkout = workoutDao.updateWorkout(workout.getId(), workout, null);
 			
 		}catch (Exception e) {
 			// TODO: handle exception
