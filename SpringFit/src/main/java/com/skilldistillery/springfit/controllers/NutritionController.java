@@ -25,8 +25,9 @@ public class NutritionController {
         User loggedInUser = (User) session.getAttribute("loggedInUser");
         if (loggedInUser != null) {
             nutrition.setUser(loggedInUser);
+            System.out.println(nutrition);
             nutritionDao.addNutrition(nutrition);
-            model.addAttribute("nutritionAdded", true);
+            model.addAttribute("nutritionAdded", true); 
             
             return "redirect:profile.do"; 
         } else {
@@ -35,6 +36,24 @@ public class NutritionController {
             return "login";
         }
     }
+    
+    // VIEW - Nutrition (to a loggedInUser)
+//    @RequestMapping(path = "addNutrition.do", method = RequestMethod.GET)
+//    public String viewNutritionData(@ModelAttribute("nutrition") Nutrition nutrition, HttpSession session, Model model) {
+//    	User loggedInUser = (User) session.getAttribute("loggedInUser");
+//    	if (loggedInUser != null) {
+//    		nutrition.setUser(loggedInUser);
+//    		System.out.println(nutrition);
+//    		nutritionDao.addNutrition(nutrition);
+//    		model.addAttribute("nutritionAdded", true); 
+//    		
+//    		return "redirect:profile.do"; 
+//    	} else {
+//    		model.addAttribute("errorMessage", "You must be logged in to add nutrition information.");
+//    		
+//    		return "login";
+//    	}
+//    }
     
 
 }
