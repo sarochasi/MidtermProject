@@ -126,7 +126,7 @@ public class UserController {
         User loggedInUser = (User) session.getAttribute("loggedInUser");
         if (loggedInUser != null) {
             model.addAttribute("user", loggedInUser);
-            return "account"; 
+            return "redirect:profile.do"; 
         } else {
             model.addAttribute("errorMessage", "You must be logged in to view your profile.");
             return "login"; 

@@ -64,7 +64,7 @@
 								<button class="btn btn-lg btn-primary" type="submit">Add
 									exercise</button>
 									
-								<button formaction="profileAfterWorkout.do" class="btn btn-lg btn-primary" type="submit">Finish workout</button></li>
+								<!-- <button formaction="profileAfterWorkout.do" class="btn btn-lg btn-primary" type="submit">Finish workout</button> --></li>
 
 						</ul>
 
@@ -88,6 +88,7 @@
 						</select>
 
 						<button class="btn btn-lg btn-primary" type="submit">Submit</button>
+						<button formaction="profileAfterWorkout.do" class="btn btn-lg btn-primary" type="submit">Finish workout</button>
 
 					</form>
 
