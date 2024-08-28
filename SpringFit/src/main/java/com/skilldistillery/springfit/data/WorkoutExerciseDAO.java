@@ -11,5 +11,7 @@ public interface WorkoutExerciseDAO {
 	
 	public boolean deleteExerciseByWorkoutId(int id);
 	
+	public WorkoutExercise updateWorkoutExercise(int id,WorkoutExercise workoutExercise);
+	
 
 }

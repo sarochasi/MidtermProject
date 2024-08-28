@@ -72,6 +72,26 @@ public class ExerciseController {
     }
 	
 	
+    @RequestMapping(path = "deleteExercise.do", method = RequestMethod.POST)
+    public ModelAndView deleteExercise(@RequestParam("exerciseId") int exerciseId) {
+    	ModelAndView mv = new ModelAndView();
+    	Exercise exercise = exerciseDao.showExerciseById(exerciseId);
+    	
+    	if(null == null) {
+    		mv.addObject("errorMsg", "Exercise not found with ID: " + exerciseId);
+    		mv.setViewName("error");
+    	}else {
+    		boolean deleted = exerciseDao.deleteExercise(exerciseId);
+    		if(!deleted) {
+    			mv.addObject("errorMsg", "Failed to delete the exercise");
+				mv.setViewName("error");
+    		}else {
+    			mv.setViewName("updateForm");
+    		}
+    	}
+    	
+    	return mv;
+    }
 	
 	
 	
