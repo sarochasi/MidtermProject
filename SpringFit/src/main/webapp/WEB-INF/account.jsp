@@ -106,18 +106,50 @@
 
 
 					<%-- 	<c:when test="${not empty workout }"> --%>
-					
-					<c:forEach var="workout" items="${myWorkouts}">
-						<div class="card" style="width: 18rem;">
-							<div class="card-body">
-								<h5 class="card-title">${workout.name}</h5>
-								<h6 class="card-subtitle mb-2 text-body-secondary">${loggedInUser.firstName}</h6>
-								<p class="card-text"></p>
-								<a href="#" class="card-link">View</a> <a href="#"
-									class="card-link">Edit</a>
-							</div>
+					<div class="card-container">
+						<div class="row">
+							<c:forEach var="workout" items="${myWorkouts}">
+								<div class="col-md-4 mb-4">
+									<div class="card" style="width: 18rem;">
+										<div class="card-body">
+											<h5 class="card-title">${workout.name}</h5>
+											<h6 class="card-subtitle mb-2 text-body-secondary">
+												<strong>Created by: </strong>${user.firstName}
+											</h6>
+											<p class="card-text">
+												<strong>Description: </strong>${workout.description}
+											</p>
+											<a class="btn btn-outline-info" data-bs-toggle="collapse"
+												href="#collapse${workout.id}" role="button"
+												aria-expanded="false" aria-controls="collapse${workout.id}">
+												View Exercises </a> 
+												<a href="#" class="btn btn-outline-info">Edit</a>
+
+											<div class="collapse mt-2" id="collapse${workout.id}">
+												<div class="card card-body">
+													<ul>
+														<c:if test="${not empty workout.workoutExercises}">
+															<c:forEach var="exercise"
+																items="${workout.workoutExercises}">
+																<li><strong>${exercise.exercise.name}</strong><br />
+																	Units: ${exercise.units}<br /> Sets: ${exercise.sets}<br />
+																	Notes: ${exercise.notes != null ? exercise.notes : 'N/A'}<br />
+																</li>
+															</c:forEach>
+														</c:if>
+														<c:if test="${empty workout.workoutExercises}">
+															<li>No exercises found for this workout.</li>
+														</c:if>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</c:forEach>
 						</div>
-					</c:forEach>
+					</div>
+
 
 				</c:when>
 
