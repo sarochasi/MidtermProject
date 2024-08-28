@@ -26,7 +26,8 @@
 				<th>Sets</th>
 			</tr>
 		</thead>
-		
+		<c:choose>
+		<c:when test="${not empty workout}">
 		<tbody>
 			<c:forEach var="workoutExercise" items="${workoutExercises}">
 				<tr>
@@ -36,8 +37,10 @@
 				</tr>
 			</c:forEach>
 		</tbody>
-	</table>
+		</c:when>
 
+		</c:choose>
+	</table>
 
 
 </body>

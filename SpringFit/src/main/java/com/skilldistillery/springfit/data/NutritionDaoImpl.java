@@ -20,11 +20,6 @@ public class NutritionDaoImpl implements NutritionDAO {
 		return em.find(Nutrition.class, id);
 	}
 	
-	// SELECT * FROM nutrition WHERE user_id = 1;
-	// String jpql = "SELECT n FROM Nutrition n WHERE n.user.id = :userId";
-
-	
-	
 	@Override
 	public Nutrition addNutrition(Nutrition nutrition) {
 		em.persist(nutrition);

@@ -10,7 +10,7 @@ public interface WorkoutDAO {
 
 	public Workout getWorkoutById(int id);
 	public Workout updateNewWorkout(int id, List<WorkoutExercise> exerciseList);
-	public boolean deleteWorkout(int id, List<WorkoutExercise> exerciseList);
+	public boolean deleteWorkout(int id);
 	
 	// Initialize workout 
 	public Workout createNewWorkoutInitialize(Workout workout, int userId);
@@ -20,5 +20,7 @@ public interface WorkoutDAO {
 	public List<Workout> showAllWorkouts();
 	public List<WorkoutExercise> getExercisesByWorkoutId(int workoutId);
 	public List<Workout> getWorkoutByUserId(int  userId);
+	
+	public boolean deleteExerciseByWorkoutId(int id);
 	
 }

@@ -24,8 +24,8 @@
 
 .scrolling-wrapper .card {
 	display: inline-block;
-	width: 200px; /* Adjust as needed */
-	margin-right: 10px; /* Space between cards */
+	width: 200px;
+	margin-right: 10px;
 }
 </style>
 
@@ -35,10 +35,8 @@
 <body>
 
 	<%@ include file="navbar.jsp"%>
-
 	<%--Edit the file nav.jsp to change nav links (navbar code to be contained in navbar; will only need to plug into each jsp)--%>
 	<%-- <jsp:include page="nav.jsp" /> --%>
-
 
 	<main>
 
@@ -61,6 +59,8 @@
 							${sessionScope.loggedInUser.lastName}</li>
 					</ul>
 
+					<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->
+					<!-- Create Workout is functional here (drop down on account.jsp - workout name, description, image URL) -->
 					<div class="container-fluid">
 						<div class="d-flex justify-content-between align-items-center">
 							<h3>Your Workouts</h3>
@@ -74,6 +74,7 @@
 						</div>
 					</div>
 
+					<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->
 
 					<div class="collapse mt-2" id="createWorkoutForm">
 						<div class="card card-body">
@@ -103,6 +104,20 @@
 					</div>
 
 					<!-- ==================================================== -->
+					<%-- 	<c:when test="${not empty workout }"> --%>
+
+					<%-- 					<c:forEach var="workout" items="${myWorkouts}">
+						<div class="card" style="width: 18rem;">
+							<div class="card-body">
+								<h5 class="card-title">${workout.name}</h5>
+								<h6 class="card-subtitle mb-2 text-body-secondary">${loggedInUser.firstName}</h6>
+								<p class="card-text"></p>
+								<a href="#" class="card-link">View</a> <a href="#"
+									class="card-link">Edit</a>
+							</div>
+						</div>
+					</c:forEach> --%>
+
 					<br>
 
 
@@ -124,6 +139,14 @@
 												href="#collapse${workout.id}" role="button"
 												aria-expanded="false" aria-controls="collapse${workout.id}">
 												View Exercises </a> <a href="#" class="btn btn-outline-info">Edit</a>
+										
+												
+											<form action="deleteWorkout.do" method="POST">
+												<input type="hidden" name="workoutId"
+													value="${workout.id}" />
+												<button type="submit"
+													class="btn btn-outline-info">Delete</button>
+											</form>
 
 											<div class="collapse mt-2" id="collapse${workout.id}">
 												<div class="card card-body">
@@ -151,6 +174,21 @@
 					</div>
 
 
+					<%-- 	<c:when test="${not empty workout }"> --%>
+
+					<%-- 					<c:forEach var="workout" items="${myWorkouts}">
+						<div class="card" style="width: 18rem;">
+							<div class="card-body">
+								<h5 class="card-title">${workout.name}</h5>
+								<h6 class="card-subtitle mb-2 text-body-secondary">${loggedInUser.firstName}</h6>
+								<p class="card-text"></p>
+								<a href="#" class="card-link">View</a> <a href="#"
+									class="card-link">Edit</a>
+							</div>
+						</div>
+					</c:forEach> --%>
+
+
 				</c:when>
 
 				<%-- 	</c:when> --%>
@@ -158,86 +196,123 @@
 					<p>Please log in to see the profile</p>
 					<button class="btn btn-link active" type="button"
 						data-bs-toggle="collapse" data-bs-target="#loginFormInProfile"
-						aria-expanded="false" aria-controls="loginFormInProfile">Log in</button>
+						aria-expanded="false" aria-controls="loginFormInProfile">Log
+						in</button>
 
 				</c:otherwise>
 			</c:choose>
-			<div class="collapse" id="#loginFormInProfile"
-				style="right: 0; width: 250px; z-index: 1000;">
-				<div class="card card-body">
-					<form action="login.do" method="POST">
-						<div class="mb-3">
-							<label for="username" class="form-label">Username</label> <input
-								type="text" class="form-control" id="username" name="username"
-								required>
-						</div>
-						<div class="mb-3">
-							<label for="password" class="form-label">Password</label> <input
-								type="password" class="form-control" id="password"
-								name="password" required>
-						</div>
-						<button type="submit" class="btn btn-primary w-100">Log
-							in</button>
-					</form>
 
+			<div class="container-fluid mt-4">
+				<div class="d-flex justify-content-between align-items-center">
+					<h3>Your Workouts</h3>
+					<form action="InitializeWorkout.do" method="GET">
+						<button type="submit" class="btn btn-primary btn-custom">Create
+							New Workout</button>
+					</form>
+				</div>
+
+				<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->
+				<!-- USER's WORKOUTS (horizontal scroll) -->
+				<div class="scrolling-wrapper">
+					<c:forEach var="workout" items="${myWorkouts}">
+						<div class="card">
+							<div class="card-body">
+								<h5 class="card-title">${workout.name}</h5>
+								<p class="card-text">${workout.description}</p>
+								<a href="showExercisesWithinWorkout.do?workoutId=${workout.id}"
+									class="btn btn-primary">View</a> <a
+									href="editWorkout.do?workoutId=${workout.id}"
+									class="btn btn-secondary">Edit</a>
+							</div>
+						</div>
+					</c:forEach>
 				</div>
 			</div>
 
 
+			<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->
 			<!-- FAVORITE -->
-			<!-- Will need to be updated once (maybe for each/cycle through) we have logic sorted out & more workouts/data entered into MySQL Workbench DB -->
+			<!-- Will need to be updated once we have liked/favorite functional -->
 			<div class="container-fluid mt-4">
 				<div class="d-flex justify-content-between align-items-center">
 					<h3>Your Favorite Workouts</h3>
 					<form action="showAllWorkouts.do" method="GET">
-						<button type="submit" class="btn btn-info">Explore all
-							workouts!</button>
+						<button type="submit" class="btn btn-primary btn-custom">Explore
+							all workouts!</button>
 					</form>
 				</div>
+
 				<div class="scrolling-wrapper">
-
-					<div class="card">
-						<img src="image" class="card-img-top" alt="image href">
-						<div class="card-body">
-							<h5 class="card-title">1</h5>
-							<p class="card-text">1</p>
+					<c:forEach var="workout" items="${myWorkouts}">
+						<div class="card">
+							<div class="card-body">
+								<h5 class="card-title">${workout.name}</h5>
+								<p class="card-text">${workout.description}</p>
+								<a href="showExercisesWithinWorkout.do?workoutId=${workout.id}"
+									class="btn btn-primary">View</a> <a
+									href="editWorkout.do?workoutId=${workout.id}"
+									class="btn btn-secondary">Edit</a>
+							</div>
 						</div>
-					</div>
-					<div class="card">
-						<img src="image" class="card-img-top" alt="image href">
-						<div class="card-body">
-							<h5 class="card-title">1</h5>
-							<p class="card-text">1</p>
-						</div>
-					</div>
-					<div class="card">
-						<img src="image" class="card-img-top" alt="image href">
-						<div class="card-body">
-							<h5 class="card-title">1</h5>
-							<p class="card-text">1</p>
-						</div>
-					</div>
-					<div class="card">
-						<img src="image" class="card-img-top" alt="image href">
-						<div class="card-body">
-							<h5 class="card-title">1</h5>
-							<p class="card-text">1</p>
-						</div>
-					</div>
-					<div class="card">
-						<img src="image" class="card-img-top" alt="image href">
-						<div class="card-body">
-							<h5 class="card-title">1</h5>
-							<p class="card-text">1</p>
-						</div>
-					</div>
-
+					</c:forEach>
 				</div>
 			</div>
 
-			<br>
 
+
+
+			<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->
+			<!-- Today's Numbers / Health?                  FIRST TABLE-->
+			
+<!-- 			<div class="container-fluid">
+				<h3>Today's Numbers</h3>
+				<table class="table table-bordered">
+					<thead></thead>
+
+					<tbody>
+						<tr>
+							<td>Current Weight</td>
+							<td>
+								<form action="submitWeight.do" method="POST">
+									<input type="number" class="form-control" name="weight"
+										placeholder="Enter your weight" required>
+									<button type="submit" class="btn btn-primary mt-2">Submit
+										Weight</button>
+								</form>
+
+								<form action="openWeight.do" method="POST">
+									<button class="btn btn-lg btn-primary" type="submit">Open
+										weight</button>
+								</form>
+
+
+							</td>
+						</tr>
+						<tr>
+							<td>Total Calories Consumed Today</td>
+							<td>
+								<form action="submitCalories.do" method="POST">
+									<input type="number" class="form-control" name="calories"
+										placeholder="Enter total calories" required>
+									<button type="submit" class="btn btn-primary mt-2">Submit
+										Calories</button>
+								</form>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div> -->
+			
+			
+			<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->
+			<!-- Is this still needed for testing? -->
+			<!-- <button formaction="workoutByUser.do" class="btn btn-lg btn-primary"
+				type="button">test file</button> -->
+
+
+			<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->
 			<!-- Today's Numbers / Health? -->
+			<!-- Today's Numbers / Health?                         SECOND TABLE-->
 
 			<h3>Today's Numbers</h3>
 			<table class="table table-bordered">
@@ -262,15 +337,58 @@
 						</td>
 					</tr>
 					<tr>
-						<td>Total Calories Consumed Today</td>
-						<td>
-							<form action="submitCalories.do" method="POST">
-								<input type="number" class="form-control" name="calories"
-									placeholder="Enter total calories" required>
+
+						<td>Track your macros!</td>
+						<td><legend class="form-label">Select: </legend>
+							<div class="col-md-4">
+								<label for="zip" class="form-label">Date Consumed</label> <input
+									type="date" class="form-control" id="dateEaten"
+									name="dateEaten" placeholder="YYYY-MM-DD">
+							</div>
+
+							<div class="form-check form-check-inline">
+								<input class="form-check-input" type="checkbox" id="breakfast"
+									name="name" value="Breakfast"> <label
+									class="form-check-label" for="breakfast">Breakfast</label>
+							</div>
+
+							<div class="form-check form-check-inline">
+								<input class="form-check-input" type="checkbox" id="lunch"
+									name="name" value="Lunch"> <label
+									class="form-check-label" for="lunch">Lunch</label>
+							</div>
+
+							<div class="form-check form-check-inline">
+								<input class="form-check-input" type="checkbox" id="dinner"
+
+									name="name" value="Dinner"> <label
+									class="form-check-label" for="dinner">Dinner</label>
+							</div>
+
+							<div class="form-check form-check-inline">
+								<input class="form-check-input" type="checkbox" id="snack"
+
+									name="name" value="Snack"> <label
+									class="form-check-label" for="snack">Snack</label>
+							</div>
+							<form action="addNutrition.do" method="POST">
+								<input type="number" class="form-control"
+									name="gramsCarbohydrates"
+									placeholder="Enter carbohydrates (in grams)" required>
 								<button type="submit" class="btn btn-info">Submit
-									Calories</button>
+									Carbohydrates</button>
 							</form>
-						</td>
+							<form action="addNutrition.do" method="POST">
+								<input type="number" class="form-control" name="gramsFat"
+									placeholder="Enter fat (in grams)" required>
+								<button type="submit" class="btn btn-info">Submit Fat</button>
+							</form>
+							<form action="addNutrition.do" method="POST">
+								<input type="number" class="form-control" name="gramsProtein"
+									placeholder="Enter protein (in grams)" required>
+								<button type="submit" class="btn btn-info">Submit
+									Protein</button>
+							</form></td>
 					</tr>
 				</tbody>
 			</table>
@@ -281,6 +399,7 @@
 
 		<!-- Footer -->
 		<%@ include file="footer.jsp"%>
+		
 	</main>
 
 	<script
@@ -292,8 +411,5 @@
 
 
 </html>
-
-
-
 
 

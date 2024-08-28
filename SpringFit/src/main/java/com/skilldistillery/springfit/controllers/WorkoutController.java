@@ -173,19 +173,6 @@ public class WorkoutController {
 		}
 	}
 	
-	@GetMapping("/account")
-	public String showAccountPage(HttpSession session, Model model) {
-	    User loggedInUser = (User) session.getAttribute("loggedInUser");
-	    if (loggedInUser != null) {
-	        List<Workout> myWorkouts = workoutDao.getWorkoutByUserId(loggedInUser.getId());
-	        model.addAttribute("myWorkouts", myWorkouts);
-	        System.out.println("Workouts for User: " + myWorkouts.size());
-	    } else {
-	        return "redirect:/login"; // Redirect to login if not logged in
-	    }
-	    return "account";
-	}
-
 
 
 	@RequestMapping(path = "showExercisesWithinWorkout.do", method = RequestMethod.GET)
@@ -199,6 +186,28 @@ public class WorkoutController {
 		mv.setViewName("viewWorkoutDetails");
 
 		return mv;
+	}
+	
+	@RequestMapping(path="deleteWorkout.do", method = RequestMethod.POST)
+	public ModelAndView deleteWorkout(@RequestParam("workoutId") int workoutId) {
+		
+		ModelAndView mv = new ModelAndView();
+		Workout workout = workoutDao.getWorkoutById(workoutId);
+		
+		if(workout == null) {
+			mv.setViewName("error");
+		}else {
+			boolean deleted = workoutDao.deleteWorkout(workoutId);
+			if(!deleted) {
+				mv.addObject("errorMsg", "Failed to delete the workout");
+				mv.setViewName("error");
+			}else {
+				mv.setViewName("redirect:profile.do");
+			}
+		}
+		
+		return mv;
+		
 	}
 
 }

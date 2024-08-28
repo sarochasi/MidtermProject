@@ -20,6 +20,7 @@ public interface ExerciseDAO {
 	public List<Exercise> findAllExercises();
 	
 	public List<ExerciseType> findAllExerciseTypes();
+	
 
 
 }
