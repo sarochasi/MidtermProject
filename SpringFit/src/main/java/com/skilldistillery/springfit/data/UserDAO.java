@@ -10,6 +10,8 @@ public interface UserDAO {
 	
 	Boolean usernameExists(String username);
 	
+	void userLikeWorkout(int userId, int workoutId);
+	
 	
 
 }

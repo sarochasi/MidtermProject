@@ -305,6 +305,7 @@ public class WorkoutController {
 			@RequestParam("workoutId") Integer workoutId) {
 		ModelAndView mv = new ModelAndView();
 		try {
+
 //			for (WorkoutExercise workoutExercise : workout.getWorkoutExercises()) {
 			workoutExerciseDao.updateWorkoutExercise(workoutExerciseId, workoutExercise);
 //			}
@@ -313,6 +314,7 @@ public class WorkoutController {
 			mv.addObject("errorMsg", "Error occurred while updating the workout exercises.");
 			mv.setViewName("error");
 			e.printStackTrace();
+
 		}
 		return mv;
 	}

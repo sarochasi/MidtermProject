@@ -286,13 +286,21 @@
 					<input type="number" class="form-control" name="gramsProtein"
 						placeholder="Enter protein (in grams)" required>
 					<button type="submit" class="btn btn-info">Submit</button>
-				</form></td>
-			</tr>
-			</tbody>
-			</table>
-		</div>
-		<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->
+				</form>
+				
+				<br>
 
+				<form action="showAllNutrition.do" method="POST">
+					<button class="btn btn-info" type="submit">View</button>
+				</form>
+				
+		</div>
+				<br>
+				
+				<form action="showAllWorkouts.do" method="POST">
+					<button class="btn btn-info" type="submit">Explore workouts from the community!</button>
+				</form>
+		<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->
 
 
 		<!-- Footer -->
