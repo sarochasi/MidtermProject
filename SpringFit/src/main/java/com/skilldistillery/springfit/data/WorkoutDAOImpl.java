@@ -18,7 +18,7 @@ import jakarta.transaction.Transactional;
 @Repository
 public class WorkoutDAOImpl implements WorkoutDAO {
 	private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("JPASpringFit");
-	
+
 	@PersistenceContext
 	private EntityManager em;
 
@@ -34,11 +34,12 @@ public class WorkoutDAOImpl implements WorkoutDAO {
 		em.persist(workout);
 		return workout;
 	}
+
 	@Override
 	public Workout createNewWorkout(String workoutName, List<WorkoutExercise> exerciseList) {
 		Workout newWorkout = new Workout();
 		newWorkout.setWorkoutExercises(exerciseList);
-		
+
 		return newWorkout;
 	}
 
@@ -47,39 +48,36 @@ public class WorkoutDAOImpl implements WorkoutDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	@Override
 	public boolean deleteExerciseByWorkoutId(int id) {
 		boolean deleted = false;
-		
+
 		String jpql = "DELETE FROM WorkoutExercise we WHERE we.workout.id = :workoutId";
-	    int result = em.createQuery(jpql)
-	                   .setParameter("workoutId", id)
-	                   .executeUpdate();
+		int result = em.createQuery(jpql).setParameter("workoutId", id).executeUpdate();
 
-	    if(result > 0) {
-	        deleted = true;
-	    }
+		if (result > 0) {
+			deleted = true;
+		}
 
-	    return deleted;
-		
+		return deleted;
+
 	}
-	
 
 	@Override
 	public boolean deleteWorkout(int id) {
 		boolean deleted = false;
 
-	    Workout managedWorkout = em.find(Workout.class, id);
+		Workout managedWorkout = em.find(Workout.class, id);
 
-	    if(managedWorkout != null) {
-	        deleteExerciseByWorkoutId(id);
+		if (managedWorkout != null) {
+			deleteExerciseByWorkoutId(id);
 
-	        em.remove(managedWorkout);
-	        deleted = true;
-	    }
+			em.remove(managedWorkout);
+			deleted = true;
+		}
 
-	    return deleted;
+		return deleted;
 	}
 
 	@Override
@@ -87,24 +85,41 @@ public class WorkoutDAOImpl implements WorkoutDAO {
 		String jpql = "SELECT w FROM Workout w";
 		return em.createQuery(jpql, Workout.class).getResultList();
 	}
-	
 
 //	===================================================================
 	public List<WorkoutExercise> getExercisesByWorkoutId(int workoutId) {
-	    String jpql = "SELECT we FROM WorkoutExercise we WHERE we.workout.id = :workoutId";
-	    return em.createQuery(jpql, WorkoutExercise.class)
-	             .setParameter("workoutId", workoutId)
-	             .getResultList();
+		String jpql = "SELECT we FROM WorkoutExercise we WHERE we.workout.id = :workoutId";
+		return em.createQuery(jpql, WorkoutExercise.class).setParameter("workoutId", workoutId).getResultList();
 	}
 
 //	=====================================================================
-	
-	public List<Workout> getWorkoutByUserId(int  userId){
+
+	public List<Workout> getWorkoutByUserId(int userId) {
 		String jpql = "SELECT w FROM Workout w JOIN FETCH w.workoutExercises WHERE w.user.id = :userId";
-		
-		
+
 		return em.createQuery(jpql, Workout.class).setParameter("userId", userId).getResultList();
-		
+
+	}
+
+	@Override
+	public Workout updateWorkout(int id, Workout workout) {
+
+		Workout managedWorkout = em.find(Workout.class, id);
+		if (managedWorkout != null) {
+			managedWorkout.setName(managedWorkout.getName());
+			managedWorkout.setDescription(managedWorkout.getDescription());
+			managedWorkout.setCreateDate(managedWorkout.getCreateDate());
+			managedWorkout.setLastUpdate(managedWorkout.getLastUpdate());
+			managedWorkout.setEnabled(managedWorkout.getEnabled());
+			managedWorkout.setPublished(managedWorkout.getPublished());
+			managedWorkout.setImageUrl(managedWorkout.getImageUrl());
+
+			List<WorkoutExercise> currentExercises = managedWorkout.getWorkoutExercises();
+			
+
+		}
+		return managedWorkout;
+
 	}
 
 }

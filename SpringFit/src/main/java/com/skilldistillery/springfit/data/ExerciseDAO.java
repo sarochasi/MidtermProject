@@ -21,7 +21,7 @@ public interface ExerciseDAO {
 	
 	public List<ExerciseType> findAllExerciseTypes();
 	
-
+	public boolean deleteExercise(int id);
 
 }
 

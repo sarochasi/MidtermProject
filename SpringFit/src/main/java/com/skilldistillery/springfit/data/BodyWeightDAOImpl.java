@@ -1,5 +1,7 @@
 package com.skilldistillery.springfit.data;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +26,16 @@ public class BodyWeightDAOImpl implements BodyWeightDAO{
 		 em.persist(bodyWeight);
 		 return bodyWeight;
 
+	}
+	public List<BodyWeight> showAllBodyWeightsForUser(User user){
+		List<BodyWeight> usersBodyWeightList = null;
+		
+		String jpql = "SELECT bw FROM BodyWeight bw WHERE user.id = :id";
+		usersBodyWeightList = em.createQuery(jpql, BodyWeight.class)
+								.setParameter("id", user.getId())
+								.getResultList();
+		
+		return usersBodyWeightList;
 	}
 
 }

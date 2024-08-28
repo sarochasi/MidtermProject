@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -209,5 +209,33 @@ public class WorkoutController {
 		return mv;
 		
 	}
-
+	
+	@RequestMapping(path = "updateForm.do", method = RequestMethod.GET)
+	public ModelAndView showUpdateForm(@RequestParam("workoutId") int id) {
+		ModelAndView mv = new ModelAndView();
+		Workout workout = workoutDao.getWorkoutById(id);
+		
+		if(workout != null) {
+			mv.addObject("workout", workout);
+			mv.setViewName("updateForm");
+		}else {
+			mv.addObject("errorMsg", "Mountain not found");
+			mv.setViewName("error");
+		}
+		return mv;
+		
+}
+	
+	@RequestMapping(path = "updateWorkout.do", method = RequestMethod.POST)
+	public ModelAndView updateWorkout(@ModelAttribute("workout") Workout workout) {
+		ModelAndView mv = new ModelAndView();
+		
+		try {
+			Workout updatedWorkout = workoutDao.updateWorkout(workout.getId(), workout, null);
+			
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+		return mv;
+	}
 }

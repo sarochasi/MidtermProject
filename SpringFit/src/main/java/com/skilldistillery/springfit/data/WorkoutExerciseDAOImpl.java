@@ -63,5 +63,23 @@ public class WorkoutExerciseDAOImpl implements WorkoutExerciseDAO {
 		
 	}
 	
+	
+
+	@Override
+	public WorkoutExercise updateWorkoutExercise(int id, WorkoutExercise workoutExercise) {
+		WorkoutExercise managedWorkoutExercise = em.find(WorkoutExercise.class, id);
+		if(managedWorkoutExercise != null) {
+			managedWorkoutExercise.setExercise(workoutExercise.getExercise());
+			managedWorkoutExercise.setUnits(workoutExercise.getUnits());
+			managedWorkoutExercise.setSets(workoutExercise.getSets());
+			managedWorkoutExercise.setNotes(workoutExercise.getNotes());
+			
+			
+		}
+		return managedWorkoutExercise;
+	}
+	
+	
+	
 
 }

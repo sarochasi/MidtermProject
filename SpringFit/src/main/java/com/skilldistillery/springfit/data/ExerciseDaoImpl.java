@@ -67,6 +67,19 @@ public class ExerciseDaoImpl implements ExerciseDAO {
 		String jpql = "Select e FROM ExerciseType e";				
 		return em.createQuery(jpql, ExerciseType.class).getResultList();
 	}
+	@Override
+	public boolean deleteExercise(int id) {
+		
+		boolean deleted = false;
+		
+		Exercise managedExercise = em.find(Exercise.class, id);
+		if(managedExercise != null)
+		{
+			em.remove(managedExercise);
+			deleted = true;
+		}
+		return deleted;
+	}
 	
 	
 	
