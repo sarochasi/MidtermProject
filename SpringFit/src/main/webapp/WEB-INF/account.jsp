@@ -126,6 +126,14 @@
 												href="#collapse${workout.id}" role="button"
 												aria-expanded="false" aria-controls="collapse${workout.id}">
 												View Exercises </a> <a href="#" class="btn btn-outline-info">Edit</a>
+										
+												
+											<form action="deleteWorkout.do" method="POST">
+												<input type="hidden" name="workoutId"
+													value="${workout.id}" />
+												<button type="submit"
+													class="btn btn-outline-info">Delete</button>
+											</form>
 
 											<div class="collapse mt-2" id="collapse${workout.id}">
 												<div class="card card-body">
@@ -175,7 +183,8 @@
 					<p>Please log in to see the profile</p>
 					<button class="btn btn-link active" type="button"
 						data-bs-toggle="collapse" data-bs-target="#loginFormInProfile"
-						aria-expanded="false" aria-controls="loginFormInProfile">Log in</button>
+						aria-expanded="false" aria-controls="loginFormInProfile">Log
+						in</button>
 
 				</c:otherwise>
 			</c:choose>
@@ -261,38 +270,36 @@
 					</tr>
 					<tr>
 						<td>Total Calories Consumed Today</td>
-						<td>
-						<legend class="form-label">Select: </legend>
-			<div class="form-check form-check-inline">
-				<input class="form-check-input" type="checkbox" id="breakfast"
-					name="mealType" value="Breakfast"> <label
-					class="form-check-label" for="breakfast">Breakfast</label>
-			</div>
+						<td><legend class="form-label">Select: </legend>
+							<div class="form-check form-check-inline">
+								<input class="form-check-input" type="checkbox" id="breakfast"
+									name="mealType" value="Breakfast"> <label
+									class="form-check-label" for="breakfast">Breakfast</label>
+							</div>
 
-			<div class="form-check form-check-inline">
-				<input class="form-check-input" type="checkbox" id="lunch"
-					name="mealType" value="Lunch"> <label
-					class="form-check-label" for="lunch">Lunch</label>
-			</div>
-			
-			<div class="form-check form-check-inline">
-				<input class="form-check-input" type="checkbox" id="dinner"
-					name="mealType" value="Dinner"> <label
-					class="form-check-label" for="dinner">Dinner</label>
-			</div>
-			
-			<div class="form-check form-check-inline">
-				<input class="form-check-input" type="checkbox" id="snack"
-					name="mealType" value="Snack"> <label
-					class="form-check-label" for="snack">Snack</label>
-			</div>
+							<div class="form-check form-check-inline">
+								<input class="form-check-input" type="checkbox" id="lunch"
+									name="mealType" value="Lunch"> <label
+									class="form-check-label" for="lunch">Lunch</label>
+							</div>
+
+							<div class="form-check form-check-inline">
+								<input class="form-check-input" type="checkbox" id="dinner"
+									name="mealType" value="Dinner"> <label
+									class="form-check-label" for="dinner">Dinner</label>
+							</div>
+
+							<div class="form-check form-check-inline">
+								<input class="form-check-input" type="checkbox" id="snack"
+									name="mealType" value="Snack"> <label
+									class="form-check-label" for="snack">Snack</label>
+							</div>
 							<form action="submitCalories.do" method="POST">
 								<input type="number" class="form-control" name="calories"
 									placeholder="Enter total calories" required>
 								<button type="submit" class="btn btn-info">Submit
 									Calories</button>
-							</form>
-						</td>
+							</form></td>
 					</tr>
 				</tbody>
 			</table>

@@ -187,5 +187,27 @@ public class WorkoutController {
 
 		return mv;
 	}
+	
+	@RequestMapping(path="deleteWorkout.do", method = RequestMethod.POST)
+	public ModelAndView deleteWorkout(@RequestParam("workoutId") int workoutId) {
+		
+		ModelAndView mv = new ModelAndView();
+		Workout workout = workoutDao.getWorkoutById(workoutId);
+		
+		if(workout == null) {
+			mv.setViewName("error");
+		}else {
+			boolean deleted = workoutDao.deleteWorkout(workoutId);
+			if(!deleted) {
+				mv.addObject("errorMsg", "Failed to delete the workout");
+				mv.setViewName("error");
+			}else {
+				mv.setViewName("redirect:profile.do");
+			}
+		}
+		
+		return mv;
+		
+	}
 
 }

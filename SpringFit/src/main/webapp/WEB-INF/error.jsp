@@ -10,6 +10,8 @@
 <body>
 
 	<h3>ERROR</h3>
+	
+	<p>${errorMsg}</p>
 
 </body>
 </html>

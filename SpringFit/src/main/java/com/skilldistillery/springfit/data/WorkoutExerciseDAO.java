@@ -9,7 +9,7 @@ public interface WorkoutExerciseDAO {
 	public WorkoutExercise createWorkoutExercise(int exerciseId, int workoutId, WorkoutExercise workoutExercise);
 
 	
-	
+	public boolean deleteExerciseByWorkoutId(int id);
 	
 
 }
