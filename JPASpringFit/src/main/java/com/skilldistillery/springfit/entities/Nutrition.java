@@ -3,6 +3,8 @@ package com.skilldistillery.springfit.entities;
 import java.time.LocalDate;
 import java.util.Objects;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,10 +19,12 @@ public class Nutrition {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	String name;
+	private String name;
 	
+	@CreationTimestamp
 	@Column(name = "date_eaten")
 	LocalDate dateEaten;
+	
 	
 	@Column(name = "grams_carbohydrates")
 	Integer gramsCarbohydrates;

@@ -336,27 +336,28 @@
 									type="date" class="form-control" id="dateEaten"
 									name="dateEaten" placeholder="YYYY-MM-DD">
 							</div>
-
+							
 							<div class="form-check form-check-inline">
-								<input class="form-check-input" type="checkbox" id="breakfast"
-									name="name" value="Breakfast"> <label
-									class="form-check-label" for="breakfast">Breakfast</label>
+								<input class="form-check-input" type="checkbox" id="name"
+									name="name" value="name"> <label
+									class="form-check-label" for="name">Breakfast</label>
 							</div>
+							
 
 							<div class="form-check form-check-inline">
-								<input class="form-check-input" type="checkbox" id="lunch"
+								<input class="form-check-input" type="checkbox" id="name"
 									name="name" value="Lunch"> <label
 									class="form-check-label" for="lunch">Lunch</label>
 							</div>
 
 							<div class="form-check form-check-inline">
-								<input class="form-check-input" type="checkbox" id="dinner"
+								<input class="form-check-input" type="checkbox" id="name"
 									name="name" value="Dinner"> <label
 									class="form-check-label" for="dinner">Dinner</label>
 							</div>
 
 							<div class="form-check form-check-inline">
-								<input class="form-check-input" type="checkbox" id="snack"
+								<input class="form-check-input" type="checkbox" id="name"
 									name="name" value="Snack"> <label
 									class="form-check-label" for="snack">Snack</label>
 							</div>
