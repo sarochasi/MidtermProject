@@ -73,6 +73,7 @@
 							style="position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate(0px, 34px);"
 							aria-labelledby="accountDropdown">
 							<li><a class="dropdown-item" href="profile.do">Profile</a></li>
+							<li><a class="dropdown-item" href="showAllWorkouts.do">Community</a></li>
 							<li><hr class="dropdown-divider"></li>
 							<li><a class="dropdown-item" href="logout.do">Log out</a></li>
 						</ul>

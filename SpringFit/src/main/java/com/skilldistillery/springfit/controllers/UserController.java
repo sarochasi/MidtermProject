@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.skilldistillery.springfit.data.UserDAO;
 import com.skilldistillery.springfit.entities.Nutrition;
 import com.skilldistillery.springfit.data.WorkoutDAO;
+import com.skilldistillery.springfit.data.WorkoutExerciseDAO;
 import com.skilldistillery.springfit.entities.User;
 import com.skilldistillery.springfit.entities.Workout;
+import com.skilldistillery.springfit.entities.WorkoutExercise;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -25,6 +27,10 @@ public class UserController {
 	private UserDAO userDao;
 	@Autowired
 	private WorkoutDAO workoutDao;
+	@Autowired
+	private WorkoutExerciseDAO workoutExerciseDao;
+	
+	
 	
 	// HOME	- (could inject session also) - THIS IS WHAT ROB HELPED SET UP
 	@RequestMapping(path = { "/", "home.do" } )
@@ -57,8 +63,21 @@ public class UserController {
             model.addAttribute("user", loggedInUser);
             
             List<Workout> myWorkouts  = workoutDao.getWorkoutByUserId(loggedInUser.getId());
+
             System.out.println(myWorkouts);
+       
+            
+            for (Workout workout : myWorkouts) {
+            
+                List<WorkoutExercise> myExercises = workoutDao.getExercisesByWorkoutId(workout.getId()); 
+                workout.setWorkoutExercises(myExercises);                 
+                System.out.println("myExercise****" + myExercises);
+                System.out.println("======================================");
+                
+ 
+            }
             model.addAttribute("myWorkouts", myWorkouts);
+            
             return "account"; 
         } else {
             model.addAttribute("errorMessage", "You must be logged in to view your profile.");

@@ -37,7 +37,7 @@ public class WorkoutDAOImpl implements WorkoutDAO {
 	@Override
 	public Workout createNewWorkout(String workoutName, List<WorkoutExercise> exerciseList) {
 		Workout newWorkout = new Workout();
-		newWorkout.setWorkoutExercise(exerciseList);
+		newWorkout.setWorkoutExercises(exerciseList);
 		
 		return newWorkout;
 	}
@@ -72,7 +72,7 @@ public class WorkoutDAOImpl implements WorkoutDAO {
 //	=====================================================================
 	
 	public List<Workout> getWorkoutByUserId(int  userId){
-		String jpql = "SELECT w FROM Workout w WHERE w.user.id = :userId";
+		String jpql = "SELECT w FROM Workout w JOIN FETCH w.workoutExercises WHERE w.user.id = :userId";
 		
 		
 		return em.createQuery(jpql, Workout.class).setParameter("userId", userId).getResultList();

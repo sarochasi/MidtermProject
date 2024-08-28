@@ -7,6 +7,7 @@ import java.util.Objects;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -43,7 +44,7 @@ public class Workout {
 	@OneToMany(mappedBy = "workout")
 	private List<WorkoutComment> workoutComments;
 	
-	@OneToMany(mappedBy = "workout")
+	@OneToMany(mappedBy = "workout", fetch = FetchType.EAGER)
 	private List<WorkoutExercise> workoutExercises;
 	
 	@ManyToMany
@@ -156,13 +157,15 @@ public class Workout {
 		this.user = user;
 	}
 
-	public List<WorkoutExercise> getWorkoutExercise() {
+	
+	public List<WorkoutExercise> getWorkoutExercises() {
 		return workoutExercises;
 	}
 
-	public void setWorkoutExercise(List<WorkoutExercise> workoutExercise) {
-		this.workoutExercises = workoutExercise;
+	public void setWorkoutExercises(List<WorkoutExercise> workoutExercises) {
+		this.workoutExercises = workoutExercises;
 	}
+
 	public void addWorkoutExercise(WorkoutExercise workoutExercise) {
 		if (workoutExercises==null) {workoutExercises = new ArrayList<>();}
 		

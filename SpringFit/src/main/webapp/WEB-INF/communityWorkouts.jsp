@@ -25,61 +25,89 @@
 			<!-- For each workout, that has been associated with a user, display that workout -->
 			<h1>Community</h1>
 
-			<table class="table table-striped">
-				<thead>
-					<tr>
-						<th>Workout name</th>
-						<th>Description</th>
-						<!-- <th>Image URL</th> -->
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach var="workout" items="${allWorkouts}">
-						<tr>
-							<td>${workout.name}</td>
-							<td>${workout.description}</td>
-							<%-- <td>${workout.imageUrl}</td> --%>
-							<td><a class="btn btn-info btn-sm"
-								href="showExercisesWithinWorkout.do?workoutId=${workout.id}">Workout
-									Details</a></td>
-							<!-- Should a workout's details display on seperate jsp? -->
-							<%-- href="details.do?id=${workout.id}">View Details</a></td> --%>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
+			<c:choose>
 
-<%-- 			<c:forEach var="workout" items="${allWorkouts}">
-    <div class="card" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title">${workout.name}</h5>
-            <h6 class="card-subtitle mb-2 text-body-secondary">${workout.user.firstName}</h6>
-            <p class="card-text">${workout.description}</p>
-            <a href="#" class="card-link">See detail</a>
-            <button type="button" class="btn btn-link active"
-                data-bs-toggle="collapse"
-                data-bs-target="#workoutDetail${workout.id}"
-                aria-expanded="false" aria-controls="workoutDetail${workout.id}">See workout</button>
-        </div>
-    </div>
+				<c:when test="${not empty loggedInUser}">
 
-    <div class="collapse mt-2" id="workoutDetail${workout.id}">
-        <div class="card card-body">
-            <c:if test="${not empty workout.workoutExercises}">
-                <c:forEach var="exercise" items="${workout.workoutExercises}">
-                    <div class="mb-3">
-                        <label class="form-label">${exercise.name}</label>
-                        <p>${exercise.description}</p>
-                    </div>
-                </c:forEach>
-            </c:if>
-            <c:if test="${empty workout.workoutExercises}">
-                <p>No exercises available for this workout.</p>
-            </c:if>
-        </div>
-    </div>
-</c:forEach> --%>
+					<div class="card-container">
+						<div class="row">
+							<c:forEach var="workout" items="${allWorkouts}">
+								<div class="col-md-6 mb-6">
+									<div class="card" style="width: 25rem;">
+										<div class="card-body">
+											<h5 class="card-title">${workout.name}</h5>
+											<h6 class="card-subtitle mb-2 text-body-secondary">
+												<strong>Created by: </strong>${workout.user.firstName}
+											</h6>
+											<p class="card-text">
+												<strong>Description: </strong>${workout.description != null ? workout.description : 'N/A'}
+											</p>
+											<a class="btn btn-outline-success" data-bs-toggle="collapse"
+												href="#collapse${workout.id}" role="button"
+												aria-expanded="false" aria-controls="collapse${workout.id}">
+												View Exercises </a> 
+												<a href="#" class="btn btn-outline-success">Like</a>
+												<a href="#" class="btn btn-outline-success">Comment</a>
 
+											<div class="collapse mt-2" id="collapse${workout.id}">
+												<div class="card card-body"
+													style="max-height: 150px; overflow-y: auto;">
+													<ul>
+														<c:if test="${not empty workout.workoutExercises}">
+															<c:forEach var="exercise"
+																items="${workout.workoutExercises}">
+																<li><strong>${exercise.exercise.name}</strong><br />
+																	Units: ${exercise.units}<br /> Sets: ${exercise.sets}<br />
+																	Notes: ${exercise.notes != null ? exercise.notes : 'N/A'}<br />
+																</li>
+															</c:forEach>
+														</c:if>
+														<c:if test="${empty workout.workoutExercises}">
+															<li>No exercises found for this workout.</li>
+														</c:if>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</c:forEach>
+						</div>
+					</div>
+				</c:when>
+				<c:otherwise>
+					<p>Please log in to see the community</p>
+					<button class="btn btn-link active" type="button"
+						data-bs-toggle="collapse" data-bs-target="#loginForm3"
+						aria-expanded="false" aria-controls="loginForm">Log in</button>
+
+
+
+				</c:otherwise>
+
+
+			</c:choose>
+
+			<div class="collapse" id="loginForm3"
+				style="right: 0; width: 250px; z-index: 1000;">
+				<div class="card card-body">
+					<form action="login.do" method="POST">
+						<div class="mb-3">
+							<label for="username" class="form-label">Username</label> <input
+								type="text" class="form-control" id="username" name="username"
+								required>
+						</div>
+						<div class="mb-3">
+							<label for="password" class="form-label">Password</label> <input
+								type="password" class="form-control" id="password"
+								name="password" required>
+						</div>
+						<button type="submit" class="btn btn-primary w-100">Log
+							in</button>
+					</form>
+
+				</div>
+			</div>
 
 
 			<!-- ================================================================================= -->

@@ -71,8 +71,8 @@ class WorkoutTest {
 	
 	@Test
 	void test_Workout_WorkoutExercise_mapping() {
-		assertNotNull(workout.getWorkoutExercise());
-		assertTrue(workout.getWorkoutExercise().size() > 0);
+		assertNotNull(workout.getWorkoutExercises());
+		assertTrue(workout.getWorkoutExercises().size() > 0);
 		
 	}
 
