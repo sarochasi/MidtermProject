@@ -77,7 +77,7 @@ public class ExerciseController {
     	ModelAndView mv = new ModelAndView();
     	Exercise exercise = exerciseDao.showExerciseById(exerciseId);
     	
-    	if(null == null) {
+    	if(exercise == null) {
     		mv.addObject("errorMsg", "Exercise not found with ID: " + exerciseId);
     		mv.setViewName("error");
     	}else {

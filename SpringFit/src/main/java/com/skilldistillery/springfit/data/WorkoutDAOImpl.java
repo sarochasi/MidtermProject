@@ -106,16 +106,14 @@ public class WorkoutDAOImpl implements WorkoutDAO {
 
 		Workout managedWorkout = em.find(Workout.class, id);
 		if (managedWorkout != null) {
-			managedWorkout.setName(managedWorkout.getName());
-			managedWorkout.setDescription(managedWorkout.getDescription());
-			managedWorkout.setCreateDate(managedWorkout.getCreateDate());
-			managedWorkout.setLastUpdate(managedWorkout.getLastUpdate());
-			managedWorkout.setEnabled(managedWorkout.getEnabled());
-			managedWorkout.setPublished(managedWorkout.getPublished());
-			managedWorkout.setImageUrl(managedWorkout.getImageUrl());
-
-			List<WorkoutExercise> currentExercises = managedWorkout.getWorkoutExercises();
-			
+			managedWorkout.setName(workout.getName());
+			managedWorkout.setDescription(workout.getDescription());
+			managedWorkout.setCreateDate(workout.getCreateDate());
+			managedWorkout.setLastUpdate(workout.getLastUpdate());
+			managedWorkout.setEnabled(workout.getEnabled());
+			managedWorkout.setPublished(workout.getPublished());
+			managedWorkout.setImageUrl(workout.getImageUrl());
+			managedWorkout.setWorkoutExercises(workout.getWorkoutExercises());
 
 		}
 		return managedWorkout;

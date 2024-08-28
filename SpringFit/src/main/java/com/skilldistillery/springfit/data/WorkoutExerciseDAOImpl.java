@@ -64,12 +64,35 @@ public class WorkoutExerciseDAOImpl implements WorkoutExerciseDAO {
 	}
 	
 	
+//	@Override
+//	public boolean deleteWorkoutExercise(int id) {
+//		
+//		boolean deleted = false;
+//		
+//		String jpql = "DELETE FROM WorkoutExercise we WHERE we.id = :workoutExerciseId";
+//		int result = em.createQuery(jpql).setParameter("workoutExerciseId", id).executeUpdate();
+//		
+//		if(result > 0) {
+//			deleted = true;
+//		}
+//		return deleted;
+//	}
 
+	@Override
+	public boolean deleteWorkoutExercise(int id) {
+	    WorkoutExercise workoutExercise = em.find(WorkoutExercise.class, id);
+	    if (workoutExercise != null) {
+	        em.remove(workoutExercise);
+	        return true;
+	    }
+	    return false;
+	}
+	
 	@Override
 	public WorkoutExercise updateWorkoutExercise(int id, WorkoutExercise workoutExercise) {
 		WorkoutExercise managedWorkoutExercise = em.find(WorkoutExercise.class, id);
 		if(managedWorkoutExercise != null) {
-			managedWorkoutExercise.setExercise(workoutExercise.getExercise());
+//			managedWorkoutExercise.setExercise(workoutExercise.getExercise());
 			managedWorkoutExercise.setUnits(workoutExercise.getUnits());
 			managedWorkoutExercise.setSets(workoutExercise.getSets());
 			managedWorkoutExercise.setNotes(workoutExercise.getNotes());
@@ -78,6 +101,7 @@ public class WorkoutExerciseDAOImpl implements WorkoutExerciseDAO {
 		}
 		return managedWorkoutExercise;
 	}
+	
 	
 	
 	

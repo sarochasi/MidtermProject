@@ -1,17 +1,32 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="jakarta.tags.core" prefix="c"%>
 
 <!DOCTYPE html>
-<html>
+<html data-bs-theme="Success">
+
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Update Workout</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+<meta charset="UTF-8">
+<title>Update workout</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+	crossorigin="anonymous">
 </head>
+
 <body>
+
+<%@ include file="navbar.jsp" %>
+
+
+
+
     <div class="container mt-5">
         <h2>Update Workout</h2>
         
+        <c:choose>
+        <c:when test="${not empty workout}">
         <form action="updateWorkout.do" method="POST">
             <!-- Workout ID (Hidden) -->
             <input type="hidden" name="id" value="${workout.id}">
@@ -35,46 +50,33 @@
             </div>
 
             <!-- Workout Exercises -->
-            <div id="exerciseList">
-                <h4>Exercises</h4>
-                <c:forEach var="exercise" items="${workout.workoutExercises}">
-                    <div class="exercise-item mb-4">
-                        <h5>Exercise ${exercise.index + 1}</h5>
-
-                        <!-- Exercise ID (Hidden) -->
-                        <input type="hidden" name="exercises[${exercise.index}].id" value="${exercise.id}">
-
-                        <!-- Exercise Name -->
-                        <div class="mb-3">
-                            <label for="exerciseName${exercise.index}" class="form-label">Exercise Name</label>
-                            <input type="text" class="form-control" id="exerciseName${exercise.index}" name="exercises[${exercise.index}].name" value="${exercise.exercise.name}" readonly>
-                        </div>
-
-                        <!-- Sets -->
-                        <div class="mb-3">
-                            <label for="exerciseSets${exercise.index}" class="form-label">Sets</label>
-                            <input type="number" class="form-control" id="exerciseSets${exercise.index}" name="exercises[${exercise.index}].sets" value="${exercise.sets}" required>
-                        </div>
-
-                        <!-- Units -->
-                        <div class="mb-3">
-                            <label for="exerciseUnits${exercise.index}" class="form-label">Units</label>
-                            <input type="text" class="form-control" id="exerciseUnits${exercise.index}" name="exercises[${exercise.index}].units" value="${exercise.units}" required>
-                        </div>
-
-                        <!-- Notes -->
-                        <div class="mb-3">
-                            <label for="exerciseNotes${exercise.index}" class="form-label">Notes</label>
-                            <input type="text" class="form-control" id="exerciseNotes${exercise.index}" name="exercises[${exercise.index}].notes" value="${exercise.notes}">
-                        </div>
-                    </div>
-                </c:forEach>
+           
+           <button type="submit" class="btn btn-primary">Update Workout</button>
+        </form>
+          
+        </c:when>
+        
+        <c:otherwise>
+			<p>${errorMsg }</p>
+		</c:otherwise>
+          </c:choose> 
             </div>
 
-            <button type="submit" class="btn btn-primary">Update Workout</button>
-        </form>
-    </div>
+   <%@ include file="footer.jsp" %>
+	</main>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
+
+
+
+
+	<!-- Bootstrap script src (bottom of body) -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+		crossorigin="anonymous"></script>
+
 </body>
+
+
 </html>

@@ -63,6 +63,24 @@ public class WorkoutController {
 
 		return mv;
 	}
+	@RequestMapping(path = "addMoreExercise.do", params ="workoutId")
+	public ModelAndView addMoreExercise(@RequestParam("workoutId") int workoutId) {
+		ModelAndView mv = new ModelAndView();
+
+		mv.addObject("exerciseTypes", exerciseDao.findAllExerciseTypes());
+
+//		=============================================
+		List<WorkoutExercise> workoutExercises = workoutDao.getExercisesByWorkoutId(workoutId);
+		;
+		mv.addObject("workoutExercises", workoutExercises);
+//	    ==============================================
+
+		mv.addObject("workoutId", workoutId);
+
+		mv.setViewName("createWorkout");
+
+		return mv;
+	}
 
 	@RequestMapping(path = "GetWorkoutPage.do", params = "workoutId")
 	public ModelAndView getExerciseType(@RequestParam("workoutId") int workoutId) {
@@ -167,13 +185,11 @@ public class WorkoutController {
 			model.addAttribute("myWorkouts", myWorkouts);
 			return "account";
 		} else {
-			
+
 			System.out.println("==================No user=============");
 			return "account";
 		}
 	}
-	
-
 
 	@RequestMapping(path = "showExercisesWithinWorkout.do", method = RequestMethod.GET)
 	public ModelAndView viewWorkoutDetails(@RequestParam("workoutId") int workoutId) {
@@ -187,55 +203,144 @@ public class WorkoutController {
 
 		return mv;
 	}
-	
-	@RequestMapping(path="deleteWorkout.do", method = RequestMethod.POST)
+
+	@RequestMapping(path = "deleteWorkout.do", method = RequestMethod.POST)
 	public ModelAndView deleteWorkout(@RequestParam("workoutId") int workoutId) {
-		
+
 		ModelAndView mv = new ModelAndView();
 		Workout workout = workoutDao.getWorkoutById(workoutId);
-		
-		if(workout == null) {
+
+		if (workout == null) {
 			mv.setViewName("error");
-		}else {
+		} else {
 			boolean deleted = workoutDao.deleteWorkout(workoutId);
-			if(!deleted) {
+			if (!deleted) {
 				mv.addObject("errorMsg", "Failed to delete the workout");
 				mv.setViewName("error");
-			}else {
+			} else {
 				mv.setViewName("redirect:profile.do");
 			}
 		}
-		
+
 		return mv;
-		
+
 	}
-	
-	@RequestMapping(path = "updateForm.do", method = RequestMethod.GET)
-	public ModelAndView showUpdateForm(@RequestParam("workoutId") int id) {
-		ModelAndView mv = new ModelAndView();
-		Workout workout = workoutDao.getWorkoutById(id);
-		
-		if(workout != null) {
-			mv.addObject("workout", workout);
-			mv.setViewName("updateForm");
-		}else {
-			mv.addObject("errorMsg", "Mountain not found");
-			mv.setViewName("error");
-		}
-		return mv;
-		
-}
-	
-	@RequestMapping(path = "updateWorkout.do", method = RequestMethod.POST)
-	public ModelAndView updateWorkout(@ModelAttribute("workout") Workout workout) {
+	@RequestMapping(path = "deleteWorkoutExercise.do", method = RequestMethod.POST)
+	public ModelAndView deleteWorkoutExercise(@RequestParam("workoutExerciseId") Integer workoutExerciseId, 
+			@RequestParam("workoutId") Integer workoutId) {
 		ModelAndView mv = new ModelAndView();
 		
 		try {
-			Workout updatedWorkout = workoutDao.updateWorkout(workout.getId(), workout, null);
-			
-		}catch (Exception e) {
-			// TODO: handle exception
+			boolean deleted = workoutExerciseDao.deleteWorkoutExercise(workoutExerciseId);
+			if (deleted) {
+				mv.setViewName("redirect:updateWorkoutExerciseForm.do?workoutId=" + workoutId);
+			} else {
+				mv.addObject("errorMsg", "Failed to delete WorkoutExercise with ID: " + workoutExerciseId);
+				mv.setViewName("error");
+			}
+		} catch (Exception e) {
+			mv.addObject("errorMsg", "Cannot delete WorkoutExercise with ID: " + workoutExerciseId + " due to foreign key constraints.");
+			mv.setViewName("error");
+			e.printStackTrace();
+		}
+		
+		return mv;
+	}
+
+	@RequestMapping(path = "updateWorkoutForm.do", method = RequestMethod.GET)
+	public ModelAndView showUpdateWorkoutForm(@RequestParam("workoutId") int id) {
+		ModelAndView mv = new ModelAndView();
+		Workout workout = workoutDao.getWorkoutById(id);
+
+		if (workout != null) {
+			mv.addObject("workout", workout);
+			mv.setViewName("updateForm");
+		} else {
+			mv.addObject("errorMsg", "Workout not found");
+			mv.setViewName("error");
+		}
+		return mv;
+
+	}
+
+	@RequestMapping(path = "updateWorkout.do", method = RequestMethod.POST)
+	public ModelAndView updateWorkout(@ModelAttribute("workout") Workout workout) {
+		ModelAndView mv = new ModelAndView();
+
+		try {
+			Workout updatedWorkout = workoutDao.updateWorkout(workout.getId(), workout);
+			if (updatedWorkout != null) {
+				mv.addObject("workout", updatedWorkout);
+				mv.setViewName("redirect:updateWorkoutExerciseForm.do?workoutId=" + updatedWorkout.getId());
+			}
+
+		} catch (Exception e) {
+			mv.addObject("errorMsg", "Error occured while updating the Workout.");
+			mv.setViewName("error");
+			e.printStackTrace();
 		}
 		return mv;
 	}
+
+	@RequestMapping(path = "updateWorkoutExerciseForm.do", method = RequestMethod.GET)
+	public ModelAndView showUpdateWorkoutExerciseForm(@RequestParam("workoutId") int workoutId) {
+		ModelAndView mv = new ModelAndView();
+//		WorkoutExercise workoutExercise = workoutExerciseDao.getWorkoutExerciseById(id);
+		List<WorkoutExercise> workoutExercises = workoutDao.getExercisesByWorkoutId(workoutId);
+
+		if (workoutExercises != null) {
+			mv.addObject("workoutExercises", workoutExercises);
+			mv.setViewName("updateWorkoutExerciseform");
+		} else {
+			mv.addObject("errorMsg", "WorkoutExercise not found");
+			mv.setViewName("error");
+		}
+		return mv;
+
+	}
+
+	@RequestMapping(path = "updateWorkoutExercise.do", method = RequestMethod.POST)
+	public ModelAndView updateWorkoutExercise(@ModelAttribute("workout") WorkoutExercise workoutExercise,
+			@RequestParam("workoutExerciseId") Integer workoutExerciseId,
+			@RequestParam("workoutId") Integer workoutId) {
+		ModelAndView mv = new ModelAndView();
+		try {
+//			for (WorkoutExercise workoutExercise : workout.getWorkoutExercises()) {
+			workoutExerciseDao.updateWorkoutExercise(workoutExerciseId, workoutExercise);
+//			}
+			mv.setViewName("redirect:updateWorkoutExerciseForm.do?workoutId=" + workoutId);
+		} catch (Exception e) {
+			mv.addObject("errorMsg", "Error occurred while updating the workout exercises.");
+			mv.setViewName("error");
+			e.printStackTrace();
+		}
+		return mv;
+	}
+
+//	@RequestMapping(path = "deleteWorkoutExercise.do", method = RequestMethod.POST)
+//	public ModelAndView deleteWorkoutExercise(@ModelAttribute("workout") WorkoutExercise workoutExercise,
+//			@RequestParam("workoutExerciseId") Integer workoutExerciseId, 
+//			@RequestParam("workoutId") Integer workoutId) {
+//
+//		ModelAndView mv = new ModelAndView();
+////		workoutExercise = workoutExerciseDao.getWorkoutExerciseById(workoutExerciseId);
+//
+//		if (workoutExercise == null) {
+//			mv.addObject("errorMsg", "WorkoutExercise not found with ID: " + workoutExerciseId);
+//			mv.setViewName("error");
+//		} else {
+//			boolean deleted = workoutExerciseDao.deleteWorkoutExercise(workoutExerciseId);
+//			if (!deleted) {
+//				mv.addObject("errorMsg", "Failed to delete");
+//				mv.setViewName("error");
+//			}else {
+//				mv.setViewName("redirect:updateWorkoutExerciseForm.do?workoutId=" + workoutId);
+//			}
+//		}
+//		return mv;
+//
+//	}
+	
+
+
 }

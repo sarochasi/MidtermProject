@@ -108,10 +108,16 @@
 											<p class="card-text">
 												<strong>Description: </strong>${workout.description != null ? workout.description : 'N/A'}
 											</p>
+											
 											<a class="btn btn-outline-info" data-bs-toggle="collapse"
-												href="#collapse${workout.id}" role="button"
-												aria-expanded="false" aria-controls="collapse${workout.id}">
-												View Exercises </a> <a href="#" class="btn btn-outline-info">Edit</a>
+										href="#collapse${workout.id}" role="button"
+										aria-expanded="false" aria-controls="collapse${workout.id}">
+										View Exercises </a> 
+										
+											<form action="updateWorkoutForm.do" method="GET">
+												<input type="hidden" name="workoutId" value="${workout.id}" />
+												<button type="submit" class="btn btn-outline-info">Edit</button>
+											</form>
 
 
 											<form action="deleteWorkout.do" method="POST">
