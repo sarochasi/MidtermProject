@@ -70,8 +70,7 @@ public class UserController {
             for (Workout workout : myWorkouts) {
             
                 List<WorkoutExercise> myExercises = workoutDao.getExercisesByWorkoutId(workout.getId()); 
-                workout.setWorkoutExercises(myExercises);
-                
+                workout.setWorkoutExercises(myExercises);                 
                 System.out.println("myExercise****" + myExercises);
                 System.out.println("======================================");
                 
