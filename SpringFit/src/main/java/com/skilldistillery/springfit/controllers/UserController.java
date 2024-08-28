@@ -1,6 +1,7 @@
 package com.skilldistillery.springfit.controllers;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.skilldistillery.springfit.data.UserDAO;
 import com.skilldistillery.springfit.entities.Nutrition;
+import com.skilldistillery.springfit.data.WorkoutDAO;
 import com.skilldistillery.springfit.entities.User;
+import com.skilldistillery.springfit.entities.Workout;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -20,6 +23,8 @@ public class UserController {
 	
 	@Autowired
 	private UserDAO userDao;
+	@Autowired
+	private WorkoutDAO workoutDao;
 	
 	// HOME	- (could inject session also) - THIS IS WHAT ROB HELPED SET UP
 	@RequestMapping(path = { "/", "home.do" } )
@@ -38,7 +43,8 @@ public class UserController {
 
         	session.setAttribute("loggedInUser", authUser);
             session.setAttribute("loginTime", LocalDateTime.now());
-            return "account";
+//            return "account";
+            return "redirect:profile.do";
         } else {
             return "error"; 
         }
@@ -49,6 +55,10 @@ public class UserController {
         User loggedInUser = (User) session.getAttribute("loggedInUser");
         if (loggedInUser != null) {
             model.addAttribute("user", loggedInUser);
+            
+            List<Workout> myWorkouts  = workoutDao.getWorkoutByUserId(loggedInUser.getId());
+            System.out.println(myWorkouts);
+            model.addAttribute("myWorkouts", myWorkouts);
             return "account"; 
         } else {
             model.addAttribute("errorMessage", "You must be logged in to view your profile.");

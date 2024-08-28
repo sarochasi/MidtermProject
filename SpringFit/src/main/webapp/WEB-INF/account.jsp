@@ -102,38 +102,21 @@
 					</div>
 
 					<!-- ==================================================== -->
+					<%-- 	<c:when test="${not empty workout }"> --%>
 
-					<table class="table table-striped">
-						<thead>
-							<tr>
-								<th>Workout name</th>
-								<th>Description</th>
-								<!-- <th>Image URL</th> -->
-							</tr>
-						</thead>
-						<tbody>
-							<c:choose>
-								<c:when test="${not empty myWorkouts}">
-									<c:forEach var="workout" items="${myWorkouts}">
-										<tr>
-											<td>${workout.name}</td>
-											<td>${workout.description}</td>
-											<td>${workout.imageUrl}</td>
+					<%-- 					<c:forEach var="workout" items="${myWorkouts}">
+						<div class="card" style="width: 18rem;">
+							<div class="card-body">
+								<h5 class="card-title">${workout.name}</h5>
+								<h6 class="card-subtitle mb-2 text-body-secondary">${loggedInUser.firstName}</h6>
+								<p class="card-text"></p>
+								<a href="#" class="card-link">View</a> <a href="#"
+									class="card-link">Edit</a>
+							</div>
+						</div>
+					</c:forEach> --%>
 
-										</tr>
-									</c:forEach>
-								</c:when>
-								<c:otherwise>
-									<tr>
-										<td colspan="3">No workouts found.</td>
-									</tr>
-								</c:otherwise>
-							</c:choose>
-						</tbody>
-					</table>
 				</c:when>
-
-				<%-- 	<c:when test="${not empty workout }"> --%>
 
 				<%-- 	</c:when> --%>
 				<c:otherwise>
@@ -141,96 +124,35 @@
 				</c:otherwise>
 			</c:choose>
 
-			<!-- USER's Workouts -->
-			<!-- Will need to be updated once (maybe for each/cycle through) we have logic sorted out & more workouts/data entered into MySQL Workbench DB -->
-
-		<table class="table table-striped">
-				<thead>
-					<tr>
-						<th>Workout name</th>
-						<th>Description</th>
-						<!-- <th>Image URL</th> -->
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach var="workout" items="${myWorkouts}">
-						<tr>
-							<td>${workout.name}</td>
-							<td>${workout.description}</td>
-							<%-- <td>${workout.imageUrl}</td> --%>
-							<%-- <td><a class="btn btn-info btn-sm"href="showExercisesWithinWorkout.do?workoutId=${workout.id}">Workout Details</a></td> --%>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-
-
-
-
-			<%-- 		<div class="album py-5 bg-body-tertiary">
-				<div class="container">
-
-					<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-						<c:forEach var="workout" items="${myWorkouts}">
-							<div class="card" style="width: 18rem;">
-								<div class="card-body">
-									<h5 class="card-title">${workout.name}</h5>
-									<h6 class="card-subtitle mb-2 text-body-secondary">${workout.user.firstName}</h6>
-									<p class="card-text"></p>
-									<!-- <a href="#" class="card-link">View</a> <a href="#"
-										class="card-link">Edit</a> -->
-								</div>
-							</div>
-						</c:forEach>
-					</div>
+			<div class="container-fluid mt-4">
+				<div class="d-flex justify-content-between align-items-center">
+					<h3>Your Workouts</h3>
+					<form action="InitializeWorkout.do" method="GET">
+						<button type="submit" class="btn btn-primary btn-custom">Create
+							New Workout</button>
+					</form>
 				</div>
-			</div> --%>
 
-
-			<!-- <div class="scrolling-wrapper">
-
-					<div class="card">
-						<img src="image" class="card-img-top" alt="image href">
-						<div class="card-body">
-							<h5 class="card-title">1</h5>
-							<p class="card-text">1</p>
+			<!-- USER's WORKOUTS (horizontal scroll) -->
+				<div class="scrolling-wrapper">
+					<c:forEach var="workout" items="${myWorkouts}">
+						<div class="card">
+							<div class="card-body">
+								<h5 class="card-title">${workout.name}</h5>
+								<p class="card-text">${workout.description}</p>
+								<a href="showExercisesWithinWorkout.do?workoutId=${workout.id}"
+									class="btn btn-primary">View</a> <a
+									href="editWorkout.do?workoutId=${workout.id}"
+									class="btn btn-secondary">Edit</a>
+							</div>
 						</div>
-					</div>
-					<div class="card">
-						<img src="image" class="card-img-top" alt="image href">
-						<div class="card-body">
-							<h5 class="card-title">1</h5>
-							<p class="card-text">1</p>
-						</div>
-					</div>
-					<div class="card">
-						<img src="image" class="card-img-top" alt="image href">
-						<div class="card-body">
-							<h5 class="card-title">1</h5>
-							<p class="card-text">1</p>
-						</div>
-					</div>
-					<div class="card">
-						<img src="image" class="card-img-top" alt="image href">
-						<div class="card-body">
-							<h5 class="card-title">1</h5>
-							<p class="card-text">1</p>
-						</div>
-					</div>
-					<div class="card">
-						<img src="image" class="card-img-top" alt="image href">
-						<div class="card-body">
-							<h5 class="card-title">1</h5>
-							<p class="card-text">1</p>
-						</div>
-					</div>
-
+					</c:forEach>
 				</div>
 			</div>
- -->
+
 			<!-- FAVORITE -->
-			<!-- Will need to be updated once (maybe for each/cycle through) we have logic sorted out & more workouts/data entered into MySQL Workbench DB -->
- 			<div class="container-fluid mt-4">
+			<!-- Will need to be updated once we have liked/favorite functional -->
+			<div class="container-fluid mt-4">
 				<div class="d-flex justify-content-between align-items-center">
 					<h3>Your Favorite Workouts</h3>
 					<form action="showAllWorkouts.do" method="GET">
@@ -238,101 +160,77 @@
 							all workouts!</button>
 					</form>
 				</div>
+
 				<div class="scrolling-wrapper">
-
-					<div class="card">
-						<img src="image" class="card-img-top" alt="image href">
-						<div class="card-body">
-							<h5 class="card-title">1</h5>
-							<p class="card-text">1</p>
+					<c:forEach var="workout" items="${myWorkouts}">
+						<div class="card">
+							<div class="card-body">
+								<h5 class="card-title">${workout.name}</h5>
+								<p class="card-text">${workout.description}</p>
+								<a href="showExercisesWithinWorkout.do?workoutId=${workout.id}"
+									class="btn btn-primary">View</a> <a
+									href="editWorkout.do?workoutId=${workout.id}"
+									class="btn btn-secondary">Edit</a>
+							</div>
 						</div>
-					</div>
-					<div class="card">
-						<img src="image" class="card-img-top" alt="image href">
-						<div class="card-body">
-							<h5 class="card-title">1</h5>
-							<p class="card-text">1</p>
-						</div>
-					</div>
-					<div class="card">
-						<img src="image" class="card-img-top" alt="image href">
-						<div class="card-body">
-							<h5 class="card-title">1</h5>
-							<p class="card-text">1</p>
-						</div>
-					</div>
-					<div class="card">
-						<img src="image" class="card-img-top" alt="image href">
-						<div class="card-body">
-							<h5 class="card-title">1</h5>
-							<p class="card-text">1</p>
-						</div>
-					</div>
-					<div class="card">
-						<img src="image" class="card-img-top" alt="image href">
-						<div class="card-body">
-							<h5 class="card-title">1</h5>
-							<p class="card-text">1</p>
-						</div>
-					</div>
-
+					</c:forEach>
 				</div>
 			</div>
-		</div> 
-
-		<br>
-
-		<!-- Today's Numbers / Health? -->
-		<div class="container-fluid">
-			<h3>Today's Numbers</h3>
-			<table class="table table-bordered">
-				<thead></thead>
-
-				<tbody>
-					<tr>
-						<td>Current Weight</td>
-						<td>
-							<form action="submitWeight.do" method="POST">
-								<input type="number" class="form-control" name="weight"
-									placeholder="Enter your weight" required>
-								<button type="submit" class="btn btn-primary mt-2">Submit
-									Weight</button>
-							</form>
-							<form action="openWeight.do" method="POST">
-								<button class="btn btn-lg btn-primary" type="submit">Open
-									weight</button>
-							</form>
-
-						</td>
-					</tr>
-					<tr>
-						<td>Total Calories Consumed Today</td>
-						<td>
-							<form action="submitCalories.do" method="POST">
-								<input type="number" class="form-control" name="calories"
-									placeholder="Enter total calories" required>
-								<button type="submit" class="btn btn-primary mt-2">Submit
-									Calories</button>
-							</form>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
 
 
+			<!-- Today's Numbers / Health? -->
+			<div class="container-fluid">
+				<h3>Today's Numbers</h3>
+				<table class="table table-bordered">
+					<thead></thead>
 
-		<button formaction="workoutByUser.do" class="btn btn-lg btn-primary"
-			type="button">test file</button>
+					<tbody>
+						<tr>
+							<td>Current Weight</td>
+							<td>
+								<form action="submitWeight.do" method="POST">
+									<input type="number" class="form-control" name="weight"
+										placeholder="Enter your weight" required>
+									<button type="submit" class="btn btn-primary mt-2">Submit
+										Weight</button>
+								</form>
 
-		<!-- Footer -->
-		<%@ include file="footer.jsp"%>
+								<form action="openWeight.do" method="POST">
+									<button class="btn btn-lg btn-primary" type="submit">Open
+										weight</button>
+								</form>
 
 
-		<script
-			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-			integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-			crossorigin="anonymous"></script>
+							</td>
+						</tr>
+						<tr>
+							<td>Total Calories Consumed Today</td>
+							<td>
+								<form action="submitCalories.do" method="POST">
+									<input type="number" class="form-control" name="calories"
+										placeholder="Enter total calories" required>
+									<button type="submit" class="btn btn-primary mt-2">Submit
+										Calories</button>
+								</form>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+
+
+			<button formaction="workoutByUser.do" class="btn btn-lg btn-primary"
+				type="button">test file</button>
+
+			<!-- Footer -->
+			<%@ include file="footer.jsp"%>
+
+
+			<script
+				src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+				integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+				crossorigin="anonymous"></script>
 </body>
 
 

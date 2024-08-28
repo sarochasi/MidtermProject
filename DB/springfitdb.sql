@@ -172,7 +172,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `body_weight` ;
 
 CREATE TABLE IF NOT EXISTS `body_weight` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `weight_lbs` INT NULL,
   `date_weighed` DATETIME NULL,
   `user_id` INT NOT NULL,
@@ -240,7 +240,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `workout_comment` ;
 
 CREATE TABLE IF NOT EXISTS `workout_comment` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `create_date` DATETIME NULL,
   `content` TEXT NULL,
   `in_reply_to_id` INT NULL,
