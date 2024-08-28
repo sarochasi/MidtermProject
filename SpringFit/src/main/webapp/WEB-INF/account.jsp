@@ -104,6 +104,7 @@
 					</div>
 
 					<!-- ==================================================== -->
+
 					<br>
 
 
@@ -152,6 +153,21 @@
 					</div>
 
 
+					<%-- 	<c:when test="${not empty workout }"> --%>
+
+					<%-- 					<c:forEach var="workout" items="${myWorkouts}">
+						<div class="card" style="width: 18rem;">
+							<div class="card-body">
+								<h5 class="card-title">${workout.name}</h5>
+								<h6 class="card-subtitle mb-2 text-body-secondary">${loggedInUser.firstName}</h6>
+								<p class="card-text"></p>
+								<a href="#" class="card-link">View</a> <a href="#"
+									class="card-link">Edit</a>
+							</div>
+						</div>
+					</c:forEach> --%>
+
+
 				</c:when>
 
 				<%-- 	</c:when> --%>
@@ -163,6 +179,7 @@
 
 				</c:otherwise>
 			</c:choose>
+
 			<div class="collapse" id="#loginFormInProfile"
 				style="right: 0; width: 250px; z-index: 1000;">
 				<div class="card card-body">
@@ -185,8 +202,11 @@
 			</div>
 
 
+
+
+
 			<!-- FAVORITE -->
-			<!-- Will need to be updated once (maybe for each/cycle through) we have logic sorted out & more workouts/data entered into MySQL Workbench DB -->
+			<!-- Will need to be updated once we have liked/favorite functional -->
 			<div class="container-fluid mt-4">
 				<div class="d-flex justify-content-between align-items-center">
 					<h3>Your Favorite Workouts</h3>
@@ -195,46 +215,23 @@
 							workouts!</button>
 					</form>
 				</div>
+
 				<div class="scrolling-wrapper">
-
-					<div class="card">
-						<img src="image" class="card-img-top" alt="image href">
-						<div class="card-body">
-							<h5 class="card-title">1</h5>
-							<p class="card-text">1</p>
+					<c:forEach var="workout" items="${myWorkouts}">
+						<div class="card">
+							<div class="card-body">
+								<h5 class="card-title">${workout.name}</h5>
+								<p class="card-text">${workout.description}</p>
+								<a href="showExercisesWithinWorkout.do?workoutId=${workout.id}"
+									class="btn btn-primary">View</a> <a
+									href="editWorkout.do?workoutId=${workout.id}"
+									class="btn btn-secondary">Edit</a>
+							</div>
 						</div>
-					</div>
-					<div class="card">
-						<img src="image" class="card-img-top" alt="image href">
-						<div class="card-body">
-							<h5 class="card-title">1</h5>
-							<p class="card-text">1</p>
-						</div>
-					</div>
-					<div class="card">
-						<img src="image" class="card-img-top" alt="image href">
-						<div class="card-body">
-							<h5 class="card-title">1</h5>
-							<p class="card-text">1</p>
-						</div>
-					</div>
-					<div class="card">
-						<img src="image" class="card-img-top" alt="image href">
-						<div class="card-body">
-							<h5 class="card-title">1</h5>
-							<p class="card-text">1</p>
-						</div>
-					</div>
-					<div class="card">
-						<img src="image" class="card-img-top" alt="image href">
-						<div class="card-body">
-							<h5 class="card-title">1</h5>
-							<p class="card-text">1</p>
-						</div>
-					</div>
-
+					</c:forEach>
 				</div>
 			</div>
+
 
 			<br>
 
@@ -312,6 +309,8 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 		crossorigin="anonymous"></script>
+
+
 </body>
 
 

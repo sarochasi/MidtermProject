@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.skilldistillery.springfit.data.UserDAO;
+import com.skilldistillery.springfit.entities.Nutrition;
 import com.skilldistillery.springfit.data.WorkoutDAO;
 import com.skilldistillery.springfit.data.WorkoutExerciseDAO;
 import com.skilldistillery.springfit.entities.User;
@@ -132,6 +133,14 @@ public class UserController {
             return "login"; 
         }
 	}
+	
+	
+	
+	
+
+	
+	
+	
 	
 }
 

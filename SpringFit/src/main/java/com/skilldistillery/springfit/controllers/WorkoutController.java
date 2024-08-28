@@ -173,19 +173,6 @@ public class WorkoutController {
 		}
 	}
 	
-	@GetMapping("/account")
-	public String showAccountPage(HttpSession session, Model model) {
-	    User loggedInUser = (User) session.getAttribute("loggedInUser");
-	    if (loggedInUser != null) {
-	        List<Workout> myWorkouts = workoutDao.getWorkoutByUserId(loggedInUser.getId());
-	        model.addAttribute("myWorkouts", myWorkouts);
-	        System.out.println("Workouts for User: " + myWorkouts.size());
-	    } else {
-	        return "redirect:/login"; // Redirect to login if not logged in
-	    }
-	    return "account";
-	}
-
 
 
 	@RequestMapping(path = "showExercisesWithinWorkout.do", method = RequestMethod.GET)
