@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="jakarta.tags.core" prefix="c"%>
@@ -264,6 +265,30 @@
 					<tr>
 						<td>Total Calories Consumed Today</td>
 						<td>
+						<legend class="form-label">Select: </legend>
+			<div class="form-check form-check-inline">
+				<input class="form-check-input" type="checkbox" id="breakfast"
+					name="mealType" value="Breakfast"> <label
+					class="form-check-label" for="breakfast">Breakfast</label>
+			</div>
+
+			<div class="form-check form-check-inline">
+				<input class="form-check-input" type="checkbox" id="lunch"
+					name="mealType" value="Lunch"> <label
+					class="form-check-label" for="lunch">Lunch</label>
+			</div>
+			
+			<div class="form-check form-check-inline">
+				<input class="form-check-input" type="checkbox" id="dinner"
+					name="mealType" value="Dinner"> <label
+					class="form-check-label" for="dinner">Dinner</label>
+			</div>
+			
+			<div class="form-check form-check-inline">
+				<input class="form-check-input" type="checkbox" id="snack"
+					name="mealType" value="Snack"> <label
+					class="form-check-label" for="snack">Snack</label>
+			</div>
 							<form action="submitCalories.do" method="POST">
 								<input type="number" class="form-control" name="calories"
 									placeholder="Enter total calories" required>
@@ -292,8 +317,3 @@
 
 
 </html>
-
-
-
-
-
