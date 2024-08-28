@@ -338,58 +338,55 @@
 
 						<td>Track your macros!</td>
 						<td><legend class="form-label">Select: </legend>
-
-							<div class="col-md-4">
-								<label for="zip" class="form-label">Date Consumed</label> <input
-									type="date" class="form-control" id="dateEaten"
-									name="dateEaten" placeholder="YYYY-MM-DD">
-							</div>
-
-							<div class="form-check form-check-inline">
-								<input class="form-check-input" type="checkbox" id="name"
-									name="name" value="name"> <label
-									class="form-check-label" for="name">Breakfast</label>
-							</div>
-
-
-							<div class="form-check form-check-inline">
-								<input class="form-check-input" type="checkbox" id="name"
-									name="name" value="Lunch"> <label
-									class="form-check-label" for="lunch">Lunch</label>
-							</div>
-							<div class="form-check form-check-inline">
-								<input class="form-check-input" type="checkbox" id="name"
-									name="name" value="Lunch"> <label
-									class="form-check-label" for="lunch">Lunch</label>
-							</div>
-							<div class="form-check form-check-inline">
-								<input class="form-check-input" type="checkbox" id="name"
-									name="name" value="Lunch"> <label
-									class="form-check-label" for="lunch">Lunch</label>
-							</div>
-
 							<form action="addNutrition.do" method="POST">
+
+								<div class="col-md-4">
+									<label for="zip" class="form-label">Date Consumed</label> <input
+										type="date" class="form-control" id="dateEaten"
+										name="dateEaten" placeholder="YYYY-MM-DD">
+								</div>
+
+<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->
+<!-- ---------------------------------------------------NUTRITION------------------------------------------------------------------------------ -->
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="radio" id="name"
+										name="name" value="Breakfast"> <label
+										class="form-check-label" for="name">Breakfast</label>
+								</div>
+
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="radio" id="name"
+										name="name" value="Lunch"> <label
+										class="form-check-label" for="lunch">Lunch</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="radio" id="name"
+										name="name" value="Dinner"> <label
+										class="form-check-label" for="lunch">Dinner</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="radio" id="name"
+										name="name" value="Snack"> <label
+										class="form-check-label" for="lunch">Snack</label>
+								</div>
+
 								<input type="number" class="form-control"
 									name="gramsCarbohydrates"
 									placeholder="Enter carbohydrates (in grams)" required>
-								<button type="submit" class="btn btn-info">Submit
-									Carbohydrates</button>
-							</form>
-							<form action="addNutrition.do" method="POST">
+								<!-- <button type="submit" class="btn btn-info">Submit
+									Carbohydrates</button> -->
 								<input type="number" class="form-control" name="gramsFat"
 									placeholder="Enter fat (in grams)" required>
-								<button type="submit" class="btn btn-info">Submit Fat</button>
-							</form>
-							<form action="addNutrition.do" method="POST">
+								<!-- <button type="submit" class="btn btn-info">Submit Fat</button> -->
 								<input type="number" class="form-control" name="gramsProtein"
 									placeholder="Enter protein (in grams)" required>
-								<button type="submit" class="btn btn-info">Submit
-									Protein</button>
+								<button type="submit" class="btn btn-info">Submit</button>
 							</form></td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
+<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->
 
 
 

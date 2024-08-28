@@ -25,8 +25,9 @@ public class NutritionController {
         User loggedInUser = (User) session.getAttribute("loggedInUser");
         if (loggedInUser != null) {
             nutrition.setUser(loggedInUser);
+            System.out.println(nutrition);
             nutritionDao.addNutrition(nutrition);
-            model.addAttribute("nutritionAdded", true);
+            model.addAttribute("nutritionAdded", true); 
             
             return "redirect:profile.do"; 
         } else {
