@@ -65,13 +65,6 @@ public class UserDaoImpl implements UserDAO {
 	}
 
 	@Override
-	public User findById(int userId) {
-		return em.find(User.class, userId);
-	}
-	
-	
-	
-	@Override
 	public User getUserById(int userId) {
 		return em.find(User.class, userId);
 	}

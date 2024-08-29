@@ -106,6 +106,13 @@
 								<button type="submit" class="btn btn-primary w-100">Log
 									in</button>
 							</form>
+									<form action="registerForm.do" method="GET">
+								<p>
+									Not a member?
+									<button type="submit" class="text-body-secondary btn btn-link">Sign
+										up</button>
+								</p>
+							</form>
 
 		</div>
 		</div>

@@ -12,5 +12,7 @@ public interface WorkoutCommentDAO {
 	public WorkoutComment getById(int workoutCommentId);
 	
 	public WorkoutComment createWorkoutComment(WorkoutComment workoutComment, int userId, int workoutId);
+	
+	public List<WorkoutComment> getCommentByWorkoutId(int workoutId);
 
 }

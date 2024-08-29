@@ -61,14 +61,18 @@ public class UserController {
     public String showProfile(HttpSession session, Model model) {
         User loggedInUser = (User) session.getAttribute("loggedInUser");
         if (loggedInUser != null) {
-//            model.addAttribute("user", loggedInUser);
-            model.addAttribute("user", userDao.findById(loggedInUser.getId()));
+            model.addAttribute("user", loggedInUser);
+            
             List<Workout> myWorkouts  = workoutDao.getWorkoutByUserId(loggedInUser.getId());
+
             System.out.println(myWorkouts);
+       
+            
             for (Workout workout : myWorkouts) {
             
                 List<WorkoutExercise> myExercises = workoutDao.getExercisesByWorkoutId(workout.getId()); 
                 workout.setWorkoutExercises(myExercises);                 
+                
  
             }
             model.addAttribute("myWorkouts", myWorkouts);
