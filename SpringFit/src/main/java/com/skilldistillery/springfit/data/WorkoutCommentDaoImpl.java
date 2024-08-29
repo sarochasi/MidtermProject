@@ -51,5 +51,11 @@ public class WorkoutCommentDaoImpl implements WorkoutCommentDAO{
 		em.persist(workoutComment);
 		return workoutComment;
 	}
+	
+	@Override
+	public List<WorkoutComment> getCommentByWorkoutId(int workoutId) {
+		String jpql = "SELECT wc FROM WorkoutComment wc WHERE wc.workout.id = :workoutId";
+		return em.createQuery(jpql, WorkoutComment.class).setParameter("workoutId", workoutId).getResultList();
+	}
 
 }
