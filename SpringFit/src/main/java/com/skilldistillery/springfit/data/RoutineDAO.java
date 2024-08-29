@@ -10,5 +10,6 @@ public interface RoutineDAO {
 	public Routine getRoutineById(int routineId);
 	
 	public boolean deleteRoutineById(int routineId);
+	public boolean deleteRoutineByIdSqlStmt(int routineId);
 	
 }

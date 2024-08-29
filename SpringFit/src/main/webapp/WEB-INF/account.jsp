@@ -315,7 +315,6 @@
 
 
  
-		</div>
 <h3>Your Routines</h3>
 			<div class="card-container">
 				<div class="row">
@@ -373,6 +372,7 @@
 
 
 
+		</div>
 
 		<!-- Footer -->
 		<%@ include file="footer.jsp"%>
