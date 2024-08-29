@@ -15,6 +15,7 @@ import com.skilldistillery.springfit.data.UserDAO;
 import com.skilldistillery.springfit.data.WorkoutCommentDAO;
 import com.skilldistillery.springfit.data.WorkoutDAO;
 import com.skilldistillery.springfit.entities.User;
+import com.skilldistillery.springfit.entities.Workout;
 import com.skilldistillery.springfit.entities.WorkoutComment;
 
 import jakarta.servlet.http.HttpSession;
@@ -34,16 +35,16 @@ public class WorkoutCommentController {
 	@RequestMapping(path = "commentByUser.do", method = RequestMethod.POST)
     public String getCommentsByUser(HttpSession session,@RequestParam("userId") int userId, Model model) {
 		User loggedInUser = (User) session.getAttribute("loggedInUser");
-		if(loggedInUser != null) {
+		if(loggedInUser != null && loggedInUser.getId() == userId) {
 		
         List<WorkoutComment> comments = workoutCommentDao.findByUserId(userId);
         
         model.addAttribute("comments", comments);
         
-        return "redirect:commentForm.do";
+        return "userComments";
         }
 		else {
-        	return "error";
+        	return "redirect:login.do";
         }
 		
         }
@@ -53,24 +54,51 @@ public class WorkoutCommentController {
 	
 
 	@RequestMapping(path = "commentForm.do", method = RequestMethod.GET)
-    public ModelAndView addComment(@RequestParam("workoutId") int workoutId,
+    public ModelAndView showCommentForm(@RequestParam("workoutId") int workoutId) {
+
+        ModelAndView mv = new ModelAndView();
+        Workout workout = workoutDao.getWorkoutById(workoutId);
+        
+        if (workout == null) {
+            mv.setViewName("redirect:workouts.do"); // Redirect if workout not found
+        } else {
+            mv.addObject("workout", workout);
+            mv.setViewName("commentForm"); // Display the form for adding a comment
+        }
+        
+        return mv;
+    }
+
+	// Process adding a comment to a workout
+    @RequestMapping(path = "addComment.do", method = RequestMethod.POST)
+    public String addComment(@RequestParam("workoutId") int workoutId,
                              @RequestParam("userId") int userId,
                              @RequestParam("content") String content,
                              @RequestParam(value = "replyId", required = false) Integer replyId) {
 
-		ModelAndView mv = new ModelAndView();
-        WorkoutComment comment = new WorkoutComment();
-        comment.setWorkout(workoutDao.getWorkoutById(workoutId));
-        comment.setContent(content);
-        comment.setCreateDate(LocalDateTime.now());
-        comment.setEnabled(true);
+        Workout workout = workoutDao.getWorkoutById(workoutId);
         
-        mv.addObject("comment",comment);
-        mv.setViewName("communityWorkouts");
+        User user = userDao.getUserById(userId);
 
-        return mv; 
+        if (workout != null && user != null) {
+            WorkoutComment comment = new WorkoutComment();
+            comment.setWorkout(workout);
+            comment.setUser(user);
+            comment.setContent(content);
+            comment.setCreateDate(LocalDateTime.now());
+            comment.setEnabled(true);
+
+            if (replyId != null) {
+                WorkoutComment reply = workoutCommentDao.getById(replyId);
+                comment.setReply(reply);
+            }
+
+            workoutCommentDao.save(comment);
+        }
+
+        return "redirect:workoutDetails.do?workoutId=" + workoutId; // Redirect back to the workout details page
     }
-
+}
 	
 
 	
