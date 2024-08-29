@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.skilldistillery.springfit.entities.User;
+import com.skilldistillery.springfit.entities.Workout;
 import com.skilldistillery.springfit.entities.WorkoutComment;
 
 import jakarta.persistence.EntityManager;
@@ -38,6 +40,16 @@ public class WorkoutCommentDaoImpl implements WorkoutCommentDAO{
 	@Override
 	public WorkoutComment getById(int workoutCommentId) {
 		return em.find(WorkoutComment.class, workoutCommentId);
+	}
+
+	@Override
+	public WorkoutComment createWorkoutComment(WorkoutComment workoutComment, int userId, int workoutId) {
+		User user = em.find(User.class, userId);
+		Workout workout = em.find(Workout.class, workoutId);
+		workoutComment.setUser(user);
+		workoutComment.setWorkout(workout);
+		em.persist(workoutComment);
+		return workoutComment;
 	}
 
 }

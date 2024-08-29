@@ -10,5 +10,7 @@ public interface WorkoutCommentDAO {
 	List<WorkoutComment> findByUserId(int id);
 	List<WorkoutComment> findByWorkoutId(int id);
 	public WorkoutComment getById(int workoutCommentId);
+	
+	public WorkoutComment createWorkoutComment(WorkoutComment workoutComment, int userId, int workoutId);
 
 }

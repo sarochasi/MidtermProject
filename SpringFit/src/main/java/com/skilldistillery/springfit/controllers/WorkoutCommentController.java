@@ -31,26 +31,42 @@ public class WorkoutCommentController {
 
 	@Autowired
 	private UserDAO userDao;
-	
+
 	@RequestMapping(path = "commentByUser.do", method = RequestMethod.POST)
-    public String getCommentsByUser(HttpSession session,@RequestParam("userId") int userId, Model model) {
+	public String getCommentsByUser(HttpSession session, @RequestParam("userId") int userId, Model model) {
 		User loggedInUser = (User) session.getAttribute("loggedInUser");
-		if(loggedInUser != null && loggedInUser.getId() == userId) {
-		
-        List<WorkoutComment> comments = workoutCommentDao.findByUserId(userId);
-        
-        model.addAttribute("comments", comments);
-        
-        return "userComments";
-        }
-		else {
-        	return "redirect:login.do";
-        }
-		
-        }
-		
-    
+		if (loggedInUser != null && loggedInUser.getId() == userId) {
+
+			List<WorkoutComment> comments = workoutCommentDao.findByUserId(userId);
+
+			model.addAttribute("comments", comments);
+
+			return "CreatingComment.do";
+		} else {
+			return "redirect:login.do";
+		}
+
+	}
+
+	@RequestMapping(path = "CreatingComment.do")
+    public ModelAndView createComment(@RequestParam("workoutId") int workoutId, @RequestParam("content") String content, WorkoutComment workoutComment, HttpSession session) {
+    	ModelAndView mv = new ModelAndView();
+    	User loggedInUser = (User) session.getAttribute("loggedInUser");
+    	if(loggedInUser != null) {
+    		Workout workout = workoutDao.getWorkoutById(workoutId);
+    		WorkoutComment newComment = workoutCommentDao.createWorkoutComment(workoutComment, loggedInUser.getId(), workout.getId());
+    		newComment.setWorkout(workout);
+            newComment.setUser(loggedInUser);
+            newComment.setContent(content);
+            newComment.setCreateDate(LocalDateTime.now());
+            newComment.setEnabled(true);
+    		mv.addObject("workoutComment", newComment);
+    		mv.setViewName("redirect:showCommunity.do");
+    }else {
+    	mv.setViewName("home");
+    }return mv;
 	
+	}
 	
 
 	@RequestMapping(path = "commentForm.do", method = RequestMethod.GET)
@@ -98,8 +114,22 @@ public class WorkoutCommentController {
 
         return "redirect:workoutDetails.do?workoutId=" + workoutId; // Redirect back to the workout details page
     }
-}
-	
 
+	@RequestMapping(path = "showCommunity.do", method = RequestMethod.GET)
+	public String list(Model model) {
+		List<Workout> allWorkouts = workoutDao.showAllWorkouts();
+		model.addAttribute("allWorkouts", allWorkouts);
+		return "communityWorkouts";
+	}
+
+	@RequestMapping(path = "GetCommetnBox.do", params = "commentId")
+	public ModelAndView getWorkoutForm(@RequestParam("comment") int commentId) {
+		ModelAndView mv = new ModelAndView();
+		
+		mv.addObject("comment", workoutCommentDao.getById(commentId));
+		mv.setViewName("communityWorkouts");
+		return mv;
+	}
+	}	
 	
 
