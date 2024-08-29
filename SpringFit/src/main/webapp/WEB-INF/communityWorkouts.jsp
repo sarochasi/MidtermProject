@@ -25,6 +25,9 @@
 		<div class="container col-xl-10 col-xxl-8 px-4 py-5">
 
 			<h1>Community Board</h1>
+			
+			<c:choose>
+				<c:when test="${not empty loggedInUser}">
 			<div class="card-container">
 				<div class="row">
 					<c:forEach var="workout" items="${allWorkouts}">
@@ -109,6 +112,44 @@
 					</c:forEach>
 				</div>
 			</div>
+			
+			</c:when>
+			
+			<c:otherwise>
+			<p>Please log in to see all exercise</p>
+					<button class="btn btn-link active" type="button"
+						data-bs-toggle="collapse" data-bs-target="#loginForm4"
+						aria-expanded="false" aria-controls="loginForm">Log in</button>
+
+				</c:otherwise>
+			</c:choose>
+
+					<div class="collapse" id="loginForm4"
+						style="right: 0; width: 250px; z-index: 1000;">
+						<div class="card card-body">
+							<form action="login.do" method="POST">
+								<div class="mb-3">
+									<label for="username" class="form-label">Username</label> <input
+										type="text" class="form-control" id="username" name="username"
+										required>
+								</div>
+								<div class="mb-3">
+									<label for="password" class="form-label">Password</label> <input
+										type="password" class="form-control" id="password"
+										name="password" required>
+								</div>
+								<button type="submit" class="btn btn-primary w-100">Log
+									in</button>
+							</form>
+							<form action="registerForm.do" method="GET">
+								<p>
+									Not a member?
+									<button type="submit" class="text-body-secondary btn btn-link">Sign
+										up</button>
+								</p>
+							</form>
+							</div>
+			
 		</div>
 		<!-- ================================================================================= -->
 

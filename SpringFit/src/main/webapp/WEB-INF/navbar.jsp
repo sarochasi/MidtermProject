@@ -22,6 +22,10 @@
 			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 				<li class="nav-item"><a class="nav-link active"
 					aria-current="page" href="home.do">Home</a></li>
+					
+				<li class="nav-item"><a class="nav-link active"
+					aria-current="page" href="showAllWorkouts.do">Community</a></li>
+					
 
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" href="#" role="button"
@@ -55,6 +59,8 @@
 					</ul></li>
 
 			</ul>
+			
+			
 
 			<c:choose>
 				<c:when test="${not empty loggedInUser}">
