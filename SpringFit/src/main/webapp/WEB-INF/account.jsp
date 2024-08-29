@@ -301,7 +301,7 @@
 				</form>
 		<br>
 
-
+<hr class="my-4">
 		<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->
 		<!-- ---------------------------------------------------------ROUTINE--------------------------------------------------------------------------------- -->
 		<h3>Routine</h3>
@@ -313,7 +313,7 @@
 		</form>
 
 
-
+<hr class="my-4">
  
 <h3>Your Routines</h3>
 			<div class="card-container">
@@ -332,8 +332,7 @@
 									<a class="btn btn-outline-info" data-bs-toggle="collapse"
 										href="#collapse${routine.id}" role="button"
 										aria-expanded="false" aria-controls="collapse${workout.id}">
-										View Workouts </a> <a href="#" class="btn btn-outline-info">Edit</a>
-
+										View Workouts </a> 
 
 									<form action="deleteRoutine.do" method="POST">
 										<input type="hidden" name="routineId" value="${routine.id}" />
