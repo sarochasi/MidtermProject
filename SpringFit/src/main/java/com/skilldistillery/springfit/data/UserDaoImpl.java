@@ -3,6 +3,7 @@ package com.skilldistillery.springfit.data;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.springfit.entities.User;
+import com.skilldistillery.springfit.entities.Workout;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -53,5 +54,18 @@ public class UserDaoImpl implements UserDAO {
 
 		return count > 0;
 	}
+
+	@Override
+	public void userLikeWorkout(int userId, int workoutId) {
+		User user = em.find(User.class, userId);
+		Workout workout = em.find(Workout.class, workoutId);
+		user.getLikedWorkout().add(workout);
+		em.persist(user);
+		em.persist(workout);
+	}
+	
+	
+	
+	
 
 }

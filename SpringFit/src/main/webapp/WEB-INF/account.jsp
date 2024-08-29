@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="jakarta.tags.core" prefix="c"%>
@@ -108,10 +109,16 @@
 											<p class="card-text">
 												<strong>Description: </strong>${workout.description != null ? workout.description : 'N/A'}
 											</p>
+											
 											<a class="btn btn-outline-info" data-bs-toggle="collapse"
-												href="#collapse${workout.id}" role="button"
-												aria-expanded="false" aria-controls="collapse${workout.id}">
-												View Exercises </a> <a href="#" class="btn btn-outline-info">Edit</a>
+										href="#collapse${workout.id}" role="button"
+										aria-expanded="false" aria-controls="collapse${workout.id}">
+										View Exercises </a> 
+										
+											<form action="updateWorkoutForm.do" method="GET">
+												<input type="hidden" name="workoutId" value="${workout.id}" />
+												<button type="submit" class="btn btn-outline-info">Edit</button>
+											</form>
 
 
 											<form action="deleteWorkout.do" method="POST">
@@ -280,11 +287,20 @@
 					<input type="number" class="form-control" name="gramsProtein"
 						placeholder="Enter protein (in grams)" required>
 					<button type="submit" class="btn btn-info">Submit</button>
-				</form></td>
-			</tr>
-			</tbody>
-			</table>
+				</form>
+				
+				<br>
+
+				<form action="showAllNutrition.do" method="POST">
+					<button class="btn btn-info" type="submit">View</button>
+				</form>
+				
 		</div>
+				<br>
+				
+				<form action="showAllWorkouts.do" method="POST">
+					<button class="btn btn-info" type="submit">Explore workouts from the community!</button>
+				</form>
 		<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->
 		<!-- ---------------------------------------------------------ROUTINE--------------------------------------------------------------------------------- -->
 		<h3>Routine</h3>
@@ -295,7 +311,9 @@
 					Routine</button>
 			</form>
 
+
 		<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->
+
 
 		<!-- Footer -->
 		<%@ include file="footer.jsp"%>
@@ -311,5 +329,3 @@
 
 
 </html>
-
-

@@ -1,3 +1,4 @@
+
 package com.skilldistillery.springfit.data;
 
 import com.skilldistillery.springfit.entities.Exercise;
@@ -10,6 +11,10 @@ public interface WorkoutExerciseDAO {
 
 	
 	public boolean deleteExerciseByWorkoutId(int id);
+	
+	public WorkoutExercise updateWorkoutExercise(int id,WorkoutExercise workoutExercise);
+	
+	public boolean deleteWorkoutExercise(int id);
 	
 
 }
