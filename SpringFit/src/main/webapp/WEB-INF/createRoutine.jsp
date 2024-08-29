@@ -18,6 +18,8 @@
 <title>Create Routine</title>
 </head>
 <body>
+
+	<%@ include file="navbar.jsp"%>
 	<h1>Routine: ${routine.name}</h1>
 	<!-- --------------------------------------------------------------------------------------------------------------------  -->
 	<h2>Workouts</h2>
@@ -48,6 +50,13 @@
 			
 			<input type="submit" value="Submit" />
 
+
+		</form >
+
+			
+		<!--Return to account.jsp  -->
+		<form action="profile.do" method="get">
+			<input type="submit" value="Submit" />
 		</form>
 	</c:if>
 	<!-- --------------------------------------------------------------------------------------------------------------------  -->
