@@ -87,7 +87,7 @@
 							</c:forEach>
 						</select>
 
-						<button class="btn btn-lg btn-primary" type="submit">Submit</button>
+						<button class="btn btn-lg btn-primary" type="submit">Select Exercise</button>
 
 						<button formaction="profileAfterWorkout.do" class="btn btn-lg btn-primary" type="submit">Finish workout</button>
 

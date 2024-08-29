@@ -31,7 +31,7 @@
 				varStatus="status">
 				<form action="updateWorkoutExercise.do" method="POST">
 					<input type="hidden" name="workoutId"
-						value="${workout.id}"> <input type="hidden"
+						value="${exercise.workout.id}"> <input type="hidden"
 						name="workoutExerciseId" value="${exercise.id}"> <input
 						type="hidden" name="workoutExercises[${status.index}].id"
 						value="${exercise.id}">
@@ -54,7 +54,7 @@
 							name="sets" value="${exercise.sets}">
 					</div>
 
-					<button type="submit" class="btn btn-primary">Update
+					<button type="submit" class="btn btn-sm btn-outline-secondary">Update
 						Exercise</button>
 
 				</form>
@@ -62,12 +62,13 @@
 				
 				<form action="deleteWorkoutExercise.do" method="POST">
 					<input type="hidden" name="workoutExerciseId"
-						value="${exercise.exercise.id}" /> 
-						<input type="hidden" name="workoutId" value="${workout.id}" />
+						value="${exercise.id}" /> 
+						<input type="hidden" name="workoutId" value="${exercise.workout.id}" />
 					<button type="submit" class="btn btn-sm btn-outline-secondary">Delete</button>
 				</form>
 			</c:forEach>
 
+		<br>
 
 			<a href="profile.do" class="btn btn-primary">Finish update</a> </br>
 			<%@ include file="footer.jsp"%>

@@ -51,21 +51,23 @@
 
             <!-- Workout Exercises -->
            
-           <button type="submit" class="btn btn-sm btn-outline-secondary">Update Workout</button>
+           <button type="submit" class="btn btn-sm btn-outline-secondary">Update exercise list</button>
         </form>
         
         <br>
         
         <form action="GetWorkoutPage.do" method="GET">
-				<input type="hidden" name="id" value="${workout.id}" />
+				<input type="hidden" name="workoutId" value="${workout.id}" />
 				<button type="submit" class="btn btn-sm btn-outline-secondary">Add
 					more exercise</button>
 			</form>
+			
+			<a href="profile.do" class="btn btn-primary">Finish</a>
           
         </c:when>
         
         <c:otherwise>
-			<p>${errorMsg }</p>
+			<p>Please log in</p>
 		</c:otherwise>
           </c:choose> 
             </div>
