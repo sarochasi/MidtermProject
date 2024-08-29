@@ -1,4 +1,5 @@
 
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="jakarta.tags.core" prefix="c"%>
@@ -162,24 +163,18 @@
 				</c:otherwise>
 
 			</c:choose>
+<hr class="my-4">
 
-
-			<!-- ------------------------------------------------------------------------------------------------- -->
+			<!-- ----------------------------------------------------------------WILL NEED TO UPDATE ONCE WE HAVE FAV FUNCTIONING--------------------------------- -->
 			<!-- FAVORITE -->
-			<div class="container-fluid">
-				<div class="d-flex justify-content-between align-items-center">
-					<h3>Liked Workouts</h3>
+			<h3>Your Favorite Workouts</h3>
 
-					<form action="showAllWorkouts.do" method="GET">
-						<button type="submit" class="btn btn-info">Explore the
-							community!</button>
-					</form>
-				</div>
-			</div>
+
+
 
 			<div class="card-container">
 				<div class="row">
-					<c:forEach var="workout" items="${userLikedWorkouts}">
+					<c:forEach var="workout" items="${myWorkouts}">
 						<div class="col-md-4 mb-4">
 							<div class="card" style="width: 18rem;">
 								<div class="card-body">
@@ -190,36 +185,16 @@
 									<p class="card-text">
 										<strong>Description: </strong>${workout.description != null ? workout.description : 'N/A'}
 									</p>
-
-									<!-- BUTTONS -->
-									<!--  <div class="d-flex justify-content-between">...</div>  (Bootstrap>Docs>Flex) -->
-									<div class="mt-auto">
-										<div class="d-flex justify-content-center align-items-center">
-											<!-- <div class="d-flex align-content-between"> -->
-
-											<%-- <a class="btn btn-outline-info" data-bs-toggle="collapse"
+									<a class="btn btn-outline-info" data-bs-toggle="collapse"
 										href="#collapse${workout.id}" role="button"
 										aria-expanded="false" aria-controls="collapse${workout.id}">
-										View Exercises </a>  --%>
+										View Exercises </a> <a href="#" class="btn btn-outline-info">Edit</a>
 
-											<a class="btn btn-outline-info" data-bs-toggle="collapse"
-												href="#collapse${workout.id}" role="button"
-												aria-expanded="false" aria-controls="collapse${workout.id}">
-												View </a> <a href="#" class="btn btn-outline-info">Edit</a>
 
-											<form action="deleteWorkout.do" method="POST">
-												<input type="hidden" name="workoutId" value="${workout.id}" />
-												<button type="submit" class="btn btn-outline-info">Delete</button>
-											</form>
-
-											<form action="unlikeWorkout.do" method="POST">
-												<input type="hidden" name="workoutId" value="${workout.id}" />
-												<button type="submit" class="btn btn-outline-info">Unlike</button>
-											</form> 
-
-										</div>
-									</div>
-									<!-- ---------------------- -->
+									<form action="deleteWorkout.do" method="POST">
+										<input type="hidden" name="workoutId" value="${workout.id}" />
+										<button type="submit" class="btn btn-outline-info">Delete</button>
+									</form>
 
 									<div class="collapse mt-2" id="collapse${workout.id}">
 										<div class="card card-body">
@@ -245,9 +220,11 @@
 					</c:forEach>
 				</div>
 			</div>
-
+			<a class="btn btn-info" href="showAllWorkouts.do">Explore
+				workouts from the community!</a>
 			<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->
 			<!-- Today's Numbers / Health? -->
+<hr class="my-4">
 
 			<h3>Weight & Nutrition</h3>
 			<table class="table table-bordered">
@@ -276,80 +253,73 @@
 			<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->
 			<!-- ---------------------------------------------------NUTRITION------------------------------------------------------------------------------ -->
 			<!-- <td>Track your macros!</td> -->
-			<!-- <td><legend class="form-label"></legend> -->
-			<form action="addNutrition.do" method="POST">
-				<!-- DATE -->
-				<div class="col-md-4">
-					<label for="zip" class="form-label"></label> <input type="date"
-						class="form-control" id="dateEaten" name="dateEaten"
-						placeholder="YYYY-MM-DD">
-				</div>
+			<td><legend class="form-label"></legend>
+				<form action="addNutrition.do" method="POST">
 
-				<!-- MEAL NAME (radio buttons to assign Values into DB (Meal>Name) -->
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="radio" id="name" name="name"
-						value="Breakfast"> <label class="form-check-label"
-						for="name">Breakfast</label>
-				</div>
-				<!--  -->
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="radio" id="name" name="name"
-						value="Lunch"> <label class="form-check-label" for="lunch">Lunch</label>
-				</div>
-				<!--  -->
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="radio" id="name" name="name"
-						value="Dinner"> <label class="form-check-label"
-						for="lunch">Dinner</label>
-					<!--  -->
-				</div>
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="radio" id="name" name="name"
-						value="Snack"> <label class="form-check-label" for="lunch">Snack</label>
-				</div>
+					<div class="col-md-4">
+						<label for="zip" class="form-label"></label> <input type="date"
+							class="form-control" id="dateEaten" name="dateEaten"
+							placeholder="YYYY-MM-DD">
+					</div>
 
-				<!-- Forms (user will type in field(s) and click submit once to submit all -->
-				<input type="number" class="form-control" name="gramsCarbohydrates"
-					placeholder="Enter carbohydrates (in grams)" required> <input
-					type="number" class="form-control" name="gramsFat"
-					placeholder="Enter fat (in grams)" required> <input
-					type="number" class="form-control" name="gramsProtein"
-					placeholder="Enter protein (in grams)" required>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" id="name" name="name"
+							value="Breakfast"> <label class="form-check-label"
+							for="name">Breakfast</label>
+					</div>
 
-				<!-- SUBMIT BUTTON -->
-				<button type="submit" class="btn btn-info">Submit</button>
-				<!-- </form> MIGHT NEED TO EDIT IF DIV DOESNT CENTER-->
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" id="name" name="name"
+							value="Lunch"> <label class="form-check-label"
+							for="lunch">Lunch</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" id="name" name="name"
+							value="Dinner"> <label class="form-check-label"
+							for="lunch">Dinner</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" id="name" name="name"
+							value="Snack"> <label class="form-check-label"
+							for="lunch">Snack</label>
+					</div>
 
-				<!-- VIEW BUTTON -->
+					<input type="number" class="form-control" name="gramsCarbohydrates"
+						placeholder="Enter carbohydrates (in grams)" required>
+					<!-- <button type="submit" class="btn btn-info">Submit
+									Carbohydrates</button> -->
+					<input type="number" class="form-control" name="gramsFat"
+						placeholder="Enter fat (in grams)" required>
+					<!-- <button type="submit" class="btn btn-info">Submit Fat</button> -->
+					<input type="number" class="form-control" name="gramsProtein"
+						placeholder="Enter protein (in grams)" required>
+					<button type="submit" class="btn btn-info">Submit</button>
+				</form> <br>
+
 				<form action="showAllNutrition.do" method="POST">
 					<button class="btn btn-info" type="submit">View</button>
 				</form>
-		</div>
-		</form>
+		<br>
+
+
+		<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->
 		<!-- ---------------------------------------------------------ROUTINE--------------------------------------------------------------------------------- -->
-		<h3>Routines</h3>
-		<div>
-			<div id="routineList">
-				<c:forEach var="routine" items="${user.routines}">
-				<li>${routine.name }</li>
-				</c:forEach>
-			</div>
-			<form action="goTocreateRoutinePage.do" method="GET">
-				<input type="text" class="form-control" name="name"
-					placeholder="Create New Routine" required>
-				<button type="submit" class="btn btn-outline-info">Create
-					Routine</button>
-			</form>
+		<h3>Routine</h3>
+		<form action="goTocreateRoutinePage.do" method="GET">
+			<input type="text" class="form-control" name="name"
+				placeholder="Create New Routine" required>
+			<button type="submit" class="btn btn-outline-info">Create
+				Routine</button>
+		</form>
 
 
-
-		</div>
 		<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->
 
 
 		<!-- Footer -->
 		<%@ include file="footer.jsp"%>
 
+		</div>
 	</main>
 
 	<script

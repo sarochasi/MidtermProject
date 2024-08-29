@@ -1,3 +1,4 @@
+
 package com.skilldistillery.springfit.controllers;
 
 import java.time.LocalDateTime;
@@ -71,53 +72,6 @@ public class WorkoutCommentController {
 	
 	}
 	
-
-	@RequestMapping(path = "commentForm.do", method = RequestMethod.GET)
-    public ModelAndView showCommentForm(@RequestParam("workoutId") int workoutId) {
-
-        ModelAndView mv = new ModelAndView();
-        Workout workout = workoutDao.getWorkoutById(workoutId);
-        
-        if (workout == null) {
-            mv.setViewName("redirect:workouts.do"); // Redirect if workout not found
-        } else {
-            mv.addObject("workout", workout);
-            mv.setViewName("commentForm"); // Display the form for adding a comment
-        }
-        
-        return mv;
-    }
-
-	// Process adding a comment to a workout
-    @RequestMapping(path = "addComment.do", method = RequestMethod.POST)
-    public String addComment(@RequestParam("workoutId") int workoutId,
-                             @RequestParam("userId") int userId,
-                             @RequestParam("content") String content,
-                             @RequestParam(value = "replyId", required = false) Integer replyId) {
-
-        Workout workout = workoutDao.getWorkoutById(workoutId);
-        
-        User user = userDao.getUserById(userId);
-
-        if (workout != null && user != null) {
-            WorkoutComment comment = new WorkoutComment();
-            comment.setWorkout(workout);
-            comment.setUser(user);
-            comment.setContent(content);
-            comment.setCreateDate(LocalDateTime.now());
-            comment.setEnabled(true);
-
-            if (replyId != null) {
-                WorkoutComment reply = workoutCommentDao.getById(replyId);
-                comment.setReply(reply);
-            }
-
-            // workoutCommentDao.save(comment);
-        }
-
-        return "redirect:workoutDetails.do?workoutId=" + workoutId; // Redirect back to the workout details page
-    }
-
 	@RequestMapping(path = "showCommunity.do", method = RequestMethod.GET)
 	public String list(Model model) {
 		List<Workout> allWorkouts = workoutDao.showAllWorkouts();
@@ -125,15 +79,6 @@ public class WorkoutCommentController {
 		model.addAttribute("allWorkouts", allWorkouts);
 		return "communityWorkouts";
 	}
-
-	@RequestMapping(path = "GetCommetnBox.do", params = "commentId")
-	public ModelAndView getWorkoutForm(@RequestParam("comment") int commentId) {
-		ModelAndView mv = new ModelAndView();
-		
-		mv.addObject("comment", workoutCommentDao.getById(commentId));
-		mv.setViewName("communityWorkouts");
-		return mv;
-	}
-	}	
 	
-
+	
+}
