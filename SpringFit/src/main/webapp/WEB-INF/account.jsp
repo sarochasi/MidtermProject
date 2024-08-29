@@ -109,12 +109,12 @@
 											<p class="card-text">
 												<strong>Description: </strong>${workout.description != null ? workout.description : 'N/A'}
 											</p>
-											
+
 											<a class="btn btn-outline-info" data-bs-toggle="collapse"
-										href="#collapse${workout.id}" role="button"
-										aria-expanded="false" aria-controls="collapse${workout.id}">
-										View Exercises </a> 
-										
+												href="#collapse${workout.id}" role="button"
+												aria-expanded="false" aria-controls="collapse${workout.id}">
+												View Exercises </a>
+
 											<form action="updateWorkoutForm.do" method="GET">
 												<input type="hidden" name="workoutId" value="${workout.id}" />
 												<button type="submit" class="btn btn-outline-info">Edit</button>
@@ -164,9 +164,19 @@
 			</c:choose>
 
 
-			<!-- ----------------------------------------------------------------WILL NEED TO UPDATE ONCE WE HAVE FAV FUNCTIONING--------------------------------- -->
-			<!-- FAVORITE --> 
-			<h3>Liked Workouts</h3>
+			<!-- ------------------------------------------------------------------------------------------------- -->
+			<!-- FAVORITE -->
+			<div class="container-fluid">
+				<div class="d-flex justify-content-between align-items-center">
+					<h3>Liked Workouts</h3>
+
+					<form action="showAllWorkouts.do" method="POST">
+						<button type="submit" class="btn btn-info">Explore
+							workouts from the community!</button>
+					</form>
+				</div>
+			</div>
+
 			<div class="card-container">
 				<div class="row">
 					<c:forEach var="workout" items="${userLikedWorkouts}">
@@ -246,30 +256,33 @@
 			<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->
 			<!-- ---------------------------------------------------NUTRITION------------------------------------------------------------------------------ -->
 			<!-- <td>Track your macros!</td> -->
-			<td><legend class="form-label"></legend>
+			<!-- <td><legend class="form-label"></legend> -->
 				<form action="addNutrition.do" method="POST">
-
+					<!-- DATE -->
 					<div class="col-md-4">
 						<label for="zip" class="form-label"></label> <input type="date"
 							class="form-control" id="dateEaten" name="dateEaten"
 							placeholder="YYYY-MM-DD">
 					</div>
 
+					<!-- MEAL NAME (radio buttons to assign Values into DB (Meal>Name) -->
 					<div class="form-check form-check-inline">
 						<input class="form-check-input" type="radio" id="name" name="name"
 							value="Breakfast"> <label class="form-check-label"
 							for="name">Breakfast</label>
 					</div>
-
+					<!--  -->
 					<div class="form-check form-check-inline">
 						<input class="form-check-input" type="radio" id="name" name="name"
 							value="Lunch"> <label class="form-check-label"
 							for="lunch">Lunch</label>
 					</div>
+					<!--  -->
 					<div class="form-check form-check-inline">
 						<input class="form-check-input" type="radio" id="name" name="name"
 							value="Dinner"> <label class="form-check-label"
 							for="lunch">Dinner</label>
+					<!--  -->
 					</div>
 					<div class="form-check form-check-inline">
 						<input class="form-check-input" type="radio" id="name" name="name"
@@ -277,39 +290,32 @@
 							for="lunch">Snack</label>
 					</div>
 
+					<!-- Forms (user will type in field(s) and click submit once to submit all -->
 					<input type="number" class="form-control" name="gramsCarbohydrates"
 						placeholder="Enter carbohydrates (in grams)" required>
-					<!-- <button type="submit" class="btn btn-info">Submit
-									Carbohydrates</button> -->
 					<input type="number" class="form-control" name="gramsFat"
 						placeholder="Enter fat (in grams)" required>
-					<!-- <button type="submit" class="btn btn-info">Submit Fat</button> -->
 					<input type="number" class="form-control" name="gramsProtein"
 						placeholder="Enter protein (in grams)" required>
-					<button type="submit" class="btn btn-info">Submit</button>
-				</form>
-				
-				<br>
 
-				<form action="showAllNutrition.do" method="POST">
-					<button class="btn btn-info" type="submit">View</button>
-				</form>
-				
-		</div>
-				<br>
-				
-				<form action="showAllWorkouts.do" method="POST">
-					<button class="btn btn-info" type="submit">Explore workouts from the community!</button>
-				</form>
-		<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->
+					<!-- SUBMIT BUTTON -->
+					<button type="submit" class="btn btn-info">Submit</button>
+					<!-- </form> MIGHT NEED TO EDIT IF DIV DOESNT CENTER-->
+
+					<!-- VIEW BUTTON -->
+					<form action="showAllNutrition.do" method="POST">
+						<button class="btn btn-info" type="submit">View</button>
+					</form>
+			</div>
+		</form> 
 		<!-- ---------------------------------------------------------ROUTINE--------------------------------------------------------------------------------- -->
 		<h3>Routine</h3>
-			<form action="goTocreateRoutinePage.do" method="GET">
-				<input type="text" class="form-control" name="name"
-					placeholder="Create New Routine" required>
-				<button type="submit" class="btn btn-outline-info">Create
-					Routine</button>
-			</form>
+		<form action="goTocreateRoutinePage.do" method="GET">
+			<input type="text" class="form-control" name="name"
+				placeholder="Create New Routine" required>
+			<button type="submit" class="btn btn-outline-info">Create
+				Routine</button>
+		</form>
 
 
 		<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->
