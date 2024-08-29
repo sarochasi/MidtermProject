@@ -50,4 +50,19 @@ public class RoutineDAOImpl implements RoutineDAO {
 		return deleted;
 	}
 
+
+	@Override
+	public boolean deleteRoutineByIdSqlStmt(int routineId) {
+		boolean deleted = false;
+
+			String jpql = "DELETE FROM routineWorkout rw WHERE rw.routine.id = :routineId";
+			int result = em.createQuery(jpql, Routine.class).setParameter("routineId", jpql).executeUpdate();
+			
+			if(result > 0) {
+				deleted = true;			
+		}
+		
+		return deleted;
+	}
+
 }
