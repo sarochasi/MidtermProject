@@ -1,4 +1,3 @@
-
 package com.skilldistillery.springfit.controllers;
 
 import java.time.LocalDateTime;
@@ -55,6 +54,32 @@ public class UserController {
 		}
 	}
 
+//    @RequestMapping(path = "profile.do", method = RequestMethod.GET)
+//    public String showProfile(HttpSession session, Model model) {
+//        User loggedInUser = (User) session.getAttribute("loggedInUser");
+//        if (loggedInUser != null) {
+//            model.addAttribute("user", loggedInUser);
+//            
+//            List<Workout> myWorkouts  = workoutDao.getWorkoutByUserId(loggedInUser.getId());
+//
+//            System.out.println(myWorkouts);
+//       
+//            
+//            for (Workout workout : myWorkouts) {
+//            
+//                List<WorkoutExercise> myExercises = workoutDao.getExercisesByWorkoutId(workout.getId()); 
+//                workout.setWorkoutExercises(myExercises);                 
+//                
+// 
+//            }
+//            model.addAttribute("myWorkouts", myWorkouts);
+//            
+//            return "account"; 
+//        } else {
+//            model.addAttribute("errorMessage", "You must be logged in to view your profile.");
+//            return "login"; 
+//        }
+//    }
 	@RequestMapping(path = "profile.do", method = RequestMethod.GET)
 	public String showProfile(HttpSession session, Model model) {
 		User loggedInUser = (User) session.getAttribute("loggedInUser");

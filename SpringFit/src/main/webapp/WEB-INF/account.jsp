@@ -327,15 +327,23 @@
 		</div>
 		</form>
 		<!-- ---------------------------------------------------------ROUTINE--------------------------------------------------------------------------------- -->
-		<h3>Routine</h3>
-		<form action="goTocreateRoutinePage.do" method="GET">
-			<input type="text" class="form-control" name="name"
-				placeholder="Create New Routine" required>
-			<button type="submit" class="btn btn-outline-info">Create
-				Routine</button>
-		</form>
+		<h3>Routines</h3>
+		<div>
+			<div id="routineList">
+				<c:forEach var="routine" items="${user.routines}">
+				<li>${routine.name }</li>
+				</c:forEach>
+			</div>
+			<form action="goTocreateRoutinePage.do" method="GET">
+				<input type="text" class="form-control" name="name"
+					placeholder="Create New Routine" required>
+				<button type="submit" class="btn btn-outline-info">Create
+					Routine</button>
+			</form>
 
 
+
+		</div>
 		<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->
 
 

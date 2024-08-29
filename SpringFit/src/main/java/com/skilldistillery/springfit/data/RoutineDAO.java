@@ -6,5 +6,9 @@ import com.skilldistillery.springfit.entities.Workout;
 public interface RoutineDAO {
 	
 	public Routine createNewRoutine(Routine routine, int userId);
+	
+	public Routine getRoutineById(int routineId);
+	
+	
 
 }

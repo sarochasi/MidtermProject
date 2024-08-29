@@ -67,6 +67,7 @@ public class WorkoutController {
 		return mv;
 	}
 
+
 	@RequestMapping(path = "addMoreExercise.do", params = "workoutId")
 	public ModelAndView addMoreExercise(@RequestParam("workoutId") int workoutId) {
 		ModelAndView mv = new ModelAndView();
@@ -190,9 +191,13 @@ public class WorkoutController {
 			return "account";
 		} else {
 
+			
+			System.out.println("==================No user=============");
 			return "account";
 		}
 	}
+	
+
 
 	@RequestMapping(path = "showExercisesWithinWorkout.do", method = RequestMethod.GET)
 	public ModelAndView viewWorkoutDetails(@RequestParam("workoutId") int workoutId) {
@@ -206,20 +211,21 @@ public class WorkoutController {
 
 		return mv;
 	}
-
-	@RequestMapping(path = "deleteWorkout.do", method = RequestMethod.POST)
+	
+	@RequestMapping(path="deleteWorkout.do", method = RequestMethod.POST)
 	public ModelAndView deleteWorkout(@RequestParam("workoutId") int workoutId) {
-
+		
 		ModelAndView mv = new ModelAndView();
 		Workout workout = workoutDao.getWorkoutById(workoutId);
-
-		if (workout == null) {
+		
+		if(workout == null) {
 			mv.setViewName("error");
-		} else {
+		}else {
 			boolean deleted = workoutDao.deleteWorkout(workoutId);
-			if (!deleted) {
+			if(!deleted) {
 				mv.addObject("errorMsg", "Failed to delete the workout");
 				mv.setViewName("error");
+
 			} else {
 				mv.setViewName("redirect:profile.do");
 			}
@@ -316,9 +322,11 @@ public class WorkoutController {
 				mv.setViewName("redirect:updateWorkoutExerciseForm.do?workoutId=" + workoutId);
 			}
 		}
+		
 		return mv;
-
+		
 	}
+
 	
 	// LIKE
 	@RequestMapping(path = "likeWorkout.do", method = RequestMethod.POST)
@@ -365,5 +373,6 @@ public class WorkoutController {
 		model.addAttribute("allWorkouts", allWorkouts);
 		return "communityWorkouts";
 	}
+
 
 }
