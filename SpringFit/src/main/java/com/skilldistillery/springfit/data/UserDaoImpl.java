@@ -56,12 +56,21 @@ public class UserDaoImpl implements UserDAO {
 
 		return count > 0;
 	}
-
+	// LIKE
 	@Override
 	public void userLikeWorkout(int userId, int workoutId) {
 		User user = em.find(User.class, userId);
 		Workout workout = em.find(Workout.class, workoutId);
 		user.getLikedWorkout().add(workout);
+		em.persist(user);
+		em.persist(workout);
+	}
+	// UNLIKE
+	@Override
+	public void userUnlikeWorkout(int userId, int workoutId) {
+		User user = em.find(User.class, userId);
+		Workout workout = em.find(Workout.class, workoutId);
+		user.getLikedWorkout().remove(workout);
 		em.persist(user);
 		em.persist(workout);
 	}

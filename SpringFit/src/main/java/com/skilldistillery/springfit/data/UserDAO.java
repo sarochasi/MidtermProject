@@ -14,6 +14,7 @@ public interface UserDAO {
 	Boolean usernameExists(String username);
 	
 	void userLikeWorkout(int userId, int workoutId);
+	void userUnlikeWorkout(int userId, int workoutId);
 
 	List<Workout> getLikedWorkouts(int userId); 
 	

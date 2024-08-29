@@ -339,6 +339,25 @@ public class WorkoutController {
 
 		return "redirect:communityBoard.do";
 	}
+	// UNLIKE
+	@RequestMapping(path = "unlikeWorkout.do", method = RequestMethod.POST)
+	public String unlikeWorkout(@RequestParam("workoutId") Integer workoutId, HttpSession session) {
+		User currentUser = (User) session.getAttribute("loggedInUser");
+		Workout workout = workoutDao.getWorkoutById(workoutId);
+		
+		if (currentUser != null && workout != null) {
+			List<User> likedUsers = workout.getUsers();
+			if (!likedUsers.contains(currentUser)) {
+				likedUsers.remove(currentUser); 
+				workout.setUsers(likedUsers);
+				
+				workoutDao.save(workout);
+				userDao.userLikeWorkout(currentUser.getId(), workout.getId());
+			}
+		}
+		
+		return "redirect:profile.do";
+	}
 
 	@RequestMapping(path = "communityBoard.do", method = RequestMethod.GET)
 	public String showCommunityBoard(Model model) {

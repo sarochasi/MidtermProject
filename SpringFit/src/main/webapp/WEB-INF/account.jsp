@@ -171,7 +171,8 @@
 					<h3>Liked Workouts</h3>
 
 					<form action="showAllWorkouts.do" method="GET">
-						<button type="submit" class="btn btn-info">Explore the community!</button>
+						<button type="submit" class="btn btn-info">Explore the
+							community!</button>
 					</form>
 				</div>
 			</div>
@@ -194,7 +195,7 @@
 									<!--  <div class="d-flex justify-content-between">...</div>  (Bootstrap>Docs>Flex) -->
 									<div class="mt-auto">
 										<div class="d-flex justify-content-center align-items-center">
-										<!-- <div class="d-flex align-content-between"> -->
+											<!-- <div class="d-flex align-content-between"> -->
 
 											<%-- <a class="btn btn-outline-info" data-bs-toggle="collapse"
 										href="#collapse${workout.id}" role="button"
@@ -204,14 +205,18 @@
 											<a class="btn btn-outline-info" data-bs-toggle="collapse"
 												href="#collapse${workout.id}" role="button"
 												aria-expanded="false" aria-controls="collapse${workout.id}">
-												View </a> 
-												
-											<a href="#" class="btn btn-outline-info">Edit</a>
+												View </a> <a href="#" class="btn btn-outline-info">Edit</a>
 
 											<form action="deleteWorkout.do" method="POST">
 												<input type="hidden" name="workoutId" value="${workout.id}" />
 												<button type="submit" class="btn btn-outline-info">Delete</button>
 											</form>
+
+											<form action="unlikeWorkout.do" method="POST">
+												<input type="hidden" name="workoutId" value="${workout.id}" />
+												<button type="submit" class="btn btn-outline-info">Unlike</button>
+											</form> 
+
 										</div>
 									</div>
 									<!-- ---------------------- -->
