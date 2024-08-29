@@ -31,11 +31,14 @@ public class RoutineController {
 	@Autowired
 	private RoutineWorkoutDAO routineWorkoutDao;
 
+	//Opens createRoutine.jsp, generates routineID, SENDS createRoutine.jsp list of user workouts,
+	//routineId, and routine Object
 	@RequestMapping(path = "goTocreateRoutinePage.do")
 	public ModelAndView goToCreateRoutineAndInitializeRoutineObjWithUserId(Routine routine, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		User loggedInUser = (User) session.getAttribute("loggedInUser");
 		if (loggedInUser != null) {
+			//Generates newroutine's ID (from persist in DAOImpl)
 			Routine newRoutine = routineDao.createNewRoutine(routine, loggedInUser.getId());
 			List<Workout> workouts = workoutDao.getWorkoutByUserId(loggedInUser.getId());
 			mv.addObject("workouts", workouts);
@@ -67,7 +70,8 @@ public class RoutineController {
 	}
 
 //---------------Receives routineId and WorkoutId, Command Object of RoutineWorkout -----------------
-//	@RequestMapping(path = "recieveRoutineDayAndWorkoutAndCreateRoutineWorkout.do", params = "routineId")
+//	RoutineWorkout made from workoutId, day number. routineId is not part of RoutineWorkout command
+//  Object because its explicitly called in the RequestParam
 	@RequestMapping(path = "addWorkoutToRoutine.do", params = "routineId", method = RequestMethod.POST)
 	public String getRoutineDay(@RequestParam("routineId") int routineId, HttpSession session,
 			RoutineWorkout routineWorkout) {
@@ -76,18 +80,17 @@ public class RoutineController {
 		if (loggedInUser != null) {
 
 			Routine routine = routineDao.getRoutineById(routineId);
-//			Workout workout = workoutDao.getWorkoutById(workoutId);
+			
+			//Creates RoutineWorkout object with routineId and routineWorkout obj, 
+			//DAOIMPL persists and adds RoutineWorkout ID
 			RoutineWorkout newRoutineWorkout = routineWorkoutDao.createRoutineWorkout(0, 0, routineId, routineWorkout);
 
 			mv.setViewName("createRoutine");
 			mv.addObject("routineId", routineId);
 
-//			Routine newRoutine = routineDao.getRoutineById(routineId);
-//			newRoutine.addRoutineWorkout(newRoutineWorkout);
+
 
 			List<Workout> workouts = workoutDao.getWorkoutByUserId(loggedInUser.getId());
-//			return "redirect:createRoutine.do?routineId=" +newRoutine.getId() + "&workouts="+workouts;
-//			return "redirect:goTocreateRoutinePage.do";		//works but creates multiple routines
 			return "redirect:addWorkoutToRoutine.do?routineId=" + routineId;
 		} else {
 			mv.setViewName("home");
@@ -95,6 +98,7 @@ public class RoutineController {
 		}
 	}
 
+	//creates workouts list, 
 	@RequestMapping(path = "addWorkoutToRoutine.do", params = "routineId", method = RequestMethod.GET)
 	public ModelAndView goToAddWorkoutToRoutine(@RequestParam("routineId") int routineId, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
@@ -111,5 +115,12 @@ public class RoutineController {
 		}
 		return mv;
 	}
-
+	
+	@RequestMapping(path = "deleteRoutine.do", params = "routineId", method = RequestMethod.POST)
+	public ModelAndView deleteRoutine(@RequestParam("routineId") int routineId) {
+		ModelAndView mv = new ModelAndView();
+		routineDao.deleteRoutineById(routineId);
+		mv.setViewName("account");
+		return mv;
+	}
 }

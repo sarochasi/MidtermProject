@@ -36,4 +36,18 @@ public class RoutineDAOImpl implements RoutineDAO {
 
 	}
 
+
+	@Override
+	public boolean deleteRoutineById(int routineId) {
+		boolean deleted = false;
+		Routine routine = em.find(Routine.class, routineId);
+		
+		if(routine != null) {
+			em.remove(routine);
+			deleted = true;
+		}
+		
+		return deleted;
+	}
+
 }

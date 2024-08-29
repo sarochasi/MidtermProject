@@ -16,8 +16,31 @@
 	crossorigin="anonymous"></script>
 <meta charset="UTF-8">
 <title>Create Routine</title>
+
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+	crossorigin="anonymous">
+
+<style>
+.scrolling-wrapper {
+	overflow-x: auto;
+	white-space: nowrap;
+	padding: 10px 0;
+}
+
+.scrolling-wrapper .card {
+	display: inline-block;
+	width: 200px;
+	margin-right: 10px;
+}
+</style>
 </head>
 <body>
+<div class="container col-xl-10 col-xxl-8 px-4 py-5">
+
+	<%@ include file="navbar.jsp"%>
 	<h1>Routine: ${routine.name}</h1>
 	<!-- --------------------------------------------------------------------------------------------------------------------  -->
 	<h2>Workouts</h2>
@@ -48,8 +71,16 @@
 			
 			<input type="submit" value="Submit" />
 
+
+		</form >
+
+			
+		<!--Return to account.jsp  -->
+		<form action="profile.do" method="get">
+			<input type="submit" value="Workout Complete" />
 		</form>
 	</c:if>
 	<!-- --------------------------------------------------------------------------------------------------------------------  -->
+</div>
 </body>
 </html>
