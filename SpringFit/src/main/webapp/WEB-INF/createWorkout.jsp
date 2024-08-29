@@ -56,11 +56,11 @@
 										name="sets" placeholder="Set"> <label
 										for="floatingInput">Set</label>
 								</div>
-							<!-- 	<div class="form-floating mb-3">
+							<div class="form-floating mb-3">
 									<input type="text" class="form-control" id="floatingInput"
 										name="note" placeholder="Note"> <label
 										for="floatingInput">Note</label>
-								</div> -->
+								</div>
 								<button class="btn btn-lg btn-primary" type="submit">Add
 									exercise</button>
 									

@@ -121,4 +121,18 @@ public class WorkoutDAOImpl implements WorkoutDAO {
 
 	}
 
+	 @Override
+	    public Workout save(Workout workout) {
+	        if (workout.getId() == 0) { // If the workout doesn't have an ID, it's new
+	            em.persist(workout);
+	        } else { // If it has an ID, it's an update
+	            workout = em.merge(workout);
+	        }
+	        return workout;
+	    }
+	 
+	  public Workout findById(Integer id) {
+	        return em.find(Workout.class, id);
+	    }
+	
 }

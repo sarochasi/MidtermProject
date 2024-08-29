@@ -12,7 +12,11 @@ public interface UserDAO {
 	
 	void userLikeWorkout(int userId, int workoutId);
 	
+
 	User findById(int userId);
+
+	public User getUserById(int userId);
+
 	
 	
 

@@ -6,13 +6,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.skilldistillery.springfit.data.ExerciseDAO;
+import com.skilldistillery.springfit.data.UserDAO;
 import com.skilldistillery.springfit.data.WorkoutDAO;
 import com.skilldistillery.springfit.data.WorkoutExerciseDAO;
 import com.skilldistillery.springfit.entities.Exercise;
@@ -29,6 +30,8 @@ public class WorkoutController {
 	private WorkoutDAO workoutDao;
 	@Autowired
 	private ExerciseDAO exerciseDao;
+	@Autowired
+	private UserDAO userDao;
 
 	@Autowired
 	private WorkoutExerciseDAO workoutExerciseDao;
@@ -60,6 +63,26 @@ public class WorkoutController {
 		} else {
 			mv.setViewName("home");
 		}
+
+		return mv;
+	}
+
+
+	@RequestMapping(path = "addMoreExercise.do", params = "workoutId")
+	public ModelAndView addMoreExercise(@RequestParam("workoutId") int workoutId) {
+		ModelAndView mv = new ModelAndView();
+
+		mv.addObject("exerciseTypes", exerciseDao.findAllExerciseTypes());
+
+//		=============================================
+		List<WorkoutExercise> workoutExercises = workoutDao.getExercisesByWorkoutId(workoutId);
+		;
+		mv.addObject("workoutExercises", workoutExercises);
+//	    ==============================================
+
+		mv.addObject("workoutId", workoutId);
+
+		mv.setViewName("createWorkout");
 
 		return mv;
 	}
@@ -201,13 +224,135 @@ public class WorkoutController {
 			if(!deleted) {
 				mv.addObject("errorMsg", "Failed to delete the workout");
 				mv.setViewName("error");
-			}else {
+
+			} else {
 				mv.setViewName("redirect:profile.do");
+			}
+		}
+
+		return mv;
+
+	}
+
+	@RequestMapping(path = "updateWorkoutForm.do", method = RequestMethod.GET)
+	public ModelAndView showUpdateWorkoutForm(@RequestParam("workoutId") int id) {
+		ModelAndView mv = new ModelAndView();
+		Workout workout = workoutDao.getWorkoutById(id);
+
+		if (workout != null) {
+			mv.addObject("workout", workout);
+			mv.setViewName("updateForm");
+		} else {
+			mv.addObject("errorMsg", "Workout not found");
+			mv.setViewName("error");
+		}
+		return mv;
+
+	}
+
+	@RequestMapping(path = "updateWorkout.do", method = RequestMethod.POST)
+	public ModelAndView updateWorkout(@ModelAttribute("workout") Workout workout) {
+		ModelAndView mv = new ModelAndView();
+
+		try {
+			Workout updatedWorkout = workoutDao.updateWorkout(workout.getId(), workout);
+			if (updatedWorkout != null) {
+				mv.addObject("workout", updatedWorkout);
+				mv.setViewName("redirect:updateWorkoutExerciseForm.do?workoutId=" + updatedWorkout.getId());
+			}
+
+		} catch (Exception e) {
+			mv.addObject("errorMsg", "Error occured while updating the Workout.");
+			mv.setViewName("error");
+			e.printStackTrace();
+		}
+		return mv;
+	}
+
+	@RequestMapping(path = "updateWorkoutExerciseForm.do", method = RequestMethod.GET)
+	public ModelAndView showUpdateWorkoutExerciseForm(@RequestParam("workoutId") int workoutId) {
+		ModelAndView mv = new ModelAndView();
+//		WorkoutExercise workoutExercise = workoutExerciseDao.getWorkoutExerciseById(id);
+		List<WorkoutExercise> workoutExercises = workoutDao.getExercisesByWorkoutId(workoutId);
+
+		if (workoutExercises != null) {
+			mv.addObject("workoutExercises", workoutExercises);
+			mv.setViewName("updateWorkoutExerciseform");
+		} else {
+			mv.addObject("errorMsg", "WorkoutExercise not found");
+			mv.setViewName("error");
+		}
+		return mv;
+
+	}
+
+	@RequestMapping(path = "updateWorkoutExercise.do", method = RequestMethod.POST)
+	public ModelAndView updateWorkoutExercise(@ModelAttribute("workout") WorkoutExercise workoutExercise,
+			@RequestParam("workoutExerciseId") Integer workoutExerciseId,
+			@RequestParam("workoutId") Integer workoutId) {
+		ModelAndView mv = new ModelAndView();
+		try {
+			workoutExerciseDao.updateWorkoutExercise(workoutExerciseId, workoutExercise);
+			mv.setViewName("redirect:updateWorkoutExerciseForm.do?workoutId=" + workoutId);
+		} catch (Exception e) {
+			mv.addObject("errorMsg", "Error occurred while updating the workout exercises.");
+			mv.setViewName("error");
+			e.printStackTrace();
+		}
+		return mv;
+	}
+
+	@RequestMapping(path = "deleteWorkoutExercise.do", method = RequestMethod.POST)
+	public ModelAndView deleteWorkoutExercise(@ModelAttribute("workout") WorkoutExercise workoutExercise,
+			@RequestParam("workoutExerciseId") Integer workoutExerciseId,
+			@RequestParam("workoutId") Integer workoutId) {
+
+		ModelAndView mv = new ModelAndView();
+
+		if (workoutExercise == null) {
+			mv.addObject("errorMsg", "WorkoutExercise not found with ID: " + workoutExerciseId);
+			mv.setViewName("error");
+		} else {
+			boolean deleted = workoutExerciseDao.deleteWorkoutExercise(workoutExerciseId);
+			if (!deleted) {
+				mv.addObject("errorMsg", "Failed to delete");
+				mv.setViewName("error");
+			} else {
+				mv.setViewName("redirect:updateWorkoutExerciseForm.do?workoutId=" + workoutId);
 			}
 		}
 		
 		return mv;
 		
 	}
+
+	
+	// LIKE
+	@RequestMapping(path = "likeWorkout.do", method = RequestMethod.POST)
+	public String likeWorkout(@RequestParam("workoutId") Integer workoutId, HttpSession session) {
+		User currentUser = (User) session.getAttribute("loggedInUser");
+		Workout workout = workoutDao.getWorkoutById(workoutId);
+
+		if (currentUser != null && workout != null) {
+			List<User> likedUsers = workout.getUsers();
+			if (!likedUsers.contains(currentUser)) {
+				likedUsers.add(currentUser); 
+				workout.setUsers(likedUsers);
+				
+				workoutDao.save(workout);
+				userDao.userLikeWorkout(currentUser.getId(), workout.getId());
+			}
+		}
+
+		return "redirect:communityBoard.do";
+	}
+
+	@RequestMapping(path = "communityBoard.do", method = RequestMethod.GET)
+	public String showCommunityBoard(Model model) {
+		List<Workout> allWorkouts = workoutDao.showAllWorkouts();
+		model.addAttribute("allWorkouts", allWorkouts);
+		return "communityWorkouts";
+	}
+
 
 }

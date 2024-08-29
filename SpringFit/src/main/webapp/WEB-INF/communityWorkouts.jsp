@@ -12,107 +12,99 @@
 	rel="stylesheet"
 	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
 	crossorigin="anonymous">
-	
+
 <title>Community - Workouts</title>
 
 </head>
 
 <body>
 
-	 <%@ include file="navbar.jsp"%> 
+	<%@ include file="navbar.jsp"%>
 
 	<main>
 		<div class="container col-xl-10 col-xxl-8 px-4 py-5">
 
-			<h1>Community</h1>
+			<h1>Community Board</h1>
+			<div class="card-container">
+				<div class="row">
+					<c:forEach var="workout" items="${allWorkouts}">
+						<div class="col-md-6 mb-6">
+							<div class="card" style="width: 25rem;">
+								<div class="card-body">
+									<h5 class="card-title">${workout.name}</h5>
+									<h6 class="card-subtitle mb-2 text-body-secondary">
+										<strong>Created by: </strong>${workout.user.firstName}
+									</h6>
+									<p class="card-text">
+										<strong>Description: </strong>${workout.description != null ? workout.description : 'N/A'}
+									</p>
+									<a class="btn btn-outline-success" data-bs-toggle="collapse"
+										href="#collapse${workout.id}" role="button"
+										aria-expanded="false" aria-controls="collapse${workout.id}">
+										View Exercises </a>
+									<form action="likeWorkout.do" method="POST"
+										style="display: inline;">
+										<input type="hidden" name="workoutId" value="${workout.id}" />
+										<button type="submit" class="btn btn-outline-success">Like
+											(${workout.likeCount})</button>
+									</form>
 
-			<c:choose>
+									<form action="CreatingComment.do" method="POST">
+										<input type="hidden" value="${workout.id }" name="workoutId" />
+										<div class="form-floating mb-3">
+									<input type="text" class="form-control" id="floatingInput"
+										name="content" placeholder="comment"> <label
+										for="floatingInput">Comment</label>
+								</div>
+								<button class="btn btn-lg btn-primary" type="submit">Comment</button>
+										</form>
+										
+										<%-- <div class="comments-section mt-4">
+                            <c:forEach var="comment" items="${workout.comments}">
+                                <div class="comment">
+                                    <p><strong>${comment.user.firstName}:</strong> ${comment.content}</p>
+                                    <p class="text-muted">${comment.createDate}</p>
+                                </div>
+                            </c:forEach>
+                        </div> --%>
+										
 
-				<c:when test="${not empty loggedInUser}">
 
-					<div class="card-container">
-						<div class="row">
-							<c:forEach var="workout" items="${allWorkouts}">
-								<div class="col-md-6 mb-6">
-									<div class="card" style="width: 25rem;">
-										<div class="card-body">
-											<h5 class="card-title">${workout.name}</h5>
-											<h6 class="card-subtitle mb-2 text-body-secondary">
-												<strong>Created by: </strong>${workout.user.firstName}
-											</h6>
-											<p class="card-text">
-												<strong>Description: </strong>${workout.description != null ? workout.description : 'N/A'}
-											</p>
-											<a class="btn btn-outline-success" data-bs-toggle="collapse"
-												href="#collapse${workout.id}" role="button"
-												aria-expanded="false" aria-controls="collapse${workout.id}">
-												View Exercises </a> <a href="#" class="btn btn-outline-success">Like</a>
-											<a href="#" class="btn btn-outline-success">Comment</a>
-
-											<div class="collapse mt-2" id="collapse${workout.id}">
-												<div class="card card-body"
-													style="max-height: 150px; overflow-y: auto;">
-													<ul>
-														<c:if test="${not empty workout.workoutExercises}">
-															<c:forEach var="exercise"
-																items="${workout.workoutExercises}">
-																<li><strong>${exercise.exercise.name}</strong><br />
-																	Units: ${exercise.units}<br /> Sets: ${exercise.sets}<br />
-																	Notes: ${exercise.notes != null ? exercise.notes : 'N/A'}<br />
-																</li>
-															</c:forEach>
-														</c:if>
-														<c:if test="${empty workout.workoutExercises}">
-															<li>No exercises found for this workout.</li>
-														</c:if>
-													</ul>
-												</div>
+										
 											</div>
 										</div>
-									</div>
+
+
+
+
+										<div class="collapse mt-2" id="collapse${workout.id}">
+											<div class="card card-body"
+												style="max-height: 150px; overflow-y: auto;">
+												<ul>
+													<c:if test="${not empty workout.workoutExercises}">
+														<c:forEach var="exercise"
+															items="${workout.workoutExercises}">
+															<li><strong>${exercise.exercise.name}</strong><br />
+																Units: ${exercise.units}<br /> Sets: ${exercise.sets}<br />
+																Notes: ${exercise.notes != null ? exercise.notes : 'N/A'}<br />
+															</li>
+														</c:forEach>
+													</c:if>
+													<c:if test="${empty workout.workoutExercises}">
+														<li>No exercises found for this workout.</li>
+													</c:if>
+												</ul>
+											</div>
+										</div>
 								</div>
-							</c:forEach>
+							</div>
 						</div>
-					</div>
-				</c:when>
-				<c:otherwise>
-					<p>Please log in to see the community</p>
-					<button class="btn btn-link active" type="button"
-						data-bs-toggle="collapse" data-bs-target="#loginForm3"
-						aria-expanded="false" aria-controls="loginForm">Log in</button>
-
-
-
-				</c:otherwise>
-
-
-			</c:choose>
-
-			<div class="collapse" id="loginForm3"
-				style="right: 0; width: 250px; z-index: 1000;">
-				<div class="card card-body">
-					<form action="login.do" method="POST">
-						<div class="mb-3">
-							<label for="username" class="form-label">Username</label> <input
-								type="text" class="form-control" id="username" name="username"
-								required>
-						</div>
-						<div class="mb-3">
-							<label for="password" class="form-label">Password</label> <input
-								type="password" class="form-control" id="password"
-								name="password" required>
-						</div>
-						<button type="submit" class="btn btn-primary w-100">Log
-							in</button>
-					</form>
-
+					</c:forEach>
 				</div>
 			</div>
-
-
 			<!-- ================================================================================= -->
 
-			 <%@ include file="footer.jsp"%> 
+			<%@ include file="footer.jsp"%>
 	</main>
 
 
