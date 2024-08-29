@@ -313,7 +313,65 @@
 		</form>
 
 
-		<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->
+
+ 
+		</div>
+<h3>Your Routines</h3>
+			<div class="card-container">
+				<div class="row">
+					<c:forEach var="routine" items="${user.routines}">
+						<div class="col-md-4 mb-4">
+							<div class="card" style="width: 18rem;">
+								<div class="card-body">
+									<h5 class="card-title">${routine.name}</h5>
+									<h6 class="card-subtitle mb-2 text-body-secondary">
+										<strong>Created by: </strong>${user.firstName}
+									</h6>
+									<p class="card-text">
+										<strong>Description: </strong>${routine.description != null ? routine.description : 'N/A'}
+									</p>
+									<a class="btn btn-outline-info" data-bs-toggle="collapse"
+										href="#collapse${routine.id}" role="button"
+										aria-expanded="false" aria-controls="collapse${workout.id}">
+										View Workouts </a> <a href="#" class="btn btn-outline-info">Edit</a>
+
+
+									<form action="deleteRoutine.do" method="POST">
+										<input type="hidden" name="routineId" value="${routine.id}" />
+										<button type="submit" class="btn btn-outline-info">Delete</button>
+									</form>
+
+									<div class="collapse mt-2" id="collapse${routine.id}">
+										<div class="card card-body">
+											<ul>
+												<c:if test="${not empty routine.routineWorkouts}">
+													<c:forEach var="routineWorkout"
+														items="${routine.routineWorkouts}">
+														<li><strong>${routineWorkout.workout.name}</strong><br />
+<%-- 															Units: ${routineWorkout.units}<br /> Sets: ${exercise.sets}<br />
+															Notes: ${exercise.notes != null ? exercise.notes : 'N/A'}<br /> --%>
+														</li>
+													</c:forEach>
+												</c:if>
+												<c:if test="${empty workout.workoutExercises}">
+													<li>No exercises found for this workout.</li>
+												</c:if>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</c:forEach>
+				</div>
+			</div>
+			<a class="btn btn-info" href="showAllWorkouts.do">Explore
+				workouts from the community!</a> 
+			
+			<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->		<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->
+
+
+
 
 
 		<!-- Footer -->
