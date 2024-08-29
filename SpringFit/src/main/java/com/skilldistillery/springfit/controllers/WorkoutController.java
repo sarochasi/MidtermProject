@@ -67,7 +67,6 @@ public class WorkoutController {
 		return mv;
 	}
 
-
 	@RequestMapping(path = "addMoreExercise.do", params = "workoutId")
 	public ModelAndView addMoreExercise(@RequestParam("workoutId") int workoutId) {
 		ModelAndView mv = new ModelAndView();
@@ -180,24 +179,21 @@ public class WorkoutController {
 		if (loggedInUser != null) {
 			List<Workout> myWorkouts = workoutDao.getWorkoutByUserId(userId);
 			List<Workout> userLikedWorkouts = userDao.getLikedWorkouts(userId);
-			
+
 //			for (Workout workout : myWorkouts) {
 //				System.out.println("Workout Name: " + workout.getName());
 //			}
 
 			model.addAttribute("myWorkouts", myWorkouts);
 			model.addAttribute("userLikedWorkouts", userLikedWorkouts);
-			
+
 			return "account";
 		} else {
 
-			
 			System.out.println("==================No user=============");
 			return "account";
 		}
 	}
-	
-
 
 	@RequestMapping(path = "showExercisesWithinWorkout.do", method = RequestMethod.GET)
 	public ModelAndView viewWorkoutDetails(@RequestParam("workoutId") int workoutId) {
@@ -211,18 +207,18 @@ public class WorkoutController {
 
 		return mv;
 	}
-	
-	@RequestMapping(path="deleteWorkout.do", method = RequestMethod.POST)
+
+	@RequestMapping(path = "deleteWorkout.do", method = RequestMethod.POST)
 	public ModelAndView deleteWorkout(@RequestParam("workoutId") int workoutId) {
-		
+
 		ModelAndView mv = new ModelAndView();
 		Workout workout = workoutDao.getWorkoutById(workoutId);
-		
-		if(workout == null) {
+
+		if (workout == null) {
 			mv.setViewName("error");
-		}else {
+		} else {
 			boolean deleted = workoutDao.deleteWorkout(workoutId);
-			if(!deleted) {
+			if (!deleted) {
 				mv.addObject("errorMsg", "Failed to delete the workout");
 				mv.setViewName("error");
 
@@ -322,12 +318,11 @@ public class WorkoutController {
 				mv.setViewName("redirect:updateWorkoutExerciseForm.do?workoutId=" + workoutId);
 			}
 		}
-		
+
 		return mv;
-		
+
 	}
 
-	
 	// LIKE
 	@RequestMapping(path = "likeWorkout.do", method = RequestMethod.POST)
 	public String likeWorkout(@RequestParam("workoutId") Integer workoutId, HttpSession session) {
@@ -335,35 +330,31 @@ public class WorkoutController {
 		Workout workout = workoutDao.getWorkoutById(workoutId);
 
 		if (currentUser != null && workout != null) {
-			List<User> likedUsers = workout.getUsers();
-			if (!likedUsers.contains(currentUser)) {
-				likedUsers.add(currentUser); 
-				workout.setUsers(likedUsers);
+			
+			currentUser.addLikedWorkout(workout);
+			workout.addLikeByUser(currentUser);
+			session.setAttribute("loggedInUser", currentUser);
+			workoutDao.save(workout);
 				
-				workoutDao.save(workout);
-				userDao.userLikeWorkout(currentUser.getId(), workout.getId());
 			}
-		}
 
 		return "redirect:communityBoard.do";
 	}
+
 	// UNLIKE
 	@RequestMapping(path = "unlikeWorkout.do", method = RequestMethod.POST)
 	public String unlikeWorkout(@RequestParam("workoutId") Integer workoutId, HttpSession session) {
 		User currentUser = (User) session.getAttribute("loggedInUser");
 		Workout workout = workoutDao.getWorkoutById(workoutId);
-		
+
 		if (currentUser != null && workout != null) {
-			List<User> likedUsers = workout.getUsers();
-			if (!likedUsers.contains(currentUser)) {
-				likedUsers.remove(currentUser); 
-				workout.setUsers(likedUsers);
-				
-				workoutDao.save(workout);
-				userDao.userLikeWorkout(currentUser.getId(), workout.getId());
-			}
-		}
+
+			currentUser.removeLikedWorkout(workout);
+			session.setAttribute("loggedInUser", currentUser);
+			workoutDao.save(workout);
 		
+		}
+
 		return "redirect:profile.do";
 	}
 
@@ -373,6 +364,5 @@ public class WorkoutController {
 		model.addAttribute("allWorkouts", allWorkouts);
 		return "communityWorkouts";
 	}
-
 
 }

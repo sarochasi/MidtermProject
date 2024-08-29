@@ -163,20 +163,38 @@ public class Workout {
 	public void setWorkoutExercises(List<WorkoutExercise> workoutExercises) {
 		this.workoutExercises = workoutExercises;
 	}
-
+	// ADD & REMOVE
 	public void addWorkoutExercise(WorkoutExercise workoutExercise) {
 		if (workoutExercises == null) {
 			workoutExercises = new ArrayList<>();
 		}
-
 		workoutExercises.add(workoutExercise);
 		workoutExercise.setWorkout(this);
-
 	}
 
 	public void removeWorkoutExercise(WorkoutExercise workoutExercise) {
 		System.out.println("fix removeWorkoutExercise");
 	}
+	
+	
+	public void addLikeByUser(User user) {
+		if (users == null) {
+			users = new ArrayList<>();
+		}
+		if (!users.contains(user)) {
+			users.add(user);
+			user.addLikedWorkout(this);
+		}
+	}
+	
+	public void removeLikeByUser(User user) {
+		if (users != null && users.contains(user)) {
+			users.remove(user);
+			user.removeLikedWorkout(this);
+		}
+	}
+	
+	
 	
 	public void setLikeCount(int likeCount) {
         this.likeCount = likeCount;

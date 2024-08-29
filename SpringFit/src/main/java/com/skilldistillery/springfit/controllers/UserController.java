@@ -93,15 +93,15 @@ public class UserController {
 			// User's "liked" workouts
 			List<Workout> userLikedWorkouts = userDao.getLikedWorkouts(loggedInUser.getId());
 
-			for (Workout workout : myWorkouts) {
-				List<WorkoutExercise> myExercises = workoutDao.getExercisesByWorkoutId(workout.getId());
-				workout.setWorkoutExercises(myExercises);
-			}
-
-			for (Workout workout : userLikedWorkouts) {
-				List<WorkoutExercise> likedWorkoutExercises = workoutDao.getExercisesByWorkoutId(workout.getId());
-				workout.setWorkoutExercises(likedWorkoutExercises);
-			}
+//			for (Workout workout : myWorkouts) {
+//				List<WorkoutExercise> myExercises = workoutDao.getExercisesByWorkoutId(workout.getId());
+//				workout.setWorkoutExercises(myExercises);
+//			}
+//
+//			for (Workout workout : userLikedWorkouts) {
+//				List<WorkoutExercise> likedWorkoutExercises = workoutDao.getExercisesByWorkoutId(workout.getId());
+//				workout.setWorkoutExercises(likedWorkoutExercises);
+//			}
 
 			model.addAttribute("myWorkouts", myWorkouts);
 			model.addAttribute("userLikedWorkouts", userLikedWorkouts);
