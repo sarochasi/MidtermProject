@@ -1,5 +1,7 @@
 package com.skilldistillery.springfit.data;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.springfit.entities.User;
@@ -64,6 +66,11 @@ public class UserDaoImpl implements UserDAO {
 		em.persist(workout);
 	}
 	
+	@Override
+	public List<Workout> getLikedWorkouts(int userId) {
+		User user = em.find(User.class, userId);
+		return user.getLikedWorkout();
+	}
 	
 	
 	

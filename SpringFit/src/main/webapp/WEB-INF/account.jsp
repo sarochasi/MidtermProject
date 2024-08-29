@@ -109,12 +109,12 @@
 											<p class="card-text">
 												<strong>Description: </strong>${workout.description != null ? workout.description : 'N/A'}
 											</p>
-
+											
 											<a class="btn btn-outline-info" data-bs-toggle="collapse"
-												href="#collapse${workout.id}" role="button"
-												aria-expanded="false" aria-controls="collapse${workout.id}">
-												View Exercises </a>
-
+										href="#collapse${workout.id}" role="button"
+										aria-expanded="false" aria-controls="collapse${workout.id}">
+										View Exercises </a> 
+										
 											<form action="updateWorkoutForm.do" method="GET">
 												<input type="hidden" name="workoutId" value="${workout.id}" />
 												<button type="submit" class="btn btn-outline-info">Edit</button>
@@ -162,18 +162,14 @@
 				</c:otherwise>
 
 			</c:choose>
-<hr class="my-4">
+
 
 			<!-- ----------------------------------------------------------------WILL NEED TO UPDATE ONCE WE HAVE FAV FUNCTIONING--------------------------------- -->
-			<!-- FAVORITE -->
-			<h3>Your Favorite Workouts</h3>
-
-
-
-
+			<!-- FAVORITE --> 
+			<h3>Liked Workouts</h3>
 			<div class="card-container">
 				<div class="row">
-					<c:forEach var="workout" items="${myWorkouts}">
+					<c:forEach var="workout" items="${userLikedWorkouts}">
 						<div class="col-md-4 mb-4">
 							<div class="card" style="width: 18rem;">
 								<div class="card-body">
@@ -219,11 +215,9 @@
 					</c:forEach>
 				</div>
 			</div>
-			<a class="btn btn-info" href="showAllWorkouts.do">Explore
-				workouts from the community!</a>
+
 			<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->
 			<!-- Today's Numbers / Health? -->
-<hr class="my-4">
 
 			<h3>Weight & Nutrition</h3>
 			<table class="table table-bordered">
@@ -293,24 +287,29 @@
 					<input type="number" class="form-control" name="gramsProtein"
 						placeholder="Enter protein (in grams)" required>
 					<button type="submit" class="btn btn-info">Submit</button>
-				</form> <br>
+				</form>
+				
+				<br>
 
 				<form action="showAllNutrition.do" method="POST">
 					<button class="btn btn-info" type="submit">View</button>
 				</form>
+				
 		</div>
-		<br>
-
-
+				<br>
+				
+				<form action="showAllWorkouts.do" method="POST">
+					<button class="btn btn-info" type="submit">Explore workouts from the community!</button>
+				</form>
 		<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->
 		<!-- ---------------------------------------------------------ROUTINE--------------------------------------------------------------------------------- -->
 		<h3>Routine</h3>
-		<form action="goTocreateRoutinePage.do" method="GET">
-			<input type="text" class="form-control" name="name"
-				placeholder="Create New Routine" required>
-			<button type="submit" class="btn btn-outline-info">Create
-				Routine</button>
-		</form>
+			<form action="goTocreateRoutinePage.do" method="GET">
+				<input type="text" class="form-control" name="name"
+					placeholder="Create New Routine" required>
+				<button type="submit" class="btn btn-outline-info">Create
+					Routine</button>
+			</form>
 
 
 		<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->

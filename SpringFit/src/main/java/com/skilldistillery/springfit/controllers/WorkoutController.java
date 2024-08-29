@@ -178,19 +178,18 @@ public class WorkoutController {
 		User loggedInUser = (User) session.getAttribute("loggedInUser");
 		if (loggedInUser != null) {
 			List<Workout> myWorkouts = workoutDao.getWorkoutByUserId(userId);
-			System.out.println("======================================");
-			System.out.println("User ID: " + userId);
-			System.out.println("Number of Workouts: " + myWorkouts.size());
-			for (Workout workout : myWorkouts) {
-				System.out.println("Workout Name: " + workout.getName());
-			}
-			System.out.println("======================================");
+			List<Workout> userLikedWorkouts = userDao.getLikedWorkouts(userId);
+			
+//			for (Workout workout : myWorkouts) {
+//				System.out.println("Workout Name: " + workout.getName());
+//			}
 
 			model.addAttribute("myWorkouts", myWorkouts);
+			model.addAttribute("userLikedWorkouts", userLikedWorkouts);
+			
 			return "account";
 		} else {
 
-			System.out.println("==================No user=============");
 			return "account";
 		}
 	}
