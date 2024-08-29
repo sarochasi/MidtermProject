@@ -23,7 +23,8 @@ public class RoutineWorkoutDAOImpl implements RoutineWorkoutDAO {
 
 	@Override
 	public RoutineWorkout createRoutineWorkout(int day, int workoutId, int routineId, RoutineWorkout routineWorkout) {
-		Workout workout = em.find(Workout.class, workoutId);
+//		Workout workout = em.find(Workout.class, workoutId);
+		Workout workout = em.find(Workout.class, routineWorkout.getWorkout().getId());
 		Routine routine = em.find(Routine.class, routineId);
 		if(workout !=null && routine != null) {
 			routineWorkout.setRoutine(routine);

@@ -29,4 +29,11 @@ public class RoutineDAOImpl implements RoutineDAO {
 		return routine;
 	}
 
+
+	@Override
+	public Routine getRoutineById(int routineId) {
+		return em.find(Routine.class,routineId );
+
+	}
+
 }

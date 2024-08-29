@@ -1,6 +1,9 @@
 package com.skilldistillery.springfit.data;
 
+import java.util.List;
+
 import com.skilldistillery.springfit.entities.User;
+import com.skilldistillery.springfit.entities.Workout;
 
 public interface UserDAO {
 	
@@ -11,8 +14,15 @@ public interface UserDAO {
 	Boolean usernameExists(String username);
 	
 	void userLikeWorkout(int userId, int workoutId);
+	void userUnlikeWorkout(int userId, int workoutId);
+
+	List<Workout> getLikedWorkouts(int userId); 
 	
+
+	User findById(int userId);
+
 	public User getUserById(int userId);
+
 	
 	
 
