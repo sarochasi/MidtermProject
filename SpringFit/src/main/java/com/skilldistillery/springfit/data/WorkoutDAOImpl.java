@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.skilldistillery.springfit.entities.User;
 import com.skilldistillery.springfit.entities.Workout;
+import com.skilldistillery.springfit.entities.WorkoutComment;
 import com.skilldistillery.springfit.entities.WorkoutExercise;
 
 import jakarta.persistence.EntityManager;
@@ -92,6 +93,8 @@ public class WorkoutDAOImpl implements WorkoutDAO {
 		String jpql = "SELECT we FROM WorkoutExercise we WHERE we.workout.id = :workoutId";
 		return em.createQuery(jpql, WorkoutExercise.class).setParameter("workoutId", workoutId).getResultList();
 	}
+	
+
 
 //	=====================================================================
 

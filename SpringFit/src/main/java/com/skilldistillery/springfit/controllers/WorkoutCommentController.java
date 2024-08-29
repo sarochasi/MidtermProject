@@ -49,7 +49,8 @@ public class WorkoutCommentController {
 	}
 
 	@RequestMapping(path = "CreatingComment.do")
-    public ModelAndView createComment(@RequestParam("workoutId") int workoutId, @RequestParam("content") String content, WorkoutComment workoutComment, HttpSession session) {
+    public ModelAndView createComment(@RequestParam("workoutId") int workoutId, 
+    		@RequestParam("content") String content, WorkoutComment workoutComment, HttpSession session) {
     	ModelAndView mv = new ModelAndView();
     	User loggedInUser = (User) session.getAttribute("loggedInUser");
     	if(loggedInUser != null) {
@@ -61,6 +62,8 @@ public class WorkoutCommentController {
             newComment.setCreateDate(LocalDateTime.now());
             newComment.setEnabled(true);
     		mv.addObject("workoutComment", newComment);
+    		List<WorkoutComment> workoutComments = workoutCommentDao.getCommentByWorkoutId(workoutId);
+    		mv.addObject("workoutComments", workoutComments);
     		mv.setViewName("redirect:showCommunity.do");
     }else {
     	mv.setViewName("home");
@@ -118,6 +121,7 @@ public class WorkoutCommentController {
 	@RequestMapping(path = "showCommunity.do", method = RequestMethod.GET)
 	public String list(Model model) {
 		List<Workout> allWorkouts = workoutDao.showAllWorkouts();
+		
 		model.addAttribute("allWorkouts", allWorkouts);
 		return "communityWorkouts";
 	}
