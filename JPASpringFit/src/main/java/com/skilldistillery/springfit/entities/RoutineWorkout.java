@@ -28,6 +28,10 @@ public class RoutineWorkout {
 	@ManyToOne
 	@JoinColumn(name = "routine_id")
 	private Routine routine;
+	
+	@ManyToOne
+	@JoinColumn(name = "workout_id")
+	private Workout workout;
 
 	public RoutineWorkout() {
 		super();
@@ -63,6 +67,17 @@ public class RoutineWorkout {
 
 	public void setRoutine(Routine routine) {
 		this.routine = routine;
+	}
+	
+	
+	
+
+	public Workout getWorkout() {
+		return workout;
+	}
+
+	public void setWorkout(Workout workout) {
+		this.workout = workout;
 	}
 
 	@Override
