@@ -149,7 +149,7 @@ System.out.println();
 	public ModelAndView deleteRoutine(@RequestParam("routineId") int routineId) {
 		ModelAndView mv = new ModelAndView();
 		routineDao.deleteRoutineById(routineId);
-		mv.setViewName("account");
+		mv.setViewName("redirect:profile.do");
 		return mv;
 	}
 }
