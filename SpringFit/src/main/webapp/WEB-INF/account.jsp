@@ -170,9 +170,8 @@
 				<div class="d-flex justify-content-between align-items-center">
 					<h3>Liked Workouts</h3>
 
-					<form action="showAllWorkouts.do" method="POST">
-						<button type="submit" class="btn btn-info">Explore
-							workouts from the community!</button>
+					<form action="showAllWorkouts.do" method="GET">
+						<button type="submit" class="btn btn-info">Explore the community!</button>
 					</form>
 				</div>
 			</div>
@@ -190,16 +189,32 @@
 									<p class="card-text">
 										<strong>Description: </strong>${workout.description != null ? workout.description : 'N/A'}
 									</p>
-									<a class="btn btn-outline-info" data-bs-toggle="collapse"
+
+									<!-- BUTTONS -->
+									<!--  <div class="d-flex justify-content-between">...</div>  (Bootstrap>Docs>Flex) -->
+									<div class="mt-auto">
+										<div class="d-flex justify-content-center align-items-center">
+										<!-- <div class="d-flex align-content-between"> -->
+
+											<%-- <a class="btn btn-outline-info" data-bs-toggle="collapse"
 										href="#collapse${workout.id}" role="button"
 										aria-expanded="false" aria-controls="collapse${workout.id}">
-										View Exercises </a> <a href="#" class="btn btn-outline-info">Edit</a>
+										View Exercises </a>  --%>
 
+											<a class="btn btn-outline-info" data-bs-toggle="collapse"
+												href="#collapse${workout.id}" role="button"
+												aria-expanded="false" aria-controls="collapse${workout.id}">
+												View </a> 
+												
+											<a href="#" class="btn btn-outline-info">Edit</a>
 
-									<form action="deleteWorkout.do" method="POST">
-										<input type="hidden" name="workoutId" value="${workout.id}" />
-										<button type="submit" class="btn btn-outline-info">Delete</button>
-									</form>
+											<form action="deleteWorkout.do" method="POST">
+												<input type="hidden" name="workoutId" value="${workout.id}" />
+												<button type="submit" class="btn btn-outline-info">Delete</button>
+											</form>
+										</div>
+									</div>
+									<!-- ---------------------- -->
 
 									<div class="collapse mt-2" id="collapse${workout.id}">
 										<div class="card card-body">
@@ -257,57 +272,55 @@
 			<!-- ---------------------------------------------------NUTRITION------------------------------------------------------------------------------ -->
 			<!-- <td>Track your macros!</td> -->
 			<!-- <td><legend class="form-label"></legend> -->
-				<form action="addNutrition.do" method="POST">
-					<!-- DATE -->
-					<div class="col-md-4">
-						<label for="zip" class="form-label"></label> <input type="date"
-							class="form-control" id="dateEaten" name="dateEaten"
-							placeholder="YYYY-MM-DD">
-					</div>
+			<form action="addNutrition.do" method="POST">
+				<!-- DATE -->
+				<div class="col-md-4">
+					<label for="zip" class="form-label"></label> <input type="date"
+						class="form-control" id="dateEaten" name="dateEaten"
+						placeholder="YYYY-MM-DD">
+				</div>
 
-					<!-- MEAL NAME (radio buttons to assign Values into DB (Meal>Name) -->
-					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio" id="name" name="name"
-							value="Breakfast"> <label class="form-check-label"
-							for="name">Breakfast</label>
-					</div>
+				<!-- MEAL NAME (radio buttons to assign Values into DB (Meal>Name) -->
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" type="radio" id="name" name="name"
+						value="Breakfast"> <label class="form-check-label"
+						for="name">Breakfast</label>
+				</div>
+				<!--  -->
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" type="radio" id="name" name="name"
+						value="Lunch"> <label class="form-check-label" for="lunch">Lunch</label>
+				</div>
+				<!--  -->
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" type="radio" id="name" name="name"
+						value="Dinner"> <label class="form-check-label"
+						for="lunch">Dinner</label>
 					<!--  -->
-					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio" id="name" name="name"
-							value="Lunch"> <label class="form-check-label"
-							for="lunch">Lunch</label>
-					</div>
-					<!--  -->
-					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio" id="name" name="name"
-							value="Dinner"> <label class="form-check-label"
-							for="lunch">Dinner</label>
-					<!--  -->
-					</div>
-					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio" id="name" name="name"
-							value="Snack"> <label class="form-check-label"
-							for="lunch">Snack</label>
-					</div>
+				</div>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" type="radio" id="name" name="name"
+						value="Snack"> <label class="form-check-label" for="lunch">Snack</label>
+				</div>
 
-					<!-- Forms (user will type in field(s) and click submit once to submit all -->
-					<input type="number" class="form-control" name="gramsCarbohydrates"
-						placeholder="Enter carbohydrates (in grams)" required>
-					<input type="number" class="form-control" name="gramsFat"
-						placeholder="Enter fat (in grams)" required>
-					<input type="number" class="form-control" name="gramsProtein"
-						placeholder="Enter protein (in grams)" required>
+				<!-- Forms (user will type in field(s) and click submit once to submit all -->
+				<input type="number" class="form-control" name="gramsCarbohydrates"
+					placeholder="Enter carbohydrates (in grams)" required> <input
+					type="number" class="form-control" name="gramsFat"
+					placeholder="Enter fat (in grams)" required> <input
+					type="number" class="form-control" name="gramsProtein"
+					placeholder="Enter protein (in grams)" required>
 
-					<!-- SUBMIT BUTTON -->
-					<button type="submit" class="btn btn-info">Submit</button>
-					<!-- </form> MIGHT NEED TO EDIT IF DIV DOESNT CENTER-->
+				<!-- SUBMIT BUTTON -->
+				<button type="submit" class="btn btn-info">Submit</button>
+				<!-- </form> MIGHT NEED TO EDIT IF DIV DOESNT CENTER-->
 
-					<!-- VIEW BUTTON -->
-					<form action="showAllNutrition.do" method="POST">
-						<button class="btn btn-info" type="submit">View</button>
-					</form>
-			</div>
-		</form> 
+				<!-- VIEW BUTTON -->
+				<form action="showAllNutrition.do" method="POST">
+					<button class="btn btn-info" type="submit">View</button>
+				</form>
+		</div>
+		</form>
 		<!-- ---------------------------------------------------------ROUTINE--------------------------------------------------------------------------------- -->
 		<h3>Routine</h3>
 		<form action="goTocreateRoutinePage.do" method="GET">
