@@ -324,17 +324,19 @@
 				</form>
 		</div>
 		</div>
+		<br>
+
+		<hr class="my-4">
+		<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->
 		<!-- ---------------------------------------------------------ROUTINE--------------------------------------------------------------------------------- -->
 		<h3>Routine</h3>
 		<form action="goTocreateRoutinePage.do" method="GET">
 			<input type="text" class="form-control" name="name"
 				placeholder="Create New Routine" required>
-			<button type="submit" class="btn btn-info">Create
-				Routine</button>
+			<button type="submit" class="btn btn-info">Create Routine</button>
 		</form>
 
-
-
+		<hr class="my-4">
 
 		<h3>Your Routines</h3>
 		<div class="card-container">
@@ -350,20 +352,10 @@
 								<p class="card-text">
 									<strong>Description: </strong>${routine.description != null ? routine.description : 'N/A'}
 								</p>
-
-								<div class="mt-auto">
-									<div class="d-flex justify-content-center align-items-center">
-										<a class="btn btn-outline-info" data-bs-toggle="collapse"
-											href="#collapse${routine.id}" role="button"
-											aria-expanded="false" aria-controls="collapse${workout.id}">View</a>
-										<a href="#" class="btn btn-outline-info">Edit</a>
-
-										<form action="deleteRoutine.do" method="POST">
-											<input type="hidden" name="routineId" value="${routine.id}" />
-											<button type="submit" class="btn btn-outline-info">Delete</button>
-										</form>
-									</div>
-								</div>
+								<a class="btn btn-outline-info" data-bs-toggle="collapse"
+									href="#collapse${routine.id}" role="button"
+									aria-expanded="false" aria-controls="collapse${workout.id}">
+									View Workouts </a>
 
 
 
