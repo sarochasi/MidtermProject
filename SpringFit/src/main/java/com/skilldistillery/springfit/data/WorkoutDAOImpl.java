@@ -1,3 +1,4 @@
+
 package com.skilldistillery.springfit.data;
 
 import java.util.List;
@@ -30,7 +31,6 @@ public class WorkoutDAOImpl implements WorkoutDAO {
 	@Override
 	public Workout createNewWorkoutInitialize(Workout workout, int userId) {
 		User user = em.find(User.class, userId);
-		workout.setEnabled(true); // Sets enabled (
 		workout.setUser(user);
 		em.persist(workout);
 		return workout;
@@ -74,8 +74,7 @@ public class WorkoutDAOImpl implements WorkoutDAO {
 		if (managedWorkout != null) {
 			deleteExerciseByWorkoutId(id);
 
-			managedWorkout.setEnabled(false);
-			// em.remove(managedWorkout);
+			em.remove(managedWorkout);
 			deleted = true;
 		}
 
@@ -84,7 +83,7 @@ public class WorkoutDAOImpl implements WorkoutDAO {
 
 	@Override
 	public List<Workout> showAllWorkouts() {
-		String jpql = "SELECT w FROM Workout w WHERE w.enabled = true"; //AND published = true";
+		String jpql = "SELECT w FROM Workout w";
 		return em.createQuery(jpql, Workout.class).getResultList();
 	}
 
@@ -97,8 +96,8 @@ public class WorkoutDAOImpl implements WorkoutDAO {
 //	=====================================================================
 
 	public List<Workout> getWorkoutByUserId(int userId) {
-		String jpql = "SELECT w FROM Workout w JOIN FETCH w.workoutExercises WHERE w.user.id = :userId AND w.enabled = true";
-		// && enabled = true (display only workouts that the user wants to see on profile page)
+		String jpql = "SELECT w FROM Workout w JOIN FETCH w.workoutExercises WHERE w.user.id = :userId";
+
 		return em.createQuery(jpql, Workout.class).setParameter("userId", userId).getResultList();
 
 	}
@@ -121,12 +120,5 @@ public class WorkoutDAOImpl implements WorkoutDAO {
 		return managedWorkout;
 
 	}
-
-//	@Override
-//	public List<Workout> userDisplayedWorkouts(int userId) {
-//		String jpql = "SELECT w FROM Workout w JOIN FETCH w.workoutExercises WHERE w.user.id = :userId";
-//		// && 
-//		return em.createQuery(jpql, Workout.class).setParameter("userId", userId).getResultList();
-//	}
 
 }

@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="jakarta.tags.core" prefix="c"%>
@@ -30,7 +31,7 @@
 				varStatus="status">
 				<form action="updateWorkoutExercise.do" method="POST">
 					<input type="hidden" name="workoutId"
-						value="${exercise.workout.id}"> <input type="hidden"
+						value="${workout.id}"> <input type="hidden"
 						name="workoutExerciseId" value="${exercise.id}"> <input
 						type="hidden" name="workoutExercises[${status.index}].id"
 						value="${exercise.id}">
@@ -57,85 +58,19 @@
 						Exercise</button>
 
 				</form>
-				<form action="deleteExercise.do" method="POST">
-					<input type="hidden" name="exerciseId" value="${exercise.id}" />
+				
+				
+				<form action="deleteWorkoutExercise.do" method="POST">
+					<input type="hidden" name="workoutExerciseId"
+						value="${exercise.exercise.id}" /> 
+						<input type="hidden" name="workoutId" value="${workout.id}" />
 					<button type="submit" class="btn btn-sm btn-outline-secondary">Delete</button>
 				</form>
 			</c:forEach>
-				<form action="addMoreExercise.do" method="GET">
-					<input type="hidden" name="workoutId" value="${workout.id}" />
-					<button type="submit" class="btn btn-sm btn-outline-secondary">Add exercise</button>
-				</form>
-
-			<!-- <button type="button" class="btn btn-info" data-bs-toggle="collapse"
-				data-bs-target="#addWorkout" aria-expanded="false"
-				aria-controls="addWorkout">Add New Exercise</button> -->
-
-			<!-- <a href="addExercise.do" class="btn btn-primary">Add exercise</a> -->
-			
-			<a href="profile.do" class="btn btn-primary">Finish update</a>
 
 
-<%-- <div class="collapse mt-2" id="addWorkout">
-    <c:choose>
-      
-        <c:when test="${not empty exercises}">
-            <form action="addExercise.do" method="POST">
-                <input type="hidden" value="${workoutId}" name="workoutId" />
-
-                
-                <ul class="dropdown-menu position-static d-grid gap-1 p-2 rounded-3 mx-0 shadow w-220px" data-bs-theme="light">
-                    <li>
-                        <select name="exerciseId" class="form-select">
-                            <c:forEach var="exercise" items="${exercises}">
-                                <option value="${exercise.id}">${exercise.name}</option>
-                            </c:forEach>
-                        </select>
-                    </li>
-                </ul>
-
-              
-                <div class="form-floating mb-3">
-                    <input type="number" class="form-control" id="floatingInput" name="units" placeholder="Rep">
-                    <label for="floatingInput">Repetition</label>
-                </div>
-                <div class="form-floating mb-3">
-                    <input type="number" class="form-control" id="floatingInput" name="sets" placeholder="Set">
-                    <label for="floatingInput">Set</label>
-                </div>
-
-             
-                <button class="btn btn-lg btn-primary" type="submit">Add exercise</button>
-            </form>
-        </c:when>
-
-     
-        <c:when test="${not empty exerciseTypes}">
-            <form action="GetWorkoutPage.do" method="GET">
-                <input type="hidden" value="${workoutId}" name="workoutId" />
-           
-                <select name="exerciseType" class="form-select">
-                    <option>Choose the type</option>
-                    <c:forEach var="type" items="${exerciseTypes}">
-                        <option value="${type.id}">${type.name}</option>
-                    </c:forEach>
-                </select>
-
-                <button class="btn btn-lg btn-primary mt-2" type="submit">Submit</button>
-            </form>
-        </c:when>
-    </c:choose>
-</div>
- --%>
-
-
-
-
-
-
-
-		</br>
-		<%@ include file="footer.jsp"%>
+			<a href="profile.do" class="btn btn-primary">Finish update</a> </br>
+			<%@ include file="footer.jsp"%>
 	</main>
 
 

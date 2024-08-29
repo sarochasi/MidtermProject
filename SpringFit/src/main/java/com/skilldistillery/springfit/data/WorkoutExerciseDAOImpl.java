@@ -1,3 +1,4 @@
+
 package com.skilldistillery.springfit.data;
 
 import org.springframework.stereotype.Repository;

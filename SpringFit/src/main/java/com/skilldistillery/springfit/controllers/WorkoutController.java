@@ -1,4 +1,5 @@
 
+
 package com.skilldistillery.springfit.controllers;
 
 import java.util.List;
@@ -225,27 +226,7 @@ public class WorkoutController {
 		return mv;
 
 	}
-	@RequestMapping(path = "deleteWorkoutExercise.do", method = RequestMethod.POST)
-	public ModelAndView deleteWorkoutExercise(@RequestParam("workoutExerciseId") Integer workoutExerciseId, 
-			@RequestParam("workoutId") Integer workoutId) {
-		ModelAndView mv = new ModelAndView();
-		
-		try {
-			boolean deleted = workoutExerciseDao.deleteWorkoutExercise(workoutExerciseId);
-			if (deleted) {
-				mv.setViewName("redirect:updateWorkoutExerciseForm.do?workoutId=" + workoutId);
-			} else {
-				mv.addObject("errorMsg", "Failed to delete WorkoutExercise with ID: " + workoutExerciseId);
-				mv.setViewName("error");
-			}
-		} catch (Exception e) {
-			mv.addObject("errorMsg", "Cannot delete WorkoutExercise with ID: " + workoutExerciseId + " due to foreign key constraints.");
-			mv.setViewName("error");
-			e.printStackTrace();
-		}
-		
-		return mv;
-	}
+
 
 	@RequestMapping(path = "updateWorkoutForm.do", method = RequestMethod.GET)
 	public ModelAndView showUpdateWorkoutForm(@RequestParam("workoutId") int id) {
@@ -305,7 +286,6 @@ public class WorkoutController {
 			@RequestParam("workoutId") Integer workoutId) {
 		ModelAndView mv = new ModelAndView();
 		try {
-
 //			for (WorkoutExercise workoutExercise : workout.getWorkoutExercises()) {
 			workoutExerciseDao.updateWorkoutExercise(workoutExerciseId, workoutExercise);
 //			}
@@ -314,8 +294,32 @@ public class WorkoutController {
 			mv.addObject("errorMsg", "Error occurred while updating the workout exercises.");
 			mv.setViewName("error");
 			e.printStackTrace();
-
 		}
+		return mv;
+	}
+	
+	@RequestMapping(path = "deleteWorkoutExercise.do", method = RequestMethod.POST)
+	public ModelAndView deleteWorkoutExercise(@ModelAttribute("workout") WorkoutExercise workoutExercise, @RequestParam("workoutExerciseId") Integer workoutExerciseId, 
+			@RequestParam("workoutId") Integer workoutId) {
+		
+		System.out.println("WorkoutExerciseId: " + workoutExerciseId);
+	    System.out.println("WorkoutId: " + workoutId);
+		ModelAndView mv = new ModelAndView();
+		
+		try {
+			boolean deleted = workoutExerciseDao.deleteWorkoutExercise(workoutExerciseId);
+			if (deleted) {
+				mv.setViewName("redirect:updateWorkoutExerciseForm.do?workoutId=" + workoutId);
+			} else {
+				mv.addObject("errorMsg", "Failed to delete WorkoutExercise with ID: " + workoutExerciseId);
+				mv.setViewName("error");
+			}
+		} catch (Exception e) {
+			mv.addObject("errorMsg", "Cannot delete WorkoutExercise with ID: " + workoutExerciseId + " due to foreign key constraints.");
+			mv.setViewName("error");
+			e.printStackTrace();
+		}
+		
 		return mv;
 	}
 

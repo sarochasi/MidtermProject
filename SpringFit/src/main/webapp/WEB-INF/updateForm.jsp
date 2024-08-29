@@ -51,8 +51,16 @@
 
             <!-- Workout Exercises -->
            
-           <button type="submit" class="btn btn-primary">Update Workout</button>
+           <button type="submit" class="btn btn-sm btn-outline-secondary">Update Workout</button>
         </form>
+        
+        <br>
+        
+        <form action="GetWorkoutPage.do" method="GET">
+				<input type="hidden" name="id" value="${workout.id}" />
+				<button type="submit" class="btn btn-sm btn-outline-secondary">Add
+					more exercise</button>
+			</form>
           
         </c:when>
         

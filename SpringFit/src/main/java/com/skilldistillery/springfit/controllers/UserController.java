@@ -1,3 +1,4 @@
+
 package com.skilldistillery.springfit.controllers;
 
 import java.time.LocalDateTime;
@@ -9,9 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.skilldistillery.springfit.data.UserDAO;
+import com.skilldistillery.springfit.entities.Nutrition;
 import com.skilldistillery.springfit.data.WorkoutDAO;
 import com.skilldistillery.springfit.data.WorkoutExerciseDAO;
 import com.skilldistillery.springfit.entities.User;
@@ -63,7 +64,6 @@ public class UserController {
             model.addAttribute("user", loggedInUser);
             
             List<Workout> myWorkouts  = workoutDao.getWorkoutByUserId(loggedInUser.getId());
-            //List<Workout> myWorkoutsIWantShown  = workoutDao.g(loggedInUser.getId());
 
             System.out.println(myWorkouts);
        
@@ -134,17 +134,6 @@ public class UserController {
         }
 	}
 	
-	@RequestMapping(path="userLikedWorkout.do")
-	public String userLikedWorkout(HttpSession session, @RequestParam int workoutId,Model model) {
-		User loggedInUser = (User) session.getAttribute("loggedInUser");
-		if (loggedInUser != null) {
-			userDao.userLikeWorkout(loggedInUser.getId(), workoutId);
-			return "redirect:profile.do"; 
-		} else {
-			model.addAttribute("errorMessage", "You must be logged in to like a workout.");
-			return "login"; 
-		}
-	}
 	
 	
 	
@@ -154,6 +143,3 @@ public class UserController {
 	
 	
 }
-
-
-

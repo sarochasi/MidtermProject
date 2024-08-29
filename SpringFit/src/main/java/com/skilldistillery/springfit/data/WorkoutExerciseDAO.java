@@ -1,3 +1,4 @@
+
 package com.skilldistillery.springfit.data;
 
 import com.skilldistillery.springfit.entities.Exercise;
