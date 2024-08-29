@@ -23,7 +23,7 @@ public class UserDaoImpl implements UserDAO {
 	@Override
 	public User authenticateUser(String username, String password) {
 		User user = null;
-		String jpql = "SELECT u FROM User u WHERE u.username = :un AND u.password = :pw" + " AND enabled = true"; 
+		String jpql = "SELECT u FROM User u WHERE u.username = :un AND u.password = :pw" + " AND enabled = true";
 		// The space before "AND" is necessary if split across multiple lines
 		try {
 			user = em.createQuery(jpql, User.class).setParameter("un", username).setParameter("pw", password)
@@ -65,14 +65,16 @@ public class UserDaoImpl implements UserDAO {
 		em.persist(user);
 		em.persist(workout);
 	}
-	
+
 	@Override
 	public List<Workout> getLikedWorkouts(int userId) {
 		User user = em.find(User.class, userId);
 		return user.getLikedWorkout();
 	}
-	
-	
-	
+
+	@Override
+	public User getUserById(int userId) {
+		return em.find(User.class, userId);
+	}
 
 }

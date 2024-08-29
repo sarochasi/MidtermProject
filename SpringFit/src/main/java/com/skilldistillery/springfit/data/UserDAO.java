@@ -17,6 +17,8 @@ public interface UserDAO {
 
 	List<Workout> getLikedWorkouts(int userId); 
 	
+	public User getUserById(int userId);
+	
 	
 
 }

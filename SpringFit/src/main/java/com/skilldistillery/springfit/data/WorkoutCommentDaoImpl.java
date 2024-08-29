@@ -35,4 +35,9 @@ public class WorkoutCommentDaoImpl implements WorkoutCommentDAO{
 		return em.createQuery(jpql, WorkoutComment.class).setParameter("workoutId", workoutId).getResultList();
 	}
 
+	@Override
+	public WorkoutComment getById(int workoutCommentId) {
+		return em.find(WorkoutComment.class, workoutCommentId);
+	}
+
 }
