@@ -71,7 +71,7 @@ public class ExerciseType {
 
 	@Override
 	public String toString() {
-		return "ExerciseType [id=" + id + ", name=" + name + ", excercises=" + excercises + "]";
+		return "ExerciseType [id=" + id + ", name=" + name + "]";
 	}
 	
 	

@@ -51,8 +51,8 @@ class RoutineTest {
 	
 	@Test
 	void test_Routine_RoutineWorkout_mapping() {
-		assertNotNull(routine.getRoutineWorkout());
-		assertTrue(routine.getRoutineWorkout().size()>0);
+		assertNotNull(routine.getRoutineWorkouts());
+		assertTrue(routine.getRoutineWorkouts().size()>0);
 		
 	}
 	@Test

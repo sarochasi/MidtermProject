@@ -4,14 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Error</title>
+<title>Insert title here</title>
 </head>
-
 <body>
-
-	<h3>ERROR</h3>
-	
-	<p>${errorMsg}</p>
 
 </body>
 </html>

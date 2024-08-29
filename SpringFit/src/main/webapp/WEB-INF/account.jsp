@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="jakarta.tags.core" prefix="c"%>
@@ -24,8 +25,8 @@
 
 .scrolling-wrapper .card {
 	display: inline-block;
-	width: 200px; /* Adjust as needed */
-	margin-right: 10px; /* Space between cards */
+	width: 200px;
+	margin-right: 10px;
 }
 </style>
 
@@ -35,227 +36,344 @@
 <body>
 
 	<%@ include file="navbar.jsp"%>
-
 	<%--Edit the file nav.jsp to change nav links (navbar code to be contained in navbar; will only need to plug into each jsp)--%>
 	<%-- <jsp:include page="nav.jsp" /> --%>
 
-
 	<main>
-
 
 		<div class="container col-xl-10 col-xxl-8 px-4 py-5">
 
-
 			<!-- <h2>Account Details</h2> -->
 			<h2>Welcome ${loggedInUser.firstName}!</h2>
+			<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->
 
-			<!-- (From the LoginLab) -->
-			<!--  	Update account.jsp to output escaped (c:out) user data if the user is logged in 
-			(i.e. in session, accessible on the JSP page with the sessionScope variable), 
-			or "Not Logged In." otherwise. 		-->
-
-			<%-- Output user details --%>
-			<%-- 	<c:choose>
-		<c:when test="${not empty sessionScope.loggedInUser}">
-			<ul>
-				<li>Username: <c:out
-						value="${sessionScope.loggedInUser.username}" /></li>
-				<p>Password: <c:out value="${sessionScope.loggedInUser.password}"/></p>
-				<li>First Name: <c:out
-						value="${sessionScope.loggedInUser.firstName}" /></li>
-				<li>Last Name: <c:out
-						value="${sessionScope.loggedInUser.lastName}" /></li>
-			</ul>
-		</c:when>
-		<c:otherwise>
-			<p>Not Logged In.</p>
-		</c:otherwise>
-	</c:choose> --%>
-			<%-- Output user details --%>
-			<!-- Can later decide to remove username / full name (could be moved to a "settings".jsp -->
+			<!-- SESSION  -->
 			<c:choose>
 				<c:when test="${not empty sessionScope.loggedInUser}">
-					<ul>
-						<li>Username: <c:out
-								value="${sessionScope.loggedInUser.username}" /></li>
-						<%-- <p>Password: <c:out value="${sessionScope.loggedInUser.password}"/></p> --%>
-						<li>${sessionScope.loggedInUser.firstName}
-							${sessionScope.loggedInUser.lastName}</li>
-					</ul>
 
 					<div class="container-fluid">
 						<div class="d-flex justify-content-between align-items-center">
 							<h3>Your Workouts</h3>
-							<form action="GetWorkoutPage.do" method="GET">
-								<button type="submit" class="btn btn-primary btn-custom">Create
+
+							<form action="IntializeWorkout.do" method="GET">
+								<button type="button" class="btn btn-info"
+									data-bs-toggle="collapse" data-bs-target="#createWorkoutForm"
+									aria-expanded="false" aria-controls="createWorkoutForm">Create
 									New Workout</button>
 							</form>
 						</div>
 					</div>
 
-					<c:forEach var="workoutExercise" items="${workoutplan}">
-						<div class="card" style="width: 18rem;">
-							<div class="card-body">
-								<h5 class="card-title">${workout.name}</h5>
-								<h6 class="card-subtitle mb-2 text-body-secondary">${sessionScope.loggedInUse.firstName}</h6>
-								<p class="card-text"></p>
-								<a href="#" class="card-link">Card link</a> <a href="#"
-									class="card-link">Another link</a>
-							</div>
+					<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->
+
+					<div class="collapse mt-2" id="createWorkoutForm">
+						<div class="card card-body">
+
+							<form action="InitializeWorkout.do" method="GET">
+								<div class="mb-3">
+									<label for="workoutName" class="form-label">Workout
+										name</label> <input type="text" class="form-control" id="workoutName"
+										name="name" required>
+								</div>
+
+								<div class="mb-3">
+									<label for="workoutDescription" class="form-label">Description</label>
+									<input type="text" class="form-control" id="workoutDescription"
+										name="description">
+								</div>
+
+								<div class="mb-3">
+									<label for="imageUrln" class="form-label">Image url</label> <input
+										type="text" class="form-control" id="imageUrl" name="imageUrl">
+								</div>
+
+								<button type="submit" class="btn btn-primary w-100">Create
+									workout</button>
+							</form>
 						</div>
-						</c:forEach>
+					</div>
+
+					<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->
+					<!--  USER  -->
+
+					<div class="card-container">
+						<div class="row">
+							<c:forEach var="workout" items="${myWorkouts}">
+								<div class="col-md-4 mb-4">
+									<div class="card" style="width: 18rem;">
+										<div class="card-body">
+											<h5 class="card-title">${workout.name}</h5>
+											<h6 class="card-subtitle mb-2 text-body-secondary">
+												<strong>Created by: </strong>${user.firstName}
+											</h6>
+											<p class="card-text">
+												<strong>Description: </strong>${workout.description != null ? workout.description : 'N/A'}
+											</p>
+
+											<a class="btn btn-outline-info" data-bs-toggle="collapse"
+												href="#collapse${workout.id}" role="button"
+												aria-expanded="false" aria-controls="collapse${workout.id}">
+												View Exercises </a>
+
+											<form action="updateWorkoutForm.do" method="GET">
+												<input type="hidden" name="workoutId" value="${workout.id}" />
+												<button type="submit" class="btn btn-outline-info">Edit</button>
+											</form>
+
+
+											<form action="deleteWorkout.do" method="POST">
+												<input type="hidden" name="workoutId" value="${workout.id}" />
+												<button type="submit" class="btn btn-outline-info">Delete</button>
+											</form>
+
+											<div class="collapse mt-2" id="collapse${workout.id}">
+												<div class="card card-body">
+													<ul>
+														<c:if test="${not empty workout.workoutExercises}">
+															<c:forEach var="exercise"
+																items="${workout.workoutExercises}">
+																<li><strong>${exercise.exercise.name}</strong><br />
+																	Units: ${exercise.units}<br /> Sets: ${exercise.sets}<br />
+																	Notes: ${exercise.notes != null ? exercise.notes : 'N/A'}<br />
+																</li>
+															</c:forEach>
+														</c:if>
+														<c:if test="${empty workout.workoutExercises}">
+															<li>No exercises found for this workout.</li>
+														</c:if>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</c:forEach>
+						</div>
+					</div>
+
 				</c:when>
+
 				<c:otherwise>
-					<p>Not Logged In.</p>
+					<p>Please log in to see the profile</p>
+					<button class="btn btn-link active" type="button"
+						data-bs-toggle="collapse" data-bs-target="#loginFormInProfile"
+						aria-expanded="false" aria-controls="loginFormInProfile">Log
+						in</button>
 				</c:otherwise>
 
 			</c:choose>
+<hr class="my-4">
 
-			<!-- USER's Workouts -->
-			<!-- Will need to be updated once (maybe for each/cycle through) we have logic sorted out & more workouts/data entered into MySQL Workbench DB -->
-
-
-
-			<!-- <div class="scrolling-wrapper">
-
-					<div class="card">
-						<img src="image" class="card-img-top" alt="image href">
-						<div class="card-body">
-							<h5 class="card-title">1</h5>
-							<p class="card-text">1</p>
-						</div>
-					</div>
-					<div class="card">
-						<img src="image" class="card-img-top" alt="image href">
-						<div class="card-body">
-							<h5 class="card-title">1</h5>
-							<p class="card-text">1</p>
-						</div>
-					</div>
-					<div class="card">
-						<img src="image" class="card-img-top" alt="image href">
-						<div class="card-body">
-							<h5 class="card-title">1</h5>
-							<p class="card-text">1</p>
-						</div>
-					</div>
-					<div class="card">
-						<img src="image" class="card-img-top" alt="image href">
-						<div class="card-body">
-							<h5 class="card-title">1</h5>
-							<p class="card-text">1</p>
-						</div>
-					</div>
-					<div class="card">
-						<img src="image" class="card-img-top" alt="image href">
-						<div class="card-body">
-							<h5 class="card-title">1</h5>
-							<p class="card-text">1</p>
-						</div>
-					</div>
-
-				</div>
-			</div>
- -->
+			<!-- ----------------------------------------------------------------WILL NEED TO UPDATE ONCE WE HAVE FAV FUNCTIONING--------------------------------- -->
 			<!-- FAVORITE -->
-			<!-- Will need to be updated once (maybe for each/cycle through) we have logic sorted out & more workouts/data entered into MySQL Workbench DB -->
-			<div class="container-fluid mt-4">
-				<div class="d-flex justify-content-between align-items-center">
-					<h3>Your Favorite Workouts</h3>
-					<form action="GetWorkoutPage.do" method="GET">
-						<button type="submit" class="btn btn-primary btn-custom">Explore
-							all workouts!</button>
-					</form>
-				</div>
-				<div class="scrolling-wrapper">
+			<h3>Your Favorite Workouts</h3>
 
-					<div class="card">
-						<img src="image" class="card-img-top" alt="image href">
-						<div class="card-body">
-							<h5 class="card-title">1</h5>
-							<p class="card-text">1</p>
-						</div>
-					</div>
-					<div class="card">
-						<img src="image" class="card-img-top" alt="image href">
-						<div class="card-body">
-							<h5 class="card-title">1</h5>
-							<p class="card-text">1</p>
-						</div>
-					</div>
-					<div class="card">
-						<img src="image" class="card-img-top" alt="image href">
-						<div class="card-body">
-							<h5 class="card-title">1</h5>
-							<p class="card-text">1</p>
-						</div>
-					</div>
-					<div class="card">
-						<img src="image" class="card-img-top" alt="image href">
-						<div class="card-body">
-							<h5 class="card-title">1</h5>
-							<p class="card-text">1</p>
-						</div>
-					</div>
-					<div class="card">
-						<img src="image" class="card-img-top" alt="image href">
-						<div class="card-body">
-							<h5 class="card-title">1</h5>
-							<p class="card-text">1</p>
-						</div>
-					</div>
 
+
+
+			<div class="card-container">
+				<div class="row">
+					<c:forEach var="workout" items="${myWorkouts}">
+						<div class="col-md-4 mb-4">
+							<div class="card" style="width: 18rem;">
+								<div class="card-body">
+									<h5 class="card-title">${workout.name}</h5>
+									<h6 class="card-subtitle mb-2 text-body-secondary">
+										<strong>Created by: </strong>${user.firstName}
+									</h6>
+									<p class="card-text">
+										<strong>Description: </strong>${workout.description != null ? workout.description : 'N/A'}
+									</p>
+									<a class="btn btn-outline-info" data-bs-toggle="collapse"
+										href="#collapse${workout.id}" role="button"
+										aria-expanded="false" aria-controls="collapse${workout.id}">
+										View Exercises </a> <a href="#" class="btn btn-outline-info">Edit</a>
+
+
+									<form action="deleteWorkout.do" method="POST">
+										<input type="hidden" name="workoutId" value="${workout.id}" />
+										<button type="submit" class="btn btn-outline-info">Delete</button>
+									</form>
+
+									<div class="collapse mt-2" id="collapse${workout.id}">
+										<div class="card card-body">
+											<ul>
+												<c:if test="${not empty workout.workoutExercises}">
+													<c:forEach var="exercise"
+														items="${workout.workoutExercises}">
+														<li><strong>${exercise.exercise.name}</strong><br />
+															Units: ${exercise.units}<br /> Sets: ${exercise.sets}<br />
+															Notes: ${exercise.notes != null ? exercise.notes : 'N/A'}<br />
+														</li>
+													</c:forEach>
+												</c:if>
+												<c:if test="${empty workout.workoutExercises}">
+													<li>No exercises found for this workout.</li>
+												</c:if>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</c:forEach>
 				</div>
 			</div>
-		</div>
+			<a class="btn btn-info" href="showAllWorkouts.do">Explore
+				workouts from the community!</a>
+			<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->
+			<!-- Today's Numbers / Health? -->
+<hr class="my-4">
 
-		<br>
-
-		<!-- Today's Numbers / Health? -->
-		<div class="container-fluid">
-			<h3>Today's Numbers</h3>
+			<h3>Weight & Nutrition</h3>
 			<table class="table table-bordered">
 				<thead></thead>
 
 				<tbody>
 					<tr>
-						<td>Current Weight</td>
+						<!-- <td>Current Weight</td> -->
 						<td>
 							<form action="submitWeight.do" method="POST">
 								<input type="number" class="form-control" name="weight"
 									placeholder="Enter your weight" required>
-								<button type="submit" class="btn btn-primary mt-2">Submit
+								<button type="submit" class="btn btn-outline-info">Submit
 									Weight</button>
 							</form>
-						</td>
-					</tr>
-					<tr>
-						<td>Total Calories Consumed Today</td>
-						<td>
-							<form action="submitCalories.do" method="POST">
-								<input type="number" class="form-control" name="calories"
-									placeholder="Enter total calories" required>
-								<button type="submit" class="btn btn-primary mt-2">Submit
-									Calories</button>
+
+
+							<form action="openWeight.do" method="POST">
+								<button class="btn btn-info" type="submit">Open weight</button>
 							</form>
 						</td>
 					</tr>
 				</tbody>
 			</table>
+
+			<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->
+			<!-- ---------------------------------------------------NUTRITION------------------------------------------------------------------------------ -->
+			<!-- <td>Track your macros!</td> -->
+			<td><legend class="form-label"></legend>
+				<form action="addNutrition.do" method="POST">
+
+					<div class="col-md-4">
+						<label for="zip" class="form-label"></label> <input type="date"
+							class="form-control" id="dateEaten" name="dateEaten"
+							placeholder="YYYY-MM-DD">
+					</div>
+
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" id="name" name="name"
+							value="Breakfast"> <label class="form-check-label"
+							for="name">Breakfast</label>
+					</div>
+
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" id="name" name="name"
+							value="Lunch"> <label class="form-check-label"
+							for="lunch">Lunch</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" id="name" name="name"
+							value="Dinner"> <label class="form-check-label"
+							for="lunch">Dinner</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" id="name" name="name"
+							value="Snack"> <label class="form-check-label"
+							for="lunch">Snack</label>
+					</div>
+
+					<input type="number" class="form-control" name="gramsCarbohydrates"
+						placeholder="Enter carbohydrates (in grams)" required>
+					<!-- <button type="submit" class="btn btn-info">Submit
+									Carbohydrates</button> -->
+					<input type="number" class="form-control" name="gramsFat"
+						placeholder="Enter fat (in grams)" required>
+					<!-- <button type="submit" class="btn btn-info">Submit Fat</button> -->
+					<input type="number" class="form-control" name="gramsProtein"
+						placeholder="Enter protein (in grams)" required>
+					<button type="submit" class="btn btn-info">Submit</button>
+				</form> <br>
+
+				<form action="showAllNutrition.do" method="POST">
+					<button class="btn btn-info" type="submit">View</button>
+				</form>
 		</div>
+		<br>
 
 
-		<h3>Misc. (to be deleted)</h3>
-		<p>Updated "Account Details" to (Welcome, user's name). A
-			"Settings" button already exists under the user drop down (top right)</p>
-		<p>Maybe create logic that will display the user's info, only IF
-			they would like to display that information publicly. (user would
-			have the choice?) - first name, last name, height, gender (but might
-			not display as ex. First Name: Bob, rather "Bob")</p>
-		<p>Where should we display user's graphs? What will the graphs
-			output/track?</p>
-		<p>Will need to revisit ManyToMany (toStrings)</p>
-		<p>How many jsps? 1 for exercises and 1 for workouts?</p>
+		<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->
+		<!-- ---------------------------------------------------------ROUTINE--------------------------------------------------------------------------------- -->
+		<h3>Routines</h3>
+		<div>
+			<div id="routineList">
+				<c:forEach var="routine" items="${user.routines}">
+				<li>${routine.name }</li>
+				</c:forEach>
+			</div>
+			<form action="goTocreateRoutinePage.do" method="GET">
+				<input type="text" class="form-control" name="name"
+					placeholder="Create New Routine" required>
+				<button type="submit" class="btn btn-outline-info">Create
+					Routine</button>
+			</form>
+
+
+ 
+		</div>
+<h3>Your Routines</h3>
+			<div class="card-container">
+				<div class="row">
+					<c:forEach var="routine" items="${user.routines}">
+						<div class="col-md-4 mb-4">
+							<div class="card" style="width: 18rem;">
+								<div class="card-body">
+									<h5 class="card-title">${routine.name}</h5>
+									<h6 class="card-subtitle mb-2 text-body-secondary">
+										<strong>Created by: </strong>${user.firstName}
+									</h6>
+									<p class="card-text">
+										<strong>Description: </strong>${routine.description != null ? routine.description : 'N/A'}
+									</p>
+									<a class="btn btn-outline-info" data-bs-toggle="collapse"
+										href="#collapse${routine.id}" role="button"
+										aria-expanded="false" aria-controls="collapse${workout.id}">
+										View Workouts </a> <a href="#" class="btn btn-outline-info">Edit</a>
+
+
+									<form action="deleteRoutine.do" method="POST">
+										<input type="hidden" name="routineId" value="${routine.id}" />
+										<button type="submit" class="btn btn-outline-info">Delete</button>
+									</form>
+
+									<div class="collapse mt-2" id="collapse${routine.id}">
+										<div class="card card-body">
+											<ul>
+												<c:if test="${not empty routine.routineWorkouts}">
+													<c:forEach var="routineWorkout"
+														items="${routine.routineWorkouts}">
+														<li><strong>${routineWorkout.workout.name}</strong><br />
+<%-- 															Units: ${routineWorkout.units}<br /> Sets: ${exercise.sets}<br />
+															Notes: ${exercise.notes != null ? exercise.notes : 'N/A'}<br /> --%>
+														</li>
+													</c:forEach>
+												</c:if>
+												<c:if test="${empty workout.workoutExercises}">
+													<li>No exercises found for this workout.</li>
+												</c:if>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</c:forEach>
+				</div>
+			</div>
+			<a class="btn btn-info" href="showAllWorkouts.do">Explore
+				workouts from the community!</a> 
+			
+			<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->		<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->
 
 
 
@@ -263,18 +381,14 @@
 		<!-- Footer -->
 		<%@ include file="footer.jsp"%>
 
+	</main>
 
-		<script
-			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-			integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-			crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+		crossorigin="anonymous"></script>
 </body>
 
 
 
 </html>
-
-
-
-
-

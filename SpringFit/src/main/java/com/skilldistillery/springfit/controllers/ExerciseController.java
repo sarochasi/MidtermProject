@@ -1,3 +1,4 @@
+
 package com.skilldistillery.springfit.controllers;
 
 import java.util.List;
@@ -33,18 +34,7 @@ public class ExerciseController {
 		model.addAttribute("allExercises", exercises);
 		return "workout";
 	}
-	//Opens workout page when selected from account page
-	@RequestMapping(path = "GetWorkoutPage.do")
-	public ModelAndView displayWorkoutPage() {	
-		ModelAndView mv = new ModelAndView();
-		
-		List<Exercise> exercises = exerciseDao.findAllExercises();
-		
-		
-		mv.addObject("allExercises",exercises);
-		mv.setViewName("workout");
-		return mv;
-	}
+
 
 	// SEARCH BY ID
 	@RequestMapping(path = "searchById.do", method = RequestMethod.GET)
@@ -83,6 +73,26 @@ public class ExerciseController {
     }
 	
 	
+    @RequestMapping(path = "deleteExercise.do", method = RequestMethod.POST)
+    public ModelAndView deleteExercise(@RequestParam("exerciseId") int exerciseId) {
+    	ModelAndView mv = new ModelAndView();
+    	Exercise exercise = exerciseDao.showExerciseById(exerciseId);
+    	
+    	if(exercise == null) {
+    		mv.addObject("errorMsg", "Exercise not found with ID: " + exerciseId);
+    		mv.setViewName("error");
+    	}else {
+    		boolean deleted = exerciseDao.deleteExercise(exerciseId);
+    		if(!deleted) {
+    			mv.addObject("errorMsg", "Failed to delete the exercise");
+				mv.setViewName("error");
+    		}else {
+    			mv.setViewName("updateForm");
+    		}
+    	}
+    	
+    	return mv;
+    }
 	
 	
 	
@@ -95,4 +105,3 @@ public class ExerciseController {
 	
 
 }
-

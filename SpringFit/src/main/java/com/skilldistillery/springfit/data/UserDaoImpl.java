@@ -3,6 +3,7 @@ package com.skilldistillery.springfit.data;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.springfit.entities.User;
+import com.skilldistillery.springfit.entities.Workout;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -20,7 +21,7 @@ public class UserDaoImpl implements UserDAO {
 	@Override
 	public User authenticateUser(String username, String password) {
 		User user = null;
-		String jpql = "SELECT u FROM User u WHERE u.username = :un AND u.password = :pw" + " AND enabled = true"; 
+		String jpql = "SELECT u FROM User u WHERE u.username = :un AND u.password = :pw" + " AND enabled = true";
 		// The space before "AND" is necessary if split across multiple lines
 		try {
 			user = em.createQuery(jpql, User.class).setParameter("un", username).setParameter("pw", password)
@@ -52,6 +53,27 @@ public class UserDaoImpl implements UserDAO {
 		Long count = em.createQuery(jpql, Long.class).setParameter("un", username).getSingleResult();
 
 		return count > 0;
+	}
+
+	@Override
+	public void userLikeWorkout(int userId, int workoutId) {
+		User user = em.find(User.class, userId);
+		Workout workout = em.find(Workout.class, workoutId);
+		user.getLikedWorkout().add(workout);
+		em.persist(user);
+		em.persist(workout);
+	}
+
+	@Override
+	public User findById(int userId) {
+		return em.find(User.class, userId);
+	}
+	
+	
+	
+	@Override
+	public User getUserById(int userId) {
+		return em.find(User.class, userId);
 	}
 
 }

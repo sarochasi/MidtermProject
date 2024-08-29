@@ -7,6 +7,7 @@ import java.util.Objects;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -15,55 +16,58 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PostLoad;
+import jakarta.persistence.Transient;
 
 @Entity
 public class Workout {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	private String name;
-	
+
 	private String description;
-	
+
 	@Column(name = "create_date")
 	private LocalDateTime createDate;
-	
-	@Column(name="last_update")
+
+	@Column(name = "last_update")
 	private LocalDateTime lastUpdate;
-	
+
 	private Boolean enabled;
-	
+
 	private Boolean published;
-	
-	@Column(name="image_url")
+
+	@Column(name = "image_url")
 	private String imageUrl;
-	
+
 	@OneToMany(mappedBy = "workout")
 	private List<WorkoutComment> workoutComments;
-	
-	@OneToMany(mappedBy = "workout")
+
+	@OneToMany(mappedBy = "workout", fetch = FetchType.EAGER)
 	private List<WorkoutExercise> workoutExercises;
-	
+
 	@ManyToMany
-	@JoinTable(name="liked_workout", joinColumns = @JoinColumn(name="workout_id"),
-	inverseJoinColumns = @JoinColumn(name="user_id"))
-	private List<User> users;
-	
-	
+	@JoinTable(name = "liked_workout", joinColumns = @JoinColumn(name = "workout_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
+	private List<User> users = new ArrayList<>();
+
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
 	
+	 @Transient
+	    private int likeCount;
+
 ///--------------------------------------------------------------------------------------------------------------
-	
+
 	public Workout() {
 		super();
 	}
-	
+
 ///--------------------------------------------------------------------------------------------------------------
-	
+
 	public int getId() {
 		return id;
 	}
@@ -128,8 +132,6 @@ public class Workout {
 		this.imageUrl = imageUrl;
 	}
 
-
-
 	public List<User> getUsers() {
 		return users;
 	}
@@ -137,7 +139,6 @@ public class Workout {
 	public void setUsers(List<User> users) {
 		this.users = users;
 	}
-	
 
 	public List<WorkoutComment> getWorkoutComments() {
 		return workoutComments;
@@ -146,7 +147,6 @@ public class Workout {
 	public void setWorkoutComments(List<WorkoutComment> workoutComments) {
 		this.workoutComments = workoutComments;
 	}
-	
 
 	public User getUser() {
 		return user;
@@ -156,27 +156,44 @@ public class Workout {
 		this.user = user;
 	}
 
-	public List<WorkoutExercise> getWorkoutExercise() {
+	public List<WorkoutExercise> getWorkoutExercises() {
 		return workoutExercises;
 	}
 
-	public void setWorkoutExercise(List<WorkoutExercise> workoutExercise) {
-		this.workoutExercises = workoutExercise;
+	public void setWorkoutExercises(List<WorkoutExercise> workoutExercises) {
+		this.workoutExercises = workoutExercises;
 	}
+
 	public void addWorkoutExercise(WorkoutExercise workoutExercise) {
-		if (workoutExercises==null) {workoutExercises = new ArrayList<>();}
-		
-		//if workoutExercises.contains(workoutExercise)?????
+		if (workoutExercises == null) {
+			workoutExercises = new ArrayList<>();
+		}
+
 		workoutExercises.add(workoutExercise);
 		workoutExercise.setWorkout(this);
-		
+
 	}
+
 	public void removeWorkoutExercise(WorkoutExercise workoutExercise) {
 		System.out.println("fix removeWorkoutExercise");
 	}
 	
-	
-	///--------------------------------------------------------------------------------------------------------------
+	public void setLikeCount(int likeCount) {
+        this.likeCount = likeCount;
+    }
+
+    public int getLikeCount() {
+        return users.size(); 
+    }
+	  
+	  @PostLoad
+	    public void updateLikeCount() {
+	        if (users != null) {
+	            likeCount = users.size();
+	        }
+	    }
+
+	/// --------------------------------------------------------------------------------------------------------------
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -198,10 +215,7 @@ public class Workout {
 	public String toString() {
 		return "Workout [id=" + id + ", name=" + name + ", description=" + description + ", createDate=" + createDate
 				+ ", lastUpdate=" + lastUpdate + ", enabled=" + enabled + ", published=" + published + ", imageUrl="
-				+ imageUrl + ", workoutComments=" + workoutComments + ", workoutExercise=" + workoutExercises
-				+ ", users=" + users + ", user=" + user + "]";
+				+ imageUrl + ", user=" + user + "]";
 	}
-	
-	
 
 }

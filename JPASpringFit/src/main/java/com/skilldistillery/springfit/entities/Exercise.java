@@ -16,6 +16,7 @@ import jakarta.persistence.OneToMany;
 @Entity
 public class Exercise {
 
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
@@ -131,6 +132,12 @@ public class Exercise {
 		return id == other.id;
 	}
 
+	@Override
+	public String toString() {
+		return "Exercise [id=" + id + ", name=" + name + ", instructions=" + instructions + ", exerciseType="
+				+ exerciseType + ", caloriesPerUnit=" + caloriesPerUnit + ", unitType=" + unitType + ", imageUrl="
+				+ imageUrl + "]";
+	}
 //	@Override
 //	public String toString() {
 //		return "Exercise [id=" + id + ", name=" + name + ", instructions=" + instructions + ", exerciseType="

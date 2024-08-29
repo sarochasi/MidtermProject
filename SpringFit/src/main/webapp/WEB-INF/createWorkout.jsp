@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="jakarta.tags.core" prefix="c"%>
@@ -20,31 +21,62 @@
 		<div class="container">
 
 			<h3>Create new workout</h3>
+			
+	<c:if test="${not empty workoutExercises}">
+            <ul>
+                <c:forEach var="workoutExercise" items="${workoutExercises}">
+                    <li>${workoutExercise.exercise.name} - Sets: ${workoutExercise.sets}, Reps: ${workoutExercise.units}</li>
+                </c:forEach>
+            </ul>
+        </c:if>
+			
 			<c:choose>
 				<c:when test="${not empty exercises}">
 					<form action="addExercise.do" method="POST">
+						<input type="hidden" value="${workoutId }" name="workoutId" />
 
 						<ul
 							class="dropdown-menu position-static d-grid gap-1 p-2 rounded-3 mx-0 shadow w-220px"
 							data-bs-theme="light">
-							<li><select name="id">
+							<li><select name="exerciseId">
 									<c:forEach var="exercise" items="${exercises}">
 										<option value="${exercise.id }">${exercise.name}</option>
 									</c:forEach>
-							</select> 
-							<button class="w-100 btn btn-lg btn-primary" type="submit">Submit</button>
-							
-							</li>
+							</select>
+
+
+
+								<div class="form-floating mb-3">
+									<input type="number" class="form-control" id="floatingInput"
+										name="units" placeholder="Rep"> <label
+										for="floatingInput">Repetition</label>
+								</div>
+								<div class="form-floating mb-3">
+									<input type="number" class="form-control" id="floatingInput"
+										name="sets" placeholder="Set"> <label
+										for="floatingInput">Set</label>
+								</div>
+							<div class="form-floating mb-3">
+									<input type="text" class="form-control" id="floatingInput"
+										name="note" placeholder="Note"> <label
+										for="floatingInput">Note</label>
+								</div>
+								<button class="btn btn-lg btn-primary" type="submit">Add
+									exercise</button>
+									
+								<!-- <button formaction="profileAfterWorkout.do" class="btn btn-lg btn-primary" type="submit">Finish workout</button> --></li>
 
 						</ul>
 
 					</form>
 				</c:when>
+				
+			
 
 				<c:when test="${not empty exerciseTypes}">
 					<form action="GetWorkoutPage.do" method="GET">
-
-						<select name="exerciseType">
+						<input type="hidden" value="${workoutId }" name="workoutId" /> <select
+							name="exerciseType">
 
 							<option>Choose the type</option>
 							<c:forEach var="type" items="${exerciseTypes }">
@@ -54,14 +86,55 @@
 
 							</c:forEach>
 						</select>
-						
-						<button class="w-100 btn btn-lg btn-primary" type="submit">Submit</button>
+
+						<button class="btn btn-lg btn-primary" type="submit">Select Exercise</button>
+
+						<button formaction="profileAfterWorkout.do" class="btn btn-lg btn-primary" type="submit">Finish workout</button>
 
 					</form>
 
 				</c:when>
-			</c:choose>
 
+
+
+
+
+
+
+
+			</c:choose>
+			
+			
+<%-- 			<c:if test="${not empty workoutId.workoutExercise}">
+                <h4>Exercises in this Workout:</h4>
+                <ul class="list-group">
+                    <c:forEach var="exercise" items="${workoutId.workoutExercise}">
+                        <li class="list-group-item">
+                            ${exercise.exercise.name} - ${exercise.sets} sets, ${exercise.reps} reps
+                        </li>
+                    </c:forEach>
+                </ul>
+            </c:if> --%>
+
+
+
+	<%-- 		<c:if test="${not empty workoutExercise}">
+
+					<c:forEach var="workoutExercise" items="workoutExercise">
+
+						<ul>
+							<li>
+								<p>${workoutExercise.name}
+								<p>
+							</li>
+
+						</ul>
+
+
+					</c:forEach>
+
+
+				 </c:if>  --%>
 
 
 
