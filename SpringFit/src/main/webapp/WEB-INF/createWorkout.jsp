@@ -18,7 +18,7 @@
 	<%@ include file="navbar.jsp"%>
 
 	<main>
-		<div class="container">
+		<div class="container col-xl-10 col-xxl-8 px-4 py-5">
 
 			<h3>Create new workout</h3>
 			
@@ -49,7 +49,7 @@
 								<div class="form-floating mb-3">
 									<input type="number" class="form-control" id="floatingInput"
 										name="units" placeholder="Rep"> <label
-										for="floatingInput">Repetition</label>
+										for="floatingInput">Repetition or Time(mins)</label>
 								</div>
 								<div class="form-floating mb-3">
 									<input type="number" class="form-control" id="floatingInput"
@@ -58,13 +58,12 @@
 								</div>
 							<div class="form-floating mb-3">
 									<input type="text" class="form-control" id="floatingInput"
-										name="note" placeholder="Note"> <label
+										name="notes" placeholder="Note"> <label
 										for="floatingInput">Note</label>
 								</div>
 								<button class="btn btn-lg btn-primary" type="submit">Add
 									exercise</button>
 									
-								<!-- <button formaction="profileAfterWorkout.do" class="btn btn-lg btn-primary" type="submit">Finish workout</button> --></li>
 
 						</ul>
 
@@ -87,7 +86,7 @@
 							</c:forEach>
 						</select>
 
-						<button class="btn btn-lg btn-primary" type="submit">Select Exercise</button>
+						<button class="btn btn-outline-primary" type="submit">Select Exercise</button>
 
 						<button formaction="profileAfterWorkout.do" class="btn btn-lg btn-primary" type="submit">Finish workout</button>
 

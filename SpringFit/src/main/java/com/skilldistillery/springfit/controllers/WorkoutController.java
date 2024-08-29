@@ -1,4 +1,5 @@
 
+
 package com.skilldistillery.springfit.controllers;
 
 import java.util.List;
@@ -178,15 +179,24 @@ public class WorkoutController {
 		User loggedInUser = (User) session.getAttribute("loggedInUser");
 		if (loggedInUser != null) {
 			List<Workout> myWorkouts = workoutDao.getWorkoutByUserId(userId);
-			List<Workout> userLikedWorkouts = userDao.getLikedWorkouts(userId);
+			// List<Workout> userLikedWorkouts = userDao.getLikedWorkouts(userId);
 
 //			for (Workout workout : myWorkouts) {
 //				System.out.println("Workout Name: " + workout.getName());
 //			}
 
 			model.addAttribute("myWorkouts", myWorkouts);
-			model.addAttribute("userLikedWorkouts", userLikedWorkouts);
+			// model.addAttribute("userLikedWorkouts", userLikedWorkouts);
 
+			System.out.println("======================================");
+			System.out.println("User ID: " + userId);
+			System.out.println("Number of Workouts: " + myWorkouts.size());
+			for (Workout workout : myWorkouts) {
+				System.out.println("Workout Name: " + workout.getName());
+			}
+			System.out.println("======================================");
+
+			model.addAttribute("myWorkouts", myWorkouts);
 			return "account";
 		} else {
 
@@ -221,7 +231,6 @@ public class WorkoutController {
 			if (!deleted) {
 				mv.addObject("errorMsg", "Failed to delete the workout");
 				mv.setViewName("error");
-
 			} else {
 				mv.setViewName("redirect:profile.do");
 			}

@@ -22,143 +22,121 @@ import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class UserController {
-
+	
 	@Autowired
 	private UserDAO userDao;
 	@Autowired
 	private WorkoutDAO workoutDao;
 	@Autowired
 	private WorkoutExerciseDAO workoutExerciseDao;
-
-	// HOME - (could inject session also) - THIS IS WHAT ROB HELPED SET UP
-	@RequestMapping(path = { "/", "home.do" })
+	
+	
+	
+	// HOME	- (could inject session also) - THIS IS WHAT ROB HELPED SET UP
+	@RequestMapping(path = { "/", "home.do" } )
 	public String home(Model model) {
 		model.addAttribute("SMOKETEST", userDao.authenticateUser("admin", "test")); // ** Temporary **
 		return "home";
 	}
+	
+	// LOGIN FORM - OUTPUT (POST) 
+    @RequestMapping(path = "login.do", method = RequestMethod.POST)
+    public String doLogin(@ModelAttribute("user") User user, HttpSession session, Model model) {
+    	
+        User authUser = userDao.authenticateUser(user.getUsername(), user.getPassword());
+        
+        if (authUser != null) {
 
-	// LOGIN FORM - OUTPUT (POST)
-	@RequestMapping(path = "login.do", method = RequestMethod.POST)
-	public String doLogin(@ModelAttribute("user") User user, HttpSession session, Model model) {
-
-		User authUser = userDao.authenticateUser(user.getUsername(), user.getPassword());
-
-		if (authUser != null) {
-
-			session.setAttribute("loggedInUser", authUser);
-			session.setAttribute("loginTime", LocalDateTime.now());
+        	session.setAttribute("loggedInUser", authUser);
+            session.setAttribute("loginTime", LocalDateTime.now());
 //            return "account";
-			return "redirect:profile.do";
-		} else {
-			return "error";
-		}
-	}
+            return "redirect:profile.do";
+        } else {
+            return "error"; 
+        }
+    }
+    
+    @RequestMapping(path = "profile.do", method = RequestMethod.GET)
+    public String showProfile(HttpSession session, Model model) {
+        User loggedInUser = (User) session.getAttribute("loggedInUser");
+        if (loggedInUser != null) {
+            model.addAttribute("user", loggedInUser);
+            
+            List<Workout> myWorkouts  = workoutDao.getWorkoutByUserId(loggedInUser.getId());
 
-//    @RequestMapping(path = "profile.do", method = RequestMethod.GET)
-//    public String showProfile(HttpSession session, Model model) {
-//        User loggedInUser = (User) session.getAttribute("loggedInUser");
-//        if (loggedInUser != null) {
-//            model.addAttribute("user", loggedInUser);
-//            
-//            List<Workout> myWorkouts  = workoutDao.getWorkoutByUserId(loggedInUser.getId());
-//
-//            System.out.println(myWorkouts);
-//       
-//            
-//            for (Workout workout : myWorkouts) {
-//            
-//                List<WorkoutExercise> myExercises = workoutDao.getExercisesByWorkoutId(workout.getId()); 
-//                workout.setWorkoutExercises(myExercises);                 
-//                
-// 
-//            }
-//            model.addAttribute("myWorkouts", myWorkouts);
-//            
-//            return "account"; 
-//        } else {
-//            model.addAttribute("errorMessage", "You must be logged in to view your profile.");
-//            return "login"; 
-//        }
-//    }
-	@RequestMapping(path = "profile.do", method = RequestMethod.GET)
-	public String showProfile(HttpSession session, Model model) {
-		User loggedInUser = (User) session.getAttribute("loggedInUser");
-		if (loggedInUser != null) {
-			model.addAttribute("user", loggedInUser);
+            System.out.println(myWorkouts);
+       
+            
+            for (Workout workout : myWorkouts) {
+            
+                List<WorkoutExercise> myExercises = workoutDao.getExercisesByWorkoutId(workout.getId()); 
+                workout.setWorkoutExercises(myExercises);                 
+                
+ 
+            }
+            model.addAttribute("myWorkouts", myWorkouts);
+            
+            return "account"; 
+        } else {
+            model.addAttribute("errorMessage", "You must be logged in to view your profile.");
+            return "login"; 
+        }
+    }
 
-			// User's workouts ("enabled" by default when making a new workout)
-			List<Workout> myWorkouts = workoutDao.getWorkoutByUserId(loggedInUser.getId());
-			// System.out.println(myWorkouts);
-
-			// User's "liked" workouts
-			List<Workout> userLikedWorkouts = userDao.getLikedWorkouts(loggedInUser.getId());
-
-//			for (Workout workout : myWorkouts) {
-//				List<WorkoutExercise> myExercises = workoutDao.getExercisesByWorkoutId(workout.getId());
-//				workout.setWorkoutExercises(myExercises);
-//			}
-//
-//			for (Workout workout : userLikedWorkouts) {
-//				List<WorkoutExercise> likedWorkoutExercises = workoutDao.getExercisesByWorkoutId(workout.getId());
-//				workout.setWorkoutExercises(likedWorkoutExercises);
-//			}
-
-			model.addAttribute("myWorkouts", myWorkouts);
-			model.addAttribute("userLikedWorkouts", userLikedWorkouts);
-
-			return "account";
-
-		} else {
-			model.addAttribute("errorMessage", "You must be logged in to view your profile.");
-			return "login";
-		}
-	}
-
-	@RequestMapping(path = "registerForm.do", method = RequestMethod.GET)
-	public String showRegisterForm(Model model) {
-		model.addAttribute("user", new User());
-		return "register";
-	}
-
-	@RequestMapping(path = "Register.do", method = RequestMethod.POST)
-	public String doRegister(@ModelAttribute("user") User user, HttpSession session, Model model) {
-
-		user.setEnabled(true);
-
-		if (userDao.usernameExists(user.getUsername())) {
-			model.addAttribute("errorMessage", "Username already exists. Please choose a different username.");
-			return "register";
-		}
-
-		User registeredUser = userDao.registerUser(user);
-
-		if (registeredUser != null) {
-			session.setAttribute("loggedInUser", registeredUser);
-			session.setAttribute("loginTime", LocalDateTime.now());
-
-			return "account";
-		} else {
-			model.addAttribute("errorMessage", "Registration failed. Please try again.");
-			return "register";
-		}
-	}
-
+    
+    @RequestMapping(path="registerForm.do", method=RequestMethod.GET)
+    public String showRegisterForm(Model model) {
+    	model.addAttribute("user", new User());
+    	return "register";
+    }
+    
+    @RequestMapping(path = "Register.do", method = RequestMethod.POST)
+    public String doRegister(@ModelAttribute("user") User user, HttpSession session, Model model) {
+    	
+    	user.setEnabled(true);
+    	
+    	if (userDao.usernameExists(user.getUsername())) {
+    		model.addAttribute("errorMessage", "Username already exists. Please choose a different username.");
+    		return "register";
+    	}
+    	
+    	User registeredUser = userDao.registerUser(user);
+    	
+    	if (registeredUser != null) {
+    		session.setAttribute("loggedInUser", registeredUser);
+    		session.setAttribute("loginTime", LocalDateTime.now());
+    		
+    		return "account";
+    	}else {
+    		model.addAttribute("errorMessage", "Registration failed. Please try again.");
+    		return "register";
+    	}
+    }
+    
 	@RequestMapping("logout.do")
 	public String logout(HttpSession session) {
 		session.removeAttribute("loggedInUser");
 		return "home";
 	}
-
-	@RequestMapping(path = "profileAfterWorkout.do")
+	
+	@RequestMapping(path="profileAfterWorkout.do")
 	public String returnToProfileAfterWorkoutCompletion(HttpSession session, Model model) {
-		User loggedInUser = (User) session.getAttribute("loggedInUser");
-		if (loggedInUser != null) {
-			model.addAttribute("user", loggedInUser);
-			return "redirect:profile.do";
-		} else {
-			model.addAttribute("errorMessage", "You must be logged in to view your profile.");
-			return "login";
-		}
+        User loggedInUser = (User) session.getAttribute("loggedInUser");
+        if (loggedInUser != null) {
+            model.addAttribute("user", loggedInUser);
+            return "redirect:profile.do"; 
+        } else {
+            model.addAttribute("errorMessage", "You must be logged in to view your profile.");
+            return "login"; 
+        }
 	}
+	
+	
+	
+	
 
+	
+	
+	
+	
 }

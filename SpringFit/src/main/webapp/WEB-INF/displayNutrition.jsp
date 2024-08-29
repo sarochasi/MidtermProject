@@ -17,7 +17,9 @@
 
 
 <body>
-	<%@ include file="navbar.jsp"%>
+<%@ include file="navbar.jsp"%>
+<main>
+<div class="container col-xl-10 col-xxl-8 px-4 py-5">
 
 	<table class="table table-striped">
 		<thead>
@@ -51,6 +53,9 @@
 
 	</table>
 
+<%@ include file="footer.jsp"%>
+</div>
+</main>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"

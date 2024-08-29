@@ -18,7 +18,7 @@
 	crossorigin="anonymous"></script>
 
 
-<title>Insert title here</title>
+<title>Body Weight</title>
 
 
 
@@ -43,6 +43,8 @@
 <body>
 
 <%@ include file="navbar.jsp"%>
+<main>
+<div class="container col-xl-10 col-xxl-8 px-4 py-5">
 
 <h1>Body Weights Data</h1>
 <table class="table table-bordered">
@@ -61,6 +63,13 @@
         </c:forEach>
     </tbody>
 </table>
+
+
+<%@ include file="footer.jsp"%>
+</div>
+</main>
+
+
 
 </body>
 
