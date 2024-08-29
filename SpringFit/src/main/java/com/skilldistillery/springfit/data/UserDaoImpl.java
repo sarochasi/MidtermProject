@@ -1,5 +1,7 @@
 package com.skilldistillery.springfit.data;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.springfit.entities.User;
@@ -55,14 +57,44 @@ public class UserDaoImpl implements UserDAO {
 		return count > 0;
 	}
 
+	// LIKE
 	@Override
 	public void userLikeWorkout(int userId, int workoutId) {
 		User user = em.find(User.class, userId);
 		Workout workout = em.find(Workout.class, workoutId);
-		user.getLikedWorkout().add(workout);
-		em.persist(user);
-		em.persist(workout);
+		
+		if (user != null && workout != null && user.getLikedWorkout().contains(workout)) {
+			user.addLikedWorkout(workout);
+			workout.addLikeByUser(user);
+			em.merge(user);
+			em.merge(workout);
+		}
 	}
+//	@Override
+//	public void userUnlikeWorkout(int userId, int workoutId) {
+//		User user = em.find(User.class, userId);
+//		Workout workout = em.find(Workout.class, workoutId);
+//		
+//		if (user != null && workout != null && user.getLikedWorkout().contains(workout)) {
+//			user.removeLikedWorkout(workout);
+//			workout.removeLikeByUser(user);
+//			em.merge(user);
+//			em.merge(workout);
+//		}
+//	}
+
+
+//
+//	@Override
+//	public List<Workout> getLikedWorkouts(int userId) {
+//		User user = em.find(User.class, userId);
+//		return user.getLikedWorkout();
+//	}
+//
+//	@Override
+//	public User findById(int userId) {
+//		return em.find(User.class, userId);
+//	}
 
 	@Override
 	public User getUserById(int userId) {

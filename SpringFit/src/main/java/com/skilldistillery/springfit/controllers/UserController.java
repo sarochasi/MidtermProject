@@ -1,4 +1,3 @@
-
 package com.skilldistillery.springfit.controllers;
 
 import java.time.LocalDateTime;
