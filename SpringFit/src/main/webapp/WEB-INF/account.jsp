@@ -111,21 +111,28 @@
 												<strong>Description: </strong>${workout.description != null ? workout.description : 'N/A'}
 											</p>
 
-											<a class="btn btn-outline-info" data-bs-toggle="collapse"
-												href="#collapse${workout.id}" role="button"
-												aria-expanded="false" aria-controls="collapse${workout.id}">
-												View Exercises </a>
+											<!--  BUTTONS -->
+											<div class="mt-auto">
+												<div
+													class="d-flex justify-content-center align-items-center">
+													<a class="btn btn-outline-info" data-bs-toggle="collapse"
+														href="#collapse${workout.id}" role="button"
+														aria-expanded="false"
+														aria-controls="collapse${workout.id}"> View</a>
 
-											<form action="updateWorkoutForm.do" method="GET">
-												<input type="hidden" name="workoutId" value="${workout.id}" />
-												<button type="submit" class="btn btn-outline-info">Edit</button>
-											</form>
+													<form action="updateWorkoutForm.do" method="GET">
+														<input type="hidden" name="workoutId"
+															value="${workout.id}" />
+														<button type="submit" class="btn btn-outline-info">Edit</button>
+													</form>
 
-
-											<form action="deleteWorkout.do" method="POST">
-												<input type="hidden" name="workoutId" value="${workout.id}" />
-												<button type="submit" class="btn btn-outline-info">Delete</button>
-											</form>
+													<form action="deleteWorkout.do" method="POST">
+														<input type="hidden" name="workoutId"
+															value="${workout.id}" />
+														<button type="submit" class="btn btn-outline-info">Delete</button>
+													</form>
+												</div>
+											</div>
 
 											<div class="collapse mt-2" id="collapse${workout.id}">
 												<div class="card card-body">
@@ -163,7 +170,7 @@
 				</c:otherwise>
 
 			</c:choose>
-<hr class="my-4">
+			<hr class="my-4">
 
 			<!-- ----------------------------------------------------------------WILL NEED TO UPDATE ONCE WE HAVE FAV FUNCTIONING--------------------------------- -->
 			<!-- FAVORITE -->
@@ -174,7 +181,7 @@
 
 			<div class="card-container">
 				<div class="row">
-					<c:forEach var="workout" items="${likedWorkouts}">
+					<c:forEach var="workout" items="${myWorkouts}">
 						<div class="col-md-4 mb-4">
 							<div class="card" style="width: 18rem;">
 								<div class="card-body">
@@ -185,16 +192,23 @@
 									<p class="card-text">
 										<strong>Description: </strong>${workout.description != null ? workout.description : 'N/A'}
 									</p>
-									<a class="btn btn-outline-info" data-bs-toggle="collapse"
-										href="#collapse${workout.id}" role="button"
-										aria-expanded="false" aria-controls="collapse${workout.id}">
-										View Exercises </a> <a href="#" class="btn btn-outline-info">Edit</a>
 
+									<!--  BUTTONS -->
+									<div class="mt-auto">
+										<div class="d-flex justify-content-center align-items-center">
+											<a class="btn btn-outline-info" data-bs-toggle="collapse"
+												href="#collapse${workout.id}" role="button"
+												aria-expanded="false" aria-controls="collapse${workout.id}">
+												View</a> <a href="#" class="btn btn-outline-info">Edit</a>
 
-									<form action="deleteWorkout.do" method="POST">
-										<input type="hidden" name="workoutId" value="${workout.id}" />
-										<button type="submit" class="btn btn-outline-info">Delete</button>
-									</form>
+											<form action="deleteWorkout.do" method="POST">
+												<input type="hidden" name="workoutId" value="${workout.id}" />
+												<button type="submit" class="btn btn-outline-info">Delete</button>
+											</form>
+										</div>
+									</div>
+									<!--  -->
+
 
 									<div class="collapse mt-2" id="collapse${workout.id}">
 										<div class="card card-body">
@@ -224,7 +238,7 @@
 				workouts from the community!</a>
 			<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->
 			<!-- Today's Numbers / Health? -->
-<hr class="my-4">
+			<hr class="my-4">
 
 			<h3>Weight & Nutrition</h3>
 			<table class="table table-bordered">
@@ -233,19 +247,25 @@
 				<tbody>
 					<tr>
 						<!-- <td>Current Weight</td> -->
-						<td>
-							<form action="submitWeight.do" method="POST">
-								<input type="number" class="form-control" name="weight"
-									placeholder="Enter your weight" required>
-								<button type="submit" class="btn btn-outline-info">Submit
-									Weight</button>
-							</form>
+
+						<!--  BUTTONS -->
+
+						<div class="mt-auto">
+							<div class="d-flex justify-content-center align-items-center">
+								<form action="submitWeight.do" method="POST">
+									<input type="number" class="form-control" name="weight"
+										placeholder="Enter your weight" required>
+									<button type="submit" class="btn btn-outline-info">Submit</button>
+								</form>
 
 
-							<form action="openWeight.do" method="POST">
-								<button class="btn btn-info" type="submit">Open weight</button>
-							</form>
-						</td>
+								<form action="openWeight.do" method="POST">
+									<button class="btn btn-info" type="submit">View</button>
+								</form>
+							</div>
+						</div>
+
+
 					</tr>
 				</tbody>
 			</table>
@@ -291,87 +311,90 @@
 					<input type="number" class="form-control" name="gramsFat"
 						placeholder="Enter fat (in grams)" required>
 					<!-- <button type="submit" class="btn btn-info">Submit Fat</button> -->
-					<input type="number" class="form-control" name="gramsProtein"
-						placeholder="Enter protein (in grams)" required>
-					<button type="submit" class="btn btn-info">Submit</button>
-				</form> <br>
 
+					<!--  BUTTONS -->
+					<div class="mt-auto">
+						<div class="d-flex justify-content-center align-items-center">
+							<input type="number" class="form-control" name="gramsProtein"
+								placeholder="Enter protein (in grams)" required>
+							<button type="submit" class="btn btn-outline-info">Submit</button>
+				</form>
 				<form action="showAllNutrition.do" method="POST">
 					<button class="btn btn-info" type="submit">View</button>
 				</form>
-		<br>
-
-
-		<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->
+		</div>
+		</div>
 		<!-- ---------------------------------------------------------ROUTINE--------------------------------------------------------------------------------- -->
 		<h3>Routine</h3>
 		<form action="goTocreateRoutinePage.do" method="GET">
 			<input type="text" class="form-control" name="name"
 				placeholder="Create New Routine" required>
-			<button type="submit" class="btn btn-outline-info">Create
+			<button type="submit" class="btn btn-info">Create
 				Routine</button>
 		</form>
 
 
 
- 
-<h3>Your Routines</h3>
-			<div class="card-container">
-				<div class="row">
-					<c:forEach var="routine" items="${user.routines}">
-						<div class="col-md-4 mb-4">
-							<div class="card" style="width: 18rem;">
-								<div class="card-body">
-									<h5 class="card-title">${routine.name}</h5>
-									<h6 class="card-subtitle mb-2 text-body-secondary">
-										<strong>Created by: </strong>${user.firstName}
-									</h6>
-									<p class="card-text">
-										<strong>Description: </strong>${routine.description != null ? routine.description : 'N/A'}
-									</p>
-									<a class="btn btn-outline-info" data-bs-toggle="collapse"
-										href="#collapse${routine.id}" role="button"
-										aria-expanded="false" aria-controls="collapse${workout.id}">
-										View Workouts </a> <a href="#" class="btn btn-outline-info">Edit</a>
+
+		<h3>Your Routines</h3>
+		<div class="card-container">
+			<div class="row">
+				<c:forEach var="routine" items="${user.routines}">
+					<div class="col-md-4 mb-4">
+						<div class="card" style="width: 18rem;">
+							<div class="card-body">
+								<h5 class="card-title">${routine.name}</h5>
+								<h6 class="card-subtitle mb-2 text-body-secondary">
+									<strong>Created by: </strong>${user.firstName}
+								</h6>
+								<p class="card-text">
+									<strong>Description: </strong>${routine.description != null ? routine.description : 'N/A'}
+								</p>
+
+								<div class="mt-auto">
+									<div class="d-flex justify-content-center align-items-center">
+										<a class="btn btn-outline-info" data-bs-toggle="collapse"
+											href="#collapse${routine.id}" role="button"
+											aria-expanded="false" aria-controls="collapse${workout.id}">View</a>
+										<a href="#" class="btn btn-outline-info">Edit</a>
+
+										<form action="deleteRoutine.do" method="POST">
+											<input type="hidden" name="routineId" value="${routine.id}" />
+											<button type="submit" class="btn btn-outline-info">Delete</button>
+										</form>
+									</div>
+								</div>
 
 
-									<form action="deleteRoutine.do" method="POST">
-										<input type="hidden" name="routineId" value="${routine.id}" />
-										<button type="submit" class="btn btn-outline-info">Delete</button>
-									</form>
 
-									<div class="collapse mt-2" id="collapse${routine.id}">
-										<div class="card card-body">
-											<ul>
-												<c:if test="${not empty routine.routineWorkouts}">
-													<c:forEach var="routineWorkout"
-														items="${routine.routineWorkouts}">
-														<li><strong>${routineWorkout.workout.name}</strong><br />
-<%-- 															Units: ${routineWorkout.units}<br /> Sets: ${exercise.sets}<br />
+								<div class="collapse mt-2" id="collapse${routine.id}">
+									<div class="card card-body">
+										<ul>
+											<c:if test="${not empty routine.routineWorkouts}">
+												<c:forEach var="routineWorkout"
+													items="${routine.routineWorkouts}">
+													<li><strong>${routineWorkout.workout.name}</strong><br />
+														<%-- 															Units: ${routineWorkout.units}<br /> Sets: ${exercise.sets}<br />
 															Notes: ${exercise.notes != null ? exercise.notes : 'N/A'}<br /> --%>
-														</li>
-													</c:forEach>
-												</c:if>
-												<c:if test="${empty workout.workoutExercises}">
-													<li>No exercises found for this workout.</li>
-												</c:if>
-											</ul>
-										</div>
+													</li>
+												</c:forEach>
+											</c:if>
+											<c:if test="${empty workout.workoutExercises}">
+												<li>No exercises found for this workout.</li>
+											</c:if>
+										</ul>
 									</div>
 								</div>
 							</div>
 						</div>
-					</c:forEach>
-				</div>
+					</div>
+				</c:forEach>
 			</div>
-			<a class="btn btn-info" href="showAllWorkouts.do">Explore
-				workouts from the community!</a> 
-			
-			<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->		<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->
-
-
-
-
+		</div>
+		<a class="btn btn-info" href="showAllWorkouts.do">Explore workouts
+			from the community!</a>
+		<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->
+		<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->
 		</div>
 
 		<!-- Footer -->
