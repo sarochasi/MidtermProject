@@ -179,6 +179,15 @@ public class WorkoutController {
 		User loggedInUser = (User) session.getAttribute("loggedInUser");
 		if (loggedInUser != null) {
 			List<Workout> myWorkouts = workoutDao.getWorkoutByUserId(userId);
+			// List<Workout> userLikedWorkouts = userDao.getLikedWorkouts(userId);
+
+//			for (Workout workout : myWorkouts) {
+//				System.out.println("Workout Name: " + workout.getName());
+//			}
+
+			model.addAttribute("myWorkouts", myWorkouts);
+			// model.addAttribute("userLikedWorkouts", userLikedWorkouts);
+
 			System.out.println("======================================");
 			System.out.println("User ID: " + userId);
 			System.out.println("Number of Workouts: " + myWorkouts.size());
@@ -318,10 +327,11 @@ public class WorkoutController {
 				mv.setViewName("redirect:updateWorkoutExerciseForm.do?workoutId=" + workoutId);
 			}
 		}
+
 		return mv;
 
 	}
-	
+
 	// LIKE
 	@RequestMapping(path = "likeWorkout.do", method = RequestMethod.POST)
 	public String likeWorkout(@RequestParam("workoutId") Integer workoutId, HttpSession session) {
@@ -329,17 +339,32 @@ public class WorkoutController {
 		Workout workout = workoutDao.getWorkoutById(workoutId);
 
 		if (currentUser != null && workout != null) {
-			List<User> likedUsers = workout.getUsers();
-			if (!likedUsers.contains(currentUser)) {
-				likedUsers.add(currentUser); 
-				workout.setUsers(likedUsers);
+			
+			currentUser.addLikedWorkout(workout);
+			workout.addLikeByUser(currentUser);
+			session.setAttribute("loggedInUser", currentUser);
+			workoutDao.save(workout);
 				
-				workoutDao.save(workout);
-				userDao.userLikeWorkout(currentUser.getId(), workout.getId());
 			}
-		}
 
 		return "redirect:communityBoard.do";
+	}
+
+	// UNLIKE
+	@RequestMapping(path = "unlikeWorkout.do", method = RequestMethod.POST)
+	public String unlikeWorkout(@RequestParam("workoutId") Integer workoutId, HttpSession session) {
+		User currentUser = (User) session.getAttribute("loggedInUser");
+		Workout workout = workoutDao.getWorkoutById(workoutId);
+
+		if (currentUser != null && workout != null) {
+
+			currentUser.removeLikedWorkout(workout);
+			session.setAttribute("loggedInUser", currentUser);
+			workoutDao.save(workout);
+		
+		}
+
+		return "redirect:profile.do";
 	}
 
 	@RequestMapping(path = "communityBoard.do", method = RequestMethod.GET)
