@@ -1,5 +1,4 @@
 
-
 package com.skilldistillery.springfit.controllers;
 
 import java.util.List;
@@ -67,7 +66,8 @@ public class WorkoutController {
 
 		return mv;
 	}
-	@RequestMapping(path = "addMoreExercise.do", params ="workoutId")
+
+	@RequestMapping(path = "addMoreExercise.do", params = "workoutId")
 	public ModelAndView addMoreExercise(@RequestParam("workoutId") int workoutId) {
 		ModelAndView mv = new ModelAndView();
 
@@ -230,7 +230,6 @@ public class WorkoutController {
 
 	}
 
-
 	@RequestMapping(path = "updateWorkoutForm.do", method = RequestMethod.GET)
 	public ModelAndView showUpdateWorkoutForm(@RequestParam("workoutId") int id) {
 		ModelAndView mv = new ModelAndView();
@@ -299,10 +298,9 @@ public class WorkoutController {
 		return mv;
 	}
 
-
 	@RequestMapping(path = "deleteWorkoutExercise.do", method = RequestMethod.POST)
 	public ModelAndView deleteWorkoutExercise(@ModelAttribute("workout") WorkoutExercise workoutExercise,
-			@RequestParam("workoutExerciseId") Integer workoutExerciseId, 
+			@RequestParam("workoutExerciseId") Integer workoutExerciseId,
 			@RequestParam("workoutId") Integer workoutId) {
 
 		ModelAndView mv = new ModelAndView();
@@ -315,7 +313,7 @@ public class WorkoutController {
 			if (!deleted) {
 				mv.addObject("errorMsg", "Failed to delete");
 				mv.setViewName("error");
-			}else {
+			} else {
 				mv.setViewName("redirect:updateWorkoutExerciseForm.do?workoutId=" + workoutId);
 			}
 		}
@@ -323,28 +321,31 @@ public class WorkoutController {
 
 	}
 	
-	 @RequestMapping(path = "likeWorkout.do", method = RequestMethod.POST)
-	    public String likeWorkout(@RequestParam("workoutId") Integer workoutId, HttpSession session) {
-	        User currentUser = (User) session.getAttribute("user");
-	        Workout workout = workoutDao.getWorkoutById(workoutId);
+	// LIKE
+	@RequestMapping(path = "likeWorkout.do", method = RequestMethod.POST)
+	public String likeWorkout(@RequestParam("workoutId") Integer workoutId, HttpSession session) {
+		User currentUser = (User) session.getAttribute("loggedInUser");
+		Workout workout = workoutDao.getWorkoutById(workoutId);
 
-	        if (currentUser != null && workout != null) {
-	            List<User> likedUsers = workout.getUsers();
-	            if (!likedUsers.contains(currentUser)) {
-	                likedUsers.add(currentUser);
-	                workout.setUsers(likedUsers);
-	                workoutDao.save(workout);
-	            }
-	        }
+		if (currentUser != null && workout != null) {
+			List<User> likedUsers = workout.getUsers();
+			if (!likedUsers.contains(currentUser)) {
+				likedUsers.add(currentUser); 
+				workout.setUsers(likedUsers);
+				
+				workoutDao.save(workout);
+				userDao.userLikeWorkout(currentUser.getId(), workout.getId());
+			}
+		}
 
-	        return "redirect:communityBoard.do";
-	    }
-	 
-	    @RequestMapping(path = "communityBoard.do", method = RequestMethod.GET)
-	    public String showCommunityBoard(Model model) {
-	        List<Workout> allWorkouts = workoutDao.showAllWorkouts(); 
-	        model.addAttribute("allWorkouts", allWorkouts);
-	        return "communityWorkouts"; 
-	    }
+		return "redirect:communityBoard.do";
+	}
+
+	@RequestMapping(path = "communityBoard.do", method = RequestMethod.GET)
+	public String showCommunityBoard(Model model) {
+		List<Workout> allWorkouts = workoutDao.showAllWorkouts();
+		model.addAttribute("allWorkouts", allWorkouts);
+		return "communityWorkouts";
+	}
 
 }
