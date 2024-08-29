@@ -126,7 +126,7 @@ public class WorkoutDAOImpl implements WorkoutDAO {
 	        if (workout.getId() == 0) { // If the workout doesn't have an ID, it's new
 	            em.persist(workout);
 	        } else { // If it has an ID, it's an update
-	            em.merge(workout);
+	            workout = em.merge(workout);
 	        }
 	        return workout;
 	    }
