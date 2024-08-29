@@ -23,6 +23,7 @@ public interface WorkoutDAO {
 	
 	public boolean deleteExerciseByWorkoutId(int id);
 	public Workout updateWorkout(int id, Workout workout);
+	Workout save(Workout workout);
 	
 	// public List<Workout> userDisplayedWorkouts(int userId);
 	

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.skilldistillery.springfit.data.ExerciseDAO;
+import com.skilldistillery.springfit.data.UserDAO;
 import com.skilldistillery.springfit.data.WorkoutDAO;
 import com.skilldistillery.springfit.data.WorkoutExerciseDAO;
 import com.skilldistillery.springfit.entities.Exercise;
@@ -30,6 +31,8 @@ public class WorkoutController {
 	private WorkoutDAO workoutDao;
 	@Autowired
 	private ExerciseDAO exerciseDao;
+	@Autowired
+	private UserDAO userDao;
 
 	@Autowired
 	private WorkoutExerciseDAO workoutExerciseDao;
@@ -320,6 +323,28 @@ public class WorkoutController {
 
 	}
 	
+	 @RequestMapping(path = "likeWorkout.do", method = RequestMethod.POST)
+	    public String likeWorkout(@RequestParam("workoutId") Integer workoutId, HttpSession session) {
+	        User currentUser = (User) session.getAttribute("user");
+	        Workout workout = workoutDao.getWorkoutById(workoutId);
 
+	        if (currentUser != null && workout != null) {
+	            List<User> likedUsers = workout.getUsers();
+	            if (!likedUsers.contains(currentUser)) {
+	                likedUsers.add(currentUser);
+	                workout.setUsers(likedUsers);
+	                workoutDao.save(workout);
+	            }
+	        }
+
+	        return "redirect:communityBoard.do";
+	    }
+	 
+	    @RequestMapping(path = "communityBoard.do", method = RequestMethod.GET)
+	    public String showCommunityBoard(Model model) {
+	        List<Workout> allWorkouts = workoutDao.showAllWorkouts(); 
+	        model.addAttribute("allWorkouts", allWorkouts);
+	        return "communityWorkouts"; 
+	    }
 
 }

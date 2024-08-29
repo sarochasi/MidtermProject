@@ -16,6 +16,8 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PostLoad;
+import jakarta.persistence.Transient;
 
 @Entity
 public class Workout {
@@ -49,11 +51,14 @@ public class Workout {
 
 	@ManyToMany
 	@JoinTable(name = "liked_workout", joinColumns = @JoinColumn(name = "workout_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
-	private List<User> users;
+	private List<User> users = new ArrayList<>();
 
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
+	
+	 @Transient
+	    private int likeCount;
 
 ///--------------------------------------------------------------------------------------------------------------
 
@@ -172,6 +177,21 @@ public class Workout {
 	public void removeWorkoutExercise(WorkoutExercise workoutExercise) {
 		System.out.println("fix removeWorkoutExercise");
 	}
+	
+	public void setLikeCount(int likeCount) {
+        this.likeCount = likeCount;
+    }
+
+    public int getLikeCount() {
+        return users.size(); 
+    }
+	  
+	  @PostLoad
+	    public void updateLikeCount() {
+	        if (users != null) {
+	            likeCount = users.size();
+	        }
+	    }
 
 	/// --------------------------------------------------------------------------------------------------------------
 	@Override
