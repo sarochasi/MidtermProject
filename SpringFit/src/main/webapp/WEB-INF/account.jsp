@@ -167,14 +167,14 @@
 
 			<!-- ----------------------------------------------------------------WILL NEED TO UPDATE ONCE WE HAVE FAV FUNCTIONING--------------------------------- -->
 			<!-- FAVORITE -->
-			<h3>Your Favorite Workouts</h3>
+			<h3>Liked Workouts</h3>
 
 
 
 
 			<div class="card-container">
 				<div class="row">
-					<c:forEach var="workout" items="${myWorkouts}">
+					<c:forEach var="workout" items="${likedWorkouts}">
 						<div class="col-md-4 mb-4">
 							<div class="card" style="width: 18rem;">
 								<div class="card-body">
