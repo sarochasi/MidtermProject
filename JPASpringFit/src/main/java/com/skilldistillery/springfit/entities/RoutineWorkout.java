@@ -79,7 +79,10 @@ public class RoutineWorkout {
 	public void setWorkout(Workout workout) {
 		this.workout = workout;
 	}
+	
 
+	
+	///--------------	///--------------	///--------------	///--------------	///--------------	///--------------	///--------------	///--------------
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);

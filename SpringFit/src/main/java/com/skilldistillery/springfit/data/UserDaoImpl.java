@@ -63,6 +63,11 @@ public class UserDaoImpl implements UserDAO {
 		em.persist(user);
 		em.persist(workout);
 	}
+
+	@Override
+	public User findById(int userId) {
+		return em.find(User.class, userId);
+	}
 	
 	
 	

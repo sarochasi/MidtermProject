@@ -1,5 +1,6 @@
 package com.skilldistillery.springfit.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -27,7 +28,7 @@ public class Routine {
 	private String imageUrl;
 	
 	@OneToMany(mappedBy = "routine")
-	private List<RoutineWorkout> routineWorkout;
+	private List<RoutineWorkout> routineWorkouts;
 	
 	@ManyToOne
 	@JoinColumn(name ="user_id")
@@ -69,12 +70,19 @@ public class Routine {
 		this.imageUrl = imageUrl;
 	}
 
-	public List<RoutineWorkout> getRoutineWorkout() {
-		return routineWorkout;
+	public List<RoutineWorkout> getRoutineWorkouts() {
+		return routineWorkouts;
 	}
 
-	public void setRoutineWorkout(List<RoutineWorkout> routineWorkout) {
-		this.routineWorkout = routineWorkout;
+	public void setRoutineWorkouts(List<RoutineWorkout> routineWorkouts) {
+		this.routineWorkouts = routineWorkouts;
+	}
+	public void addRoutineWorkout(RoutineWorkout routineWorkout) {
+		if (routineWorkouts == null) {
+			routineWorkouts = new ArrayList<>();
+		}
+		routineWorkouts.add(routineWorkout);
+		routineWorkout.setRoutine(this);
 	}
 
 	public User getUser() {
@@ -105,7 +113,7 @@ public class Routine {
 	@Override
 	public String toString() {
 		return "Routine [id=" + id + ", name=" + name + ", description=" + description + ", imageUrl=" + imageUrl
-				+ ", routineWorkout=" + routineWorkout + ", user=" + user + "]";
+				+ ", user=" + user + "]";
 	}
 	
 	

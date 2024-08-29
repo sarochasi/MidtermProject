@@ -18,14 +18,19 @@
 <title>Create Routine</title>
 </head>
 <body>
-	<h1>Create Routine</h1>
+	<h1>Routine: ${routine.name}</h1>
 	<!-- --------------------------------------------------------------------------------------------------------------------  -->
+	<h2>Workouts</h2>
+	<c:forEach var="routineWorkout" items="${routine.routineWorkouts}">
+	<li>${routineWorkout.workout.name } ${routineWorkout.dayNumber }</li>
+	</c:forEach>
 	<!--------------------------------------------------workout selection ------------------------------------------------ -->
 	<c:if test="${not empty workouts}">
 
-		<form action="getRoutineDay.do" method="GET">
+<!-- 		<form action="recieveRoutineDayAndWorkoutAndCreateRoutineWorkout.do" method="GET"> -->
+		<form action="addWorkoutToRoutine.do" method="POST">
 			<input type="hidden" name="routineId" value="${routineId}" />
-			 <select name="workoutId">
+			 <select name="workout.id">
 				<c:forEach var="w" items="${workouts }">
 					<option selected="selected" value="${w.id }">${w.name }</option>
 				</c:forEach>
