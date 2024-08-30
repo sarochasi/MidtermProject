@@ -1,3 +1,5 @@
+
+
 package com.skilldistillery.springfit.controllers;
 
 import java.time.LocalDateTime;
@@ -60,7 +62,7 @@ public class UserController {
     public String showProfile(HttpSession session, Model model) {
         User loggedInUser = (User) session.getAttribute("loggedInUser");
         if (loggedInUser != null) {
-            model.addAttribute("user", userDao.getUserById(loggedInUser.getId()));
+            model.addAttribute("user", loggedInUser);
             
             List<Workout> myWorkouts  = workoutDao.getWorkoutByUserId(loggedInUser.getId());
 

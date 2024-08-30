@@ -41,6 +41,11 @@
 				<c:choose>
 					<c:when test="${empty loggedInUser}">
 						<div class="col-md-10 mx-auto col-lg-5">
+						
+						<c:if test="${not empty loginError}">
+        <p style="color:red;">${loginError}</p>
+    </c:if>
+    
 							<form action="login.do" method="POST"
 								class="p-4 p-md-5 border rounded-3 bg-body-tertiary">
 								<h1 class="fw-bold mb-0 fs-2">Log in</h1>
