@@ -1,5 +1,3 @@
-
-
 package com.skilldistillery.springfit.controllers;
 
 import java.util.List;
@@ -36,19 +34,6 @@ public class WorkoutController {
 
 	@Autowired
 	private WorkoutExerciseDAO workoutExerciseDao;
-
-	// Methods
-	// * navigateToCreateWorkoutJSP
-	// * addExerciseToWorkout
-	// * save workout from session to database
-
-//	//I think this method can be deleted, exercise
-//	@RequestMapping(path = "GetWorkoutPagealternate.do")
-//	public ModelAndView displayWorkoutPage() {	
-//		ModelAndView mv = new ModelAndView();	
-//		mv.setViewName("workout");
-//		return mv;
-//	}
 
 	// Takes user data for Workout (name desicription, etc), does not take exercises
 	// yet.
@@ -334,20 +319,35 @@ public class WorkoutController {
 
 	// LIKE
 	@RequestMapping(path = "likeWorkout.do", method = RequestMethod.POST)
-	public String likeWorkout(@RequestParam("workoutId") Integer workoutId, HttpSession session) {
+	public String likeWorkout(@RequestParam("workoutId") Integer workoutId, HttpSession session, Model model) {
 		User currentUser = (User) session.getAttribute("loggedInUser");
 		Workout workout = workoutDao.getWorkoutById(workoutId);
 
 		if (currentUser != null && workout != null) {
 			
-			currentUser.addLikedWorkout(workout);
-			workout.addLikeByUser(currentUser);
-			session.setAttribute("loggedInUser", currentUser);
-			workoutDao.save(workout);
+			currentUser = userDao.getUserById(currentUser.getId());
+			
+			if (currentUser.getLikedWorkout() != null) {
+				currentUser.getLikedWorkout().size();
+				userDao.saveUser(currentUser);
+			}
+			 
+			if (!currentUser.getLikedWorkout().contains(workout)) {
+				currentUser.getLikedWorkout().add(workout);
+				workout.addLikeByUser(currentUser);
+				workout.setLikeCount(workout.getLikeCount());
+				userDao.saveUser(currentUser);
+				workoutDao.save(workout);
+			}
+			
+//			currentUser.addLikedWorkout(workout);
+//			workout.addLikeByUser(currentUser);
+//			session.setAttribute("loggedInUser", currentUser);
+//			workoutDao.save(workout);
 				
 			}
 
-		return "redirect:communityBoard.do";
+		return "redirect:profile.do";
 	}
 
 	// UNLIKE
@@ -357,10 +357,17 @@ public class WorkoutController {
 		Workout workout = workoutDao.getWorkoutById(workoutId);
 
 		if (currentUser != null && workout != null) {
-
-			currentUser.removeLikedWorkout(workout);
-			session.setAttribute("loggedInUser", currentUser);
-			workoutDao.save(workout);
+			currentUser = userDao.getUserById(currentUser.getId());
+			if (currentUser.getLikedWorkout().contains(workout)) {
+				currentUser.getLikedWorkout().remove(workout);
+				workout.getUsers().remove(currentUser);
+				
+				userDao.saveUser(currentUser);
+				workoutDao.save(workout);
+			}
+//			currentUser.removeLikedWorkout(workout);
+//			session.setAttribute("loggedInUser", currentUser);
+//			workoutDao.save(workout);
 		
 		}
 

@@ -63,7 +63,7 @@ public class UserDaoImpl implements UserDAO {
 		User user = em.find(User.class, userId);
 		Workout workout = em.find(Workout.class, workoutId);
 		
-		if (user != null && workout != null && user.getLikedWorkout().contains(workout)) {
+		if (user != null && workout != null && !user.getLikedWorkout().contains(workout)) {
 			user.addLikedWorkout(workout);
 			workout.addLikeByUser(user);
 			em.merge(user);
@@ -84,13 +84,16 @@ public class UserDaoImpl implements UserDAO {
 //	}
 
 
-//
-//	@Override
-//	public List<Workout> getLikedWorkouts(int userId) {
-//		User user = em.find(User.class, userId);
-//		return user.getLikedWorkout();
-//	}
-//
+
+	@Override
+	public List<Workout> getLikedWorkouts(int userId) {
+		User user = em.find(User.class, userId);
+		if (user != null) {
+			return user.getLikedWorkout();
+		}
+		return null; 
+	}
+
 //	@Override
 //	public User findById(int userId) {
 //		return em.find(User.class, userId);
@@ -99,6 +102,17 @@ public class UserDaoImpl implements UserDAO {
 	@Override
 	public User getUserById(int userId) {
 		return em.find(User.class, userId);
+	}
+	
+
+	@Override
+	public User saveUser(User user) {
+		if (user.getId() == 0) {
+			em.persist(user);
+		} else {
+			user = em.merge(user);
+		}
+		return user;
 	}
 
 }
