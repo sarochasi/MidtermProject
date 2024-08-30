@@ -244,7 +244,12 @@ public class WorkoutController {
 	@RequestMapping(path = "updateWorkout.do", method = RequestMethod.POST)
 	public ModelAndView updateWorkout(@ModelAttribute("workout") Workout workout) {
 		ModelAndView mv = new ModelAndView();
-
+		
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println(workout);
 		try {
 			Workout updatedWorkout = workoutDao.updateWorkout(workout.getId(), workout);
 			if (updatedWorkout != null) {

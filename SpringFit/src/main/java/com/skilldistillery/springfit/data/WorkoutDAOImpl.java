@@ -7,20 +7,16 @@ import org.springframework.stereotype.Repository;
 
 import com.skilldistillery.springfit.entities.User;
 import com.skilldistillery.springfit.entities.Workout;
-import com.skilldistillery.springfit.entities.WorkoutComment;
 import com.skilldistillery.springfit.entities.WorkoutExercise;
 
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 
 @Transactional
 @Repository
 public class WorkoutDAOImpl implements WorkoutDAO {
-	private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("JPASpringFit");
-
+ 
 	@PersistenceContext
 	private EntityManager em;
 
@@ -113,12 +109,13 @@ public class WorkoutDAOImpl implements WorkoutDAO {
 		if (managedWorkout != null) {
 			managedWorkout.setName(workout.getName());
 			managedWorkout.setDescription(workout.getDescription());
-			managedWorkout.setCreateDate(workout.getCreateDate());
-			managedWorkout.setLastUpdate(workout.getLastUpdate());
-			managedWorkout.setEnabled(workout.getEnabled());
+//			managedWorkout.setCreateDate(workout.getCreateDate());
+//			managedWorkout.setLastUpdate(workout.getLastUpdate());
+//			managedWorkout.setEnabled(workout.getEnabled());
 			managedWorkout.setPublished(workout.getPublished());
 			managedWorkout.setImageUrl(workout.getImageUrl());
-			managedWorkout.setWorkoutExercises(workout.getWorkoutExercises());
+//			managedWorkout.setWorkoutExercises(workout.getWorkoutExercises());
+			em.flush();
 
 		}
 		return managedWorkout;

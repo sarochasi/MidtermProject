@@ -51,7 +51,7 @@
 
             <!-- Workout Exercises -->
            
-           <button type="submit" class="btn btn-sm btn-outline-secondary">Update exercise list</button>
+           <button type="submit" class="btn btn-sm btn-outline-secondary">Update</button>
         </form>
         
         <br>
