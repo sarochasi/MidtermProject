@@ -20,6 +20,8 @@ public class Routine {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
+	private boolean enabled;
+	
 	private String name;
 	
 	private String description;
@@ -92,6 +94,16 @@ public class Routine {
 	public void setUser(User user) {
 		this.user = user;
 	}
+	
+	
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
 
 	@Override
 	public int hashCode() {
@@ -112,8 +124,8 @@ public class Routine {
 
 	@Override
 	public String toString() {
-		return "Routine [id=" + id + ", name=" + name + ", description=" + description + ", imageUrl=" + imageUrl
-				+ ", user=" + user + "]";
+		return "Routine [id=" + id + ", enabled=" + enabled + ", name=" + name + ", description=" + description
+				+ ", imageUrl=" + imageUrl + ", user=" + user + "]";
 	}
 	
 	

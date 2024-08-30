@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.skilldistillery.springfit.data.UserDAO;
 import com.skilldistillery.springfit.data.WorkoutDAO;
 import com.skilldistillery.springfit.data.WorkoutExerciseDAO;
+import com.skilldistillery.springfit.entities.Routine;
 import com.skilldistillery.springfit.entities.User;
 import com.skilldistillery.springfit.entities.Workout;
 import com.skilldistillery.springfit.entities.WorkoutExercise;
@@ -64,6 +65,7 @@ public class UserController {
 
 			List<Workout> myWorkouts = workoutDao.getWorkoutByUserId(loggedInUser.getId());
 			List<Workout> myLikedWorkouts = userDao.getLikedWorkouts(loggedInUser.getId());
+			List<Routine> myRoutines = userDao.getRoutinesByUserId(loggedInUser.getId());
 
 			System.out.println(myWorkouts);
 
@@ -75,6 +77,7 @@ public class UserController {
 			}
 			model.addAttribute("myWorkouts", myWorkouts);
 			model.addAttribute("myLikedWorkouts", myLikedWorkouts);
+			model.addAttribute("myRoutines", myRoutines);
 
 			return "account";
 		} else {

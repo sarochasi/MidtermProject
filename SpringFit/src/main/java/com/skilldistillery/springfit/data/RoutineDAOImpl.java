@@ -24,6 +24,7 @@ public class RoutineDAOImpl implements RoutineDAO {
 	@Override
 	public Routine createNewRoutine(Routine routine, int userId) {
 		User user = (User)em.find(User.class, userId);
+		routine.setEnabled(true);
 		routine.setUser(user);
 		em.persist(routine);
 		return routine;
@@ -44,6 +45,8 @@ public class RoutineDAOImpl implements RoutineDAO {
 		
 		if(routine != null) {
 //			em.remove(routine);
+			routine.setEnabled(false);
+			
 			
 			deleted = true;
 		}

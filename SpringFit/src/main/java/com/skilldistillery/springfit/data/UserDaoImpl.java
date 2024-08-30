@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.skilldistillery.springfit.entities.Routine;
 import com.skilldistillery.springfit.entities.User;
 import com.skilldistillery.springfit.entities.Workout;
 
@@ -113,6 +114,14 @@ public class UserDaoImpl implements UserDAO {
 			user = em.merge(user);
 		}
 		return user;
+	}
+
+	@Override
+	public List<Routine> getRoutinesByUserId(int id) {
+		String jpql = "SELECT r FROM Routine r WHERE r.user.id = :id AND r.enabled=true";
+		List<Routine> routineList = em.createQuery(jpql, Routine.class).setParameter("id", id).getResultList();
+
+		return routineList;
 	}
 
 }

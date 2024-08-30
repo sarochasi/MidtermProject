@@ -2,6 +2,7 @@ package com.skilldistillery.springfit.data;
 
 import java.util.List;
 
+import com.skilldistillery.springfit.entities.Routine;
 import com.skilldistillery.springfit.entities.User;
 import com.skilldistillery.springfit.entities.Workout;
 
@@ -20,6 +21,8 @@ public interface UserDAO {
 	User saveUser(User user);
 
 	List<Workout> getLikedWorkouts(int userId);
+
+	List<Routine> getRoutinesByUserId(int id);
 
 
 }
