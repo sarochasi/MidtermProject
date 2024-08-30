@@ -148,7 +148,7 @@ System.out.println();
 	@RequestMapping(path = "deleteRoutine.do", params = "routineId", method = RequestMethod.POST)
 	public ModelAndView deleteRoutine(@RequestParam("routineId") int routineId) {
 		ModelAndView mv = new ModelAndView();
-		routineDao.deleteRoutineByIdSqlStmt(routineId);
+		routineDao.deleteRoutineById(routineId);
 		mv.setViewName("redirect:profile.do");
 		return mv;
 	}

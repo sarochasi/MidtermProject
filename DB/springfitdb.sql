@@ -280,6 +280,7 @@ CREATE TABLE IF NOT EXISTS `routine` (
   `description` TEXT NULL,
   `image_url` VARCHAR(2000) NULL,
   `user_id` INT NOT NULL,
+  `enabled` TINYINT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_routine_user1_idx` (`user_id` ASC) VISIBLE,
   CONSTRAINT `fk_routine_user1`
@@ -512,7 +513,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `springfitdb`;
-INSERT INTO `routine` (`id`, `name`, `description`, `image_url`, `user_id`) VALUES (1, 'Full Body Routine', 'Bulk workout routine', 'na', 1);
+INSERT INTO `routine` (`id`, `name`, `description`, `image_url`, `user_id`, `enabled`) VALUES (1, 'Full Body Routine', 'Bulk workout routine', 'na', 1, 1);
 
 COMMIT;
 
