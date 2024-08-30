@@ -43,7 +43,8 @@ public class RoutineDAOImpl implements RoutineDAO {
 		Routine routine = em.find(Routine.class, routineId);
 		
 		if(routine != null) {
-			em.remove(routine);
+//			em.remove(routine);
+			
 			deleted = true;
 		}
 		
@@ -55,7 +56,7 @@ public class RoutineDAOImpl implements RoutineDAO {
 	public boolean deleteRoutineByIdSqlStmt(int routineId) {
 		boolean deleted = false;
 
-			String jpql = "DELETE FROM routineWorkout rw WHERE rw.routine.id = :routineId";
+			String jpql = "DELETE FROM RoutineWorkout rw WHERE rw.routine.id = :routineId";
 			int result = em.createQuery(jpql, Routine.class).setParameter("routineId", jpql).executeUpdate();
 			
 			if(result > 0) {
