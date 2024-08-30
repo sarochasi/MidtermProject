@@ -61,7 +61,7 @@ public class WorkoutController {
 
 //		=============================================
 		List<WorkoutExercise> workoutExercises = workoutDao.getExercisesByWorkoutId(workoutId);
-		;
+		
 		mv.addObject("workoutExercises", workoutExercises);
 //	    ==============================================
 
@@ -214,7 +214,7 @@ public class WorkoutController {
 		} else {
 			boolean deleted = workoutDao.deleteWorkout(workoutId);
 			if (!deleted) {
-				mv.addObject("errorMsg", "Failed to delete the workout");
+				mv.addObject("errorMessage", "Failed to delete the workout");
 				mv.setViewName("error");
 			} else {
 				mv.setViewName("redirect:profile.do");
@@ -234,7 +234,7 @@ public class WorkoutController {
 			mv.addObject("workout", workout);
 			mv.setViewName("updateForm");
 		} else {
-			mv.addObject("errorMsg", "Workout not found");
+			mv.addObject("errorMessage", "Workout not found");
 			mv.setViewName("error");
 		}
 		return mv;
@@ -253,7 +253,7 @@ public class WorkoutController {
 			}
 
 		} catch (Exception e) {
-			mv.addObject("errorMsg", "Error occured while updating the Workout.");
+			mv.addObject("errorMessage", "Error occured while updating the Workout.");
 			mv.setViewName("error");
 			e.printStackTrace();
 		}
@@ -270,7 +270,7 @@ public class WorkoutController {
 			mv.addObject("workoutExercises", workoutExercises);
 			mv.setViewName("updateWorkoutExerciseform");
 		} else {
-			mv.addObject("errorMsg", "WorkoutExercise not found");
+			mv.addObject("errorMessage", "WorkoutExercise not found");
 			mv.setViewName("error");
 		}
 		return mv;
@@ -286,7 +286,7 @@ public class WorkoutController {
 			workoutExerciseDao.updateWorkoutExercise(workoutExerciseId, workoutExercise);
 			mv.setViewName("redirect:updateWorkoutExerciseForm.do?workoutId=" + workoutId);
 		} catch (Exception e) {
-			mv.addObject("errorMsg", "Error occurred while updating the workout exercises.");
+			mv.addObject("errorMessage", "Error occurred while updating the workout exercises.");
 			mv.setViewName("error");
 			e.printStackTrace();
 		}
@@ -301,12 +301,12 @@ public class WorkoutController {
 		ModelAndView mv = new ModelAndView();
 
 		if (workoutExercise == null) {
-			mv.addObject("errorMsg", "WorkoutExercise not found with ID: " + workoutExerciseId);
+			mv.addObject("errorMessage", "WorkoutExercise not found with ID: " + workoutExerciseId);
 			mv.setViewName("error");
 		} else {
 			boolean deleted = workoutExerciseDao.deleteWorkoutExercise(workoutExerciseId);
 			if (!deleted) {
-				mv.addObject("errorMsg", "Failed to delete");
+				mv.addObject("errorMessage", "Failed to delete");
 				mv.setViewName("error");
 			} else {
 				mv.setViewName("redirect:updateWorkoutExerciseForm.do?workoutId=" + workoutId);
