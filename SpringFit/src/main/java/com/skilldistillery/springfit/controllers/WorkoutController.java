@@ -132,15 +132,15 @@ public class WorkoutController {
 
 		model.addAttribute("workoutExercise", workoutExercise);
 
-		Workout newWorkout = workoutDao.getWorkoutById(workoutId);
-		workoutDao.getWorkoutById(workoutId);
-		newWorkout.addWorkoutExercise(workoutExercise);
+//		Workout newWorkout = workoutDao.getWorkoutById(workoutId);
+//		workoutDao.getWorkoutById(workoutId);
+//		newWorkout.addWorkoutExercise(workoutExercise);
 
 		// workoutExercise = workoutDao.createNewWorkout(workoutExercise);
 
 		// exercise Id recieved
 
-		return "redirect:GetWorkoutPage.do?workoutId=" + newWorkout.getId();
+		return "redirect:GetWorkoutPage.do?workoutId=" + workoutId;
 
 	}
 
