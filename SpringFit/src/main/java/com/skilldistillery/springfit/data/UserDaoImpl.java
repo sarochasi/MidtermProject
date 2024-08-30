@@ -101,4 +101,14 @@ public class UserDaoImpl implements UserDAO {
 		return em.find(User.class, userId);
 	}
 
+	@Override
+	public User saveUser(User user) {
+		if (user.getId() == 0) {
+			em.persist(user);
+		} else {
+			user = em.merge(user);
+		}
+		return user;
+	}
+
 }

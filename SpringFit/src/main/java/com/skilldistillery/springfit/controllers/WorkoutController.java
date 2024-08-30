@@ -342,8 +342,11 @@ public class WorkoutController {
 			
 			currentUser.addLikedWorkout(workout);
 			workout.addLikeByUser(currentUser);
+			
 			session.setAttribute("loggedInUser", currentUser);
+			
 			workoutDao.save(workout);
+			userDao.saveUser(currentUser);
 				
 			}
 

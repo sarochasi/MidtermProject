@@ -234,94 +234,97 @@
 					</c:forEach>
 				</div>
 			</div>
-			<a class="btn btn-info" href="showAllWorkouts.do">Explore
-				workouts from the community!</a>
-			<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->
-			<!-- Today's Numbers / Health? -->
-			<hr class="my-4">
 
-			<h3>Weight & Nutrition</h3>
-			<table class="table table-bordered">
-				<thead></thead>
+			<form action="showAllWorkouts.do" method="GET">
+				<button type="submit" class="btn btn-info">Explore the
+					community!</button> </form>
+				<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->
+				<!-- Today's Numbers / Health? -->
+				<hr class="my-4">
 
-				<tbody>
-					<tr>
-						<!-- <td>Current Weight</td> -->
+				<h3>Weight & Nutrition</h3>
+				<table class="table table-bordered">
+					<thead></thead>
 
-						<!--  BUTTONS -->
+					<tbody>
+						<tr>
+							<!-- <td>Current Weight</td> -->
 
-						<div class="mt-auto">
-							<div class="d-flex justify-content-center align-items-center">
-								<form action="submitWeight.do" method="POST">
-									<input type="number" class="form-control" name="weight"
-										placeholder="Enter your weight" required>
-									<button type="submit" class="btn btn-outline-info">Submit</button>
-								</form>
+							<!--  BUTTONS -->
+
+							<div class="mt-auto">
+								<div class="d-flex justify-content-center align-items-center">
+									<form action="submitWeight.do" method="POST">
+										<input type="number" class="form-control" name="weight"
+											placeholder="Enter your weight" required>
+										<button type="submit" class="btn btn-outline-info">Submit</button>
+									</form>
 
 
-								<form action="openWeight.do" method="POST">
-									<button class="btn btn-info" type="submit">View</button>
-								</form>
+									<form action="openWeight.do" method="POST">
+										<button class="btn btn-info" type="submit">View</button>
+									</form>
+								</div>
 							</div>
+
+
+						</tr>
+					</tbody>
+				</table>
+
+				<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->
+				<!-- ---------------------------------------------------NUTRITION------------------------------------------------------------------------------ -->
+				<!-- <td>Track your macros!</td> -->
+				<td><legend class="form-label"></legend>
+					<form action="addNutrition.do" method="POST">
+
+						<div class="col-md-4">
+							<label for="zip" class="form-label"></label> <input type="date"
+								class="form-control" id="dateEaten" name="dateEaten"
+								placeholder="YYYY-MM-DD">
 						</div>
 
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="radio" id="name"
+								name="name" value="Breakfast"> <label
+								class="form-check-label" for="name">Breakfast</label>
+						</div>
 
-					</tr>
-				</tbody>
-			</table>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="radio" id="name"
+								name="name" value="Lunch"> <label
+								class="form-check-label" for="lunch">Lunch</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="radio" id="name"
+								name="name" value="Dinner"> <label
+								class="form-check-label" for="lunch">Dinner</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="radio" id="name"
+								name="name" value="Snack"> <label
+								class="form-check-label" for="lunch">Snack</label>
+						</div>
 
-			<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->
-			<!-- ---------------------------------------------------NUTRITION------------------------------------------------------------------------------ -->
-			<!-- <td>Track your macros!</td> -->
-			<td><legend class="form-label"></legend>
-				<form action="addNutrition.do" method="POST">
-
-					<div class="col-md-4">
-						<label for="zip" class="form-label"></label> <input type="date"
-							class="form-control" id="dateEaten" name="dateEaten"
-							placeholder="YYYY-MM-DD">
-					</div>
-
-					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio" id="name" name="name"
-							value="Breakfast"> <label class="form-check-label"
-							for="name">Breakfast</label>
-					</div>
-
-					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio" id="name" name="name"
-							value="Lunch"> <label class="form-check-label"
-							for="lunch">Lunch</label>
-					</div>
-					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio" id="name" name="name"
-							value="Dinner"> <label class="form-check-label"
-							for="lunch">Dinner</label>
-					</div>
-					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio" id="name" name="name"
-							value="Snack"> <label class="form-check-label"
-							for="lunch">Snack</label>
-					</div>
-
-					<input type="number" class="form-control" name="gramsCarbohydrates"
-						placeholder="Enter carbohydrates (in grams)" required>
-					<!-- <button type="submit" class="btn btn-info">Submit
+						<input type="number" class="form-control"
+							name="gramsCarbohydrates"
+							placeholder="Enter carbohydrates (in grams)" required>
+						<!-- <button type="submit" class="btn btn-info">Submit
 									Carbohydrates</button> -->
-					<input type="number" class="form-control" name="gramsFat"
-						placeholder="Enter fat (in grams)" required>
-					<!-- <button type="submit" class="btn btn-info">Submit Fat</button> -->
+						<input type="number" class="form-control" name="gramsFat"
+							placeholder="Enter fat (in grams)" required>
+						<!-- <button type="submit" class="btn btn-info">Submit Fat</button> -->
 
-					<!--  BUTTONS -->
-					<div class="mt-auto">
-						<div class="d-flex justify-content-center align-items-center">
-							<input type="number" class="form-control" name="gramsProtein"
-								placeholder="Enter protein (in grams)" required>
-							<button type="submit" class="btn btn-outline-info">Submit</button>
-				</form>
-				<form action="showAllNutrition.do" method="POST">
-					<button class="btn btn-info" type="submit">View</button>
-				</form>
+						<!--  BUTTONS -->
+						<div class="mt-auto">
+							<div class="d-flex justify-content-center align-items-center">
+								<input type="number" class="form-control" name="gramsProtein"
+									placeholder="Enter protein (in grams)" required>
+								<button type="submit" class="btn btn-outline-info">Submit</button>
+					</form>
+					<form action="showAllNutrition.do" method="POST">
+						<button class="btn btn-info" type="submit">View</button>
+					</form>
 		</div>
 		</div>
 		<br>

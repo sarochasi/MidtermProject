@@ -14,6 +14,6 @@ public interface UserDAO {
 	
 	public User getUserById(int userId);
 	
-	
+	User saveUser(User user);
 
 }

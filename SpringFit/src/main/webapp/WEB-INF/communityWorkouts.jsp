@@ -46,13 +46,21 @@
 										aria-expanded="false" aria-controls="collapse${workout.id}">
 										View Exercises </a>
 
+<!--  -      ---------------------------------------------------------------- -->
 									<form action="likeWorkout.do" method="POST"
 										style="display: inline;">
 										<input type="hidden" name="workoutId" value="${workout.id}" />
 										<button type="submit" class="btn btn-outline-success">Like
 											(${workout.likeCount})</button>
-									</form>
-
+									</form> 
+<!--  -      ---------------------------------------------------------------- -->
+									<%-- <form action="likeWorkout.do" method="POST"
+										style="display: inline;">
+										<input type="hidden" name="workoutId" value="${workout.id}" />
+										<button type="submit" class="btn btn-outline-success">Like
+											(${workout.likedWorkout})</button>
+									</form> --%>
+<!--  -      ---------------------------------------------------------------- -->
 
 
 									<c:if test="${not empty workout.workoutComments}">
