@@ -1,5 +1,4 @@
 
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="jakarta.tags.core" prefix="c"%>
@@ -112,7 +111,7 @@
 											</p>
 
 											<!--  BUTTONS -->
-											<div class="mt-auto">
+											<!-- <div class="mt-auto"> -->
 												<div
 													class="d-flex justify-content-center align-items-center">
 													<a class="btn btn-outline-info" data-bs-toggle="collapse"
@@ -132,7 +131,7 @@
 														<button type="submit" class="btn btn-outline-info">Delete</button>
 													</form>
 												</div>
-											</div>
+										<!-- 	</div> -->
 
 											<div class="collapse mt-2" id="collapse${workout.id}">
 												<div class="card card-body">
@@ -199,10 +198,10 @@
 
 											<!-- <a href="#" class="btn btn-outline-info">Edit</a> -->
 
-											<%-- <form action="deleteWorkout.do" method="POST">
+											<form action="deleteWorkout.do" method="POST">
 												<input type="hidden" name="workoutId" value="${workout.id}" />
 												<button type="submit" class="btn btn-outline-info">Delete</button>
-											</form> --%>
+											</form>
 
 											<form action="unlikeWorkout.do" method="POST">
 												<input type="hidden" name="workoutId" value="${workout.id}" />
@@ -237,7 +236,7 @@
 						</div>
 					</c:forEach>
 				</div>
-			</div>
+			</div> 
 
 			<form action="showAllWorkouts.do" method="GET">
 				<button type="submit" class="btn btn-info">Explore the
@@ -275,7 +274,8 @@
 			</table>
 
 			<!-- ---------------------------------------------------NUTRITION------------------------------------------------------------------------------ -->
-			<td><legend class="form-label"></legend>
+			<!-- <td> -->
+			<!-- <legend class="form-label"></legend> -->
 				<form action="addNutrition.do" method="POST">
 
 					<div class="col-md-4">
@@ -316,13 +316,11 @@
 						<div class="d-flex justify-content-center align-items-center">
 							<input type="number" class="form-control" name="gramsProtein"
 								placeholder="Enter protein (in grams)" required>
-							<button type="submit" class="btn btn-outline-info">Submit</button>
+							<button type="submit" class="btn btn-outline-info">Submit</button></div></div>
 				</form>
 				<form action="showAllNutrition.do" method="POST">
 					<button class="btn btn-info" type="submit">View</button>
 				</form>
-		</div>
-		</div>
 		<br>
 
 		<hr class="my-4">
@@ -378,7 +376,6 @@
 					</div>
 				</c:forEach>
 			</div>
-		</div>
 		</div>
 
 		<!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->

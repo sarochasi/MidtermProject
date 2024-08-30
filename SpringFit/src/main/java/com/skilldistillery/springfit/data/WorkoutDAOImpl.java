@@ -33,6 +33,7 @@ public class WorkoutDAOImpl implements WorkoutDAO {
 	public Workout createNewWorkoutInitialize(Workout workout, int userId) {
 		User user = em.find(User.class, userId);
 		workout.setUser(user);
+		workout.setEnabled(true);
 		em.persist(workout);
 		return workout;
 	}
@@ -73,9 +74,9 @@ public class WorkoutDAOImpl implements WorkoutDAO {
 		Workout managedWorkout = em.find(Workout.class, id);
 
 		if (managedWorkout != null) {
-			deleteExerciseByWorkoutId(id);
-
-			em.remove(managedWorkout);
+//			deleteExerciseByWorkoutId(id);
+			managedWorkout.setEnabled(false);
+//			em.remove(managedWorkout);
 			deleted = true;
 		}
 
@@ -99,7 +100,7 @@ public class WorkoutDAOImpl implements WorkoutDAO {
 //	=====================================================================
 
 	public List<Workout> getWorkoutByUserId(int userId) {
-		String jpql = "SELECT w FROM Workout w JOIN FETCH w.workoutExercises WHERE w.user.id = :userId";
+		String jpql = "SELECT w FROM Workout w JOIN FETCH w.workoutExercises WHERE w.user.id = :userId AND w.enabled = true";
 
 		return em.createQuery(jpql, Workout.class).setParameter("userId", userId).getResultList();
 
