@@ -32,7 +32,8 @@ public class BodyWeightController {
 			
 	
 			
-			mv.setViewName("account");		
+			mv.setViewName("redirect:profile.do");		
+			//mv.setViewName("account");		
 			}
 		else {
 			mv.setViewName("home");
